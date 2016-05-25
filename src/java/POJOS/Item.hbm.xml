@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2016 1:07:58 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Item" table="item" catalog="anitaweb" optimistic-lock="version">
+        <id name="iditem" type="java.lang.Integer">
+            <column name="iditem" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="subcat" class="POJOS.Subcat" fetch="select">
+            <column name="idsubcat" not-null="true" />
+        </many-to-one>
+        <property name="itemname" type="string">
+            <column name="itemname" length="70" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <set name="stocks" table="stock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="iditem" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Stock" />
+        </set>
+        <set name="grnRegs" table="grn_reg" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="iditem" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.GrnReg" />
+        </set>
+    </class>
+</hibernate-mapping>

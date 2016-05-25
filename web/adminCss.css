@@ -1,0 +1,484 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 1, 2015, 7:55:39 PM
+    Author     : Sevi
+*/
+
+
+.mypadin7{
+    padding-top: 7px;
+}
+.mypadin100{
+    padding-top: 80px;
+}
+.mypadintop60{
+    padding-top: 60px;
+}
+.mypadin50{
+    padding-top: 50px;
+}
+.mypadin35{
+    padding-top: 35px;
+}
+
+.myPadinTop5{
+    padding-top: 5px;
+}
+.myMinWidth50{
+    min-width: 50px;
+}
+.myBtnHight50{
+    height: 50px;
+}
+.myBtnwidth150{
+    width:150px;
+}
+.myhover:hover{
+    background-color: #d7022b;
+    color: white
+}
+.myhover-nav-bar:hover{
+    // background-color: #d7022b;
+    color: red;
+}
+.mymodlewidth900{
+    width: 900px;
+}
+.mybtnselect{
+    background-color: #d7022b;
+    color: white
+}
+.myproductbtnwidth{
+    width: 80px;
+}
+.myborder{
+    border: solid ;
+    border-color: #d7022b;
+}
+.mysavebtnsize{
+    height: 90px;
+}
+.mypenalwidth{
+    width: 1000px;
+}
+//....................login.jsp.................................................
+body {
+    padding-top: 90px;
+}
+.panel-login {
+    border-color: #ccc;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+.panel-login>.panel-heading {
+    color: #00415d;
+    background-color: #fff;
+    border-color: #fff;
+    text-align:center;
+}
+.panel-login>.panel-heading a{
+    text-decoration: none;
+    color: #666;
+    font-weight: bold;
+    font-size: 15px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+    color: #029f5b;
+    font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    clear: both;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+    outline:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #ccc;
+}
+.btn-login {
+    background-color: #59B2E0;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #59B2E6;
+}
+.btn-login:hover,
+.btn-login:focus {
+    color: #fff;
+    background-color: #53A3CD;
+    border-color: #53A3CD;
+}
+.forgot-password {
+    text-decoration: underline;
+    color: #888;
+}
+.forgot-password:hover,
+.forgot-password:focus {
+    text-decoration: underline;
+    color: #666;
+}
+
+.btn-register {
+    background-color: #1CB94E;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #1CB94A;
+}
+.btn-register:hover,
+.btn-register:focus {
+    color: #fff;
+    background-color: #1CA347;
+    border-color: #1CA347;
+}
+//......... index.jsp.....................................................
+
+.mega-dropdown {
+    position: static !important;
+}
+.mega-dropdown-menu {
+    padding: 20px 0px;
+    width: 100%;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.mega-dropdown-menu > li > ul {
+    padding: 0;
+    margin: 0;
+}
+.mega-dropdown-menu > li > ul > li {
+    list-style: none;
+}
+.mega-dropdown-menu > li > ul > li > a {
+    display: block;
+    color: #222;
+    padding: 3px 5px;
+}
+.mega-dropdown-menu > li ul > li > a:hover,
+.mega-dropdown-menu > li ul > li > a:focus {
+    text-decoration: none;
+}
+.mega-dropdown-menu .dropdown-header {
+    font-size: 18px;
+    color: #ff3546;
+    padding: 5px 60px 5px 5px;
+    line-height: 30px;
+}
+
+.carousel-control {
+    width: 30px;
+    height: 30px;
+    top: -35px;
+
+}
+.left.carousel-control {
+    right: 30px;
+    left: inherit;
+}
+.carousel-control .glyphicon-chevron-left, 
+.carousel-control .glyphicon-chevron-right {
+    font-size: 12px;
+    background-color: #fff;
+    line-height: 30px;
+    text-shadow: none;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+//...footer...............................................................
+.full {
+    width: 100%;	
+}
+.gap {
+    height: 30px;
+    width: 100%;
+    clear: both;
+    display: block;
+}
+.footer {
+    background: #edded1;
+    height: auto;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #DDDDDD;
+}
+.footer p {
+    margin: 0;
+}
+.footer img {
+    max-width: 100%;
+}
+.footer h3 {
+    border-bottom: 1px solid #BAC1C8;
+    color: #54697E;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    padding: 40px 0 10px;
+    text-transform: uppercase;
+}
+.footer ul {
+    font-size: 13px;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 15px;
+    color: #7F8C8D;
+}
+.footer ul li a {
+    padding: 0 0 5px 0;
+    display: block;
+}
+.footer a {
+    color: #78828D
+}
+.supportLi h4 {
+    font-size: 20px;
+    font-weight: lighter;
+    line-height: normal;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+.newsletter-box input#appendedInputButton {
+    background: #FFFFFF;
+    display: inline-block;
+    float: left;
+    height: 30px;
+    clear: both;
+    width: 100%;
+}
+.newsletter-box .btn {
+    border: medium none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    height: 40px;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+}
+.newsletter-box {
+    overflow: hidden;
+}
+.bg-gray {
+    background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+    box-shadow: 0 1px 0 #ed9d96;
+}
+.social li {
+    background: none repeat scroll 0 0 #ed5564;
+    border: 2px solid #B5B5B5;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 8px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 36px;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+.social li:hover {
+    transform: scale(1.15) rotate(360deg);
+    -webkit-transform: scale(1.1) rotate(360deg);
+    -moz-transform: scale(1.1) rotate(360deg);
+    -ms-transform: scale(1.1) rotate(360deg);
+    -o-transform: scale(1.1) rotate(360deg);
+}
+.social li a {
+    color: #EDEFF1;
+}
+.social li:hover {
+    border: 2px solid #2c3e50;
+    background: #2c3e50;
+}
+.social li a i {
+    font-size: 16px;
+    margin: 0 0 0 5px;
+    color: #EDEFF1 !important;
+}
+.footer-bottom {
+    background: #E3E3E3;
+    border-top: 1px solid #DDDDDD;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+    padding-top: 6px;
+}
+.payments {
+    font-size: 1.5em;	
+}
+//.....................item...slider............................
+/* carousel */
+.media-carousel 
+{
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+    margin-top: 30px;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left 
+{
+    left: -12px;
+    background-image: none;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    height: 40px;
+    width : 40px;
+    margin-top: 30px
+}
+/* Next button  */
+.media-carousel .carousel-control.right 
+{
+    right: -12px !important;
+    background-image: none;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    height: 40px;
+    width : 40px;
+    margin-top: 30px
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators 
+{
+    right: 50%;
+    top: auto;
+    bottom: 0px;
+    margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li 
+{
+    background: #c0c0c0;
+}
+.media-carousel .carousel-indicators .active 
+{
+    background: #333333;
+}
+.media-carousel img
+{
+    width: 250px;
+    height: 175px
+}
+/* End carousel */
+
+//.......link to top......................
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 30px;
+    right:30px;
+    display:none;
+}
+//.....404...error.............................
+.error-404 {
+    margin: 0 auto;
+    text-align: center;
+}
+.error-404 .error-code {
+    bottom: 60%;
+    color: #4686CC;
+    font-size: 96px;
+    line-height: 100px;
+    font-weight: bold;
+}
+.error-404 .error-desc {
+    font-size: 12px;
+    color: #647788;
+}
+.error-404 .m-b-10 {
+    margin-bottom: 10px!important;
+}
+.error-404 .m-b-20 {
+    margin-bottom: 20px!important;
+}
+.error-404 .m-t-20 {
+    margin-top: 20px!important;
+}
+.mycenter{
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+
+}
+//// new buton....
+
+.newd,.sale {
+    float: right; width: 40px; height: 40px; margin-top:-175px;
+
+}
+.product-image-wrapper{
+    border:1px solid #F7F7F5;
+    overflow: hidden;
+    margin-bottom:30px;
+}
+.product_image{
+    margin-top: 0px;
+    float: left;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.glyphicon { margin-right:10px; }
+/*.panel-body { padding:0px; }*/
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+.buy-btn{
+    width: 100%;
+}
+.side-penal{
+     padding:0px;
+}

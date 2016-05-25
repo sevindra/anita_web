@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>Src.NewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sup_save</servlet-name>
+        <servlet-class>Src.sup_save</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProductSave</servlet-name>
+        <servlet-class>Src.Cat_save</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductSave</servlet-name>
+        <url-pattern>/ProductSave</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sup_save</servlet-name>
+        <url-pattern>/sup_save</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <session-config>
+        <session-timeout>
+            20
+        </session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/adminPanel/404.jsp</location>
+    </error-page>
+</web-app>

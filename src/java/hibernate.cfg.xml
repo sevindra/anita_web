@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3308/anitaweb?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123</property>
+    <mapping resource="POJOS/LoginReg.hbm.xml"/>
+    <mapping resource="POJOS/Stock.hbm.xml"/>
+    <mapping resource="POJOS/Utype.hbm.xml"/>
+    <mapping resource="POJOS/Cat.hbm.xml"/>
+    <mapping resource="POJOS/Item.hbm.xml"/>
+    <mapping resource="POJOS/User.hbm.xml"/>
+    <mapping resource="POJOS/Supplier.hbm.xml"/>
+    <mapping resource="POJOS/Country.hbm.xml"/>
+    <mapping resource="POJOS/Grn.hbm.xml"/>
+    <mapping resource="POJOS/Subcat.hbm.xml"/>
+    <mapping resource="POJOS/GrnReg.hbm.xml"/>
+    <mapping resource="POJOS/Login.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

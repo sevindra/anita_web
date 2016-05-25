@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2016 1:07:58 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Supplier" table="supplier" catalog="anitaweb" optimistic-lock="version">
+        <id name="idsupplier" type="java.lang.Integer">
+            <column name="idsupplier" />
+            <generator class="identity" />
+        </id>
+        <property name="supname" type="string">
+            <column name="supname" length="80" />
+        </property>
+        <property name="comname" type="string">
+            <column name="comname" length="80" />
+        </property>
+        <property name="contact1" type="java.lang.Integer">
+            <column name="contact1" />
+        </property>
+        <property name="contact2" type="java.lang.Integer">
+            <column name="contact2" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="80" />
+        </property>
+        <property name="address1" type="string">
+            <column name="address1" length="45" />
+        </property>
+        <property name="address2" type="string">
+            <column name="address2" length="45" />
+        </property>
+        <property name="address3" type="string">
+            <column name="address3" length="45" />
+        </property>
+        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idsupplier" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Grn" />
+        </set>
+    </class>
+</hibernate-mapping>

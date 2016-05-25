@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2016 1:07:58 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Login" table="login" catalog="anitaweb" optimistic-lock="version">
+        <id name="idLogin" type="java.lang.Integer">
+            <column name="idLogin" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="POJOS.User" fetch="select">
+            <column name="iduser" not-null="true" />
+        </many-to-one>
+        <property name="uname" type="string">
+            <column name="uname" length="45" />
+        </property>
+        <property name="upass" type="string">
+            <column name="upass" length="45" />
+        </property>
+        <set name="loginRegs" table="login_reg" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idLogin" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.LoginReg" />
+        </set>
+    </class>
+</hibernate-mapping>

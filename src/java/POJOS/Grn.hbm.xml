@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2016 1:07:58 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Grn" table="grn" catalog="anitaweb" optimistic-lock="version">
+        <id name="grnid" type="int">
+            <column name="grnid" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="supplier" class="POJOS.Supplier" fetch="select">
+            <column name="idsupplier" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="POJOS.User" fetch="select">
+            <column name="iduser" not-null="true" />
+        </many-to-one>
+        <property name="date" type="string">
+            <column name="date" length="20" />
+        </property>
+        <property name="time" type="string">
+            <column name="time" length="20" />
+        </property>
+        <property name="pmode" type="string">
+            <column name="pmode" length="10" />
+        </property>
+        <property name="total" type="java.lang.Double">
+            <column name="total" precision="22" scale="0" />
+        </property>
+        <property name="cash" type="java.lang.Double">
+            <column name="cash" precision="22" scale="0" />
+        </property>
+        <property name="bal" type="java.lang.Double">
+            <column name="bal" precision="22" scale="0" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <set name="grnRegs" table="grn_reg" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grnid" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.GrnReg" />
+        </set>
+    </class>
+</hibernate-mapping>
