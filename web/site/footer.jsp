@@ -13,39 +13,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> My Account </h3>
+                    <h3> SERVICE </h3>
                     <ul>
-                        <li> <a href="#"> Watched Items </a> </li>
+                        <li> <a href="#"> New Products</a> </li>
+                        <li> <a href="#"> Checkout </a> </li>
+                        <li> <a href="#"> Cart </a> </li>
+                        <li> <a href="#"> Watched List </a> </li>
                         <li> <a href="#"> Purchase </a> </li>
+                        <li> <a href="#"> Contact Us </a> </li>
                         <li> <a href="<%if (user1 != null) {%>#<%}%>" data-toggle="modal" data-target="<%if (user1 == null) {%>.bs-example-modal-cat<%}%>"><%if (user1 != null) {%><a href="logout">Logout</a><%} else {%>Login<%}%></a> </li>
 
                     </ul>
                 </div>
                 <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> Men </h3>
+                    <h3> QUICK SHOPPING </h3>
                     <ul>
-                        <li> <a href="#"> Shirt </a> </li>
-                        <li> <a href="#"> T-Shirt </a> </li>
-                        <li> <a href="#"> Short </a> </li>
-                        <li> <a href="#"> Trousers </a> </li>
-                    </ul>
-                </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> Women </h3>
-                    <ul>
-                        <li> <a href="#"> Top wear </a> </li>
-                        <li> <a href="#"> Skirt </a> </li>
-                        <li> <a href="#"> Office wear </a> </li>
-                        <li> <a href="#"> Pant </a> </li>
-                    </ul>
-                </div>
-                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-                    <h3> Kids </h3>
-                    <ul>
-                        <li> <a href="#"> Shirt </a> </li>
-                        <li> <a href="#"> Short </a> </li>
-                        <li> <a href="#"> Shoes </a> </li>
+                        <li> <a href="#"> Men </a> </li>
+                        <li> <a href="#"> Women </a> </li>
+                        <li> <a href="#"> Kids </a> </li>
                         <li> <a href="#"> Toys </a> </li>
+                        <li> <a href="#"> Bags </a> </li>
+                        <li> <a href="#"> Shoes </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> POLICIES </h3>
+                    <ul>
+                        <li> <a href="#"> Terms of Use </a> </li>
+                        <li> <a href="#"> Privacy Policy </a> </li>
+                        <li> <a href="#"> Refund Policy </a> </li>
+                        
+                    </ul>
+                </div>
+                <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <h3> ABOUT Anita </h3>
+                    <ul>
+                        <li> <a href="#"> Company Information </a> </li>
+                        <li> <a href="#"> Careers </a> </li>
+                        <li> <a href="#"> Store Location </a> </li>
+                        <li> <a href="#"> Copyright </a> </li>
                     </ul>
                 </div>
                 <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">

@@ -444,10 +444,9 @@ body {
 .error-404 .m-t-20 {
     margin-top: 20px!important;
 }
-.mycenter{
+.my-div-center{
     margin: auto;
     width: 60%;
-    border: 3px solid #73AD21;
     padding: 10px;
 
 }
@@ -471,7 +470,7 @@ body {
     margin: 0 auto;
 }
 .navbar-botom-margin{
-    margin-bottom: 60px
+    margin-bottom: 10px
 }
 .buy-btn-width{
     width: 100%;
@@ -491,4 +490,17 @@ body{margin-top:50px;}
 }
 .category-size{
     font-size: 16px
+}
+.my-title-size{
+    font-size: 20px;
+    
+}
+.my-text-center{
+    text-align: center;
+}
+.my-text-justify{
+    text-align: justify
+}
+.my-btn-width{
+    width: 100px
 }

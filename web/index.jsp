@@ -144,6 +144,7 @@
                             <div class="col-md-4">
                                 <div class="thumbnail">
                                     <img src="adminPanel/men/2015-New-Arrival-Mens-Set-font-b-Men-s-b-font-Commercial-Wedding-font-b-Formal.jpg"/>
+                                    <!--<img src="img/new.png"/>-->
                                     <div class="caption">
                                         <div class="row">
                                             <div class="col-md-4 col-xs-4">
@@ -155,7 +156,7 @@
                                             </div>
                                         </div>
                                         <p>Medium, 100% Cotton, Hand Wash, Made in Sri Lanka</p>
-                                        <div class="row my-div-center">
+                                        <div class="row">
 
                                             <div class="col-md-8 col-md-offset-2">
                                                 <a href="#" class="btn btn-success buy-btn-width"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a>
