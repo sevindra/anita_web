@@ -470,3 +470,25 @@ body {
     float: none;
     margin: 0 auto;
 }
+.navbar-botom-margin{
+    margin-bottom: 60px
+}
+.buy-btn-width{
+    width: 100%;
+}
+
+body{margin-top:50px;}
+.glyphicon { margin-right:10px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+.side-panel{
+    padding:0px;
+}
+.my-div-center{
+    float: none;
+    margin: 0 auto;
+}
+.category-size{
+    font-size: 16px
+}

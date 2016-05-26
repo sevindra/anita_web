@@ -8,8 +8,8 @@
     POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
 
 %>
-<div class="container" style="padding-top: 60px">
-    <nav class="navbar navbar-default navbar-fixed-top" style="max-height: 50px">
+<div class="container navbar-botom-margin">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -23,6 +23,7 @@
         <div class="collapse navbar-collapse js-navbar-collapse">
             <img src="img/anita.ico" style="width: 50px; height: 40px; float: left; padding-top: 3px; min-height: 50px; padding-left: 5px">
             <ul class="nav navbar-nav">
+                <li><a href="index.jsp"><span></span>Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
