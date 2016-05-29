@@ -21,23 +21,32 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Articles</a>
+                                        <a href="http://www.jquery2dotnet.com">Shirt</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">News</a>
+                                        <a href="http://www.jquery2dotnet.com">T-Shirt</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Newsletters</a>
+                                       <a href="http://www.jquery2dotnet.com">Short</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Comments</a>
-                                        <span class="badge">42</span>
+                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <a href="http://www.jquery2dotnet.com">Short</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
                                     </td>
                                 </tr>
                             </table>

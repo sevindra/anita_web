@@ -504,3 +504,11 @@ body{margin-top:50px;}
 .my-btn-width{
     width: 100px
 }
+.logo-text{
+    font-family: fantasy; 
+    font-size: 24px;
+    float: left;
+    padding-top: 8px;
+    padding-left: 5px;
+    color: #e60000
+}

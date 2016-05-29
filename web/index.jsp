@@ -140,10 +140,10 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <%for (int i = 0; i < 3; i++) {
-                                    for (int j = 0; j < 3; j++) {%>
+                                    for (int j = 0; j < 5; j++) {%>
                             <div class="col-md-4">
                                 <div class="thumbnail">
-                                    <img src="adminPanel/men/2015-New-Arrival-Mens-Set-font-b-Men-s-b-font-Commercial-Wedding-font-b-Formal.jpg"/>
+                                    <a href="#"><img src="adminPanel/men/2015-New-Arrival-Mens-Set-font-b-Men-s-b-font-Commercial-Wedding-font-b-Formal.jpg"/></a>
                                     <!--<img src="img/new.png"/>-->
                                     <div class="caption">
                                         <div class="row">

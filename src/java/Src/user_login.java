@@ -58,7 +58,7 @@ public class user_login extends HttpServlet {
                 if (uname.equals(dbuname) && pass.equals(dbpass)) {
                     HttpSession hs = request.getSession();
                     hs.setAttribute("user_obj", user);
-                    response.sendRedirect("site/index.jsp?as=5");
+                    response.sendRedirect("index.jsp");
                 } else {
                     out.write("else");
 

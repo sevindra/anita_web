@@ -22,12 +22,14 @@
 
         <div class="collapse navbar-collapse js-navbar-collapse">
             <img src="img/anita.ico" style="width: 50px; height: 40px; float: left; padding-top: 3px; min-height: 50px; padding-left: 5px">
+            <label class="logo-text">ANITA</label>
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp"><span></span>Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/watched.jsp<%}%>">New Products</a></li>
+                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/watched.jsp<%}%>">Promotions</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Products</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Checkout</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Cart</a></li>
@@ -40,13 +42,16 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>				
                     <ul class="dropdown-menu">
-                        <li class="col-sm-3">
+                        <div class="col-md-6">
+                            
+                        </div>
+<!--                        <li class="col-sm-3">
                         <li> <a href="#"> Shirt </a> </li>
                         <li> <a href="#"> T-Shirt </a> </li>
                         <li> <a href="#"> Short </a> </li>
                         <li> <a href="#"> Trousers </a> </li>
                         <li> <a href="#"> Denims </a> </li>
-                        <li> <a href="#"> Shoes </a> </li>
+                        <li> <a href="#"> Shoes </a> </li>-->
                     </ul>
 
                 </li>
