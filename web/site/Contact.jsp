@@ -9,11 +9,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="../inc.jsp" %>
+        <script>
+//            $(document).ready(function () {
+
+                $(".dropdown").hover(
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                            $(this).toggleClass('open');
+                        },
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                            $(this).toggleClass('open');
+                        }
+                );
+
+
+//            });
+        </script>
         <title>Contact</title>
     </head>
     <body>
 
-        <div style="text-decoration:none; overflow:hidden; height:500px; width:1350px; max-width:100%;" >
+        <div style="text-decoration:none; overflow:hidden; height:500px; width:1350px; max-width:100%;">
             <div id="embed-map-canvas" style="height:100%; width:100%;max-width:100%;">
                 <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Anita+Designer+Wear,+Desinghe+Mawatha,+Sri+Jayawardenepura+Kotte,+Western+Province,+Sri+Lanka&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
             </div>

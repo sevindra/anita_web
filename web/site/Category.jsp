@@ -41,12 +41,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Short</a>
+                                       <a href="http://www.jquery2dotnet.com">Denim</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
+                                        <a href="http://www.jquery2dotnet.com">Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -65,22 +65,32 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                        <a href="http://www.jquery2dotnet.com">Blouses</a> <span class="label label-success">$ 320</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                        <a href="http://www.jquery2dotnet.com">T-Shirts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                        <a href="http://www.jquery2dotnet.com">Frocks</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Denims</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -99,23 +109,27 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Change Password</a>
+                                        <a href="http://www.jquery2dotnet.com">T-shirts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
+                                        <a href="http://www.jquery2dotnet.com">Trousers</a> <span class="label label-info">5</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Import/Export</a>
+                                        <a href="http://www.jquery2dotnet.com">Shorts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com" class="text-danger">
-                                            Delete Account</a>
+                                        <a href="http://www.jquery2dotnet.com">Frocks</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Baby Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -134,24 +148,15 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Sales</a>
+                                       <a href="http://www.jquery2dotnet.com">Boy</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Customers</a>
+                                       <a href="http://www.jquery2dotnet.com">Girl</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                       <a href="http://www.jquery2dotnet.com">Products</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="http://www.jquery2dotnet.com">Shopping Cart</a>
-                                    </td>
-                                </tr>
+                                
                             </table>
                         </div>
                     </div>

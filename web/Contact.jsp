@@ -11,12 +11,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="inc.jsp" %>
         <title>Contact</title>
+        <script>
+            $(document).ready(function () {
+
+                $(".dropdown").hover(
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                            $(this).toggleClass('open');
+                        },
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                            $(this).toggleClass('open');
+                        }
+                );
+
+
+            });
+        </script>
     </head>
     <body>
         <%@include file="site/header.jsp" %>
         <div class="row my-div-center my-text-center">
             <label class="my-title-size">Contact Us</label>
         </div>
+        
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <p class="my-text-center">Thank you for visiting the Anita Designer Wear website. We value your thoughts, suggestions and 
@@ -116,6 +134,6 @@
                     </div>
                 </div>
             </div>
-        <%@include file="site/footer.jsp" %>
+            <%@include file="site/footer.jsp" %>
         </body>
     </html>

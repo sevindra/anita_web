@@ -11,10 +11,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="inc.jsp" %>
         <title>Product Details</title>
+        <script>
+            $(document).ready(function () {
+
+                $(".dropdown").hover(
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                            $(this).toggleClass('open');
+                        },
+                        function () {
+                            $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                            $(this).toggleClass('open');
+                        }
+                );
+
+
+            });
+        </script>
     </head>
     <body>
-        <%@include file="site/header.jsp" %>
-        <%@include file="site/Category.jsp" %>
+        <div>
+            <%@include file="site/header.jsp" %>
+        </div>
+        <div>
+            <%@include file="site/Category.jsp" %>
+        </div>
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">

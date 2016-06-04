@@ -3,6 +3,8 @@
     Created on : May 22, 2016, 10:46:11 PM
     Author     : Sevi
 --%>
+
+</script>
 <%
     HttpSession hsheader = request.getSession();
     POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
@@ -39,50 +41,139 @@
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Purchase</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+<!--                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>				
                     <ul class="dropdown-menu">
-                        <div class="col-md-6">
-                            
-                        </div>
-<!--                        <li class="col-sm-3">
-                        <li> <a href="#"> Shirt </a> </li>
-                        <li> <a href="#"> T-Shirt </a> </li>
-                        <li> <a href="#"> Short </a> </li>
-                        <li> <a href="#"> Trousers </a> </li>
-                        <li> <a href="#"> Denims </a> </li>
-                        <li> <a href="#"> Shoes </a> </li>-->
+                        <li> <a href="item.jsp"> Shirt </a> </li>
+                        <li> <a href="item.jsp"> T-Shirt </a> </li>
+                        <li> <a href="item.jsp"> Short </a> </li>
+                        <li> <a href="item.jsp"> Trousers </a> </li>
+                        <li> <a href="item.jsp"> Denims </a> </li>
+                        <li> <a href="item.jsp"> Shoes </a> </li>
+                    </ul>
+
+                </li>-->
+                <li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
+                    <!--                    <ul class="dropdown-menu">
+                                            <li> <a href="item.jsp"> Blouses </a> </li>
+                                            <li> <a href="item.jsp"> T-Shirts </a> </li>
+                                            <li> <a href="item.jsp"> Frocks </a> </li>
+                                            <li> <a href="item.jsp"> Trousers </a> </li>
+                                            <li> <a href="item.jsp"> Denims </a> </li>
+                                            <li> <a href="item.jsp"> Shoes </a> </li>
+                    
+                                        </ul>-->
+                    <ul class="dropdown-menu multi-level" >
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
+                            <ul class="dropdown-menu">
+                                <li> <a href="item.jsp"> Shirt </a> </li>
+                                <li> <a href="item.jsp"> T-Shirt </a> </li>
+                                <li> <a href="item.jsp"> Short </a> </li>
+                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                <li> <a href="item.jsp"> Denims </a> </li>
+                                <li> <a href="item.jsp"> Shoes </a> </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
+                            <ul class="dropdown-menu" style="margin-top: 30px">
+                                <li> <a href="item.jsp"> Blouses </a> </li>
+                                <li> <a href="item.jsp"> T-Shirts </a> </li>
+                                <li> <a href="item.jsp"> Frocks </a> </li>
+                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                <li> <a href="item.jsp"> Denims </a> </li>
+                                <li> <a href="item.jsp"> Shoes </a> </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids</a>
+                            <ul class="dropdown-menu" style="margin-top: 55px">
+                                <li> <a href="item.jsp"> T-shirts </a> </li>
+                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                <li> <a href="item.jsp"> Shorts  </a> </li>
+                                <li> <a href="item.jsp"> Frocks </a> </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Toys</a>
+                            <ul class="dropdown-menu" style="margin-top: 82px">
+                                <li> <a href="item.jsp"> Boy </a> </li>
+                                <li> <a href="item.jsp"> Girl </a> </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other</a>
+                            <ul class="dropdown-menu" style="margin-top: 108px">
+                                <li> <a href="item.jsp"> other1 </a> </li>
+                                <li> <a href="item.jsp"> other2 </a> </li>
+                                
+                            </ul>
+                        </li>
                     </ul>
 
                 </li>
-                <li class="dropdown mega-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>				
-                    <ul class="dropdown-menu">
-                        <li class="col-sm-3">
-                        <li> <a href="#"> Blouses </a> </li>
-                        <li> <a href="#"> T-Shirts </a> </li>
-                        <li> <a href="#"> Frocks </a> </li>
-                        <li> <a href="#"> Trousers </a> </li>
-                        <li> <a href="#"> Denims </a> </li>
-                        <li> <a href="#"> Shoes </a> </li>
-                    </ul>
+                <!--                <li class="">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li> <a href="item.jsp"> Blouses </a> </li>
+                                                            <li> <a href="item.jsp"> T-Shirts </a> </li>
+                                                            <li> <a href="item.jsp"> Frocks </a> </li>
+                                                            <li> <a href="item.jsp"> Trousers </a> </li>
+                                                            <li> <a href="item.jsp"> Denims </a> </li>
+                                                            <li> <a href="item.jsp"> Shoes </a> </li>
+                                    
+                                                        </ul>
+                                    <ul class="dropdown-menu multi-level" >
+                                        <li class="dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
+                                            <ul class="dropdown-menu">
+                                                <li> <a href="item.jsp"> Shirt </a> </li>
+                                                <li> <a href="item.jsp"> T-Shirt </a> </li>
+                                                <li> <a href="item.jsp"> Short </a> </li>
+                                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                                <li> <a href="item.jsp"> Denims </a> </li>
+                                                <li> <a href="item.jsp"> Shoes </a> </li>
+                
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
+                                            <ul class="dropdown-menu" style="margin-top: 30px">
+                                                <li> <a href="item.jsp"> Blouses </a> </li>
+                                                <li> <a href="item.jsp"> T-Shirts </a> </li>
+                                                <li> <a href="item.jsp"> Frocks </a> </li>
+                                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                                <li> <a href="item.jsp"> Denims </a> </li>
+                                                <li> <a href="item.jsp"> Shoes </a> </li>
+                
+                                            </ul>
+                                        </li>
+                                    </ul>
+                
+                                </li>-->
+                <li><a href="Contact.jsp">Contact</a></li>
 
-                </li>
-                <li><a href="Contact.jsp"><span></span>Contact</a></li>
             </ul>				
 
 
 
 
-<!--            <div class="col-md-4 col-md-offset-1" style="padding-top: 7px">
-                <div class="form-group input-group">
-
-                    <input class="form-control" placeholder="Search" type="text"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                    </span>
-                </div>
-            </div>-->
+            <!--            <div class="col-md-4 col-md-offset-1" style="padding-top: 7px">
+                            <div class="form-group input-group">
+            
+                                <input class="form-control" placeholder="Search" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </div>-->
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
                     <a href="#" class="dropdown-toggle" role="button" aria-expanded="false"  data-toggle="modal" data-target="<%if (userheader == null) {%>.bs-example-modal-cat<%}%>" id="user" value="<%if (userheader != null) {
@@ -96,11 +187,11 @@
                                 out.write("Login");
                             }%> <span class="caret"></span></a>
                         <%
-                                    if (userheader != null) {%>
+                            if (userheader != null) {%>
                     <ul class="dropdown-menu" role="menu">
 
                         <%
-                                    if (userheader.getUtype().getUtype().equals("Admin")) {%>
+                            if (userheader.getUtype().getUtype().equals("Admin")) {%>
 
                         <li><a href="adminPanel/sup.jsp">Admin Panel</a></li>
                             <%}%>

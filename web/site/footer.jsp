@@ -35,6 +35,7 @@
                             <li> <a href="#"> Toys </a> </li>
                             <li> <a href="#"> Bags </a> </li>
                             <li> <a href="#"> Shoes </a> </li>
+                            <li> <a href="#"> Other </a> </li>
                         </ul>
                     </div>
                     <div class="col-md-2">
