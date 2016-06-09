@@ -23,7 +23,7 @@
                     Try refreshing the page or click the button below to go back to the Homepage.
                     <div><br/>
                         <!-- <a class=" login-detail-panel-button btn" href="http://vultus.de/"> -->
-                        <a href="../index.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Go back to Homepage</a>
+                        <a href="index.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Go back to Homepage</a>
                     </div>
                 </div>
             </div>

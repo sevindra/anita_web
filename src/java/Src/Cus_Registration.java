@@ -8,24 +8,20 @@ package Src;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javassist.compiler.TokenId;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author Sevi
  */
-@WebServlet(name = "user_login", urlPatterns = {"/user_login"})
-public class user_login extends HttpServlet {
+@WebServlet(name = "user_save", urlPatterns = {"/user_save"})
+public class Cus_Registration extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,36 +37,41 @@ public class user_login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String email = request.getParameter("email");
-            String pass = request.getParameter("password");
-
-            SessionFactory sf = controler.connector.getSessionFactory();
-            Session ses = sf.openSession();
-            Criteria cr = ses.createCriteria(POJOS.User.class);
-            cr.add(Restrictions.eq("email", email));
-            POJOS.User user = (User) cr.uniqueResult();
-            if (user != null) {
-
-                String dbemail = user.getEmail();
-                String dbpass = user.getPass();
-
-                out.write(dbemail + " " + dbpass);
-                if (email.equals(dbemail) && pass.equals(dbpass)) {
-                    HttpSession hs = request.getSession();
-                    hs.setAttribute("user_obj", user);
-                    response.sendRedirect("index.jsp");
-                } else {
-                    response.sendRedirect("index.jsp?error_login=1");
-
-                }
-            } else {
-                response.sendRedirect("index.jsp?error_login=1");
-            }
+            out.write("okkkk");
+//            String fname=request.getParameter("fname");
+//            String lname=request.getParameter("lname");
+//            String uname=request.getParameter("uname");
+//            int utype=Integer.parseInt(request.getParameter("utype"));
+//            String pass=request.getParameter("pass");
+//            String cpass=request.getParameter("cpass");
+//            String qus=request.getParameter("qus");
+//            String ans=request.getParameter("ans");
+//            String save=request.getParameter("save");
+//            
+//            Session ses=controler.connector.getSessionFactory().openSession();
+//            Transaction tr=ses.beginTransaction();
+//            
+//            
+//            if (save.equals("save")) {
+//                POJOS.User user=new User();
+//                POJOS.Utype type=(POJOS.Utype) ses.load(POJOS.Utype.class, utype);
+//                user.setFname(fname);
+//                user.setLname(lname);
+//                user.setUname(uname);
+//                user.setUtype(type);
+//                user.setPass(pass);
+//                user.setCpass(cpass);
+//                user.setQue(qus);
+//                user.setAnswer(ans);out.write("ok");
+//                ses.save(user);
+//                tr.commit();
+//                
+//                response.sendRedirect("adminPanel/user_reg.jsp");
+//            }
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

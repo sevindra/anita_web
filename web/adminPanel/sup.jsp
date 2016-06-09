@@ -28,7 +28,7 @@
             HttpSession hs = request.getSession();
             POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
             if (user == null) {
-                response.sendRedirect("../site/index.jsp");
+                //response.sendRedirect("../index.jsp");
             } else {
             }
         %>

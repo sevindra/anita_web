@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 7, 2016 1:07:58 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 8, 2016 10:20:12 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.User" table="user" catalog="anitaweb" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
             <column name="iduser" />
             <generator class="identity" />
         </id>
-        <many-to-one name="country" class="POJOS.Country" fetch="select">
-            <column name="idcountry" not-null="true" />
-        </many-to-one>
         <many-to-one name="utype" class="POJOS.Utype" fetch="select">
             <column name="idutype" not-null="true" />
         </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="0" />
+        </property>
+        <property name="time" type="time">
+            <column name="time" length="0" />
+        </property>
         <property name="uname" type="string">
             <column name="uname" length="45" />
         </property>
         <property name="fname" type="string">
             <column name="fname" length="45" />
-        </property>
-        <property name="mname" type="string">
-            <column name="mname" length="45" />
         </property>
         <property name="lname" type="string">
             <column name="lname" length="45" />

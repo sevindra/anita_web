@@ -411,14 +411,6 @@ body {
 }
 /* End carousel */
 
-//.......link to top......................
-.back-to-top {
-    cursor: pointer;
-    position: fixed;
-    bottom: 30px;
-    right:30px;
-    display:none;
-}
 //.....404...error.............................
 .error-404 {
     margin: 0 auto;
@@ -520,7 +512,7 @@ body{margin-top:50px;}
 }
 
 .thumbnail {
-    padding: 0;
+    padding: 5;
 }
 
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
@@ -576,3 +568,33 @@ body{margin-top:50px;}
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+//.....item image slider............
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+//............message
+/*body{ margin-top:50px;}*/
+.nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
+.tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
+.tab-pane .list-group-item:last-child {border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}
+.tab-pane .list-group .checkbox { display: inline-block;margin: 0px; }
+.tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
+.tab-pane .list-group .glyphicon { margin-right:5px; }
+.tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
+a.list-group-item.read { color: #222;background-color: #F3F3F3; }
+hr { margin-top: 5px;margin-bottom: 10px; }
+.nav-pills>li>a {padding: 5px 10px;}
+
+.ad { padding: 5px;background: #F5F5F5;color: #222;font-size: 80%;border: 1px solid #E5E5E5; }
+.ad a.title {color: #15C;text-decoration: none;font-weight: bold;font-size: 110%;}
+.ad a.url {color: #093;text-decoration: none;}

@@ -83,17 +83,21 @@
 
     <div class="footer-bottom">
         <div class="container">
-            <p class=""> Copyright © 2016 Anita Designer wear (Pvt) Ltd, All Rights Reserved. </p>
-            <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left" style="margin-left: 50px; float: right"><span class="glyphicon glyphicon-chevron-up"></span></a>
-            <div class="pull-right">
-                <ul class="nav nav-pills payments">
-                    <li><i class="fa fa-cc-visa"></i></li>
-                    <li><i class="fa fa-cc-mastercard"></i></li>
-                    <li><i class="fa fa-cc-amex"></i></li>
-                    <li><i class="fa fa-cc-paypal"></i></li>
-                </ul> 
+            <div class="row">
+                <p class=""> Copyright © 2016 Anita Designer wear (Pvt) Ltd, All Rights Reserved. </p>
+                <div class="pull-right">
+                    <ul class="nav nav-pills payments">
+                        <li><i class="fa fa-cc-visa"></i></li>
+                        <li><i class="fa fa-cc-mastercard"></i></li>
+                        <li><i class="fa fa-cc-amex"></i></li>
+                        <li><i class="fa fa-cc-paypal"></i></li>
+                    </ul> 
+                </div>
             </div>
-            <a class="pull-left" href="#" style="font-size: 12px; margin-top: -50px; margin-right: 80%"> WEB DESIGNED BY CYGNETIC</a>
+            <br/>
+            <div class="row">
+                <a class="pull-left" href="#" style="font-size: 12px; margin-top: -50px; margin-right: 80%"> WEB DESIGNED BY CYGNETIC</a>
+            </div>
         </div>
     </div>
     <!--/.footer-bottom--> 

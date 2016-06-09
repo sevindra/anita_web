@@ -1,6 +1,6 @@
 <%-- 
-    Document   : purchased
-    Created on : 27-Jan-2016, 16:02:35
+    Document   : my_profile
+    Created on : Jun 9, 2016, 9:58:23 AM
     Author     : Sevi
 --%>
 
@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="inc.jsp" %>
+        <%@include  file="site/header.jsp" %>
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>purchased</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

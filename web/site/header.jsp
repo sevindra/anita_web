@@ -30,29 +30,29 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/watched.jsp<%}%>">New Products</a></li>
-                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/watched.jsp<%}%>">Promotions</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Products</a></li>
+                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">New Products</a></li>
+                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Promotions</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Products</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Checkout</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Cart</a></li>
                         <li><a href="<%if (userheader != null) {%>#<%}%>" data-toggle="modal" data-target="<%if (userheader == null) {%>.bs-example-modal-cat<%}%>"><%if (userheader != null) {%><a href="logout">Logout</a><%} else {%>Login<%}%></a></li>
                         <li class="divider"></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Watched Items</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Purchase</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>watched.jsp<%}%>">Watched Items</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Purchase</a></li>
                     </ul>
                 </li>
-<!--                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>				
-                    <ul class="dropdown-menu">
-                        <li> <a href="item.jsp"> Shirt </a> </li>
-                        <li> <a href="item.jsp"> T-Shirt </a> </li>
-                        <li> <a href="item.jsp"> Short </a> </li>
-                        <li> <a href="item.jsp"> Trousers </a> </li>
-                        <li> <a href="item.jsp"> Denims </a> </li>
-                        <li> <a href="item.jsp"> Shoes </a> </li>
-                    </ul>
-
-                </li>-->
+                <!--                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>				
+                                    <ul class="dropdown-menu">
+                                        <li> <a href="item.jsp"> Shirt </a> </li>
+                                        <li> <a href="item.jsp"> T-Shirt </a> </li>
+                                        <li> <a href="item.jsp"> Short </a> </li>
+                                        <li> <a href="item.jsp"> Trousers </a> </li>
+                                        <li> <a href="item.jsp"> Denims </a> </li>
+                                        <li> <a href="item.jsp"> Shoes </a> </li>
+                                    </ul>
+                
+                                </li>-->
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
                     <!--                    <ul class="dropdown-menu">
@@ -104,7 +104,7 @@
                             <ul class="dropdown-menu" style="margin-top: 82px">
                                 <li> <a href="item.jsp"> Boy </a> </li>
                                 <li> <a href="item.jsp"> Girl </a> </li>
-                                
+
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
@@ -112,68 +112,17 @@
                             <ul class="dropdown-menu" style="margin-top: 108px">
                                 <li> <a href="item.jsp"> other1 </a> </li>
                                 <li> <a href="item.jsp"> other2 </a> </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
 
                 </li>
-                <!--                <li class="">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
-                                                        <ul class="dropdown-menu">
-                                                            <li> <a href="item.jsp"> Blouses </a> </li>
-                                                            <li> <a href="item.jsp"> T-Shirts </a> </li>
-                                                            <li> <a href="item.jsp"> Frocks </a> </li>
-                                                            <li> <a href="item.jsp"> Trousers </a> </li>
-                                                            <li> <a href="item.jsp"> Denims </a> </li>
-                                                            <li> <a href="item.jsp"> Shoes </a> </li>
-                                    
-                                                        </ul>
-                                    <ul class="dropdown-menu multi-level" >
-                                        <li class="dropdown-submenu">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
-                                            <ul class="dropdown-menu">
-                                                <li> <a href="item.jsp"> Shirt </a> </li>
-                                                <li> <a href="item.jsp"> T-Shirt </a> </li>
-                                                <li> <a href="item.jsp"> Short </a> </li>
-                                                <li> <a href="item.jsp"> Trousers </a> </li>
-                                                <li> <a href="item.jsp"> Denims </a> </li>
-                                                <li> <a href="item.jsp"> Shoes </a> </li>
-                
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
-                                            <ul class="dropdown-menu" style="margin-top: 30px">
-                                                <li> <a href="item.jsp"> Blouses </a> </li>
-                                                <li> <a href="item.jsp"> T-Shirts </a> </li>
-                                                <li> <a href="item.jsp"> Frocks </a> </li>
-                                                <li> <a href="item.jsp"> Trousers </a> </li>
-                                                <li> <a href="item.jsp"> Denims </a> </li>
-                                                <li> <a href="item.jsp"> Shoes </a> </li>
-                
-                                            </ul>
-                                        </li>
-                                    </ul>
-                
-                                </li>-->
+               
                 <li><a href="Contact.jsp">Contact</a></li>
 
             </ul>				
 
-
-
-
-            <!--            <div class="col-md-4 col-md-offset-1" style="padding-top: 7px">
-                            <div class="form-group input-group">
-            
-                                <input class="form-control" placeholder="Search" type="text"/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                </span>
-                            </div>
-                        </div>-->
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
                     <a href="#" class="dropdown-toggle" role="button" aria-expanded="false"  data-toggle="modal" data-target="<%if (userheader == null) {%>.bs-example-modal-cat<%}%>" id="user" value="<%if (userheader != null) {
@@ -185,13 +134,14 @@
                                 out.write(userheader.getUname());
                             } else {
                                 out.write("Login");
-                            }%> <span class="caret"></span></a>
+                            }%> <span class="<%if (userheader != null) {%>caret<%}%>"></span></a>
                         <%
                             if (userheader != null) {%>
                     <ul class="dropdown-menu" role="menu">
 
+                        <li><a href="#">My Profile</a></li>
                         <%
-                            if (userheader.getUtype().getUtype().equals("Admin")) {%>
+                            if (userheader.getUtype().getUtype().equals("Admin")|userheader.getUtype().getUtype().equals("SuperAdmin")) {%>
 
                         <li><a href="adminPanel/sup.jsp">Admin Panel</a></li>
                             <%}%>
@@ -199,21 +149,21 @@
                     </ul>  
                     <%}%>
                 </li>
-                <a></a>
-                <!--<li><a href="#" class="glyphicon glyphicon-envelope"></a></li>-->
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<span class="label label-info" style="margin-left: 5px">32</span>
+                <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if(userheader!=null){%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
                     </a>
+                    <%if (userheader != null) {%>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><span class="label label-warning">4:00 AM</span>Favourites Snippet</a></li>
-                        <li><a href="#"><span class="label label-warning">4:30 AM</span>Email marketing</a></li>
-                        <li><a href="#"><span class="label label-warning">5:00 AM</span>Subscriber focused email
+                        <li><a href="message.jsp"><span class="label label-warning">4:00 AM</span> Favourites Snippet</a></li>
+                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
+                        <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email
                                 design</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" class="text-center">View All</a></li>
-                    </ul>
+                        <li><a href="message.jsp" class="text-center">View All</a></li>
+                    </ul>        
+                    <%}%>
                 </li>
-                <li><a href="#"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<span class="label label-warning" style="margin-right:  10px;margin-left: 5px">2</span></a>
+                <li><a href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<span class="label label-warning" style="margin-right:  10px;margin-left: 5px">2</span></a>
 
                 </li>
             </ul>
@@ -248,7 +198,7 @@
                         <div class="col-lg-12">
                             <form id="login-form" action="user_login" method="post" role="form" style="display: block;">
                                 <div class="form-group">
-                                    <input type="text" required="" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    <input type="text" required="" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail">
                                 </div>
                                 <div class="form-group password">
                                     <!--<input type="password" id="password" placeholder="password">-->
@@ -276,17 +226,17 @@
                                 </div>
 
                             </form>
-                            <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                            <form id="register-form" action="cus_reg" role="form" style="display: none;">
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="email" name="reemail" id="reemail" tabindex="2" class="form-control" placeholder="Confirm Email Address" value="">
+                                        <input type="email" name="reemail" id="reemail" tabindex="2" class="form-control" placeholder="Confirm Email Address">
                                     </div>
                                 </div>
                                 <br>
@@ -298,23 +248,24 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" name="fname" id="fname" tabindex="3" class="form-control" placeholder="First Name" value="">
+                                        <input type="text" name="fname" id="fname" tabindex="3" class="form-control" placeholder="First Name">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="lname" id="lname" tabindex="3" class="form-control" placeholder="Last Name" value="">
+                                        <input type="text" name="lname" id="lname" tabindex="3" class="form-control" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" name="mobile" id="mobile" tabindex="3" class="form-control" placeholder="(+94) Mobile No" value="">
+                                        <input type="text" name="mobile" id="mobile" tabindex="3" class="form-control" placeholder="(07) Mobile No">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">
+                                            <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
+                                            <button type="submit" name="register-submit" class="btn btn-register form-control" value="register"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
                                         </div>
                                     </div>
                                 </div>

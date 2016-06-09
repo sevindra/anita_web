@@ -1,6 +1,6 @@
 <%-- 
-    Document   : item
-    Created on : May 22, 2016, 10:09:33 PM
+    Document   : watched
+    Created on : 27-Jan-2016, 15:55:34
     Author     : Sevi
 --%>
 
@@ -10,8 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="inc.jsp" %>
-        <title>Product Details</title>
+        <title>JSP Page</title>
         <script>
+
+
+
 
             $(function () {
                 $('#login-form-link').click(function (e) {
@@ -45,6 +48,11 @@
 
 
             });
+
+
+
+
+
             <%
                 HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
@@ -58,48 +66,64 @@
                 ////    <%}%>
 
             }
+
+
+
         </script>
     </head>
     <body>
         <div>
             <%@include file="site/header.jsp" %>
         </div>
-        
+        <br/>
         <div>
             <%@include file="site/Category.jsp" %>
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <%for (int i = 0; i < 3; i++) {
-                            for (int j = 0; j < 3; j++) {%>
-                    <div class="col-lg-4">
+                    <%for (int i = 0; i < 1; i++) {
+                            for (int j = 0; j < 5; j++) {
+                    %>
+                    <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <div class="thumbnail" style="position: relative">
-                                    <a href="Item_details.jsp"><img src="adminPanel/men/2015-New-Arrival-Mens-Set-font-b-Men-s-b-font-Commercial-Wedding-font-b-Formal.jpg"/></a>
-                                    <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
-
+                                <div class="thumbnail col-md-3" style="padding: 5px">
+                                    <img src="adminPanel/men/3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N.jpg"/>
                                 </div>
-                                <div class="col-md-6">
-                                    <h3>T-Shirt</h3>
-                                </div>
-                                <div class="col-md-6 price pull-right">
-                                    <h3><label>Rs.1250.00</label></h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p style="text-align: justify">Medium, 100% Cotton, Hand Wash, Made in Sri Lanka</p>
-                                        <div class="col-md-8 col-md-offset-2">
-                                            <a class="btn btn-success btn-block" href="Item_details.jsp"><strong>View</strong></a>
+                                <div class="col-md-9">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <h4><a>3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N</a></h4>
                                         </div>
+                                        <div class="row">
+                                            <h4>Size : M</h4>
+                                        </div>
+                                        <div class="row">
+                                            <h4>Qty : 1</h4>
+                                        </div>
+                                        <div class="row">
+                                            <button class="btn btn-danger col-md-4">Remove</button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <h4 class="pull-right"><strong>LKR.1250.00</strong></h4>
+                                        <br/>
+                                        <h6 class="pull-right">Shipping Available</h6>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-primary btn-block">Buy It Now</button> 
+                                        <button class="btn btn-success btn-block">Add To Cart</button> 
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <%}
+                    <%
+                            }
                         }%>
                 </div>
             </div>

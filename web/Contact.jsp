@@ -12,6 +12,27 @@
         <%@include file="inc.jsp" %>
         <title>Contact</title>
         <script>
+
+
+
+
+            $(function () {
+                $('#login-form-link').click(function (e) {
+                    $("#login-form").delay(100).fadeIn(100);
+                    $("#register-form").fadeOut(100);
+                    $('#register-form-link').removeClass('active');
+                    $(this).addClass('active');
+                    e.preventDefault();
+                });
+                $('#register-form-link').click(function (e) {
+                    $("#register-form").delay(100).fadeIn(100);
+                    $("#login-form").fadeOut(100);
+                    $('#login-form-link').removeClass('active');
+                    $(this).addClass('active');
+                    e.preventDefault();
+                });
+
+            });
             $(document).ready(function () {
 
                 $(".dropdown").hover(
@@ -25,8 +46,29 @@
                         }
                 );
 
-
+               
             });
+           
+
+
+
+
+            <%
+                HttpSession hs = request.getSession();
+                POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
+
+            %>
+
+            function loginfirst() {
+
+            <%                        if (user == null) {%>////
+                alert("Please Login First !");
+                ////    <%}%>
+
+            }
+
+
+
         </script>
     </head>
     <body>
@@ -34,12 +76,14 @@
         <div class="row my-div-center my-text-center">
             <label class="my-title-size">Contact Us</label>
         </div>
-        
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <p class="my-text-center">Thank you for visiting the Anita Designer Wear website. We value your thoughts, suggestions and 
-                    comments regarding any aspect of the Anita experience. Please contact us by completing the form below. 
-                    You will receive a reply from us shortly. </p>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <p class="my-text-center">Thank you for visiting the Anita Designer Wear website. We value your thoughts, suggestions and 
+                        comments regarding any aspect of the Anita experience. Please contact us by completing the form below. 
+                        You will receive a reply from us shortly. </p>
+                </div>
             </div>
         </div>
         <div class="container-fluid">

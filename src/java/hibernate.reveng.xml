@@ -7,7 +7,6 @@
   <table-filter match-name="cat"/>
   <table-filter match-name="user"/>
   <table-filter match-name="item"/>
-  <table-filter match-name="country"/>
   <table-filter match-name="utype"/>
   <table-filter match-name="login_reg"/>
   <table-filter match-name="grn"/>

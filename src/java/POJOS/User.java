@@ -1,7 +1,8 @@
 package POJOS;
-// Generated May 7, 2016 1:07:55 PM by Hibernate Tools 4.3.1
+// Generated Jun 8, 2016 10:20:12 AM by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,11 +13,11 @@ public class User  implements java.io.Serializable {
 
 
      private Integer iduser;
-     private Country country;
      private Utype utype;
+     private Date date;
+     private Date time;
      private String uname;
      private String fname;
-     private String mname;
      private String lname;
      private String pass;
      private String cpass;
@@ -36,16 +37,15 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(Country country, Utype utype) {
-        this.country = country;
+    public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Country country, Utype utype, String uname, String fname, String mname, String lname, String pass, String cpass, String street, String city, String state, String zip, String mobile, String email, String que, String answer, Integer status, Set grns, Set logins) {
-       this.country = country;
+    public User(Utype utype, Date date, Date time, String uname, String fname, String lname, String pass, String cpass, String street, String city, String state, String zip, String mobile, String email, String que, String answer, Integer status, Set grns, Set logins) {
        this.utype = utype;
+       this.date = date;
+       this.time = time;
        this.uname = uname;
        this.fname = fname;
-       this.mname = mname;
        this.lname = lname;
        this.pass = pass;
        this.cpass = cpass;
@@ -69,19 +69,26 @@ public class User  implements java.io.Serializable {
     public void setIduser(Integer iduser) {
         this.iduser = iduser;
     }
-    public Country getCountry() {
-        return this.country;
-    }
-    
-    public void setCountry(Country country) {
-        this.country = country;
-    }
     public Utype getUtype() {
         return this.utype;
     }
     
     public void setUtype(Utype utype) {
         this.utype = utype;
+    }
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Date getTime() {
+        return this.time;
+    }
+    
+    public void setTime(Date time) {
+        this.time = time;
     }
     public String getUname() {
         return this.uname;
@@ -96,13 +103,6 @@ public class User  implements java.io.Serializable {
     
     public void setFname(String fname) {
         this.fname = fname;
-    }
-    public String getMname() {
-        return this.mname;
-    }
-    
-    public void setMname(String mname) {
-        this.mname = mname;
     }
     public String getLname() {
         return this.lname;
