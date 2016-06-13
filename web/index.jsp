@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.current_url"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,9 +18,19 @@
         <!-- End WOWSlider.com HEAD section -->
         <title>Anita Designer wear</title>
         <script>
-
-
-
+            <%
+                   String uri = request.getScheme() + "://"
+                            + request.getServerName()
+                            + ("http".equals(request.getScheme()) && request.getServerPort() == 80 || "https".equals(request.getScheme()) && request.getServerPort() == 443 ? "" : ":" + request.getServerPort())
+                            + request.getRequestURI()
+                            + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
+                    current_url url = new current_url();
+                    url.setUrl(uri);
+                System.out.print("this current ur- "+uri);
+                    HttpSession currurl = request.getSession();
+                    currurl.setAttribute("currenturl", uri);
+                    
+            %>
             $(function () {
                 $('#login-form-link').click(function (e) {
                     $("#login-form").delay(100).fadeIn(100);
@@ -38,6 +49,8 @@
 
             });
             $(document).ready(function () {
+
+
 
                 $(".dropdown").hover(
                         function () {
@@ -70,8 +83,6 @@
                 ////    <%}%>
 
             }
-
-
 
         </script>
     </head>
@@ -113,7 +124,7 @@
                     <!--                    <div class="panel panel-default">
                                             <div class="panel-body">-->
                     <%for (int i = 0; i < 3; i++) {
-                                    for (int j = 0; j < 3; j++) {%>
+                            for (int j = 0; j < 3; j++) {%>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -142,7 +153,7 @@
                     </div>
 
                     <%}
-                                }%>
+                        }%>
                     <!--                        </div>
                                         </div>-->
                 </div>
@@ -152,7 +163,6 @@
 
 
         <%@include file="site/footer.jsp" %>
-
 
 
     </body>

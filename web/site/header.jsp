@@ -4,7 +4,7 @@
     Author     : Sevi
 --%>
 
-</script>
+
 <%
     HttpSession hsheader = request.getSession();
     POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
@@ -139,7 +139,7 @@
                             if (userheader != null) {%>
                     <ul class="dropdown-menu" role="menu">
 
-                        <li><a href="#">My Profile</a></li>
+                        <li><a href="my_profile.jsp">My Profile</a></li>
                         <%
                             if (userheader.getUtype().getUtype().equals("Admin")|userheader.getUtype().getUtype().equals("SuperAdmin")) {%>
 
@@ -163,7 +163,7 @@
                     </ul>        
                     <%}%>
                 </li>
-                <li><a href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<span class="label label-warning" style="margin-right:  10px;margin-left: 5px">2</span></a>
+                <li><a onclick="seturl()" href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<span class="label label-warning" style="margin-right:  10px;margin-left: 5px">2</span></a>
 
                 </li>
             </ul>
@@ -219,7 +219,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="text-center">
-                                                <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                <a href="foget_password.jsp" tabindex="5" class="forgot-password">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>

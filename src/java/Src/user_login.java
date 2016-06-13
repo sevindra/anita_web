@@ -60,11 +60,12 @@ public class user_login extends HttpServlet {
                     hs.setAttribute("user_obj", user);
                     response.sendRedirect("index.jsp");
                 } else {
-                    response.sendRedirect("index.jsp?error_login=1");
+                    response.sendRedirect("login.jsp?error_login=1");
 
                 }
             } else {
-                response.sendRedirect("index.jsp?error_login=1");
+                response.sendRedirect("login.jsp?error_login=1");
+                
             }
         }
     }

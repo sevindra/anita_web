@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.current_url"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,9 +13,15 @@
         <%@include file="inc.jsp" %>
         <title>JSP Page</title>
         <script>
+            <%
+
+                HttpSession url = request.getSession();
+                //current_url currenturl = (current_url) url.getAttribute("currenturl");
+                String urlrr = url.getAttribute("currenturl").toString();
+                System.out.println("curret url:-" + urlrr);
 
 
-
+            %>
 
             $(function () {
                 $('#login-form-link').click(function (e) {
@@ -53,8 +60,7 @@
 
 
 
-            <%
-                HttpSession hs = request.getSession();
+            <%                HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
 
             %>
@@ -75,7 +81,7 @@
         <div>
             <%@include file="site/header.jsp" %>
         </div>
-
+        <br/>
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
