@@ -10,6 +10,8 @@ package Src;
  * @author Sevi
  */
 public class current_url {
+    private String url;
+    private String email;
 
     public String getUrl() {
         
@@ -20,6 +22,13 @@ public class current_url {
         this.url = url;
     }
     
-    private String url;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
 }

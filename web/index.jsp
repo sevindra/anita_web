@@ -46,7 +46,7 @@
                     $(this).addClass('active');
                     e.preventDefault();
                 });
-
+               
             });
             $(document).ready(function () {
 

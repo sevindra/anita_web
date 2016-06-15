@@ -172,7 +172,7 @@
 </div>
 <!--<button type="button" class="btn btn-default myhover myBtnwidth150" data-toggle="modal" data-target=".bs-example-modal-cat">Add Sub Category</button>-->
 
-<div class="modal fade bs-example-modal-cat" data-remodal-id="loginid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade bs-example-modal-cat" data-remodal-id="loginid" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="loginmodel">
     <div class="modal-dialog mymodlewidth900">
         <!--<div class="modal-content">-->
 

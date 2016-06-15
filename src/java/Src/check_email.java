@@ -6,7 +6,6 @@
 package Src;
 
 import POJOS.User;
-import POJOS.Utype;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,17 +13,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Sevi
  */
-@WebServlet(name = "cus_reg", urlPatterns = {"/cus_reg"})
-public class cus_reg extends HttpServlet {
+@WebServlet(name = "check_email", urlPatterns = {"/check_email"})
+public class check_email extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,39 +39,32 @@ public class cus_reg extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String email = request.getParameter("email");
-            String reemail = request.getParameter("reemail");
-            String password = request.getParameter("password");
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            String register_btn = request.getParameter("register-submit");
-            String mobile = request.getParameter("mobile");
+            String emailnic = request.getParameter("email_or_nic");
             
-
             Session ses = controler.connector.getSessionFactory().openSession();
-            Transaction tr = ses.beginTransaction();
-            Criteria cr = ses.createCriteria(User.class);
-            cr.add(Restrictions.eq("uname", fname));
-            User us = (User)cr.uniqueResult();
-           
-                
-                User user = new User();
-            if (register_btn.equals("register")) {
-                out.write("if");
-                Utype utype = (Utype) ses.load(Utype.class, 4);
-                user.setUtype(utype);
-                user.setUname(fname);
-                user.setFname(fname);
-                user.setLname(lname);
-                user.setPass(password);
-                user.setEmail(email);
-                user.setMobile(mobile);
-                user.setStatus(1);
-                ses.save(user);
-                response.sendRedirect("index.jsp");
+            Criteria cr = ses.createCriteria(POJOS.User.class);
+            cr.add(Restrictions.eq("email", emailnic));
+            
+            User user = (User) cr.uniqueResult();
+            if (user!=null) {
+                String dbemail=user.getEmail();
+                if (dbemail.equals(emailnic)) {
+                    
+                    current_url emailornic = new current_url();
+                    emailornic.setEmail(emailnic);
+
+                    HttpSession httpses = request.getSession();
+                    httpses.setAttribute("email", emailornic);
+                    httpses.setAttribute("foget_pw_user", user);
+                    response.sendRedirect("reset_password.jsp");
+                }else{
+                }
+            } else {
+                    response.sendRedirect("foget_password.jsp?error_uid=1");
             }
             
-                tr.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

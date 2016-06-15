@@ -5,8 +5,6 @@
  */
 package Src;
 
-import POJOS.User;
-import POJOS.Utype;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,17 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Sevi
  */
-@WebServlet(name = "cus_reg", urlPatterns = {"/cus_reg"})
-public class cus_reg extends HttpServlet {
+@WebServlet(name = "send_using_email", urlPatterns = {"/send_using_email"})
+public class send_using_email extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,39 +35,21 @@ public class cus_reg extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String email = request.getParameter("email");
-            String reemail = request.getParameter("reemail");
-            String password = request.getParameter("password");
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            String register_btn = request.getParameter("register-submit");
-            String mobile = request.getParameter("mobile");
+              HttpSession hs = request.getSession();
+            POJOS.User user = (POJOS.User) hs.getAttribute("foget_pw_user");
+            double d = Math.random();
+            int code = (int) (d * 1000000000);
             
-
-            Session ses = controler.connector.getSessionFactory().openSession();
-            Transaction tr = ses.beginTransaction();
-            Criteria cr = ses.createCriteria(User.class);
-            cr.add(Restrictions.eq("uname", fname));
-            User us = (User)cr.uniqueResult();
-           
-                
-                User user = new User();
-            if (register_btn.equals("register")) {
-                out.write("if");
-                Utype utype = (Utype) ses.load(Utype.class, 4);
-                user.setUtype(utype);
-                user.setUname(fname);
-                user.setFname(fname);
-                user.setLname(lname);
-                user.setPass(password);
-                user.setEmail(email);
-                user.setMobile(mobile);
-                user.setStatus(1);
-                ses.save(user);
-                response.sendRedirect("index.jsp");
+            hs.setAttribute("mycode", code);
+            
+            if(user==null){
+                out.write("user null");
+            }else{
+              email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR "+user.getUname()+", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code="+code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
+                response.sendRedirect("send_email.jsp");
             }
-            
-                tr.commit();
+        }catch(Exception e){
+        e.printStackTrace();
         }
     }
 
