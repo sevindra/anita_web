@@ -11,6 +11,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="inc.jsp" %>
         <script>
+            var color;
+            var size;
+            $(function () {
+                $('.color').hide();
+                $('.size').hide();
+
+            });
+            function sizecolor() {
+                color = $('.color_val').val();
+                size = $('.size_val').val();
+                if (color == "-Select-") {
+                    $('.color').show();
+                }else{
+                    $('.color').hide();
+                    
+                }
+                if (size == "-Select-") {
+                    $('.size').show();
+                }else{
+                    
+                    $('.size').hide();
+                }
+            }
             $(function () {
                 $('#login-form-link').click(function (e) {
                     $("#login-form").delay(100).fadeIn(100);
@@ -26,6 +49,8 @@
                     $(this).addClass('active');
                     e.preventDefault();
                 });
+
+
 
             });
             $(document).ready(function () {
@@ -74,6 +99,7 @@
 
             %>
 
+
             function loginfirst() {
 
             <%                        if (user == null) {%>////
@@ -81,6 +107,8 @@
                 ////    <%}%>
 
             }
+
+
         </script>
         <title>Item Name</title>
     </head>
@@ -131,7 +159,7 @@
                             <div class="col-md-9">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <select class="form-control">
+                                        <select class="form-control color_val" onchange="sizecolor()">
                                             <option>-Select-</option>
                                             <option>Black</option>
                                             <option>White</option>
@@ -144,12 +172,22 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 text-right">
+
+                            </div>
+                            <div class="col-md-9">
+                                <div class="col-md-10 color">
+                                    <span class="glyphicon glyphicon-remove-sign myred"></span><strong class="myred">Please select color</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-right">
                                 <h5>Size : </h5> 
                             </div>
                             <div class="col-md-9">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <select class="form-control">
+                                        <select class="form-control size_val" onchange="sizecolor()">
                                             <option>-Select-</option>
                                             <option>S</option>
                                             <option>M</option>
@@ -157,6 +195,16 @@
                                             <option>XL</option>
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-right">
+
+                            </div>
+                            <div class="col-md-9">
+                                <div class="col-md-10 size">
+                                    <span class="glyphicon glyphicon-remove-sign myred"></span><strong class="myred">Please select size</strong>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +229,7 @@
                                         <h4><strong>LKR.1250.00</strong></h4>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-primary form-control">Buy It Now</button>
+                                        <button class="btn btn-primary form-control" onclick="sizecolor()">Buy It Now</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -192,7 +240,24 @@
                                         <h5>1 Watching</h5>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-success form-control">Add To Cart</button>
+                                        <button class="btn btn-success form-control" onclick="sizecolor()">Add To Cart</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 text-right">
+
+                                    </div> 
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a href="#"><h6><span class="glyphicon glyphicon-eye-open"></span>Add to watch list</h6></a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <h5><strong>Description</strong></h5>
+                                        Medium, 100% Cotton, Hand Wash, Made in Sri Lanka
                                     </div>
                                 </div>
                             </div>
@@ -219,6 +284,7 @@
                                 <h5>Payments : </h5> 
                             </div>
                             <div class="col-md-9">
+                                <!--<span class="fa fa-spinner fa-spin "></span>-->
                                 <h5><strong>Visa,Master Card,American Express</strong></h5>
                             </div>
                         </div>

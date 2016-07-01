@@ -4,6 +4,10 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="POJOS.State"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,12 +34,12 @@
                 });
                 var i = 0;
                 $('#add_new_address').click(function (e) {
-                    if(i==0){
-                    $('.del_add_savebtn').hide();
+                    if (i == 0) {
+                        $('.del_add_savebtn').hide();
                         i++;
-                    }else{
-                    $('.del_add_savebtn').show();
-                        i=0;
+                    } else {
+                        $('.del_add_savebtn').show();
+                        i = 0;
                     }
                 });
             });
@@ -138,6 +142,42 @@
 
 
         </script>
+        <script type="text/javascript">
+            function getFileName() {
+                var fileName = document.getElementById("selectFile").value;
+                var f = fileName.split("\\");
+
+                document.getElementById("fileName").value = f[f.length - 1];
+                var a = document.getElementById("selectFile").files;
+                for (var i = 0; i < a.length; i++) {
+                    //alert(a[i].name + "," + ((a[i].size) / 1024) / 1024);
+                }
+            }
+            function readurl(input) {
+                getFileName();
+                var c = 0;
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var elem = document.createElement("img");
+                        elem.setAttribute("id", c);
+                        elem.setAttribute("class", "myimgs");
+                        elem.setAttribute("src", e.target.result);
+                        elem.setAttribute("height", "100");
+                        elem.setAttribute("width", "100");
+                        elem.setAttribute("onclick", 'deleteimage(' + c + ')');
+                        document.getElementById("myimg").appendChild(elem);
+                        c++;
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+            function deleteimage(x) {
+                $("#" + x).remove();
+            }
+
+        </script>
     </head>
     <body style="background: #e2f2f2">
         <%@include  file="site/header.jsp" %>
@@ -205,108 +245,142 @@
 
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <div class="col-md-12">
-<!--                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Account Type</strong></h5>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="Account Type" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>-->
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Name</strong></h5>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" placeholder="First Name" class="form-control"/>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" placeholder="Middle Name" class="form-control"/>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" placeholder="Last Name" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Address</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Address" class="form-control"/>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" placeholder="City" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>State</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="State" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Postal Code (Zip)</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Postal Code (Zip)" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Primary Mobile</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Mobile" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>User Name</strong></h5>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="User Name" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-
-                                        <!--<hr/>-->
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Profile Picture</strong></h5>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-group image-preview">
-                                                    <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-                                                    <span class="input-group-btn">
-                                                        <!-- image-preview-clear button -->
-                                                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                                            <span class="glyphicon glyphicon-remove"></span> Clear
-                                                        </button>
-                                                        <!-- image-preview-input -->
-                                                        <div class="btn btn-default image-preview-input">
-                                                            <span class="glyphicon glyphicon-folder-open"></span>
-                                                            <span class="image-preview-input-title">Browse</span>
-                                                            <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-                                                        </div>
-                                                    </span>
+                                    <form  enctype="multipart/form-data" method="get" id="uploadForm" action="user_details_save">
+                                        <div class="col-md-12">
+                                            <!--                                        <div class="row">
+                                                                                        <div class="col-md-2 col-md-offset-1">
+                                                                                            <h5><strong>Account Type</strong></h5>
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <input type="text" placeholder="Account Type" class="form-control"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <br/>-->
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>Name</strong></h5>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" placeholder="First Name" class="form-control" name="fname"/>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" placeholder="Middle Name" class="form-control" name="mname"/>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" placeholder="Last Name" class="form-control" name="lname"/>
                                                 </div>
                                             </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>Address</strong></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="Address" class="form-control" name="address"/>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" placeholder="City" class="form-control" name="city"/>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>State</strong></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-control">
+                                                        <%
+                                                        Session ses= controler.connector.getSessionFactory().openSession();
+                                                        Criteria c = ses.createCriteria(State.class);
+                                                        List <State> li1=c.list();
+                                                        for(State state:li1){
+                                                        %>
+                                                        <option value="<%=state.getIdstate()%>"><%=state.getState()%></option>
+                                                        <%}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>Postal Code (Zip)</strong></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control" name="pcode"/>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>Primary Mobile</strong></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="Mobile" class="form-control" name="mobile"/>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>User Name</strong></h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="User Name" class="form-control" name="uname"/>
+                                                </div>
+                                            </div>
+                                            <br/>
+
+                                            <!--<hr/>-->
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-1">
+                                                    <h5><strong>Profile Picture</strong></h5>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group image-preview">
+                                                        <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                                                        <span class="input-group-btn">
+                                                            <!-- image-preview-clear button -->
+                                                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                                <span class="glyphicon glyphicon-remove"></span> Clear
+                                                            </button>
+                                                            <!-- image-preview-input -->
+                                                            <div class="btn btn-default image-preview-input">
+                                                                <span class="glyphicon glyphicon-folder-open"></span>
+                                                                <span class="image-preview-input-title">Browse</span>
+                                                                <input onchange="readurl(this)" class="upload" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" id="selectFile"/> <!-- rename it -->
+
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                        <div class="row">
+                                                                                        <div class="col-md-2 col-md-offset-1">
+                                                                                            <h5><strong>Profile Picture</strong></h5>
+                                                                                        </div>
+                                                                                        <div class="col-md-5">
+                                                                                            <div class="input-group image-preview">
+                                                                                                <input type="text" class="form-control image-preview-filename" disabled="disabled">  don't give a name === doesn't send on POST/GET 
+                                                                                                <span class="input-group-btn">
+                                                                                                     image-preview-clear button 
+                                                                                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                                                                        <span class="glyphicon glyphicon-remove"></span> Clear
+                                                                                                    </button>
+                                                                                                     image-preview-input 
+                                                                                                    <div class="btn btn-default image-preview-input">
+                                                                                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                                                                                        <span class="image-preview-input-title">Browse</span>
+                                                                                                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>  rename it 
+                                                                                                    </div>
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>-->
+                                            <br/>
+                                            <div class="row">
+                                                <button class="btn btn-primary pull-right"><strong>Save Details</strong></button>
+                                            </div>
                                         </div>
-                                        <br/>
-                                        <div class="row">
-                                            <button class="btn btn-primary pull-right"><strong>Save Details</strong></button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -468,6 +542,12 @@
                                         </div>
                                         <div class="col-md-4">
                                             <input type="password" class="form-control" placeholder="Confirm New Password"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button id="del_add_savebtn2" class="btn btn-primary pull-right"><strong>Save Details</strong></button>
                                         </div>
                                     </div>
                                     <br/>

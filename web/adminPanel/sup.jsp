@@ -28,7 +28,7 @@
             HttpSession hs = request.getSession();
             POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
             if (user == null) {
-                //response.sendRedirect("../index.jsp");
+                response.sendRedirect("../index.jsp");
             } else {
             }
         %>
@@ -37,6 +37,7 @@
                 alert($(this).parent().html().val());
             });
         </script>
+        <%@include file="../site/header.jsp" %>
         <div class="col-md-2 mypadin100">
             <a href="sup.jsp"><button class="btn btn-sm btn-default form-control myBtnHight50 myhover mybtnselect"><strong>Supplier</strong></button></a> 
             <div class="myPadinTop5"></div>

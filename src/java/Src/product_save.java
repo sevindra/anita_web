@@ -52,7 +52,7 @@ public class product_save extends HttpServlet {
                 POJOS.Subcat subct=(POJOS.Subcat) s.load(POJOS.Subcat.class, Integer.parseInt(subcat));
                 items.setSubcat(subct);
                 items.setItemname(item);
-                items.setStatus("1");
+                items.setStatus(1);
                 s.save(items);
                 tr.commit();
                 response.sendRedirect("adminPanel/Product.jsp");

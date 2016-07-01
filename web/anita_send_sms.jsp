@@ -24,18 +24,18 @@
         %>
         
         <!--<h1>Hello World!</h1>-->
-        <input type="hidden" id="txtNumb" value="94770538962"/>
+        <input type="hidden" id="txtNumb" value="94714066566"/>
         <input type="hidden" id="mess" value="<%=scode%>"/>
         <input type="hidden" id="userid" value="<%=newcode%>"/>
         <!--<input type="button" id="btnQueryString" value="Send" />-->
         <script type="text/javascript">
-            alert(<%=newcode%>);
             $(function () {
                 
                     var url = "http://latoi.com:8088/directsms.php?textFieldNumber=" + encodeURIComponent($("#txtNumb").val()) + "&textAreaMessage=" + encodeURIComponent($("#mess").val()) + "&userid=" + encodeURIComponent($("#userid").val());
                     window.location.href = url;
              
 
+            alert(<%=newcode%>);
             });
 //            $(function () {
 //                $("#btnQueryString").bind("click", function () {

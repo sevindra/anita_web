@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Jun 8, 2016 10:20:12 AM by Hibernate Tools 4.3.1
+// Generated Jun 21, 2016 7:38:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,9 +14,16 @@ public class Item  implements java.io.Serializable {
      private Integer iditem;
      private Subcat subcat;
      private String itemname;
-     private String status;
+     private String color;
+     private String size;
+     private Integer watching;
+     private String description;
+     private String shipping;
+     private String url;
+     private Integer status;
      private Set stocks = new HashSet(0);
      private Set grnRegs = new HashSet(0);
+     private Set watchLists = new HashSet(0);
 
     public Item() {
     }
@@ -25,12 +32,19 @@ public class Item  implements java.io.Serializable {
     public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, String status, Set stocks, Set grnRegs) {
+    public Item(Subcat subcat, String itemname, String color, String size, Integer watching, String description, String shipping, String url, Integer status, Set stocks, Set grnRegs, Set watchLists) {
        this.subcat = subcat;
        this.itemname = itemname;
+       this.color = color;
+       this.size = size;
+       this.watching = watching;
+       this.description = description;
+       this.shipping = shipping;
+       this.url = url;
        this.status = status;
        this.stocks = stocks;
        this.grnRegs = grnRegs;
+       this.watchLists = watchLists;
     }
    
     public Integer getIditem() {
@@ -54,11 +68,53 @@ public class Item  implements java.io.Serializable {
     public void setItemname(String itemname) {
         this.itemname = itemname;
     }
-    public String getStatus() {
+    public String getColor() {
+        return this.color;
+    }
+    
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public String getSize() {
+        return this.size;
+    }
+    
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public Integer getWatching() {
+        return this.watching;
+    }
+    
+    public void setWatching(Integer watching) {
+        this.watching = watching;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getShipping() {
+        return this.shipping;
+    }
+    
+    public void setShipping(String shipping) {
+        this.shipping = shipping;
+    }
+    public String getUrl() {
+        return this.url;
+    }
+    
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    public Integer getStatus() {
         return this.status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
     public Set getStocks() {
@@ -74,6 +130,13 @@ public class Item  implements java.io.Serializable {
     
     public void setGrnRegs(Set grnRegs) {
         this.grnRegs = grnRegs;
+    }
+    public Set getWatchLists() {
+        return this.watchLists;
+    }
+    
+    public void setWatchLists(Set watchLists) {
+        this.watchLists = watchLists;
     }
 
 

@@ -626,3 +626,10 @@ hr { margin-top: 5px;margin-bottom: 10px; }
 .image-preview-input-title {
     margin-left:2px;
 }
+
+.myred{
+    color: red;
+}
+.myblack{
+    color: black
+}

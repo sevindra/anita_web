@@ -23,7 +23,7 @@
         </div>
 
         <div class="collapse navbar-collapse js-navbar-collapse">
-            <img src="img/anita.ico" style="width: 50px; height: 40px; float: left; padding-top: 3px; min-height: 50px; padding-left: 5px">
+            <img src="../img/anita.ico" style="width: 50px; height: 40px; float: left; padding-top: 3px; min-height: 50px; padding-left: 5px">
             <label class="logo-text">ANITA</label>
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp"><span></span>Home</a></li>
@@ -33,7 +33,7 @@
                         <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">New Products</a></li>
                         <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Promotions</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Products</a></li>
-                        
+
                     </ul>
                 </li>
                 <!--                <li class="dropdown">
@@ -113,7 +113,7 @@
                     </ul>
 
                 </li>
-               
+
                 <li><a href="Contact.jsp">Contact</a></li>
 
             </ul>				
@@ -152,7 +152,7 @@
                     <%}%>
                 </li>
                 <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if(userheader!=null){%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
+                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
                     </a>
                     <%if (userheader != null) {%>
                     <ul class="dropdown-menu">

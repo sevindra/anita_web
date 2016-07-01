@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Jun 8, 2016 10:20:12 AM by Hibernate Tools 4.3.1
+// Generated Jun 21, 2016 7:38:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,52 +13,53 @@ public class User  implements java.io.Serializable {
 
 
      private Integer iduser;
+     private Addres addres;
      private Utype utype;
      private Date date;
      private Date time;
      private String uname;
      private String fname;
+     private String mname;
      private String lname;
      private String pass;
      private String cpass;
-     private String street;
-     private String city;
-     private String state;
-     private String zip;
      private String mobile;
      private String email;
      private String que;
      private String answer;
      private Integer status;
      private Set grns = new HashSet(0);
+     private Set messages = new HashSet(0);
+     private Set watchLists = new HashSet(0);
      private Set logins = new HashSet(0);
 
     public User() {
     }
 
 	
-    public User(Utype utype) {
+    public User(Addres addres, Utype utype) {
+        this.addres = addres;
         this.utype = utype;
     }
-    public User(Utype utype, Date date, Date time, String uname, String fname, String lname, String pass, String cpass, String street, String city, String state, String zip, String mobile, String email, String que, String answer, Integer status, Set grns, Set logins) {
+    public User(Addres addres, Utype utype, Date date, Date time, String uname, String fname, String mname, String lname, String pass, String cpass, String mobile, String email, String que, String answer, Integer status, Set grns, Set messages, Set watchLists, Set logins) {
+       this.addres = addres;
        this.utype = utype;
        this.date = date;
        this.time = time;
        this.uname = uname;
        this.fname = fname;
+       this.mname = mname;
        this.lname = lname;
        this.pass = pass;
        this.cpass = cpass;
-       this.street = street;
-       this.city = city;
-       this.state = state;
-       this.zip = zip;
        this.mobile = mobile;
        this.email = email;
        this.que = que;
        this.answer = answer;
        this.status = status;
        this.grns = grns;
+       this.messages = messages;
+       this.watchLists = watchLists;
        this.logins = logins;
     }
    
@@ -68,6 +69,13 @@ public class User  implements java.io.Serializable {
     
     public void setIduser(Integer iduser) {
         this.iduser = iduser;
+    }
+    public Addres getAddres() {
+        return this.addres;
+    }
+    
+    public void setAddres(Addres addres) {
+        this.addres = addres;
     }
     public Utype getUtype() {
         return this.utype;
@@ -104,6 +112,13 @@ public class User  implements java.io.Serializable {
     public void setFname(String fname) {
         this.fname = fname;
     }
+    public String getMname() {
+        return this.mname;
+    }
+    
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
     public String getLname() {
         return this.lname;
     }
@@ -124,34 +139,6 @@ public class User  implements java.io.Serializable {
     
     public void setCpass(String cpass) {
         this.cpass = cpass;
-    }
-    public String getStreet() {
-        return this.street;
-    }
-    
-    public void setStreet(String street) {
-        this.street = street;
-    }
-    public String getCity() {
-        return this.city;
-    }
-    
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public String getState() {
-        return this.state;
-    }
-    
-    public void setState(String state) {
-        this.state = state;
-    }
-    public String getZip() {
-        return this.zip;
-    }
-    
-    public void setZip(String zip) {
-        this.zip = zip;
     }
     public String getMobile() {
         return this.mobile;
@@ -194,6 +181,20 @@ public class User  implements java.io.Serializable {
     
     public void setGrns(Set grns) {
         this.grns = grns;
+    }
+    public Set getMessages() {
+        return this.messages;
+    }
+    
+    public void setMessages(Set messages) {
+        this.messages = messages;
+    }
+    public Set getWatchLists() {
+        return this.watchLists;
+    }
+    
+    public void setWatchLists(Set watchLists) {
+        this.watchLists = watchLists;
     }
     public Set getLogins() {
         return this.logins;
