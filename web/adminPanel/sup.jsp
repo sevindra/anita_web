@@ -28,7 +28,7 @@
             HttpSession hs = request.getSession();
             POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
             if (user == null) {
-                response.sendRedirect("../index.jsp");
+//                response.sendRedirect("../index.jsp");
             } else {
             }
         %>
@@ -58,14 +58,6 @@
                 <div class="panel-heading"><h3 class="panel-title"><strong>Supplier Details</strong></h3></div>
                 <div class="panel-body">
                     <form method="get" action="../sup_save">
-                        <!--                    <div class="row">
-                                                <div class="col-md-3 mypadin7 col">
-                                                    Supplier ID  
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <input class="form-control" placeholder="Enter Supplier ID"/>    
-                                                </div>
-                                            </div>-->
                         <br/>
                         <div class="row">
                             <div class="col-md-3 mypadin7">

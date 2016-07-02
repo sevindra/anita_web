@@ -36,29 +36,10 @@
                         
                     </ul>
                 </li>
-                <!--                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>				
-                                    <ul class="dropdown-menu">
-                                        <li> <a href="item.jsp"> Shirt </a> </li>
-                                        <li> <a href="item.jsp"> T-Shirt </a> </li>
-                                        <li> <a href="item.jsp"> Short </a> </li>
-                                        <li> <a href="item.jsp"> Trousers </a> </li>
-                                        <li> <a href="item.jsp"> Denims </a> </li>
-                                        <li> <a href="item.jsp"> Shoes </a> </li>
-                                    </ul>
                 
-                                </li>-->
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
-                    <!--                    <ul class="dropdown-menu">
-                                            <li> <a href="item.jsp"> Blouses </a> </li>
-                                            <li> <a href="item.jsp"> T-Shirts </a> </li>
-                                            <li> <a href="item.jsp"> Frocks </a> </li>
-                                            <li> <a href="item.jsp"> Trousers </a> </li>
-                                            <li> <a href="item.jsp"> Denims </a> </li>
-                                            <li> <a href="item.jsp"> Shoes </a> </li>
                     
-                                        </ul>-->
                     <ul class="dropdown-menu multi-level" >
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
@@ -238,22 +219,22 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="email" name="reemail" id="reemail" tabindex="2" class="form-control" placeholder="Confirm Email Address">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="password" name="password" id="password" tabindex="3" class="form-control" placeholder="Password">
+                                        <input type="password" name="cpassword" id="cpass" tabindex="3" class="form-control" placeholder="Confirm Password">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" name="fname" id="fname" tabindex="3" class="form-control" placeholder="First Name">
+                                        <input type="text" name="fname" id="fname" tabindex="4" class="form-control" placeholder="First Name">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="lname" id="lname" tabindex="3" class="form-control" placeholder="Last Name">
+                                        <input type="text" name="lname" id="lname" tabindex="5" class="form-control" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <br>

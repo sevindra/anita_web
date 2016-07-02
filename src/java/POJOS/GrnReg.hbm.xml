@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jun 21, 2016 7:38:20 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 01-Jul-2016 05:52:53 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.GrnReg" table="grn_reg" catalog="anitaweb" optimistic-lock="version">
         <id name="idgrnReg" type="java.lang.Integer">

@@ -1,8 +1,7 @@
 package POJOS;
-// Generated Jun 21, 2016 7:38:20 PM by Hibernate Tools 4.3.1
+// Generated 01-Jul-2016 05:52:52 by Hibernate Tools 4.3.1
 
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,19 +13,13 @@ public class User  implements java.io.Serializable {
 
      private Integer iduser;
      private Addres addres;
+     private Register register;
      private Utype utype;
-     private Date date;
-     private Date time;
      private String uname;
-     private String fname;
      private String mname;
-     private String lname;
-     private String pass;
-     private String cpass;
-     private String mobile;
-     private String email;
      private String que;
      private String answer;
+     private String img;
      private Integer status;
      private Set grns = new HashSet(0);
      private Set messages = new HashSet(0);
@@ -37,25 +30,20 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(Addres addres, Utype utype) {
+    public User(Addres addres, Register register, Utype utype) {
         this.addres = addres;
+        this.register = register;
         this.utype = utype;
     }
-    public User(Addres addres, Utype utype, Date date, Date time, String uname, String fname, String mname, String lname, String pass, String cpass, String mobile, String email, String que, String answer, Integer status, Set grns, Set messages, Set watchLists, Set logins) {
+    public User(Addres addres, Register register, Utype utype, String uname, String mname, String que, String answer, String img, Integer status, Set grns, Set messages, Set watchLists, Set logins) {
        this.addres = addres;
+       this.register = register;
        this.utype = utype;
-       this.date = date;
-       this.time = time;
        this.uname = uname;
-       this.fname = fname;
        this.mname = mname;
-       this.lname = lname;
-       this.pass = pass;
-       this.cpass = cpass;
-       this.mobile = mobile;
-       this.email = email;
        this.que = que;
        this.answer = answer;
+       this.img = img;
        this.status = status;
        this.grns = grns;
        this.messages = messages;
@@ -77,26 +65,19 @@ public class User  implements java.io.Serializable {
     public void setAddres(Addres addres) {
         this.addres = addres;
     }
+    public Register getRegister() {
+        return this.register;
+    }
+    
+    public void setRegister(Register register) {
+        this.register = register;
+    }
     public Utype getUtype() {
         return this.utype;
     }
     
     public void setUtype(Utype utype) {
         this.utype = utype;
-    }
-    public Date getDate() {
-        return this.date;
-    }
-    
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    public Date getTime() {
-        return this.time;
-    }
-    
-    public void setTime(Date time) {
-        this.time = time;
     }
     public String getUname() {
         return this.uname;
@@ -105,54 +86,12 @@ public class User  implements java.io.Serializable {
     public void setUname(String uname) {
         this.uname = uname;
     }
-    public String getFname() {
-        return this.fname;
-    }
-    
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
     public String getMname() {
         return this.mname;
     }
     
     public void setMname(String mname) {
         this.mname = mname;
-    }
-    public String getLname() {
-        return this.lname;
-    }
-    
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-    public String getPass() {
-        return this.pass;
-    }
-    
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    public String getCpass() {
-        return this.cpass;
-    }
-    
-    public void setCpass(String cpass) {
-        this.cpass = cpass;
-    }
-    public String getMobile() {
-        return this.mobile;
-    }
-    
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-    public String getEmail() {
-        return this.email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
     }
     public String getQue() {
         return this.que;
@@ -167,6 +106,13 @@ public class User  implements java.io.Serializable {
     
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+    public String getImg() {
+        return this.img;
+    }
+    
+    public void setImg(String img) {
+        this.img = img;
     }
     public Integer getStatus() {
         return this.status;

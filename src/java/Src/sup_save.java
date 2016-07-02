@@ -63,8 +63,6 @@ public class sup_save extends HttpServlet {
                 supplier.setAddress1(add1);
                 supplier.setAddress2(add2);
                 supplier.setAddress3(add3);
-//                s.save(supplier);
-//                tr.commit();
                 objsave.save(supplier);
                 response.sendRedirect("adminPanel/sup.jsp");
             } else if (btn.equals("update")) {

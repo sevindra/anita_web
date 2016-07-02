@@ -19,19 +19,20 @@
         <title>Anita Designer wear</title>
         <script>
             <%
-                   String uri = request.getScheme() + "://"
-                            + request.getServerName()
-                            + ("http".equals(request.getScheme()) && request.getServerPort() == 80 || "https".equals(request.getScheme()) && request.getServerPort() == 443 ? "" : ":" + request.getServerPort())
-                            + request.getRequestURI()
-                            + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
-                    current_url url = new current_url();
-                    url.setUrl(uri);
-                System.out.print("this current ur- "+uri);
-                    HttpSession currurl = request.getSession();
-                    currurl.setAttribute("currenturl", uri);
-                    
+                String uri = request.getScheme() + "://"
+                        + request.getServerName()
+                        + ("http".equals(request.getScheme()) && request.getServerPort() == 80 || "https".equals(request.getScheme()) && request.getServerPort() == 443 ? "" : ":" + request.getServerPort())
+                        + request.getRequestURI()
+                        + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
+                current_url url = new current_url();
+                url.setUrl(uri);
+                System.out.print("this current ur- " + uri);
+                HttpSession currurl = request.getSession();
+                currurl.setAttribute("currenturl", uri);
+
             %>
             $(function () {
+
                 $('#login-form-link').click(function (e) {
                     $("#login-form").delay(100).fadeIn(100);
                     $("#register-form").fadeOut(100);
@@ -46,10 +47,9 @@
                     $(this).addClass('active');
                     e.preventDefault();
                 });
-               
+
             });
             $(document).ready(function () {
-
 
 
                 $(".dropdown").hover(
@@ -70,8 +70,7 @@
 
 
 
-            <%
-                HttpSession hs = request.getSession();
+            <%                HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
 
             %>
@@ -163,7 +162,15 @@
 
 
         <%@include file="site/footer.jsp" %>
+        <script>
+            $(document).ready(function () {
 
+
+                $(".bs-example-modal-cat").modal();
+
+
+            });
+        </script>
 
     </body>
 </html>

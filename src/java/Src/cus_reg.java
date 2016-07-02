@@ -5,6 +5,7 @@
  */
 package Src;
 
+import POJOS.Register;
 import POJOS.User;
 import POJOS.Utype;
 import java.io.IOException;
@@ -41,38 +42,32 @@ public class cus_reg extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
-            String reemail = request.getParameter("reemail");
             String password = request.getParameter("password");
+            String cpass = request.getParameter("cpassword");
             String fname = request.getParameter("fname");
             String lname = request.getParameter("lname");
             String register_btn = request.getParameter("register-submit");
             String mobile = request.getParameter("mobile");
-            
 
-            Session ses = controler.connector.getSessionFactory().openSession();
-            Transaction tr = ses.beginTransaction();
-            Criteria cr = ses.createCriteria(User.class);
-            cr.add(Restrictions.eq("uname", fname));
-            User us = (User)cr.uniqueResult();
-           
-                
-                User user = new User();
+//            Session ses = controler.connector.getSessionFactory().openSession();
+//            Transaction tr = ses.beginTransaction();
+//            Criteria cr = ses.createCriteria(User.class);
+//            cr.add(Restrictions.eq("uname", fname));
+//            User us = (User)cr.uniqueResult();
+            Register register = new Register();
             if (register_btn.equals("register")) {
                 out.write("if");
-                Utype utype = (Utype) ses.load(Utype.class, 4);
-                user.setUtype(utype);
-                user.setUname(fname);
-                user.setFname(fname);
-                user.setLname(lname);
-                user.setPass(password);
-                user.setEmail(email);
-                user.setMobile(mobile);
-                user.setStatus(1);
-                ses.save(user);
+                register.setEmail(email);
+                register.setPassword(password);
+                register.setFname(fname);
+                register.setLname(lname);
+                register.setMobile(Integer.parseInt(mobile));
+                objsave.save(register);
                 response.sendRedirect("index.jsp");
             }
-            
-                tr.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

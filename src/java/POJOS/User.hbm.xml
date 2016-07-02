@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jun 21, 2016 7:38:20 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 01-Jul-2016 05:52:53 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.User" table="user" catalog="anitaweb" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
@@ -11,44 +11,26 @@
         <many-to-one name="addres" class="POJOS.Addres" fetch="select">
             <column name="addres_idaddres" not-null="true" />
         </many-to-one>
+        <many-to-one name="register" class="POJOS.Register" fetch="select">
+            <column name="idregister" not-null="true" />
+        </many-to-one>
         <many-to-one name="utype" class="POJOS.Utype" fetch="select">
             <column name="idutype" not-null="true" />
         </many-to-one>
-        <property name="date" type="date">
-            <column name="date" length="0" />
-        </property>
-        <property name="time" type="time">
-            <column name="time" length="0" />
-        </property>
         <property name="uname" type="string">
             <column name="uname" length="45" />
         </property>
-        <property name="fname" type="string">
-            <column name="fname" length="45" />
-        </property>
         <property name="mname" type="string">
             <column name="mname" length="45" />
-        </property>
-        <property name="lname" type="string">
-            <column name="lname" length="45" />
-        </property>
-        <property name="pass" type="string">
-            <column name="pass" length="45" />
-        </property>
-        <property name="cpass" type="string">
-            <column name="cpass" length="45" />
-        </property>
-        <property name="mobile" type="string">
-            <column name="mobile" length="11" />
-        </property>
-        <property name="email" type="string">
-            <column name="email" length="70" />
         </property>
         <property name="que" type="string">
             <column name="que" length="100" />
         </property>
         <property name="answer" type="string">
             <column name="answer" length="45" />
+        </property>
+        <property name="img" type="string">
+            <column name="img" length="65535" />
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />
