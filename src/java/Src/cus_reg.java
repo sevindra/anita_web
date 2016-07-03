@@ -5,8 +5,6 @@
  */
 package Src;
 
-import POJOS.Register;
-import POJOS.User;
 import POJOS.Utype;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Criteria;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -48,24 +45,51 @@ public class cus_reg extends HttpServlet {
             String lname = request.getParameter("lname");
             String register_btn = request.getParameter("register-submit");
             String mobile = request.getParameter("mobile");
+            String sec_code = request.getParameter("Security_code");
+            int code = 0;
+            HttpSession hs = request.getSession();
 
-//            Session ses = controler.connector.getSessionFactory().openSession();
-//            Transaction tr = ses.beginTransaction();
-//            Criteria cr = ses.createCriteria(User.class);
-//            cr.add(Restrictions.eq("uname", fname));
-//            User us = (User)cr.uniqueResult();
-            Register register = new Register();
-            if (register_btn.equals("register")) {
-                out.write("if");
-                register.setEmail(email);
-                register.setPassword(password);
-                register.setFname(fname);
-                register.setLname(lname);
-                register.setMobile(Integer.parseInt(mobile));
-                objsave.save(register);
-                response.sendRedirect("index.jsp");
+            Session ses = controler.connector.getSessionFactory().openSession();
+            Transaction tr = ses.beginTransaction();
+
+            if (register_btn != null) {
+                if (register_btn.equals("register")) {
+                    double d = Math.random();
+                    code = (int) (d * 1000000000);
+                    hs.setAttribute("registercode", code);
+
+                    Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile, new String[]{email}, "Welcome to Anita");
+                    response.sendRedirect("login.jsp?register=reg&reg=1");
+                }
             }
+            if (sec_code != null) {
+                String mycode = hs.getAttribute("registercode").toString();
+                if (mycode.equals(sec_code)) {
+                    POJOS.User user = new POJOS.User();
+                    POJOS.Utype utype = (Utype) ses.load(POJOS.Utype.class, 4);
+                    user.setUtype(utype);
+                    user.setFname(fname);
+                    user.setLname(lname);
+                    user.setMobile(mobile);
+                    user.setStatus(1);
+//                    objsave.save(user);
+                    ses.save(user);
 
+                    POJOS.Login login = new POJOS.Login();
+                    
+                    login.setUser(user);
+                    login.setEmail(email);
+                    login.setUpass(cpass);
+                    
+//                    objsave.save(login);
+                    ses.save(login);
+                    
+                    hs.setAttribute("user_obj",user);
+                    tr.commit();
+                    response.sendRedirect("index.jsp");
+                }
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -61,8 +61,8 @@ public class change_password extends HttpServlet {
 
             if (saves.equals("pwsave")) {
                 out.print("ok");
-                user1.setPass(pass);
-                user1.setCpass(cpass);
+//                user1.setPass(pass);
+//                user1.setCpass(cpass);
                 ses.update(user1);
                 response.sendRedirect("send_email.jsp?update=753951");
             } else {

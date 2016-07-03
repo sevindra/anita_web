@@ -31,18 +31,19 @@ public class objsave {
             Transaction tr = ses.beginTransaction();
             ses.save(obj);
             tr.commit();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public static void update(Object obj) throws Exception {
         ses = getses();
         try {
             Transaction tr = ses.beginTransaction();
             ses.update(obj);
             tr.commit();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

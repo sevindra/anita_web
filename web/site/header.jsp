@@ -101,13 +101,13 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
-                    <a href="#" class="dropdown-toggle" role="button" aria-expanded="false"  data-toggle="modal" data-target="<%if (userheader == null) {%>.bs-example-modal-cat<%}%>" id="user" value="<%if (userheader != null) {
+                    <a href="login.jsp" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
                             out.write(userheader.getIduser());
                         } else {
                             out.write("Login");
                         }%>">Hi <%
                             if (userheader != null) {
-                                out.write(userheader.getUname());
+                                out.write(userheader.getFname());
                             } else {
                                 out.write("Login");
                             }%> <span class="<%if (userheader != null) {%>caret<%}%>"></span></a>

@@ -222,7 +222,7 @@
                         </div>
                         <br/>
                         <div class="row">
-                            <span class="glyphicon glyphicon-envelope"></span> <%=user.getEmail()%>
+                            <span class="glyphicon glyphicon-envelope"></span> <%=%>email
                         </div>
                     </div>
                 </div>

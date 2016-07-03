@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 01-Jul-2016 05:52:52 by Hibernate Tools 4.3.1
+// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,43 +12,39 @@ public class User  implements java.io.Serializable {
 
 
      private Integer iduser;
-     private Addres addres;
-     private Register register;
      private Utype utype;
-     private String uname;
+     private String fname;
      private String mname;
-     private String que;
-     private String answer;
+     private String lname;
+     private String mobile;
      private String img;
      private Integer status;
      private Set grns = new HashSet(0);
      private Set messages = new HashSet(0);
      private Set watchLists = new HashSet(0);
      private Set logins = new HashSet(0);
+     private Set addreses = new HashSet(0);
 
     public User() {
     }
 
 	
-    public User(Addres addres, Register register, Utype utype) {
-        this.addres = addres;
-        this.register = register;
+    public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Addres addres, Register register, Utype utype, String uname, String mname, String que, String answer, String img, Integer status, Set grns, Set messages, Set watchLists, Set logins) {
-       this.addres = addres;
-       this.register = register;
+    public User(Utype utype, String fname, String mname, String lname, String mobile, String img, Integer status, Set grns, Set messages, Set watchLists, Set logins, Set addreses) {
        this.utype = utype;
-       this.uname = uname;
+       this.fname = fname;
        this.mname = mname;
-       this.que = que;
-       this.answer = answer;
+       this.lname = lname;
+       this.mobile = mobile;
        this.img = img;
        this.status = status;
        this.grns = grns;
        this.messages = messages;
        this.watchLists = watchLists;
        this.logins = logins;
+       this.addreses = addreses;
     }
    
     public Integer getIduser() {
@@ -58,20 +54,6 @@ public class User  implements java.io.Serializable {
     public void setIduser(Integer iduser) {
         this.iduser = iduser;
     }
-    public Addres getAddres() {
-        return this.addres;
-    }
-    
-    public void setAddres(Addres addres) {
-        this.addres = addres;
-    }
-    public Register getRegister() {
-        return this.register;
-    }
-    
-    public void setRegister(Register register) {
-        this.register = register;
-    }
     public Utype getUtype() {
         return this.utype;
     }
@@ -79,12 +61,12 @@ public class User  implements java.io.Serializable {
     public void setUtype(Utype utype) {
         this.utype = utype;
     }
-    public String getUname() {
-        return this.uname;
+    public String getFname() {
+        return this.fname;
     }
     
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
     public String getMname() {
         return this.mname;
@@ -93,19 +75,19 @@ public class User  implements java.io.Serializable {
     public void setMname(String mname) {
         this.mname = mname;
     }
-    public String getQue() {
-        return this.que;
+    public String getLname() {
+        return this.lname;
     }
     
-    public void setQue(String que) {
-        this.que = que;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
-    public String getAnswer() {
-        return this.answer;
+    public String getMobile() {
+        return this.mobile;
     }
     
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
     public String getImg() {
         return this.img;
@@ -148,6 +130,13 @@ public class User  implements java.io.Serializable {
     
     public void setLogins(Set logins) {
         this.logins = logins;
+    }
+    public Set getAddreses() {
+        return this.addreses;
+    }
+    
+    public void setAddreses(Set addreses) {
+        this.addreses = addreses;
     }
 
 

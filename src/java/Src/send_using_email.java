@@ -45,7 +45,7 @@ public class send_using_email extends HttpServlet {
             if(user==null){
                 out.write("user null");
             }else{
-              email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR "+user.getUname()+", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code="+code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
+              email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR "+user.getFname()+", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code="+code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
                 response.sendRedirect("send_email.jsp");
             }
         }catch(Exception e){

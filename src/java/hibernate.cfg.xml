@@ -13,7 +13,6 @@
     <mapping resource="POJOS/Cat.hbm.xml"/>
     <mapping resource="POJOS/WatchList.hbm.xml"/>
     <mapping resource="POJOS/Item.hbm.xml"/>
-    <mapping resource="POJOS/Register.hbm.xml"/>
     <mapping resource="POJOS/User.hbm.xml"/>
     <mapping resource="POJOS/State.hbm.xml"/>
     <mapping resource="POJOS/Message.hbm.xml"/>

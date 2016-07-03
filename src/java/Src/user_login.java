@@ -5,6 +5,7 @@
  */
 package Src;
 
+import POJOS.Login;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,18 +47,18 @@ public class user_login extends HttpServlet {
 
             SessionFactory sf = controler.connector.getSessionFactory();
             Session ses = sf.openSession();
-            Criteria cr = ses.createCriteria(POJOS.User.class);
+            Criteria cr = ses.createCriteria(POJOS.Login.class);
             cr.add(Restrictions.eq("email", email));
-            POJOS.User user = (User) cr.uniqueResult();
-            if (user != null) {
+            POJOS.Login login = (Login) cr.uniqueResult();
+            if (login != null) {
 
-                String dbemail = user.getEmail();
-                String dbpass = user.getPass();
+                String dbemail = login.getEmail();
+                String dbpass = login.getUpass();
 
                 out.write(dbemail + " " + dbpass);
                 if (email.equals(dbemail) && pass.equals(dbpass)) {
                     HttpSession hs = request.getSession();
-                    hs.setAttribute("user_obj", user);
+                    hs.setAttribute("user_obj", login);
                     response.sendRedirect("index.jsp");
                 } else {
                     response.sendRedirect("login.jsp?error_login=1");

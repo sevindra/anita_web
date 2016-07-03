@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01-Jul-2016 05:52:53 by Hibernate Tools 4.3.1 -->
+<!-- Generated 02-Jul-2016 15:04:50 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Addres" table="addres" catalog="anitaweb" optimistic-lock="version">
         <id name="idaddres" type="java.lang.Integer">
@@ -10,6 +10,9 @@
         </id>
         <many-to-one name="state" class="POJOS.State" fetch="select">
             <column name="state_idstate" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="POJOS.User" fetch="select">
+            <column name="user_iduser" not-null="true" />
         </many-to-one>
         <property name="address" type="string">
             <column name="address" length="100" />
@@ -29,11 +32,5 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="addres_idaddres" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.User" />
-        </set>
     </class>
 </hibernate-mapping>

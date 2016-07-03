@@ -1,33 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01-Jul-2016 05:52:53 by Hibernate Tools 4.3.1 -->
+<!-- Generated 02-Jul-2016 15:04:50 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.User" table="user" catalog="anitaweb" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
             <column name="iduser" />
             <generator class="identity" />
         </id>
-        <many-to-one name="addres" class="POJOS.Addres" fetch="select">
-            <column name="addres_idaddres" not-null="true" />
-        </many-to-one>
-        <many-to-one name="register" class="POJOS.Register" fetch="select">
-            <column name="idregister" not-null="true" />
-        </many-to-one>
         <many-to-one name="utype" class="POJOS.Utype" fetch="select">
             <column name="idutype" not-null="true" />
         </many-to-one>
-        <property name="uname" type="string">
-            <column name="uname" length="45" />
+        <property name="fname" type="string">
+            <column name="fname" length="45" />
         </property>
         <property name="mname" type="string">
             <column name="mname" length="45" />
         </property>
-        <property name="que" type="string">
-            <column name="que" length="100" />
+        <property name="lname" type="string">
+            <column name="lname" length="45" />
         </property>
-        <property name="answer" type="string">
-            <column name="answer" length="45" />
+        <property name="mobile" type="string">
+            <column name="mobile" length="10" />
         </property>
         <property name="img" type="string">
             <column name="img" length="65535" />
@@ -58,6 +52,12 @@
                 <column name="iduser" not-null="true" />
             </key>
             <one-to-many class="POJOS.Login" />
+        </set>
+        <set name="addreses" table="addres" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Addres" />
         </set>
     </class>
 </hibernate-mapping>

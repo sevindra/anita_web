@@ -14,14 +14,19 @@
         <script>
             $(document).ready(function () {
                 var reg = "<%=request.getParameter("reg")%>";
-                if(reg==1){
-                $('#register-form').click();
-                $(this).addClass('active');
-                $('#login-form-link').removeClass('active');
-                $('#login-form').hide();
-                $('#register-form').show();
+                    $('#gotohome').hide();
+                    $('#checkEmail').hide();
+                if (reg == 1) {
+                    $('#register-form').click();
+                    $(this).addClass('active');
+                    $('#login-form-link').removeClass('active');
+                    $('#login-form').hide();
+                    $('#regbtn').hide();
+                    $('#register-form').show();
+                    $('#gotohome').show();
+                    $('#checkEmail').show();
                 }
-                
+
                 $('.alert-autocloseable-danger').hide();
                 var res = "<%=request.getParameter("error_login")%>";
                 if (res == 1) {
@@ -124,22 +129,22 @@
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="email" name="reemail" id="reemail" tabindex="2" class="form-control" placeholder="Confirm Email Address">
+                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="password" name="password" id="password" tabindex="3" class="form-control" placeholder="Password">
+                                                <input type="password" name="cpassword" id="cpass" tabindex="3" class="form-control" placeholder="Confirm Password">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="text" name="fname" id="fname" tabindex="3" class="form-control" placeholder="First Name">
+                                                <input type="text" name="fname" id="fname" tabindex="4" class="form-control" placeholder="First Name">
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" name="lname" id="lname" tabindex="3" class="form-control" placeholder="Last Name">
+                                                <input type="text" name="lname" id="lname" tabindex="5" class="form-control" placeholder="Last Name">
                                             </div>
                                         </div>
                                         <br>
@@ -149,11 +154,19 @@
                                             </div>
                                         </div>
                                         <br>
+                                        <div class="alert alert-info alert-autocloseable-register text-center" id="checkEmail">
+                                            <strong>Please check your Email</strong>
+                                        </div>
+                                        <br/>
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-sm-6 col-sm-offset-3">
+                                                <div class="col-sm-6 col-sm-offset-3" id="regbtn">
                                                     <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
                                                     <button type="submit" name="register-submit" class="btn btn-register form-control" value="register"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
+                                                </div>
+                                                <div class="col-sm-6 col-sm-offset-3" id="gotohome">
+                                                    <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
+                                                    <a href="index.jsp" class="btn btn-info form-control"><span class="glyphicon glyphicon-home"></span><label> Home</label></a>
                                                 </div>
                                             </div>
                                         </div>

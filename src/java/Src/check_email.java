@@ -5,6 +5,7 @@
  */
 package Src;
 
+import POJOS.Login;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,10 +43,10 @@ public class check_email extends HttpServlet {
             String emailnic = request.getParameter("email_or_nic");
             
             Session ses = controler.connector.getSessionFactory().openSession();
-            Criteria cr = ses.createCriteria(POJOS.User.class);
+            Criteria cr = ses.createCriteria(POJOS.Login.class);
             cr.add(Restrictions.eq("email", emailnic));
             
-            User user = (User) cr.uniqueResult();
+            Login user = (Login) cr.uniqueResult();
             if (user!=null) {
                 String dbemail=user.getEmail();
                 if (dbemail.equals(emailnic)) {

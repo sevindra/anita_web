@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 01-Jul-2016 05:52:52 by Hibernate Tools 4.3.1
+// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class Login  implements java.io.Serializable {
 
      private Integer idLogin;
      private User user;
-     private String uname;
+     private String email;
      private String upass;
      private Set loginRegs = new HashSet(0);
 
@@ -24,9 +24,9 @@ public class Login  implements java.io.Serializable {
     public Login(User user) {
         this.user = user;
     }
-    public Login(User user, String uname, String upass, Set loginRegs) {
+    public Login(User user, String email, String upass, Set loginRegs) {
        this.user = user;
-       this.uname = uname;
+       this.email = email;
        this.upass = upass;
        this.loginRegs = loginRegs;
     }
@@ -45,12 +45,12 @@ public class Login  implements java.io.Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    public String getUname() {
-        return this.uname;
+    public String getEmail() {
+        return this.email;
     }
     
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setEmail(String email) {
+        this.email = email;
     }
     public String getUpass() {
         return this.upass;
