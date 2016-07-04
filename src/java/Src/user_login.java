@@ -7,15 +7,20 @@ package Src;
 
 import POJOS.Login;
 import POJOS.User;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javassist.compiler.TokenId;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.ImageIcon;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,34 +50,39 @@ public class user_login extends HttpServlet {
             String email = request.getParameter("email");
             String pass = request.getParameter("password");
 
-            SessionFactory sf = controler.connector.getSessionFactory();
-            Session ses = sf.openSession();
+            Session ses = controler.connector.getSessionFactory().openSession();
             Criteria cr = ses.createCriteria(POJOS.Login.class);
             cr.add(Restrictions.eq("email", email));
             POJOS.Login login = (Login) cr.uniqueResult();
-            if (login != null) {
+            String a = email;
+            String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            boolean b = a.matches(emailreg);
+            if (b == false) {
 
-                String dbemail = login.getEmail();
-                String dbpass = login.getUpass();
+                response.sendRedirect("login.jsp?reg=2");
+            } else {
 
-                out.write(dbemail + " " + dbpass);
-                if (email.equals(dbemail) && pass.equals(dbpass)) {
-                    HttpSession hs = request.getSession();
-                    hs.setAttribute("user_obj", login);
-                    response.sendRedirect("index.jsp");
+                if (login != null) {
+                    String dbemail = login.getEmail();
+                    String dbpass = login.getUpass();
+
+                    if (email.equals(dbemail) && pass.equals(dbpass)) {
+                        HttpSession hs = request.getSession();
+                        hs.setAttribute("user_obj", login.getUser());
+                        response.sendRedirect("index.jsp");
+                    } else {
+                        response.sendRedirect("login.jsp?error_login=1");
+
+                    }
                 } else {
                     response.sendRedirect("login.jsp?error_login=1");
 
                 }
-            } else {
-                response.sendRedirect("login.jsp?error_login=1");
-                
             }
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

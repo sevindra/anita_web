@@ -13,9 +13,31 @@
         <title>Login</title>
         <script>
             $(document).ready(function () {
+                $("#mypwmatch").hide();
+                $('#incomplete').hide();
+                $("input[type=password]").keyup(function () {
+                    if ($("#regpassword").val().toString() == $("#cpass").val().toString()) {
+                        $("#pwmatch").removeClass("glyphicon-remove");
+                        $("#pwmatch").addClass("glyphicon-ok");
+                        $("#pwmatch").css("color", "#00A41E");
+                        $("#mypwmatch").show();
+                        $("#disreg").removeAttr("disabled");
+                    } else {
+                        $("#disreg").attr("disabled", "disabled");
+                        $("#pwmatch").removeClass("glyphicon-ok");
+                        $("#pwmatch").addClass("glyphicon-remove");
+                        $("#pwmatch").css("color", "#FF0004");
+                        $("#mypwmatch").show();
+                    }
+                });
+
+
                 var reg = "<%=request.getParameter("reg")%>";
-                    $('#gotohome').hide();
-                    $('#checkEmail').hide();
+                var error_data = "<%=request.getParameter("error_data")%>";
+                var verify_email = "<%=request.getParameter("verify_email")%>";
+                $('#gotohome').hide();
+                $('#invliedEmail').hide();
+                $('#checkEmail').hide();
                 if (reg == 1) {
                     $('#register-form').click();
                     $(this).addClass('active');
@@ -24,6 +46,16 @@
                     $('#regbtn').hide();
                     $('#register-form').show();
                     $('#gotohome').show();
+                }
+                if (reg == 2) {
+                    $('#invliedEmail').show();
+
+                }
+                if (error_data == 3) {
+                    $('#incomplete').show();
+
+                }
+                if (verify_email == 3) {
                     $('#checkEmail').show();
                 }
 
@@ -88,7 +120,10 @@
                                 <div class="col-lg-12">
                                     <form id="login-form" action="user_login" method="post" role="form" style="display: block;">
                                         <div class="form-group">
-                                            <input type="text" required="" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail">
+                                            <input type="email" required="" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail">
+                                        </div>
+                                        <div class="alert alert-danger text-center" id="invliedEmail">
+                                            <strong>Invalid Email Address</strong>
                                         </div>
                                         <div class="form-group password">
                                             <!--<input type="password" id="password" placeholder="password">-->
@@ -123,50 +158,56 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address">
+                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" required="">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                                <input type="password" name="password" id="regpassword" tabindex="2" class="form-control" placeholder="Password" required="">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="password" name="cpassword" id="cpass" tabindex="3" class="form-control" placeholder="Confirm Password">
+                                                <input type="password" name="cpassword" id="cpass" tabindex="3" class="form-control" placeholder="Confirm Password" required="">
+
+                                                <div id="mypwmatch"><span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match</div>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input type="text" name="fname" id="fname" tabindex="4" class="form-control" placeholder="First Name">
+                                                <input type="text" name="fname" id="fname" tabindex="4" class="form-control" placeholder="First Name" required="">
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" name="lname" id="lname" tabindex="5" class="form-control" placeholder="Last Name">
+                                                <input type="text" name="lname" id="lname" tabindex="5" class="form-control" placeholder="Last Name" required="">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="text" name="mobile" id="mobile" tabindex="3" class="form-control" placeholder="(07) Mobile No">
+                                                <input type="text" name="mobile" id="mobile" tabindex="3" class="form-control" placeholder="(07) Mobile No" required="">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="alert alert-info alert-autocloseable-register text-center" id="checkEmail">
-                                            <strong>Please check your Email</strong>
+                                            <strong>Please Verify Your Email</strong>
+                                        </div>
+                                        <div class="alert alert-danger text-center" id="incomplete">
+                                            <strong>Incomplete Data</strong>
                                         </div>
                                         <br/>
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3" id="regbtn">
                                                     <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
-                                                    <button type="submit" name="register-submit" class="btn btn-register form-control" value="register"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
+                                                    <button type="submit" name="register-submit" class="btn btn-register form-control" value="register" id="disreg"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
                                                 </div>
                                                 <div class="col-sm-6 col-sm-offset-3" id="gotohome">
                                                     <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
-                                                    <a href="index.jsp" class="btn btn-info form-control"><span class="glyphicon glyphicon-home"></span><label> Home</label></a>
+                                                    <a href="index.jsp" class="btn btn-info form-control" id="myhome"><span class="glyphicon glyphicon-home"></span><label> Home</label></a>
+                                                    <a href="login.jsp">Reload</a>
                                                 </div>
                                             </div>
                                         </div>

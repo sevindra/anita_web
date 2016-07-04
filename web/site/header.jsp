@@ -101,7 +101,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
-                    <a href="login.jsp" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
+                    <a href="<%if(userheader == null){%>login.jsp<%}else{%>#<%}%>" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
                             out.write(userheader.getIduser());
                         } else {
                             out.write("Login");
