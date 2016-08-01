@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
+// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
 
 
 
@@ -10,7 +10,8 @@ public class Message  implements java.io.Serializable {
 
 
      private Integer idmessage;
-     private User user;
+     private User userByCustomer;
+     private User userByAnita;
      private String message;
      private Integer newmes;
      private Integer notification;
@@ -19,11 +20,13 @@ public class Message  implements java.io.Serializable {
     }
 
 	
-    public Message(User user) {
-        this.user = user;
+    public Message(User userByCustomer, User userByAnita) {
+        this.userByCustomer = userByCustomer;
+        this.userByAnita = userByAnita;
     }
-    public Message(User user, String message, Integer newmes, Integer notification) {
-       this.user = user;
+    public Message(User userByCustomer, User userByAnita, String message, Integer newmes, Integer notification) {
+       this.userByCustomer = userByCustomer;
+       this.userByAnita = userByAnita;
        this.message = message;
        this.newmes = newmes;
        this.notification = notification;
@@ -36,12 +39,19 @@ public class Message  implements java.io.Serializable {
     public void setIdmessage(Integer idmessage) {
         this.idmessage = idmessage;
     }
-    public User getUser() {
-        return this.user;
+    public User getUserByCustomer() {
+        return this.userByCustomer;
     }
     
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserByCustomer(User userByCustomer) {
+        this.userByCustomer = userByCustomer;
+    }
+    public User getUserByAnita() {
+        return this.userByAnita;
+    }
+    
+    public void setUserByAnita(User userByAnita) {
+        this.userByAnita = userByAnita;
     }
     public String getMessage() {
         return this.message;

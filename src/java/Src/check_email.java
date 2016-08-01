@@ -49,14 +49,18 @@ public class check_email extends HttpServlet {
             Login user = (Login) cr.uniqueResult();
             if (user!=null) {
                 String dbemail=user.getEmail();
+                
                 if (dbemail.equals(emailnic)) {
                     
+//                    out.print(dbemail);
                     current_url emailornic = new current_url();
                     emailornic.setEmail(emailnic);
 
                     HttpSession httpses = request.getSession();
+                    httpses.setAttribute("login", user);
                     httpses.setAttribute("email", emailornic);
-                    httpses.setAttribute("foget_pw_user", user);
+                    emailornic=(current_url)httpses.getAttribute("email");
+                    out.print(emailornic.getEmail());
                     response.sendRedirect("reset_password.jsp");
                 }else{
                 }

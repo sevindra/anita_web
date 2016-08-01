@@ -27,7 +27,8 @@
             <label class="logo-text">ANITA</label>
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp"><span></span>Home</a></li>
-                <li class="dropdown">
+                <!--class="dropdown"-->
+                <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">New Products</a></li>
@@ -116,8 +117,8 @@
                     <ul class="dropdown-menu" role="menu">
 
                         <li><a href="my_profile.jsp">My Profile</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Checkout</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>adminPanel/purchased.jsp<%}%>">Cart</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Checkout</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Cart</a></li>
 
                         <li class="divider"></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>watched.jsp<%}%>">Watched Items</a></li>

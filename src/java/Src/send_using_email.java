@@ -36,7 +36,7 @@ public class send_using_email extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
               HttpSession hs = request.getSession();
-            POJOS.User user = (POJOS.User) hs.getAttribute("foget_pw_user");
+            POJOS.User user = (POJOS.User) hs.getAttribute("user");
             double d = Math.random();
             int code = (int) (d * 1000000000);
             

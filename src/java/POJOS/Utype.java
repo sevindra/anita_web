@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
+// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,12 +13,12 @@ public class Utype  implements java.io.Serializable {
 
      private Integer idutype;
      private String utype;
-     private Set users = new HashSet(0);
+     private Set<User> users = new HashSet<User>(0);
 
     public Utype() {
     }
 
-    public Utype(String utype, Set users) {
+    public Utype(String utype, Set<User> users) {
        this.utype = utype;
        this.users = users;
     }
@@ -37,11 +37,11 @@ public class Utype  implements java.io.Serializable {
     public void setUtype(String utype) {
         this.utype = utype;
     }
-    public Set getUsers() {
+    public Set<User> getUsers() {
         return this.users;
     }
     
-    public void setUsers(Set users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 

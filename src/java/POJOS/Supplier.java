@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
+// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,12 +20,12 @@ public class Supplier  implements java.io.Serializable {
      private String address1;
      private String address2;
      private String address3;
-     private Set grns = new HashSet(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
 
     public Supplier() {
     }
 
-    public Supplier(String supname, String comname, Integer contact1, Integer contact2, String email, String address1, String address2, String address3, Set grns) {
+    public Supplier(String supname, String comname, Integer contact1, Integer contact2, String email, String address1, String address2, String address3, Set<Grn> grns) {
        this.supname = supname;
        this.comname = comname;
        this.contact1 = contact1;
@@ -100,11 +100,11 @@ public class Supplier  implements java.io.Serializable {
     public void setAddress3(String address3) {
         this.address3 = address3;
     }
-    public Set getGrns() {
+    public Set<Grn> getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set grns) {
+    public void setGrns(Set<Grn> grns) {
         this.grns = grns;
     }
 

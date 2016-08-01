@@ -66,6 +66,7 @@
             <%
                 HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
+                POJOS.Login login=(POJOS.Login)hs.getAttribute("login");
 
             %>
 
@@ -136,7 +137,7 @@
                         $(".image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                     }
                     reader.readAsDataURL(file);
-                    alert(file);
+//                    alert(file);
                 });
             });
 
@@ -150,7 +151,7 @@
                 document.getElementById("fileName").value = f[f.length - 1];
                 var a = document.getElementById("selectFile").files;
                 for (var i = 0; i < a.length; i++) {
-                    //alert(a[i].name + "," + ((a[i].size) / 1024) / 1024);
+                    alert(a[i].name + "," + ((a[i].size) / 1024) / 1024);
                 }
             }
             function readurl(input) {
@@ -202,13 +203,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="row text-center">
-                            <h4>
-                                <%if (user != null) {
-                                        out.write(user.getUtype().getUtype());
-                                    }%>
-                            </h4>
-                        </div>
+                        
                         <div class="row">
                             <span class="glyphicon glyphicon-map-marker"></span> 44, Vimukthi Mawatha, Pelawatta, Battaramulla.
                         </div>
@@ -222,7 +217,7 @@
                         </div>
                         <br/>
                         <div class="row">
-                            <span class="glyphicon glyphicon-envelope"></span> <%=%>email
+                            <span class="glyphicon glyphicon-envelope"></span><%=login.getEmail()%>
                         </div>
                     </div>
                 </div>
@@ -288,7 +283,7 @@
                                                     <h5><strong>State</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <select class="form-control">
+                                                    <select class="form-control" name="state">
                                                         <%
                                                         Session ses= controler.connector.getSessionFactory().openSession();
                                                         Criteria c = ses.createCriteria(State.class);
@@ -324,7 +319,7 @@
                                                     <h5><strong>User Name</strong></h5>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" placeholder="User Name" class="form-control" name="uname"/>
+                                                    <input type="text" placeholder="NIC" class="form-control" name="nic"/>
                                                 </div>
                                             </div>
                                             <br/>

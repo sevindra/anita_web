@@ -46,6 +46,7 @@
                     $('#regbtn').hide();
                     $('#register-form').show();
                     $('#gotohome').show();
+                    //$('#invliedEmail').show();
                 }
                 if (reg == 2) {
                     $('#invliedEmail').show();
@@ -187,12 +188,20 @@
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="text" name="mobile" id="mobile" tabindex="3" class="form-control" placeholder="(07) Mobile No" required="">
+                                                <input type="text" name="mobile" id="mobile" tabindex="6" class="form-control" placeholder="(07) Mobile No" required="">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="alert alert-info alert-autocloseable-register text-center" id="checkEmail">
-                                            <strong>Please Verify Your Email</strong>
+                                            <center>
+                                                <strong>
+                                                    Your account has been created and an
+                                                    activation link has been sent to the email address
+                                                    you entered. Note that you must activate
+                                                    the account by selecting the activation link
+                                                    when you get the email before you can login.
+                                                </strong>
+                                            </center>
                                         </div>
                                         <div class="alert alert-danger text-center" id="incomplete">
                                             <strong>Incomplete Data</strong>
@@ -205,9 +214,11 @@
                                                     <button type="submit" name="register-submit" class="btn btn-register form-control" value="register" id="disreg"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
                                                 </div>
                                                 <div class="col-sm-6 col-sm-offset-3" id="gotohome">
-                                                    <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
-                                                    <a href="index.jsp" class="btn btn-info form-control" id="myhome"><span class="glyphicon glyphicon-home"></span><label> Home</label></a>
-                                                    <a href="login.jsp">Reload</a>
+                                                    <center>
+                                                        <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
+                                                        <a href="index.jsp" class="btn btn-info btn-block" id="myhome"><span class="glyphicon glyphicon-home"></span><label> Home</label></a>
+                                                        <a href="login.jsp?reg=1">Reload</a>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>

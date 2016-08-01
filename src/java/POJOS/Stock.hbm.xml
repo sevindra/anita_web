@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-Jul-2016 15:04:50 by Hibernate Tools 4.3.1 -->
+<!-- Generated 28-Jul-2016 14:47:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Stock" table="stock" catalog="anitaweb" optimistic-lock="version">
         <id name="idstock" type="java.lang.Integer">
@@ -23,11 +23,11 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <set name="grnRegs" table="grn_reg" inverse="true" lazy="true" fetch="select">
+        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idstock" not-null="true" />
+                <column name="stock_idstock" not-null="true" />
             </key>
-            <one-to-many class="POJOS.GrnReg" />
+            <one-to-many class="POJOS.Grn" />
         </set>
     </class>
 </hibernate-mapping>

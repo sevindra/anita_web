@@ -6,7 +6,6 @@
 package Src;
 
 import POJOS.Grn;
-import POJOS.GrnReg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -67,10 +66,10 @@ public class grn_save extends HttpServlet {
                 POJOS.Supplier suplier =(POJOS.Supplier) s.load(POJOS.Supplier.class, Integer.parseInt(sup));
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
                 grn.setSupplier(suplier);
-                grn.setDate(date);
-                grn.setTime(time);
-                grn.setPmode(pmode);
-                grn.setUser(user);
+//                grn.setDate(date);
+//                grn.setTime(time);
+//                grn.setPmode(pmode);
+//                grn.setUser(user);
                 
                 
                 

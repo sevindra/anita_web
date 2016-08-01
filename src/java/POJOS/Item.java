@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
+// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,39 +12,43 @@ public class Item  implements java.io.Serializable {
 
 
      private Integer iditem;
+     private Color color;
+     private Size size;
      private Subcat subcat;
      private String itemname;
-     private String color;
-     private String size;
      private Integer watching;
      private String description;
-     private String shipping;
      private String url;
+     private String delivary;
      private Integer status;
-     private Set stocks = new HashSet(0);
-     private Set grnRegs = new HashSet(0);
-     private Set watchLists = new HashSet(0);
+     private Set<Stock> stocks = new HashSet<Stock>(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
 
     public Item() {
     }
 
 	
-    public Item(Subcat subcat) {
+    public Item(Color color, Size size, Subcat subcat) {
+        this.color = color;
+        this.size = size;
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, String color, String size, Integer watching, String description, String shipping, String url, Integer status, Set stocks, Set grnRegs, Set watchLists) {
-       this.subcat = subcat;
-       this.itemname = itemname;
+    public Item(Color color, Size size, Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Stock> stocks, Set<Grn> grns, Set<WatchList> watchLists, Set<Cart> carts) {
        this.color = color;
        this.size = size;
+       this.subcat = subcat;
+       this.itemname = itemname;
        this.watching = watching;
        this.description = description;
-       this.shipping = shipping;
        this.url = url;
+       this.delivary = delivary;
        this.status = status;
        this.stocks = stocks;
-       this.grnRegs = grnRegs;
+       this.grns = grns;
        this.watchLists = watchLists;
+       this.carts = carts;
     }
    
     public Integer getIditem() {
@@ -53,6 +57,20 @@ public class Item  implements java.io.Serializable {
     
     public void setIditem(Integer iditem) {
         this.iditem = iditem;
+    }
+    public Color getColor() {
+        return this.color;
+    }
+    
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    public Size getSize() {
+        return this.size;
+    }
+    
+    public void setSize(Size size) {
+        this.size = size;
     }
     public Subcat getSubcat() {
         return this.subcat;
@@ -68,20 +86,6 @@ public class Item  implements java.io.Serializable {
     public void setItemname(String itemname) {
         this.itemname = itemname;
     }
-    public String getColor() {
-        return this.color;
-    }
-    
-    public void setColor(String color) {
-        this.color = color;
-    }
-    public String getSize() {
-        return this.size;
-    }
-    
-    public void setSize(String size) {
-        this.size = size;
-    }
     public Integer getWatching() {
         return this.watching;
     }
@@ -96,19 +100,19 @@ public class Item  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getShipping() {
-        return this.shipping;
-    }
-    
-    public void setShipping(String shipping) {
-        this.shipping = shipping;
-    }
     public String getUrl() {
         return this.url;
     }
     
     public void setUrl(String url) {
         this.url = url;
+    }
+    public String getDelivary() {
+        return this.delivary;
+    }
+    
+    public void setDelivary(String delivary) {
+        this.delivary = delivary;
     }
     public Integer getStatus() {
         return this.status;
@@ -117,26 +121,33 @@ public class Item  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getStocks() {
+    public Set<Stock> getStocks() {
         return this.stocks;
     }
     
-    public void setStocks(Set stocks) {
+    public void setStocks(Set<Stock> stocks) {
         this.stocks = stocks;
     }
-    public Set getGrnRegs() {
-        return this.grnRegs;
+    public Set<Grn> getGrns() {
+        return this.grns;
     }
     
-    public void setGrnRegs(Set grnRegs) {
-        this.grnRegs = grnRegs;
+    public void setGrns(Set<Grn> grns) {
+        this.grns = grns;
     }
-    public Set getWatchLists() {
+    public Set<WatchList> getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set watchLists) {
+    public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
+    }
+    public Set<Cart> getCarts() {
+        return this.carts;
+    }
+    
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 
 

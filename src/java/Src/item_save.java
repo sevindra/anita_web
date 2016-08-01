@@ -6,7 +6,6 @@
 package Src;
 
 import POJOS.Grn;
-import POJOS.GrnReg;
 import POJOS.Item;
 import POJOS.Stock;
 import java.io.IOException;
@@ -79,7 +78,6 @@ public class item_save extends HttpServlet {
             idgrn = (POJOS.Grn) ses.load(POJOS.Grn.class, Integer.parseInt(grnid));
             POJOS.Grn grn = new Grn();
 //
-            POJOS.GrnReg grnreg = new GrnReg();
 
 //            POJOS.Item item =(Item) ses.load(POJOS.Item.class, Integer.parseInt(pid));
             Criteria citem = ses.createCriteria(POJOS.Item.class);
@@ -120,16 +118,15 @@ public class item_save extends HttpServlet {
 //                grnreg.setTotal(Double.parseDouble(total));
 //
 //                objsave.save(grnreg);
-                GrnReg GrnReg = new GrnReg();
-                GrnReg.setCost(Double.parseDouble(cost));
-                GrnReg.setDiscount(Integer.parseInt(dis));
-                GrnReg.setGrn(grn);
-                GrnReg.setItem(item);
-                GrnReg.setQty(Integer.parseInt(qty));
-                GrnReg.setStock(stock);
-                GrnReg.setTotal(Double.parseDouble(total));
-                
-                hs.setAttribute("grnreg", GrnReg);
+//                GrnReg.setCost(Double.parseDouble(cost));
+//                GrnReg.setDiscount(Integer.parseInt(dis));
+//                GrnReg.setGrn(grn);
+//                GrnReg.setItem(item);
+//                GrnReg.setQty(Integer.parseInt(qty));
+//                GrnReg.setStock(stock);
+//                GrnReg.setTotal(Double.parseDouble(total));
+//                
+//                hs.setAttribute("grnreg", GrnReg);
                 
             } else if (idgrn.getGrnid() == Integer.parseInt(grnid)) {
 

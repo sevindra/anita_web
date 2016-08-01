@@ -69,6 +69,7 @@ public class user_login extends HttpServlet {
                     if (email.equals(dbemail) && pass.equals(dbpass)) {
                         HttpSession hs = request.getSession();
                         hs.setAttribute("user_obj", login.getUser());
+                        hs.setAttribute("login", login);
                         response.sendRedirect("index.jsp");
                     } else {
                         response.sendRedirect("login.jsp?error_login=1");

@@ -47,55 +47,51 @@ public class cus_reg extends HttpServlet {
             String mobile = request.getParameter("mobile");
             String sec_code = request.getParameter("Security_code");
 
-            if (email.equals("") || password.equals("") || cpass.equals("") || fname.equals("") || lname.equals("")) {
-                response.sendRedirect("login.jsp?error_data=3&reg=1");
-            } else {
+            int code = 0;
+            HttpSession hs = request.getSession();
 
-                int code = 0;
-                HttpSession hs = request.getSession();
+            Session ses = controler.connector.getSessionFactory().openSession();
+            Transaction tr = ses.beginTransaction();
 
-                Session ses = controler.connector.getSessionFactory().openSession();
-                Transaction tr = ses.beginTransaction();
+            if (register_btn != null) {
+                if (register_btn.equals("register")) {
+                    double d = Math.random();
+                    code = (int) (d * 1000000000);
+                    hs.setAttribute("registercode", code);
 
-                if (register_btn != null) {
-                    if (register_btn.equals("register")) {
-                        double d = Math.random();
-                        code = (int) (d * 1000000000);
-                        hs.setAttribute("registercode", code);
-
-                        Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile, new String[]{email}, "Welcome to Anita");
-                        response.sendRedirect("login.jsp?register=reg&verify_email=2");
-                    }
-                }
-                if (sec_code != null) {
-                    String mycode = hs.getAttribute("registercode").toString();
-                    if (mycode.equals(sec_code)) {
-                        POJOS.User user = new POJOS.User();
-                        POJOS.Utype utype = (Utype) ses.load(POJOS.Utype.class, 4);
-                        user.setUtype(utype);
-                        user.setFname(fname);
-                        user.setLname(lname);
-                        user.setMobile(mobile);
-                        user.setStatus(1);
-//                    objsave.save(user);
-                        ses.save(user);
-
-                        POJOS.Login login = new POJOS.Login();
-
-                        login.setUser(user);
-                        login.setEmail(email);
-                        login.setUpass(cpass);
-
-//                    objsave.save(login);
-                        ses.save(login);
-
-                        hs.setAttribute("user_obj", user);
-                        tr.commit();
-                        response.sendRedirect("index.jsp");
-                    }
-
+                    Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile, new String[]{email}, "Welcome to Anita");
+                    response.sendRedirect("login.jsp?register=reg&verify_email=3&reg=1");
                 }
             }
+            if (sec_code != null) {
+                String mycode = hs.getAttribute("registercode").toString();
+                if (mycode.equals(sec_code)) {
+                    POJOS.User user = new POJOS.User();
+                    POJOS.Utype utype = (Utype) ses.load(POJOS.Utype.class, 4);
+                    user.setUtype(utype);
+                    user.setFname(fname);
+                    user.setLname(lname);
+                    user.setMobile(mobile);
+                    user.setStatus(1);
+//                    objsave.save(user);
+                    ses.save(user);
+
+                    POJOS.Login login = new POJOS.Login();
+
+                    login.setUser(user);
+                    login.setEmail(email);
+                    login.setUpass(cpass);
+
+//                    objsave.save(login);
+                    ses.save(login);
+
+                    hs.setAttribute("user_obj", user);
+                    tr.commit();
+                    response.sendRedirect("index.jsp");
+                }
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

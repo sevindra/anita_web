@@ -44,57 +44,57 @@ public class user_details_save extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String fname=request.getParameter("fname");
-            String mname=request.getParameter("mname");
-            String lname=request.getParameter("lname");
-            String address=request.getParameter("address");
-            String city=request.getParameter("city");
-            int state=Integer.parseInt(request.getParameter("state"));
-            String pcode=request.getParameter("pcode");
-            String mobile=request.getParameter("mobile");
-            String uname=request.getParameter("uname");
-            
-            Session ses= controler.connector.getSessionFactory().openSession();
-            
-            System.out.println(fname+" "+mname+" "+lname+" "+ address+" "+city+" "+state+" "+pcode+" "+mobile+" "+uname);
+
+//            String fname = request.getParameter("fname");
+//            String mname = request.getParameter("mname");
+//            String lname = request.getParameter("lname");
+//            String address = request.getParameter("address");
+//            String city = request.getParameter("city");
+//            int state = Integer.parseInt(request.getParameter("state"));
+//            String pcode = request.getParameter("pcode");
+//            String mobile = request.getParameter("mobile");
+//            String nic = request.getParameter("nic");
+
+            Session ses = controler.connector.getSessionFactory().openSession();
+//            System.out.println(fname + " " + mname + " " + lname + " " + address + " " + city + " " + state + " " + pcode + " " + mobile + " " + uname);
             boolean ismultiple = ServletFileUpload.isMultipartContent(request);
-           
+                out.write("okkkkk");
             if (ismultiple) {
-                
+                out.write("okkkkk");
+
                 FileItemFactory fif = new DiskFileItemFactory();
-                ServletFileUpload upload=new ServletFileUpload(fif);
-                
+                ServletFileUpload upload = new ServletFileUpload(fif);
+
                 try {
-                    
-                    List<FileItem> fit=upload.parseRequest(request);
+
+                    List<FileItem> fit = upload.parseRequest(request);
                     for (FileItem f : fit) {
                         if (!(f.getName().equals(""))) {
-                            
+
                             if (!f.isFormField()) {
-                                User user= new User();
-                                Addres add= new Addres();
-                                State stte=(State) ses.load(State.class, state);
-                                
-                                add.setAddress(address);
-                                add.setCity(city);
-                                add.setZip(pcode);
-                                add.setState(stte);
-                                objsave.update(out);
-                                user.setFname(fname);
-                                user.setMname(mname);
-                                user.setLname(lname);
-                                
-                                
+//                                User user = new User();
+//                                Addres add = new Addres();
+//                                State stte = (State) ses.load(State.class, state);
+//
+//                                add.setAddress(address);
+//                                add.setCity(city);
+//                                add.setZip(pcode);
+//                                add.setState(stte);
+////                                objsave.update(out);
+//                                user.setFname(fname);
+//                                user.setMname(mname);
+//                                user.setLname(lname);
+
                                 String n = new File(f.getName()).getName();
                                 f.write(new File("C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/adminPanel/customer_images/" + System.currentTimeMillis() + "_" + n));
                                 response.sendRedirect("my_profile.jsp");
                             }
-                        }else{
-                                response.sendRedirect("my_profile.jsp");
-                        
+                        } else {
+                            response.sendRedirect("my_profile.jsp");
+
                         }
                     }
-                    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

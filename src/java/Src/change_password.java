@@ -5,6 +5,7 @@
  */
 package Src;
 
+import POJOS.Login;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,22 +49,16 @@ public class change_password extends HttpServlet {
             Transaction tr = ses.beginTransaction();
 
             HttpSession hs = request.getSession();
-            current_url email = (current_url) hs.getAttribute("email");
-
-            Criteria cr = ses.createCriteria(POJOS.User.class);
-            cr.add(Restrictions.eq("email", email.getEmail()));
-            out.print(email);
-            User user = (User) cr.uniqueResult();
-            int id = user.getIduser();
-            Criteria cr1 = ses.createCriteria(User.class);
-            cr.add(Restrictions.eq("iduser", id));
-            User user1 = (User) cr.uniqueResult();
-
+            
+            current_url emaill = (current_url) hs.getAttribute("email");
+            
+            Criteria cr = ses.createCriteria(Login.class);
+            cr.add(Restrictions.eq("email", emaill.getEmail()));
+            Login login=(Login) cr.uniqueResult();
             if (saves.equals("pwsave")) {
                 out.print("ok");
-//                user1.setPass(pass);
-//                user1.setCpass(cpass);
-                ses.update(user1);
+                login.setUpass(cpass);
+                ses.update(login);
                 response.sendRedirect("send_email.jsp?update=753951");
             } else {
                 out.write("okelse");

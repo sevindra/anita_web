@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 02-Jul-2016 15:04:48 by Hibernate Tools 4.3.1
+// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -19,11 +19,13 @@ public class User  implements java.io.Serializable {
      private String mobile;
      private String img;
      private Integer status;
-     private Set grns = new HashSet(0);
-     private Set messages = new HashSet(0);
-     private Set watchLists = new HashSet(0);
-     private Set logins = new HashSet(0);
-     private Set addreses = new HashSet(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
+     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Set<Message> messagesForAnita = new HashSet<Message>(0);
+     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Login> logins = new HashSet<Login>(0);
+     private Set<Addres> addreses = new HashSet<Addres>(0);
 
     public User() {
     }
@@ -32,7 +34,7 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String fname, String mname, String lname, String mobile, String img, Integer status, Set grns, Set messages, Set watchLists, Set logins, Set addreses) {
+    public User(Utype utype, String fname, String mname, String lname, String mobile, String img, Integer status, Set<Cart> carts, Set<Message> messagesForCustomer, Set<Grn> grns, Set<Message> messagesForAnita, Set<WatchList> watchLists, Set<Login> logins, Set<Addres> addreses) {
        this.utype = utype;
        this.fname = fname;
        this.mname = mname;
@@ -40,8 +42,10 @@ public class User  implements java.io.Serializable {
        this.mobile = mobile;
        this.img = img;
        this.status = status;
+       this.carts = carts;
+       this.messagesForCustomer = messagesForCustomer;
        this.grns = grns;
-       this.messages = messages;
+       this.messagesForAnita = messagesForAnita;
        this.watchLists = watchLists;
        this.logins = logins;
        this.addreses = addreses;
@@ -103,39 +107,53 @@ public class User  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getGrns() {
+    public Set<Cart> getCarts() {
+        return this.carts;
+    }
+    
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+    public Set<Message> getMessagesForCustomer() {
+        return this.messagesForCustomer;
+    }
+    
+    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
+        this.messagesForCustomer = messagesForCustomer;
+    }
+    public Set<Grn> getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set grns) {
+    public void setGrns(Set<Grn> grns) {
         this.grns = grns;
     }
-    public Set getMessages() {
-        return this.messages;
+    public Set<Message> getMessagesForAnita() {
+        return this.messagesForAnita;
     }
     
-    public void setMessages(Set messages) {
-        this.messages = messages;
+    public void setMessagesForAnita(Set<Message> messagesForAnita) {
+        this.messagesForAnita = messagesForAnita;
     }
-    public Set getWatchLists() {
+    public Set<WatchList> getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set watchLists) {
+    public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
-    public Set getLogins() {
+    public Set<Login> getLogins() {
         return this.logins;
     }
     
-    public void setLogins(Set logins) {
+    public void setLogins(Set<Login> logins) {
         this.logins = logins;
     }
-    public Set getAddreses() {
+    public Set<Addres> getAddreses() {
         return this.addreses;
     }
     
-    public void setAddreses(Set addreses) {
+    public void setAddreses(Set<Addres> addreses) {
         this.addreses = addreses;
     }
 

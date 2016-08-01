@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 02-Jul-2016 15:04:50 by Hibernate Tools 4.3.1 -->
+<!-- Generated 28-Jul-2016 14:47:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.LoginReg" table="login_reg" catalog="anitaweb" optimistic-lock="version">
         <id name="idloginReg" type="java.lang.Integer">
@@ -11,14 +11,11 @@
         <many-to-one name="login" class="POJOS.Login" fetch="select">
             <column name="idLogin" not-null="true" />
         </many-to-one>
-        <property name="intime" type="string">
-            <column name="intime" length="45" />
+        <property name="indateTime" type="timestamp">
+            <column name="indate_time" length="0" />
         </property>
-        <property name="outtime" type="string">
-            <column name="outtime" length="45" />
-        </property>
-        <property name="date" type="string">
-            <column name="date" length="45" />
+        <property name="outdateTime" type="timestamp">
+            <column name="outdate_time" length="0" />
         </property>
     </class>
 </hibernate-mapping>
