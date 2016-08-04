@@ -43,6 +43,7 @@
                 alert(val);
                 var url = "http://latoi.com:8088/directsms.php?textFieldNumber=" + encodeURIComponent(val) + "&textAreaMessage=" + encodeURIComponent(message) + "&userid=" + encodeURIComponent(l);
                 window.open(url, '_blank', ',toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none');
+    alert("Your Message has been sent!");
     }
 
             $(document).ready(function () {

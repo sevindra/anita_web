@@ -101,7 +101,10 @@
         </script>
     </head>
     <body>
-        <div class="container mypadin50">
+        <div class="text-center">
+            <img src="img/anita.ico" style="width: 100px; height:100px"/><label style="font-family: fantasy; font-size: 35px;">  Anita Designer Wear</label>
+        </div>
+        <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="panel panel-login">

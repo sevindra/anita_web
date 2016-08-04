@@ -24,20 +24,25 @@
                 $('.email_alert').hide();
                 $('#returnhome').hide();
 
-                if (pcode == code) {
-                    $('.register_new').hide();
-                    $('.change_password').show();
-                } else {
-
-                    $('.change_password').hide();
-                    if (update == 753951) {
-                        $('#change_pass').hide();
+                if (pcode != null | code != null) {
+                    alert("if");
+                    if (pcode == code) {
+//                    $('.register_new').hide();
                         $('.change_password').show();
-                        $('.email_alert').show();
-                        $('#returnhome').show();
-                        $('#savebtn').hide();
+                    } else {
 
+                        $('.change_password').hide();
+                        if (update == 753951) {
+                            $('#change_pass').hide();
+                            $('.change_password').show();
+                            $('.email_alert').show();
+                            $('#returnhome').show();
+                            $('#savebtn').hide();
+
+                        }
                     }
+                } else {
+                    alert("null");
                 }
             });
         </script>
@@ -115,9 +120,9 @@
 
                 </div>
             </div>
-            <div class="row register_new">
+            <div class="row register_new col-md-6 col-md-offset-4">
                 Having trouble resetting your password?
-                <a href="login.jsp?reg=1">Register for a new account</a>
+                <a href="login.jsp?reg=1"> Register for a new account</a>
             </div>
         </div>
     </body>
