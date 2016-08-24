@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Sevi
  */
-@WebServlet(name = "showKwh", urlPatterns = {"/showKwh"})
-public class showKwh extends HttpServlet {
+@WebServlet(name = "verify_smscode", urlPatterns = {"/verify_smscode"})
+public class verify_smscode extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +34,20 @@ public class showKwh extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet showKwh</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet showKwh at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+//            out.print(request.getParameter("sescode")+" , "+request.getParameter("typecode"));
+            String sescode = request.getParameter("sescode");
+            String typecode = request.getParameter("typecode");
+            if (typecode!=null) {
+                if (sescode.equals(typecode)) {
+                    out.print("verified");
+//                    response.sendRedirect("reset_password.jsp?verified=ok");
+                } else {
+                    out.print("error");
+                }
+ 
+            }else{
+            
+            }
         }
     }
 

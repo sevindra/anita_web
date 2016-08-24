@@ -88,6 +88,7 @@
     <body>
 
         <%@include file="site/header.jsp" %>
+        <a href="#footer">sedd</a>
         <!-- Start WOWSlider.com BODY section -->
         <div id="wowslider-container1">
             <div class="ws_images"><ul>

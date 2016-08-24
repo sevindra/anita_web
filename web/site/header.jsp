@@ -125,7 +125,7 @@
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Purchase</a></li>
                         <li class="divider"></li>
                             <%
-                                if (userheader.getUtype().getUtype().equals("Admin") | userheader.getUtype().getUtype().equals("SuperAdmin")) {%>
+                                if (userheader.getUtype().getUtype().equals("Super Admin") | userheader.getUtype().getUtype().equals("SuperAdmin")) {%>
 
                         <li><a href="adminPanel/sup.jsp">Admin Panel</a></li>
                             <%}%>

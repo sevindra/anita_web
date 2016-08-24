@@ -14,11 +14,15 @@
         <script>
             $(function () {
                 var error =<%=request.getParameter("error_uid")%>
+                var session =<%=request.getParameter("session")%>
                 if (error == 1) {
-                    $('email_alert').show();
+                    $('.email_alert').show();
                 } else {
                     $('.email_alert').hide();
 
+                }
+                if(session=== 912){
+                    alert("Session Time out");
                 }
             });
         </script>

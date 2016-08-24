@@ -35,21 +35,42 @@ public class send_using_email extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-              HttpSession hs = request.getSession();
+            HttpSession hs = request.getSession();
             POJOS.User user = (POJOS.User) hs.getAttribute("user");
             double d = Math.random();
             int code = (int) (d * 1000000000);
-            
+
             hs.setAttribute("mycode", code);
-            
-            if(user==null){
-                out.write("user null");
-            }else{
-              email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR "+user.getFname()+", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code="+code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
+            String content = "<html>\n"
+                    + "    <head>\n"
+                    + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
+                    + "        <title>JSP Page</title>\n"
+                    + "        <!-- Latest compiled and minified CSS -->\n"
+                    + "        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">\n"
+                    + "\n"
+                    + "        <!-- Optional theme -->\n"
+                    + "        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css\" integrity=\"sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp\" crossorigin=\"anonymous\">\n"
+                    + "\n"
+                    + "        <!-- Latest compiled and minified JavaScript -->\n"
+                    + "        <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>\n"
+                    + "    </head>\n"
+                    + "    <body>\n"
+                    + "        <div class=\"text-center\" style=\"margin-top: 10px\">\n"
+                    + "            <label>Click here to Continue - </label><button class=\"btn btn-danger\" style=\"margin-left: 10px\"><span class=\"glyphicon glyphicon-ok\"></span> Continue</button>\n"
+                    + "        </div>\n"
+                    + "    </body>\n"
+                    + "</html>";
+
+            if (user == null) {
+                out.write("Session Expired");
+                response.sendRedirect("foget_password.jsp?session=912");
+            } else {
+//                email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + content, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
+                email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + ", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code=" + code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
                 response.sendRedirect("send_email.jsp");
             }
-        }catch(Exception e){
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

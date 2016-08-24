@@ -24,27 +24,44 @@
                 HttpSession hs = request.getSession();
                 Login email = (Login) hs.getAttribute("login");
                 current_url emaill = (current_url) hs.getAttribute("email");
-                
-                User user=email.getUser();
+
+                User user = email.getUser();
                 hs.setAttribute("user", user);
             %>
+            $(function () {
+                $('.email_alert').hide();
+                $('.code_panel').hide();
+                $('#returnhome').hide();
+            });
+            function email_alt() {
+                $('.email_alert').show();
+                $('.code_panel').show();
 
+            }
 
-
-
+            var l;
             function send_sms() {
                 var num1 = document.getElementById('num').value;
                 var val = num1.substring(1, 10);
                 val = "94" + val;
-                var rnum = Math.random();
-                rnum = rnum.toString();
-                var l = rnum.substring(2, 10);
-                var message = "Your Security is: "+l;
-                alert(val);
-                var url = "http://latoi.com:8088/directsms.php?textFieldNumber=" + encodeURIComponent(val) + "&textAreaMessage=" + encodeURIComponent(message) + "&userid=" + encodeURIComponent(l);
-                window.open(url, '_blank', ',toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none');
-    alert("Your Message has been sent!");
-    }
+            <%
+                double d = Math.random();
+                int code = (int) (d * 1000000000);
+            %>
+
+                l = <%=code%>
+                var message = ":     Your Anita Recovery code is: " + l;
+
+                alert(val + " code=" + l);
+            <%
+                hs.setAttribute("msgcode", code);
+            %>
+                email_alt();
+//                var url = "http://latoi.com:8088/directsms.php?textFieldNumber=" + encodeURIComponent(val) + "&textAreaMessage=" + encodeURIComponent(message) + "&userid=" + encodeURIComponent(l);
+//                var i=window.open(url, "_blank");
+//                i.setInterval("window.close()",500);
+//               alert("Your Message has been sent!");
+            }
 
             $(document).ready(function () {
                 var num1 = document.getElementById('mobile_num').innerHTML;
@@ -55,6 +72,28 @@
 
 
             });
+            var sms_verify_status;
+            function verify() {
+
+                var code = document.getElementById('verify_code_tf').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        alert(xhttp.responseText);
+//                        document.getElementById('ajax').innerHTML=xhttp.responseText;
+                        sms_verify_status = xhttp.responseText;
+                        if (sms_verify_status == "verified") {
+                            $('.email_alert').hide();
+                            $('.code_panel').hide();
+                        }
+
+                    }
+                };
+                xhttp.open("POST", "verify_smscode?sescode=" + l + "&typecode=" + code, true);
+                xhttp.send();
+            }
+
         </script>
 
     </head>
@@ -93,11 +132,58 @@
                         </div>
                         <div class="col-md-8 col-md-offset-2 alert alert-info text-center email_alert">
                             <strong>Your recovery Code has been sent to the your
-                                mobile no. Note that you must activate
-                                the account by selecting the activation link
-                                when you get the email before you can login.
+                                mobile no. Please enter the code.
                             </strong>
                         </div>
+                        <div class="panel panel-default col-md-6 col-md-offset-3 code_panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <strong>Code:</strong>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input placeholder="Code" class="form-control" id="verify_code_tf"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <button class="btn btn-primary btn-block" onclick="verify()">Verify</button>
+                            </div>
+                        </div>
+                        <form action="change_password" method="POST">
+                            <div id="changepass">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5><strong>New Password</strong></h5>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="password" class="form-control" placeholder="New Password" id="pass" name="pass"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5><strong>Conform Password</strong></h5>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="password" class="form-control" placeholder="Conform Password" id="cpass" name="cpass"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="alert alert-success text-center email_alerte">
+                                <strong>Successfuly! Password has been changed.</strong>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-8">
+                                    <button class="btn btn-primary pull-right" name="save" value="pwsave" id="savebtn"><strong>Save</strong></button>
+                                    <a class="btn btn-primary pull-right" name="save" href="index.jsp" id="returnhome"><strong>Return to Home</strong></a>
+                                </div>
+                            </div>
+                        </form>
                         <div class="col-md-6 col-md-offset-3">
                             Having trouble resetting your password?
                             <a href="login.jsp?reg=1">Register for a new account</a>

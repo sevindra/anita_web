@@ -30,13 +30,13 @@
                     // window.location.href = url;
                     //window.location.href = url;
 
-                    //window.setTimeOut("window.close();",100);
+                    window.setTimeOut("window.close();",100);
 
                     //meken blank window ekaka open karaganna puluwan....
                     //myWindow=window.open(url, "_blank", "width=200, height=100 ,resizable=no,visible=no");
-                  //i=  window.open(url, '_blank', ',toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none');
-                    myWindow = window.open(url, "myWindow", "width=200, height=100");//alert("Are you sure sendthis\nMessage?");
-                    myWindow.blur();
+                    window.open(url, '_blank', ',toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none');
+//                    myWindow = window.open(url, "myWindow", "width=200, height=100");//alert("Are you sure sendthis\nMessage?");
+                    
 // window.setTimeOut("window.close()", 10);
                    // window.setTimeOut(window.close(),10);
                     //myWindow.focus();

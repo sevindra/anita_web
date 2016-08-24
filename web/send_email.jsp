@@ -80,7 +80,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
 
-                            <form action="change_password" method="get">
+                            <form action="change_password" method="POST">
                                 <div id="changepass">
                                     <div class="row">
                                         <div class="col-md-4">
