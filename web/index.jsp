@@ -88,7 +88,6 @@
     <body>
 
         <%@include file="site/header.jsp" %>
-        <a href="#footer">sedd</a>
         <!-- Start WOWSlider.com BODY section -->
         <div id="wowslider-container1">
             <div class="ws_images"><ul>
@@ -97,7 +96,7 @@
                     <li><img src="data1/images/01.jpg" alt="" title="" id="wows1_2"/></li>
                     <li><img src="data1/images/men_page_banner2.jpg" alt="" title="" id="wows1_3"/></li>
                     <li><img src="data1/images/02.jpg" alt="" title="" id="wows1_4"/></li>
-                    <li><a href="http://wowslider.com"><img src="data1/images/mensclothingbanner1.jpg" alt="bootstrap carousel" title="" id="wows1_5"/></a></li>
+                    <li><a href="#"><img src="data1/images/mensclothingbanner1.jpg" alt="bootstrap carousel" title="" id="wows1_5"/></a></li>
                     <li><img src="data1/images/03.jpg" alt="" title="" id="wows1_6"/></li>
                 </ul></div>
             <div class="ws_bullets"><div>
@@ -108,7 +107,7 @@
                     <a href="#" title=""><span><img src="data1/tooltips/02.jpg" alt=""/>5</span></a>
                     <a href="#" title=""><span><img src="data1/tooltips/mensclothingbanner1.jpg" alt=""/>6</span></a>
                     <a href="#" title=""><span><img src="data1/tooltips/03.jpg" alt=""/>7</span></a>
-                </div></div><div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.com">wowslider.com</a> by WOWSlider.com v8.7</div>
+                </div></div><div class="ws_script" style="position:absolute;left:-99%"></div>
             <div class="ws_shadow"></div>
         </div>	
         <script type="text/javascript" src="engine1/wowslider.js"></script>

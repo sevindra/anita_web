@@ -25,7 +25,7 @@
                 $('#returnhome').hide();
 
                 if (pcode != null | code != null) {
-                    alert("if");
+                   // alert("if");
                     if (pcode == code) {
 //                    $('.register_new').hide();
                         $('.change_password').show();

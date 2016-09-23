@@ -21,32 +21,32 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Shirt</a>
+                                        <a href="item.jsp">Shirt</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">T-Shirt</a>
+                                        <a href="item.jsp">T-Shirt</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Short</a>
+                                       <a href="item.jsp">Short</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
+                                        <a href="item.jsp">Trousers</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Denim</a>
+                                       <a href="item.jsp">Denim</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Shoes</a>
+                                        <a href="item.jsp">Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -65,32 +65,32 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Blouses</a> <span class="label label-success">$ 320</span>
+                                        <a href="item.jsp">Blouses</a> <span class="label label-success">$ 320</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">T-Shirts</a>
+                                        <a href="item.jsp">T-Shirts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Frocks</a>
+                                        <a href="item.jsp">Frocks</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Trousers</a>
+                                        <a href="item.jsp">Trousers</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Denims</a>
+                                        <a href="item.jsp">Denims</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Shoes</a>
+                                        <a href="item.jsp">Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -109,27 +109,27 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">T-shirts</a>
+                                        <a href="item.jsp">T-shirts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Trousers</a> <span class="label label-info">5</span>
+                                        <a href="item.jsp">Trousers</a> <span class="label label-info">5</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Shorts</a>
+                                        <a href="item.jsp">Shorts</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Frocks</a>
+                                        <a href="item.jsp">Frocks</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com">Baby Shoes</a>
+                                        <a href="item.jsp">Baby Shoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -148,12 +148,12 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Boy</a>
+                                       <a href="item.jsp">Boy</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Girl</a>
+                                       <a href="item.jsp">Girl</a>
                                     </td>
                                 </tr>
                                 
@@ -173,22 +173,22 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Sales</a>
+                                       <a href="item.jsp">Sales</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Customers</a>
+                                       <a href="item.jsp">Customers</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Products</a>
+                                       <a href="item.jsp">Products</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                       <a href="item.jsp">Shopping Cart</a>
                                     </td>
                                 </tr>
                             </table>
@@ -207,22 +207,22 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Sales</a>
+                                       <a href="item.jsp">Sales</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Customers</a>
+                                       <a href="item.jsp">Customers</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Products</a>
+                                       <a href="item.jsp">Products</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                       <a href="item.jsp">Shopping Cart</a>
                                     </td>
                                 </tr>
                             </table>

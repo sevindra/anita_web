@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 28-Jul-2016 14:47:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 20, 2016 12:22:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Item" table="item" catalog="anitaweb" optimistic-lock="version">
         <id name="iditem" type="java.lang.Integer">
@@ -35,6 +35,18 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="item_iditem" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Cart" />
+        </set>
+        <set name="watchLists" table="watch_list" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="item_iditem" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.WatchList" />
+        </set>
         <set name="stocks" table="stock" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="iditem" not-null="true" />
@@ -46,18 +58,6 @@
                 <column name="item_iditem" not-null="true" />
             </key>
             <one-to-many class="POJOS.Grn" />
-        </set>
-        <set name="watchLists" table="watch_list" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="item_iditem" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.WatchList" />
-        </set>
-        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="item_iditem" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Cart" />
         </set>
     </class>
 </hibernate-mapping>

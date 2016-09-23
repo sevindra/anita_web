@@ -30,8 +30,11 @@
             %>
             $(function () {
                 $('.email_alert').hide();
+                $('.email_alerte').hide();
                 $('.code_panel').hide();
                 $('#returnhome').hide();
+                $('#changepass').hide();
+                $('#savebtn').hide();
             });
             function email_alt() {
                 $('.email_alert').show();
@@ -184,7 +187,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-6 col-md-offset-3 row">
                             Having trouble resetting your password?
                             <a href="login.jsp?reg=1">Register for a new account</a>
                         </div>

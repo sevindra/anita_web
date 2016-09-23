@@ -273,7 +273,7 @@
 
 
 
-            <label><%if(user!=null){out.write(user.getUname());}else{out.write("Gust");}%></label>
+            <label><%if(user!=null){out.write(user.getFname());}else{out.write("Gust");}%></label>
             <div class="panel panel-danger">
                 <div class="panel-heading"><h3 class="panel-title"><strong>Good Receive Note</strong></h3></div>
                 <div class="panel-body">

@@ -31,9 +31,9 @@
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">New Products</a></li>
-                        <li><a id="watch" onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Promotions</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>item.jsp<%}%>">Products</a></li>
+                        <li><a id="watch" href="item.jsp">New Products</a></li>
+                        <li><a id="watch" href="item.jsp">Promotions</a></li>
+                        <li><a href="item.jsp">Products</a></li>
                         
                     </ul>
                 </li>
@@ -248,7 +248,6 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <!--<input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Register">-->
                                             <button type="submit" name="register-submit" class="btn btn-register form-control" value="register"><span class="glyphicon glyphicon-user"></span><label> REGISTER</label></button>
                                         </div>
                                     </div>

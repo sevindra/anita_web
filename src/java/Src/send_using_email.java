@@ -37,6 +37,7 @@ public class send_using_email extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession hs = request.getSession();
             POJOS.User user = (POJOS.User) hs.getAttribute("user");
+            POJOS.Login login=(POJOS.Login) hs.getAttribute("login");
             double d = Math.random();
             int code = (int) (d * 1000000000);
 
@@ -56,7 +57,8 @@ public class send_using_email extends HttpServlet {
                     + "    </head>\n"
                     + "    <body>\n"
                     + "        <div class=\"text-center\" style=\"margin-top: 10px\">\n"
-                    + "            <label>Click here to Continue - </label><button class=\"btn btn-danger\" style=\"margin-left: 10px\"><span class=\"glyphicon glyphicon-ok\"></span> Continue</button>\n"
+                    + "            <label style=\"color red;"
+                    + "\">Click here to Continue - </label><a href=\"http://localhost:8080/anita_Web/send_email.jsp?code='"+code+"'\"><button class=\"btn btn-danger\" style=\"margin-left: 10px\"><span class=\"glyphicon glyphicon-ok\"></span> Continue</button></a>\n"
                     + "        </div>\n"
                     + "    </body>\n"
                     + "</html>";
@@ -65,8 +67,8 @@ public class send_using_email extends HttpServlet {
                 out.write("Session Expired");
                 response.sendRedirect("foget_password.jsp?session=912");
             } else {
-//                email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + content, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
-                email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + ", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code=" + code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
+                email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + content, new String[]{login.getEmail()}, "PASSWORD RESET ");
+                //email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "DEAR " + user.getFname() + ", Click to continue http://localhost:8080/anita_Web/send_email.jsp?code=" + code, new String[]{"sevindra@gmail.com"}, "PASSWORD RESET CODE");
                 response.sendRedirect("send_email.jsp");
             }
         } catch (Exception e) {

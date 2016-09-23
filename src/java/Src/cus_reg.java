@@ -55,11 +55,33 @@ public class cus_reg extends HttpServlet {
 
             if (register_btn != null) {
                 if (register_btn.equals("register")) {
+
+                    //check karanna me email eken thawa innawada kiyala
                     double d = Math.random();
                     code = (int) (d * 1000000000);
                     hs.setAttribute("registercode", code);
 
-                    Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile, new String[]{email}, "Welcome to Anita");
+                    String content = "<html>\n"
+                            + "    <head>\n"
+                            + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
+                            + "        <title>JSP Page</title>\n"
+                            + "        <!-- Latest compiled and minified CSS -->\n"
+                            + "        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">\n"
+                            + "\n"
+                            + "        <!-- Optional theme -->\n"
+                            + "        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css\" integrity=\"sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp\" crossorigin=\"anonymous\">\n"
+                            + "\n"
+                            + "        <!-- Latest compiled and minified JavaScript -->\n"
+                            + "        <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>\n"
+                            + "    </head>\n"
+                            + "    <body>\n"
+                            + "        <div class=\"text-center\" style=\"margin-top: 10px\">\n"
+                            + "            <label>Click here to Continue - </label><a href=\"http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile+"\"><button class=\"btn btn-danger\" style=\"margin-left: 10px\"><span class=\"glyphicon glyphicon-ok\"></span> Continue</button></a>\n"
+                            + "        </div>\n"
+                            + "    </body>\n"
+                            + "</html>";
+//                    Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- http://localhost:8080/anita_Web/cus_reg?Security_code=" + code + "&fname=" + fname + "&email=" + email + "&cpassword=" + cpass + "&lname=" + lname + "&mobile=" + mobile, new String[]{email}, "Welcome to Anita");
+                    Src.email.sendmail("cygnetic.info@gmail.com", "Sevindra1", "Dear " + fname + " " + lname + ", Your Email Address is Verified, Click to continue:- "+content, new String[]{email}, "Welcome to Anita");
                     response.sendRedirect("login.jsp?register=reg&verify_email=3&reg=1");
                 }
             }
@@ -72,6 +94,7 @@ public class cus_reg extends HttpServlet {
                     user.setFname(fname);
                     user.setLname(lname);
                     user.setMobile(mobile);
+                    user.setImg("adminPanel/customer_images/user.jpg");
                     user.setStatus(1);
 //                    objsave.save(user);
                     ses.save(user);
@@ -90,6 +113,9 @@ public class cus_reg extends HttpServlet {
                     response.sendRedirect("index.jsp");
                 }
 
+            }else{
+            out.write("Session Expierd");
+            
             }
 
         } catch (Exception e) {

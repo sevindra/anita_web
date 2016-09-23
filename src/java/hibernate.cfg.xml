@@ -7,22 +7,22 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3308/anitaweb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">123</property>
-    <mapping resource="POJOS/LoginReg.hbm.xml"/>
-    <mapping resource="POJOS/Stock.hbm.xml"/>
-    <mapping resource="POJOS/Utype.hbm.xml"/>
+    <mapping resource="POJOS/Size.hbm.xml"/>
     <mapping resource="POJOS/Cat.hbm.xml"/>
-    <mapping resource="POJOS/WatchList.hbm.xml"/>
-    <mapping resource="POJOS/Color.hbm.xml"/>
-    <mapping resource="POJOS/Item.hbm.xml"/>
     <mapping resource="POJOS/State.hbm.xml"/>
-    <mapping resource="POJOS/User.hbm.xml"/>
+    <mapping resource="POJOS/Stock.hbm.xml"/>
     <mapping resource="POJOS/Message.hbm.xml"/>
-    <mapping resource="POJOS/Addres.hbm.xml"/>
-    <mapping resource="POJOS/Cart.hbm.xml"/>
+    <mapping resource="POJOS/LoginReg.hbm.xml"/>
     <mapping resource="POJOS/Supplier.hbm.xml"/>
+    <mapping resource="POJOS/User.hbm.xml"/>
+    <mapping resource="POJOS/Cart.hbm.xml"/>
+    <mapping resource="POJOS/Item.hbm.xml"/>
+    <mapping resource="POJOS/Color.hbm.xml"/>
+    <mapping resource="POJOS/Addres.hbm.xml"/>
+    <mapping resource="POJOS/WatchList.hbm.xml"/>
     <mapping resource="POJOS/Grn.hbm.xml"/>
     <mapping resource="POJOS/Subcat.hbm.xml"/>
     <mapping resource="POJOS/Login.hbm.xml"/>
-    <mapping resource="POJOS/Size.hbm.xml"/>
+    <mapping resource="POJOS/Utype.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

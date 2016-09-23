@@ -213,7 +213,7 @@
                                 <h5>Qty : </h5> 
                             </div>
                             <div class="col-md-9">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <input type="text" placeholder="Qty" class="form-control"/>
                                 </div>
                             </div>

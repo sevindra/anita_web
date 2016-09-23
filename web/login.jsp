@@ -43,13 +43,16 @@
                     $(this).addClass('active');
                     $('#login-form-link').removeClass('active');
                     $('#login-form').hide();
-                    $('#regbtn').hide();
                     $('#register-form').show();
-                    $('#gotohome').show();
                     //$('#invliedEmail').show();
                 }
                 if (reg == 2) {
                     $('#invliedEmail').show();
+
+                }
+                if (reg == 3) {
+                    $('#regbtn').hide();
+                    $('#gotohome').show();
 
                 }
                 if (error_data == 3) {

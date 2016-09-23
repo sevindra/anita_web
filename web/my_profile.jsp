@@ -169,7 +169,7 @@
                         elem.setAttribute("onclick", 'deleteimage(' + c + ')');
                         document.getElementById("myimg").appendChild(elem);
                         c++;
-                    }
+                    };
                     reader.readAsDataURL(input.files[i]);
                 }
             }
@@ -188,7 +188,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8 my-div-center">
-                            <img class="img-responsive img-circle" src="adminPanel/men/Via-Omiru-dot-com1.jpg"/>
+                            
+                            <img class="img-responsive img-circle" src="<%if(user!=null){out.write(user.getImg());}%>"/>
                         </div>
                     </div>
                     <div class="row">
@@ -240,7 +241,7 @@
 
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <form  enctype="multipart/form-data" method="get" id="uploadForm" action="user_details_save">
+                                    <form  enctype="multipart/form-data" method="post" id="uploadForm" action="user_details_save">
                                         <div class="col-md-12">
                                             <!--                                        <div class="row">
                                                                                         <div class="col-md-2 col-md-offset-1">
@@ -256,7 +257,7 @@
                                                     <h5><strong>Name</strong></h5>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="First Name" class="form-control" name="fname"/>
+                                                    <input type="text" placeholder="First Name" class="form-control" name="fname" value="Sevindra"/>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="text" placeholder="Middle Name" class="form-control" name="mname"/>
@@ -316,7 +317,7 @@
                                             <br/>
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-1">
-                                                    <h5><strong>User Name</strong></h5>
+                                                    <h5><strong>NIC</strong></h5>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" placeholder="NIC" class="form-control" name="nic"/>

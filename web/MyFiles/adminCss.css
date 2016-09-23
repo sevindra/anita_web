@@ -8,7 +8,9 @@ and open the template in the editor.
     Author     : Sevi
 */
 
-
+.glyphicon_margin{
+    margin-right: 10px
+}
 .mypadin7{
     padding-top: 7px;
 }

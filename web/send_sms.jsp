@@ -30,7 +30,7 @@
                     // window.location.href = url;
                     //window.location.href = url;
 
-                    window.setTimeOut("window.close();",100);
+                    window.setTimeOut("window.close()",100);
 
                     //meken blank window ekaka open karaganna puluwan....
                     //myWindow=window.open(url, "_blank", "width=200, height=100 ,resizable=no,visible=no");

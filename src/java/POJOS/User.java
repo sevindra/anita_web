@@ -1,5 +1,5 @@
 package POJOS;
-// Generated 28-Jul-2016 14:47:23 by Hibernate Tools 4.3.1
+// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,6 +13,7 @@ public class User  implements java.io.Serializable {
 
      private Integer iduser;
      private Utype utype;
+     private String nic;
      private String fname;
      private String mname;
      private String lname;
@@ -20,12 +21,12 @@ public class User  implements java.io.Serializable {
      private String img;
      private Integer status;
      private Set<Cart> carts = new HashSet<Cart>(0);
-     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
-     private Set<Grn> grns = new HashSet<Grn>(0);
-     private Set<Message> messagesForAnita = new HashSet<Message>(0);
-     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
-     private Set<Login> logins = new HashSet<Login>(0);
      private Set<Addres> addreses = new HashSet<Addres>(0);
+     private Set<Login> logins = new HashSet<Login>(0);
+     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
+     private Set<Message> messagesForAnita = new HashSet<Message>(0);
 
     public User() {
     }
@@ -34,8 +35,9 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String fname, String mname, String lname, String mobile, String img, Integer status, Set<Cart> carts, Set<Message> messagesForCustomer, Set<Grn> grns, Set<Message> messagesForAnita, Set<WatchList> watchLists, Set<Login> logins, Set<Addres> addreses) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Grn> grns, Set<Message> messagesForCustomer, Set<Message> messagesForAnita) {
        this.utype = utype;
+       this.nic = nic;
        this.fname = fname;
        this.mname = mname;
        this.lname = lname;
@@ -43,12 +45,12 @@ public class User  implements java.io.Serializable {
        this.img = img;
        this.status = status;
        this.carts = carts;
-       this.messagesForCustomer = messagesForCustomer;
-       this.grns = grns;
-       this.messagesForAnita = messagesForAnita;
-       this.watchLists = watchLists;
-       this.logins = logins;
        this.addreses = addreses;
+       this.logins = logins;
+       this.watchLists = watchLists;
+       this.grns = grns;
+       this.messagesForCustomer = messagesForCustomer;
+       this.messagesForAnita = messagesForAnita;
     }
    
     public Integer getIduser() {
@@ -64,6 +66,13 @@ public class User  implements java.io.Serializable {
     
     public void setUtype(Utype utype) {
         this.utype = utype;
+    }
+    public String getNic() {
+        return this.nic;
+    }
+    
+    public void setNic(String nic) {
+        this.nic = nic;
     }
     public String getFname() {
         return this.fname;
@@ -114,33 +123,12 @@ public class User  implements java.io.Serializable {
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
     }
-    public Set<Message> getMessagesForCustomer() {
-        return this.messagesForCustomer;
+    public Set<Addres> getAddreses() {
+        return this.addreses;
     }
     
-    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
-        this.messagesForCustomer = messagesForCustomer;
-    }
-    public Set<Grn> getGrns() {
-        return this.grns;
-    }
-    
-    public void setGrns(Set<Grn> grns) {
-        this.grns = grns;
-    }
-    public Set<Message> getMessagesForAnita() {
-        return this.messagesForAnita;
-    }
-    
-    public void setMessagesForAnita(Set<Message> messagesForAnita) {
-        this.messagesForAnita = messagesForAnita;
-    }
-    public Set<WatchList> getWatchLists() {
-        return this.watchLists;
-    }
-    
-    public void setWatchLists(Set<WatchList> watchLists) {
-        this.watchLists = watchLists;
+    public void setAddreses(Set<Addres> addreses) {
+        this.addreses = addreses;
     }
     public Set<Login> getLogins() {
         return this.logins;
@@ -149,12 +137,33 @@ public class User  implements java.io.Serializable {
     public void setLogins(Set<Login> logins) {
         this.logins = logins;
     }
-    public Set<Addres> getAddreses() {
-        return this.addreses;
+    public Set<WatchList> getWatchLists() {
+        return this.watchLists;
     }
     
-    public void setAddreses(Set<Addres> addreses) {
-        this.addreses = addreses;
+    public void setWatchLists(Set<WatchList> watchLists) {
+        this.watchLists = watchLists;
+    }
+    public Set<Grn> getGrns() {
+        return this.grns;
+    }
+    
+    public void setGrns(Set<Grn> grns) {
+        this.grns = grns;
+    }
+    public Set<Message> getMessagesForCustomer() {
+        return this.messagesForCustomer;
+    }
+    
+    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
+        this.messagesForCustomer = messagesForCustomer;
+    }
+    public Set<Message> getMessagesForAnita() {
+        return this.messagesForAnita;
+    }
+    
+    public void setMessagesForAnita(Set<Message> messagesForAnita) {
+        this.messagesForAnita = messagesForAnita;
     }
 
 

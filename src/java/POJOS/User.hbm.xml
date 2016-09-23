@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 28-Jul-2016 14:47:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 20, 2016 12:22:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.User" table="user" catalog="anitaweb" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
@@ -11,6 +11,9 @@
         <many-to-one name="utype" class="POJOS.Utype" fetch="select">
             <column name="idutype" not-null="true" />
         </many-to-one>
+        <property name="nic" type="string">
+            <column name="nic" length="45" />
+        </property>
         <property name="fname" type="string">
             <column name="fname" length="45" />
         </property>
@@ -35,29 +38,11 @@
             </key>
             <one-to-many class="POJOS.Cart" />
         </set>
-        <set name="messagesForCustomer" table="message" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="customer" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Message" />
-        </set>
-        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="iduser" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Grn" />
-        </set>
-        <set name="messagesForAnita" table="message" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="anita" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Message" />
-        </set>
-        <set name="watchLists" table="watch_list" inverse="true" lazy="true" fetch="select">
+        <set name="addreses" table="addres" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="user_iduser" not-null="true" />
             </key>
-            <one-to-many class="POJOS.WatchList" />
+            <one-to-many class="POJOS.Addres" />
         </set>
         <set name="logins" table="login" inverse="true" lazy="true" fetch="select">
             <key>
@@ -65,11 +50,29 @@
             </key>
             <one-to-many class="POJOS.Login" />
         </set>
-        <set name="addreses" table="addres" inverse="true" lazy="true" fetch="select">
+        <set name="watchLists" table="watch_list" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="user_iduser" not-null="true" />
             </key>
-            <one-to-many class="POJOS.Addres" />
+            <one-to-many class="POJOS.WatchList" />
+        </set>
+        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="iduser" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Grn" />
+        </set>
+        <set name="messagesForCustomer" table="message" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="customer" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Message" />
+        </set>
+        <set name="messagesForAnita" table="message" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="anita" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Message" />
         </set>
     </class>
 </hibernate-mapping>
