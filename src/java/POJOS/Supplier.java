@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,28 +12,40 @@ public class Supplier  implements java.io.Serializable {
 
 
      private Integer idsupplier;
-     private String supname;
-     private String comname;
-     private Integer contact1;
-     private Integer contact2;
+     private State state;
+     private String fname;
+     private String mname;
+     private String lname;
+     private String cname;
+     private String contact1;
+     private String contact2;
      private String email;
      private String address1;
      private String address2;
      private String address3;
-     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Integer status;
+     private Set grns = new HashSet(0);
 
     public Supplier() {
     }
 
-    public Supplier(String supname, String comname, Integer contact1, Integer contact2, String email, String address1, String address2, String address3, Set<Grn> grns) {
-       this.supname = supname;
-       this.comname = comname;
+	
+    public Supplier(State state) {
+        this.state = state;
+    }
+    public Supplier(State state, String fname, String mname, String lname, String cname, String contact1, String contact2, String email, String address1, String address2, String address3, Integer status, Set grns) {
+       this.state = state;
+       this.fname = fname;
+       this.mname = mname;
+       this.lname = lname;
+       this.cname = cname;
        this.contact1 = contact1;
        this.contact2 = contact2;
        this.email = email;
        this.address1 = address1;
        this.address2 = address2;
        this.address3 = address3;
+       this.status = status;
        this.grns = grns;
     }
    
@@ -44,32 +56,53 @@ public class Supplier  implements java.io.Serializable {
     public void setIdsupplier(Integer idsupplier) {
         this.idsupplier = idsupplier;
     }
-    public String getSupname() {
-        return this.supname;
+    public State getState() {
+        return this.state;
     }
     
-    public void setSupname(String supname) {
-        this.supname = supname;
+    public void setState(State state) {
+        this.state = state;
     }
-    public String getComname() {
-        return this.comname;
+    public String getFname() {
+        return this.fname;
     }
     
-    public void setComname(String comname) {
-        this.comname = comname;
+    public void setFname(String fname) {
+        this.fname = fname;
     }
-    public Integer getContact1() {
+    public String getMname() {
+        return this.mname;
+    }
+    
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
+    public String getLname() {
+        return this.lname;
+    }
+    
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+    public String getCname() {
+        return this.cname;
+    }
+    
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+    public String getContact1() {
         return this.contact1;
     }
     
-    public void setContact1(Integer contact1) {
+    public void setContact1(String contact1) {
         this.contact1 = contact1;
     }
-    public Integer getContact2() {
+    public String getContact2() {
         return this.contact2;
     }
     
-    public void setContact2(Integer contact2) {
+    public void setContact2(String contact2) {
         this.contact2 = contact2;
     }
     public String getEmail() {
@@ -100,11 +133,18 @@ public class Supplier  implements java.io.Serializable {
     public void setAddress3(String address3) {
         this.address3 = address3;
     }
-    public Set<Grn> getGrns() {
+    public Integer getStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    public Set getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set<Grn> grns) {
+    public void setGrns(Set grns) {
         this.grns = grns;
     }
 

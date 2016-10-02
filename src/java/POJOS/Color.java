@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,13 +13,13 @@ public class Color  implements java.io.Serializable {
 
      private Integer idcolor;
      private String color;
-     private Set<Cart> carts = new HashSet<Cart>(0);
-     private Set<Item> items = new HashSet<Item>(0);
+     private Set carts = new HashSet(0);
+     private Set items = new HashSet(0);
 
     public Color() {
     }
 
-    public Color(String color, Set<Cart> carts, Set<Item> items) {
+    public Color(String color, Set carts, Set items) {
        this.color = color;
        this.carts = carts;
        this.items = items;
@@ -39,18 +39,18 @@ public class Color  implements java.io.Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-    public Set<Cart> getCarts() {
+    public Set getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set<Cart> carts) {
+    public void setCarts(Set carts) {
         this.carts = carts;
     }
-    public Set<Item> getItems() {
+    public Set getItems() {
         return this.items;
     }
     
-    public void setItems(Set<Item> items) {
+    public void setItems(Set items) {
         this.items = items;
     }
 

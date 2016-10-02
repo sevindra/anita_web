@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -21,10 +21,10 @@ public class Item  implements java.io.Serializable {
      private String url;
      private String delivary;
      private Integer status;
-     private Set<Cart> carts = new HashSet<Cart>(0);
-     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
-     private Set<Stock> stocks = new HashSet<Stock>(0);
-     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Set carts = new HashSet(0);
+     private Set watchLists = new HashSet(0);
+     private Set stocks = new HashSet(0);
+     private Set grns = new HashSet(0);
 
     public Item() {
     }
@@ -35,7 +35,7 @@ public class Item  implements java.io.Serializable {
         this.size = size;
         this.subcat = subcat;
     }
-    public Item(Color color, Size size, Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Cart> carts, Set<WatchList> watchLists, Set<Stock> stocks, Set<Grn> grns) {
+    public Item(Color color, Size size, Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set carts, Set watchLists, Set stocks, Set grns) {
        this.color = color;
        this.size = size;
        this.subcat = subcat;
@@ -121,32 +121,32 @@ public class Item  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set<Cart> getCarts() {
+    public Set getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set<Cart> carts) {
+    public void setCarts(Set carts) {
         this.carts = carts;
     }
-    public Set<WatchList> getWatchLists() {
+    public Set getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set<WatchList> watchLists) {
+    public void setWatchLists(Set watchLists) {
         this.watchLists = watchLists;
     }
-    public Set<Stock> getStocks() {
+    public Set getStocks() {
         return this.stocks;
     }
     
-    public void setStocks(Set<Stock> stocks) {
+    public void setStocks(Set stocks) {
         this.stocks = stocks;
     }
-    public Set<Grn> getGrns() {
+    public Set getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set<Grn> grns) {
+    public void setGrns(Set grns) {
         this.grns = grns;
     }
 

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Anita Admin Panel</title>
         <%@include file="inc.jsp" %>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
@@ -58,208 +58,149 @@
                     }
                 }
             }
+
+            function add_supplier() {
+                $('#admin_body').load('Add_Supplier.jsp');
+            }
+            function Dashboard() {
+                $('#admin_body').load('Dashboard.jsp');
+            }
+            function sup_active_deactive() {
+                $('#admin_body').load('sup_active_deactive.jsp');
+            }
+
+            <%
+                 HttpSession hsheader = request.getSession();
+                 POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
+
+            %>
+               
         </script>
     </head>
-    <body>
-        <%@include file="admin_header.jsp" %>
+    <body onload="Dashboard();">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src="../img/anita.ico" style="width: 50px; height: 40px; float: left; padding-top: 3px; min-height: 50px; padding-left: 5px; margin-right: 7px"><a class="navbar-brand" href="../index.jsp"><strong style="color: red">ANITA DESIGNER WEAR</strong></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
 
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+                        <li class="">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-bell glyphicon_margin"></span> Notification<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Message</a></li>
+                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Email</a></li>
+                                <li><a href="#"><span class="fa fa-shopping-cart glyphicon_margin"></span> Orders</a></li>
+                                <li><a href="#"><span class="fa fa-database glyphicon_margin"></span> Low Stock</a></li>
+                                <li><a href="#"><span class="fa fa-eye glyphicon_margin"></span> Watched Items</a></li>
+                                <li><a href="#"><span class="fa fa-users glyphicon_margin"></span> Total Users</a></li>
+                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Daily Visited</a></li>
+                                <li><a href="#"><span class="fa fa-question glyphicon_margin"></span> Questions</a></li>
 
-        <%@include file="admin_left_panel.jsp" %>
-        <div class="col-md-9 mypadin35">
-            <h3 style="margin-top: -20px"><strong>Dashboard</strong></h3>
-            
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">26</strong></div>
-                                    <div><strong>Messages</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-envelope-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">10</strong></div>
-                                    <div><strong>Email</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">10</strong></div>
-                                    <div><strong>Orders</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-users fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">120</strong></div>
-                                    <div><strong>Total Users</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><%
+                            if(userheader!=null){
+                            out.print(userheader.getFname());
+                            }else{
+                            out.print("user null");
+                            }
+                            %><span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
 
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="glyphicon glyphicon-user fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">26</strong></div>
-                                    <div><strong>Daily Visited</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-database fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">10</strong></div>
-                                    <div><strong>Low Stock</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-eye fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">120</strong></div>
-                                    <div><strong>Watched Items</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-question fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div><strong style="font-size: 35px">10</strong></div>
-                                    <div><strong>Questions</strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+        </nav>
 
+        <div class="col-md-2 mypadin35">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a onclick="Dashboard();" href="#"><span class="fa fa-dashboard glyphicon_margin"></span> DashBoard</a>
+                        </h4>
+                    </div>
+                    
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#cat2"><span class="fa fa-truck glyphicon_margin"></span> Add Stock</a>
+                        </h4>
+                    </div>
+                    <div id="cat2" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <a href="#"><li class="list-group-item">One</li></a>
+                            <li class="list-group-item">Two</li>
+                            <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#cat3"><span class="glyphicon glyphicon-pencil"></span> Product</a>
+                        </h4>
+                    </div>
+                    <div id="cat3" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">One</li>
+                            <li class="list-group-item">Two</li>
+                            <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#cat4"><span class="glyphicon glyphicon-briefcase"></span> Supplier</a>
+                        </h4>
+                    </div>
+                    <div id="cat4" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_supplier();" href="#">Add Supplier</a></li>
+                            <li class="list-group-item"><a onclick="sup_active_deactive();" href="#">Active/Deactive</a></li>
+                            <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#cat5"><span class="fa fa-calculator glyphicon_margin"></span> Report</a>
+                        </h4>
+                    </div>
+                    <div id="cat5" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_supplier();" href="#">one</a></li>
+                            <li class="list-group-item">Two</li>
+                            <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </div>
 
-            </div>
+        <div class="col-md-10 mypadin35" id="admin_body">
 
-            <div id="chart_div" class="col-md-12"></div>
-            <br/>
-            <!--            <div id="btn-group">
-                            <button class="button button-blue" id="none">No Format</button>
-                            <button class="button button-blue" id="scientific">Scientific Notation</button>
-                            <button class="button button-blue" id="decimal">Decimal</button>
-                            <button class="button button-blue" id="short">Short</button>
-                        </div>-->
 
         </div>
     </body>

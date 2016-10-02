@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,7 +14,6 @@ public class Grn  implements java.io.Serializable {
      private Item item;
      private Stock stock;
      private Supplier supplier;
-     private User user;
      private Date deteTime;
      private Double cost;
      private Integer qty;
@@ -28,19 +27,17 @@ public class Grn  implements java.io.Serializable {
     }
 
 	
-    public Grn(int grnid, Item item, Stock stock, Supplier supplier, User user) {
+    public Grn(int grnid, Item item, Stock stock, Supplier supplier) {
         this.grnid = grnid;
         this.item = item;
         this.stock = stock;
         this.supplier = supplier;
-        this.user = user;
     }
-    public Grn(int grnid, Item item, Stock stock, Supplier supplier, User user, Date deteTime, Double cost, Integer qty, Double total, Integer discount, Double pay, Double bal, Integer status) {
+    public Grn(int grnid, Item item, Stock stock, Supplier supplier, Date deteTime, Double cost, Integer qty, Double total, Integer discount, Double pay, Double bal, Integer status) {
        this.grnid = grnid;
        this.item = item;
        this.stock = stock;
        this.supplier = supplier;
-       this.user = user;
        this.deteTime = deteTime;
        this.cost = cost;
        this.qty = qty;
@@ -78,13 +75,6 @@ public class Grn  implements java.io.Serializable {
     
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-    }
-    public User getUser() {
-        return this.user;
-    }
-    
-    public void setUser(User user) {
-        this.user = user;
     }
     public Date getDeteTime() {
         return this.deteTime;

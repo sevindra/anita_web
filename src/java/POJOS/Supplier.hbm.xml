@@ -1,24 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 20, 2016 12:22:52 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Supplier" table="supplier" catalog="anitaweb" optimistic-lock="version">
         <id name="idsupplier" type="java.lang.Integer">
             <column name="idsupplier" />
             <generator class="identity" />
         </id>
-        <property name="supname" type="string">
-            <column name="supname" length="80" />
+        <many-to-one name="state" class="POJOS.State" fetch="select">
+            <column name="state_idstate" not-null="true" />
+        </many-to-one>
+        <property name="fname" type="string">
+            <column name="fname" length="80" />
         </property>
-        <property name="comname" type="string">
-            <column name="comname" length="80" />
+        <property name="mname" type="string">
+            <column name="mname" length="45" />
         </property>
-        <property name="contact1" type="java.lang.Integer">
-            <column name="contact1" />
+        <property name="lname" type="string">
+            <column name="lname" length="45" />
         </property>
-        <property name="contact2" type="java.lang.Integer">
-            <column name="contact2" />
+        <property name="cname" type="string">
+            <column name="cname" length="80" />
+        </property>
+        <property name="contact1" type="string">
+            <column name="contact1" length="11" />
+        </property>
+        <property name="contact2" type="string">
+            <column name="contact2" length="11" />
         </property>
         <property name="email" type="string">
             <column name="email" length="80" />
@@ -31,6 +40,9 @@
         </property>
         <property name="address3" type="string">
             <column name="address3" length="45" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
         </property>
         <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
             <key>

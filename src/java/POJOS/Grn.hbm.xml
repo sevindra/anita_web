@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 20, 2016 12:22:52 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Grn" table="grn" catalog="anitaweb" optimistic-lock="version">
         <id name="grnid" type="int">
@@ -16,9 +16,6 @@
         </many-to-one>
         <many-to-one name="supplier" class="POJOS.Supplier" fetch="select">
             <column name="idsupplier" not-null="true" />
-        </many-to-one>
-        <many-to-one name="user" class="POJOS.User" fetch="select">
-            <column name="iduser" not-null="true" />
         </many-to-one>
         <property name="deteTime" type="timestamp">
             <column name="dete_time" length="0" />

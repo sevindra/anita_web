@@ -50,16 +50,15 @@ public class user_details_save extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
-            String fname = request.getParameter("fname");
-            String mname = request.getParameter("mname");
-            String lname = request.getParameter("lname");
-            String address = request.getParameter("address");
-            String city = request.getParameter("city");
-            String state = request.getParameter("state");
-            String pcode = request.getParameter("pcode");
-            String mobile = request.getParameter("mobile");
-            String nic = request.getParameter("nic");
-            System.out.println(fname + " " + mname + " " + lname + " " + address + " " + city + " " + state + " " + pcode + " " + mobile + " " + nic);
+            String fname = "";
+            String mname = "";
+            String lname = "";
+            String address = "";
+            String city = "";
+            String state = "";
+            String pcode = "";
+            String mobile = "";
+            String nic = "";
             Session ses = controler.connector.getSessionFactory().openSession();
             boolean ismultiple = ServletFileUpload.isMultipartContent(request);
             out.write("okkkkk");
@@ -67,7 +66,6 @@ public class user_details_save extends HttpServlet {
 
                 FileItemFactory fif = new DiskFileItemFactory();
                ServletFileUpload upload = new ServletFileUpload(fif);
-
                 try {
                     List<FileItem> fit = upload.parseRequest(request);
                     for (FileItem f : fit) {
@@ -75,15 +73,20 @@ public class user_details_save extends HttpServlet {
                         if (!(f.getName() == null)) {
                             // out.write("okkkkk3");
 
-                            if (!f.isFormField()) {
+                            if (f.isFormField()) {
 ////                               
-
+                                if(f.getName().equals("fname")){
+                                    fname = f.getString();
+                                }
+            System.out.println(fname + "ffff " + mname + " " + lname + " " + address + " " + city + " " + state + " " + pcode + " " + mobile + " " + nic);
+                                
 //                                String n = new File(f.getName()).getName();
 //                                url1="C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
 //                                url2="adminPanel/customer_images/" + System.currentTimeMillis() + "_" + n;
 //                                f.write(new File(url1+url2));
                                 //response.sendRedirect("my_profile.jsp");
                             }else{
+                                
                             }
                             //0out.print(f.getName().equals(fname));
                         } else {
@@ -103,6 +106,10 @@ public class user_details_save extends HttpServlet {
 //                    ses.update(user);
 //                    ses.beginTransaction().commit();
 //                    out.write(user.getFname());
+                    
+                    
+                    
+                   
 
                 } catch (Exception e) {
                     e.printStackTrace();

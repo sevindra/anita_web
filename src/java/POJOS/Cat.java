@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,12 +14,12 @@ public class Cat  implements java.io.Serializable {
      private Integer idcat;
      private String catname;
      private Integer status;
-     private Set<Subcat> subcats = new HashSet<Subcat>(0);
+     private Set subcats = new HashSet(0);
 
     public Cat() {
     }
 
-    public Cat(String catname, Integer status, Set<Subcat> subcats) {
+    public Cat(String catname, Integer status, Set subcats) {
        this.catname = catname;
        this.status = status;
        this.subcats = subcats;
@@ -46,11 +46,11 @@ public class Cat  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set<Subcat> getSubcats() {
+    public Set getSubcats() {
         return this.subcats;
     }
     
-    public void setSubcats(Set<Subcat> subcats) {
+    public void setSubcats(Set subcats) {
         this.subcats = subcats;
     }
 

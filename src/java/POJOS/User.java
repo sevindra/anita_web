@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 20, 2016 12:22:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,15 +18,15 @@ public class User  implements java.io.Serializable {
      private String mname;
      private String lname;
      private String mobile;
+     private String mobile2;
      private String img;
      private Integer status;
-     private Set<Cart> carts = new HashSet<Cart>(0);
-     private Set<Addres> addreses = new HashSet<Addres>(0);
-     private Set<Login> logins = new HashSet<Login>(0);
-     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
-     private Set<Grn> grns = new HashSet<Grn>(0);
-     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
-     private Set<Message> messagesForAnita = new HashSet<Message>(0);
+     private Set carts = new HashSet(0);
+     private Set addreses = new HashSet(0);
+     private Set logins = new HashSet(0);
+     private Set watchLists = new HashSet(0);
+     private Set messagesForCustomer = new HashSet(0);
+     private Set messagesForAnita = new HashSet(0);
 
     public User() {
     }
@@ -35,20 +35,20 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Grn> grns, Set<Message> messagesForCustomer, Set<Message> messagesForAnita) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set carts, Set addreses, Set logins, Set watchLists, Set messagesForCustomer, Set messagesForAnita) {
        this.utype = utype;
        this.nic = nic;
        this.fname = fname;
        this.mname = mname;
        this.lname = lname;
        this.mobile = mobile;
+       this.mobile2 = mobile2;
        this.img = img;
        this.status = status;
        this.carts = carts;
        this.addreses = addreses;
        this.logins = logins;
        this.watchLists = watchLists;
-       this.grns = grns;
        this.messagesForCustomer = messagesForCustomer;
        this.messagesForAnita = messagesForAnita;
     }
@@ -102,6 +102,13 @@ public class User  implements java.io.Serializable {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+    public String getMobile2() {
+        return this.mobile2;
+    }
+    
+    public void setMobile2(String mobile2) {
+        this.mobile2 = mobile2;
+    }
     public String getImg() {
         return this.img;
     }
@@ -116,53 +123,46 @@ public class User  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set<Cart> getCarts() {
+    public Set getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set<Cart> carts) {
+    public void setCarts(Set carts) {
         this.carts = carts;
     }
-    public Set<Addres> getAddreses() {
+    public Set getAddreses() {
         return this.addreses;
     }
     
-    public void setAddreses(Set<Addres> addreses) {
+    public void setAddreses(Set addreses) {
         this.addreses = addreses;
     }
-    public Set<Login> getLogins() {
+    public Set getLogins() {
         return this.logins;
     }
     
-    public void setLogins(Set<Login> logins) {
+    public void setLogins(Set logins) {
         this.logins = logins;
     }
-    public Set<WatchList> getWatchLists() {
+    public Set getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set<WatchList> watchLists) {
+    public void setWatchLists(Set watchLists) {
         this.watchLists = watchLists;
     }
-    public Set<Grn> getGrns() {
-        return this.grns;
-    }
-    
-    public void setGrns(Set<Grn> grns) {
-        this.grns = grns;
-    }
-    public Set<Message> getMessagesForCustomer() {
+    public Set getMessagesForCustomer() {
         return this.messagesForCustomer;
     }
     
-    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
+    public void setMessagesForCustomer(Set messagesForCustomer) {
         this.messagesForCustomer = messagesForCustomer;
     }
-    public Set<Message> getMessagesForAnita() {
+    public Set getMessagesForAnita() {
         return this.messagesForAnita;
     }
     
-    public void setMessagesForAnita(Set<Message> messagesForAnita) {
+    public void setMessagesForAnita(Set messagesForAnita) {
         this.messagesForAnita = messagesForAnita;
     }
 

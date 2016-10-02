@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
  */
 public class objsave {
 
-    static Session ses;
+  public static Session ses;
 
     public static Session getses() throws Exception {
 
@@ -26,7 +26,8 @@ public class objsave {
     }
 
     public static void save(Object obj) throws Exception {
-        ses = getses();
+        //ses = getses();
+        getses();
         try {
             Transaction tr = ses.beginTransaction();
             ses.save(obj);
@@ -38,7 +39,8 @@ public class objsave {
     }
 
     public static void update(Object obj) throws Exception {
-        ses = getses();
+        //ses = getses();
+        getses();
         try {
             Transaction tr = ses.beginTransaction();
             ses.update(obj);

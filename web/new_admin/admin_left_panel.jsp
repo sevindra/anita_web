@@ -3,7 +3,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="main.jsp"><span class="glyphicon glyphicon-dashboard"></span> DashBoard</a>
+                            <a onclick="Dashboard();" href="#"><span class="glyphicon glyphicon-dashboard"></span> DashBoard</a>
                         </h4>
                     </div>
 <!--                    <div id="collapse1" class="panel-collapse collapse in">
@@ -52,7 +52,7 @@
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="Add_supplier.jsp">Add Supplier</a></li>
+                            <li class="list-group-item"><a onclick="add_supplier()">Add Supplier</a></li>
                             <li class="list-group-item">Two</li>
                             <li class="list-group-item">Three</li>
                         </ul>
