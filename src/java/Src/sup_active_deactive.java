@@ -5,27 +5,24 @@
  */
 package Src;
 
-import POJOS.Login;
-import POJOS.User;
+import POJOS.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Sevi
  */
-@WebServlet(name = "change_password", urlPatterns = {"/change_password"})
-public class change_password extends HttpServlet {
+@WebServlet(name = "sup_active_deactive", urlPatterns = {"/sup_active_deactive"})
+public class sup_active_deactive extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,30 +38,57 @@ public class change_password extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String pass = request.getParameter("pass");
-            String cpass = request.getParameter("cpass");
-            String saves = request.getParameter("save");
-
-//            Session ses = controler.connector.getSessionFactory().openSession();
-//            Transaction tr = ses.beginTransaction();
-
-            HttpSession hs = request.getSession();
-            
-            current_url emaill = (current_url) hs.getAttribute("email");
-            
-            Criteria cr = objsave.getses().createCriteria(Login.class);//ses.createCriteria(Login.class);
-            cr.add(Restrictions.eq("email", emaill.getEmail()));
-            Login login=(Login) cr.uniqueResult();
-            if (saves.equals("pwsave")) {
-                out.print("ok");
-                login.setUpass(cpass);
-                //ses.update(login);
-                objsave.update(login);
-                response.sendRedirect("send_email.jsp?update=753951");
-            } else {
-                out.write("okelse");
+            String status = request.getParameter("status");
+            String supid = request.getParameter("supid");
+            System.out.println("supid-"+supid);
+            //out.print("head "+supid + "-" + status);
+           Supplier supplier = (Supplier) objsave.getses().load(Supplier.class, Integer.parseInt(supid));
+            if(supplier.getStatus()==1){
+            supplier.setStatus(0);
+            objsave.update(supplier);
             }
-            //tr.commit();
+            else{
+            supplier.setStatus(1);
+            objsave.update(supplier);
+            }
+
+            out.write("<tr>\n" +
+"                    <th>First Name</th>\n" +
+"                    <th>Last Name</th>\n" +
+"                    <th>Company Name</th>\n" +
+"                    <th>Contact No1</th>\n" +
+"                    <th>Contact No2</th>\n" +
+"                    <th>Email</th>\n" +
+"                    <th>Address</th>\n" +
+"                    <th>State</th>\n" +
+"                    <th>Act/Deact</th>\n" +
+"                </tr>");
+            Session ses = objsave.getses();
+                    Criteria c = ses.createCriteria(Supplier.class);
+                    List<Supplier> list = c.list();
+                    for (Supplier sup : list) {
+            out.write("<tr>");
+            out.write("<td>"+sup.getFname()+"</td>\n" +
+"                    <td>"+sup.getLname()+"</td>\n" +
+"                    <td>"+sup.getCname()+"</td>\n" +
+"                    <td>"+sup.getContact1()+"</td>\n" +
+"                    <td>"+sup.getContact2()+"</td>\n" +
+"                    <td>"+sup.getEmail()+"</td>\n" +
+"                    <td>"+sup.getAddress1()+" "+sup.getAddress2()+" "+sup.getAddress3()+"</td>\n" +
+"                    <td>"+sup.getState().getState()+"</td>");
+            //out.write("</tr>");
+            if(sup.getStatus().toString().equals("1")){
+            out.write("<td id=\"btn_active\">\n" +
+"                        <button class=\"btn btn-success btn-block\" onclick=\"sttechg('"+sup.getIdsupplier()+"')\">Active</button>\n" +
+"                    </td>");
+            }else{
+            out.write("<td id=\"btn_deactive\">\n" +
+"                        <button class=\"btn btn-danger btn-block\" onclick=\"sttechg('"+sup.getIdsupplier()+"')\">Deactive</button>\n" +
+"                    </td>");
+            }
+            out.write("</tr>");
+                    }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

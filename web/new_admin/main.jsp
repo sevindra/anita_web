@@ -19,12 +19,12 @@
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['2016', 'Sales', 'Expenses', 'Profit'],
-                    ['Jan', 1000, 400, 200],
-                    ['Feb', 1170, 460, 250],
-                    ['March', 660, 1120, 300],
-                    ['April', 1030, 540, 350],
-                    ['May', 1030, 540, 350],
-                    ['Jun', 1030, 540, 350],
+//                    ['Jan', 1000, 400, 200],
+//                    ['Feb', 1170, 460, 250],
+//                    ['March', 660, 1120, 300],
+//                    ['April', 1030, 540, 350],
+//                    ['May', 1030, 540, 350],
+//                    ['Jun', 1030, 540, 350],
                     ['Jul', 1030, 540, 350],
                     ['Aug', 1030, 540, 350],
                     ['Sep', 1030, 540, 350],
@@ -60,7 +60,7 @@
             }
 
             function add_supplier() {
-                $('#admin_body').load('Add_Supplier.jsp');
+                $('#admin_body').load('Add_supplier.jsp');
             }
             function Dashboard() {
                 $('#admin_body').load('Dashboard.jsp');
@@ -68,6 +68,7 @@
             function sup_active_deactive() {
                 $('#admin_body').load('sup_active_deactive.jsp');
             }
+            
 
             <%
                  HttpSession hsheader = request.getSession();

@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Nov 1, 2015, 7:55:39 PM
     Author     : Sevi
 */
+.red_star{
+    color: red;
+    margin-left: 10px
+}
 .margin_left{
     margin-left: 5px
 }
