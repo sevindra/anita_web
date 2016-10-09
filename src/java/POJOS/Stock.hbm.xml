@@ -1,15 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Stock" table="stock" catalog="anitaweb" optimistic-lock="version">
         <id name="idstock" type="java.lang.Integer">
             <column name="idstock" />
             <generator class="identity" />
         </id>
+        <many-to-one name="color" class="POJOS.Color" fetch="select">
+            <column name="color_idcolor" not-null="true" />
+        </many-to-one>
         <many-to-one name="item" class="POJOS.Item" fetch="select">
             <column name="iditem" not-null="true" />
+        </many-to-one>
+        <many-to-one name="size" class="POJOS.Size" fetch="select">
+            <column name="size_idsize" not-null="true" />
         </many-to-one>
         <property name="itemCode" type="string">
             <column name="item_code" length="50" />

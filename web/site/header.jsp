@@ -10,6 +10,9 @@
     POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
 
 %>
+<noscript>
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=error_javascript.jsp">
+</noscript>
 <div class="container navbar-botom-margin">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
@@ -34,13 +37,13 @@
                         <li><a id="watch" href="item.jsp">New Products</a></li>
                         <li><a id="watch" href="item.jsp">Promotions</a></li>
                         <li><a href="item.jsp">Products</a></li>
-                        
+
                     </ul>
                 </li>
-                
+
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
-                    
+
                     <ul class="dropdown-menu multi-level" >
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
@@ -95,14 +98,14 @@
                     </ul>
 
                 </li>
-               
+
                 <li><a href="Contact.jsp">Contact</a></li>
 
             </ul>				
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
-                    <a href="<%if(userheader == null){%>login.jsp<%}else{%>#<%}%>" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
+                    <a href="<%if (userheader == null) {%>login.jsp<%} else {%>#<%}%>" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
                             out.write(userheader.getIduser());
                         } else {
                             out.write("Login");
@@ -134,7 +137,7 @@
                     <%}%>
                 </li>
                 <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if(userheader!=null){%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
+                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
                     </a>
                     <%if (userheader != null) {%>
                     <ul class="dropdown-menu">

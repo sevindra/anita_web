@@ -35,7 +35,7 @@
     <body>
         <h3 style="margin-top: -20px"><strong>Suppler Active / Deactive</strong></h3>
         <div class="col-md-12">
-            <table class="table table-hover table-striped table-bordered myborder" id="sup_table">
+            <table class="table table-hover table-striped table-bordered" id="sup_table">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>

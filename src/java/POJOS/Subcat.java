@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class Subcat  implements java.io.Serializable {
      private Cat cat;
      private String subname;
      private Integer status;
-     private Set items = new HashSet(0);
+     private Set<Item> items = new HashSet<Item>(0);
 
     public Subcat() {
     }
@@ -24,7 +24,7 @@ public class Subcat  implements java.io.Serializable {
     public Subcat(Cat cat) {
         this.cat = cat;
     }
-    public Subcat(Cat cat, String subname, Integer status, Set items) {
+    public Subcat(Cat cat, String subname, Integer status, Set<Item> items) {
        this.cat = cat;
        this.subname = subname;
        this.status = status;
@@ -59,11 +59,11 @@ public class Subcat  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getItems() {
+    public Set<Item> getItems() {
         return this.items;
     }
     
-    public void setItems(Set items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 

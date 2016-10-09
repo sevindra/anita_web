@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,8 +12,6 @@ public class Item  implements java.io.Serializable {
 
 
      private Integer iditem;
-     private Color color;
-     private Size size;
      private Subcat subcat;
      private String itemname;
      private Integer watching;
@@ -21,23 +19,20 @@ public class Item  implements java.io.Serializable {
      private String url;
      private String delivary;
      private Integer status;
-     private Set carts = new HashSet(0);
-     private Set watchLists = new HashSet(0);
-     private Set stocks = new HashSet(0);
-     private Set grns = new HashSet(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
+     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Stock> stocks = new HashSet<Stock>(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
+     private Set<ItemImage> itemImages = new HashSet<ItemImage>(0);
 
     public Item() {
     }
 
 	
-    public Item(Color color, Size size, Subcat subcat) {
-        this.color = color;
-        this.size = size;
+    public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Color color, Size size, Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set carts, Set watchLists, Set stocks, Set grns) {
-       this.color = color;
-       this.size = size;
+    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Cart> carts, Set<WatchList> watchLists, Set<Stock> stocks, Set<Grn> grns, Set<ItemImage> itemImages) {
        this.subcat = subcat;
        this.itemname = itemname;
        this.watching = watching;
@@ -49,6 +44,7 @@ public class Item  implements java.io.Serializable {
        this.watchLists = watchLists;
        this.stocks = stocks;
        this.grns = grns;
+       this.itemImages = itemImages;
     }
    
     public Integer getIditem() {
@@ -57,20 +53,6 @@ public class Item  implements java.io.Serializable {
     
     public void setIditem(Integer iditem) {
         this.iditem = iditem;
-    }
-    public Color getColor() {
-        return this.color;
-    }
-    
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public Size getSize() {
-        return this.size;
-    }
-    
-    public void setSize(Size size) {
-        this.size = size;
     }
     public Subcat getSubcat() {
         return this.subcat;
@@ -121,33 +103,40 @@ public class Item  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getCarts() {
+    public Set<Cart> getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set carts) {
+    public void setCarts(Set<Cart> carts) {
         this.carts = carts;
     }
-    public Set getWatchLists() {
+    public Set<WatchList> getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set watchLists) {
+    public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
-    public Set getStocks() {
+    public Set<Stock> getStocks() {
         return this.stocks;
     }
     
-    public void setStocks(Set stocks) {
+    public void setStocks(Set<Stock> stocks) {
         this.stocks = stocks;
     }
-    public Set getGrns() {
+    public Set<Grn> getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set grns) {
+    public void setGrns(Set<Grn> grns) {
         this.grns = grns;
+    }
+    public Set<ItemImage> getItemImages() {
+        return this.itemImages;
+    }
+    
+    public void setItemImages(Set<ItemImage> itemImages) {
+        this.itemImages = itemImages;
     }
 
 

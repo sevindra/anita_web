@@ -12,6 +12,9 @@
         <title>Anita Admin Panel</title>
         <%@include file="inc.jsp" %>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <noscript>
+        <META HTTP-EQUIV="Refresh" CONTENT="0;URL=../error_javascript.jsp">
+        </noscript>
         <script>
             google.charts.load('current', {'packages': ['bar']});
             google.charts.setOnLoadCallback(drawChart);
@@ -68,14 +71,26 @@
             function sup_active_deactive() {
                 $('#admin_body').load('sup_active_deactive.jsp');
             }
-            
+            function category() {
+                $('#admin_body').load('category.jsp');
+            }
+            function subcategory() {
+                $('#admin_body').load('sub_category.jsp');
+            }
+            function product() {
+                $('#admin_body').load('product.jsp');
+            }
+            function product_active_deactive() {
+                $('#admin_body').load('product_active_deactive.jsp');
+            }
+
 
             <%
-                 HttpSession hsheader = request.getSession();
-                 POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
+                HttpSession hsheader = request.getSession();
+                POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
 
             %>
-               
+
         </script>
     </head>
     <body onload="Dashboard();">
@@ -111,13 +126,12 @@
                             </ul>
                         </li>
                         <li class="">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><%
-                            if(userheader!=null){
-                            out.print(userheader.getFname());
-                            }else{
-                            out.print("user null");
-                            }
-                            %><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><%                                if (userheader != null) {
+                                    out.print(userheader.getFname());
+                                } else {
+                                    out.print("user null");
+                                }
+                                %><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                                 <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Settings</a></li>
@@ -139,7 +153,7 @@
                             <a onclick="Dashboard();" href="#"><span class="fa fa-dashboard glyphicon_margin"></span> DashBoard</a>
                         </h4>
                     </div>
-                    
+
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -163,9 +177,10 @@
                     </div>
                     <div id="cat3" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item">One</li>
-                            <li class="list-group-item">Two</li>
-                            <li class="list-group-item">Three</li>
+                            <li class="list-group-item"><a onclick="category()" href="#">Category</a></li>
+                            <li class="list-group-item"><a onclick="subcategory()" href="#">Sub Category</a></li></li>
+                        <li class="list-group-item"><a onclick="product()" href="#">Product</a></li></li>
+            <li class="list-group-item"><a onclick="product_active_deactive()" href="#">Active/Deactive</a></li></li>
                         </ul>
                     </div>
                 </div>
@@ -179,7 +194,6 @@
                         <ul class="list-group">
                             <li class="list-group-item"><a onclick="add_supplier();" href="#">Add Supplier</a></li>
                             <li class="list-group-item"><a onclick="sup_active_deactive();" href="#">Active/Deactive</a></li>
-                            <li class="list-group-item">Three</li>
                         </ul>
                     </div>
                 </div>

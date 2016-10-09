@@ -1,6 +1,6 @@
 <%-- 
-    Document   : mytest
-    Created on : Nov 4, 2015, 12:22:21 AM
+    Document   : unauthorized_enty
+    Created on : Oct 7, 2016, 12:55:21 AM
     Author     : Sevi
 --%>
 
@@ -10,11 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <%@include file="inc.jsp" %>
-        
     </head>
     <body>
-
-        
+    <center>
+        <img src="img/MADM310.jpg"/>
+    </center>
     </body>
 </html>

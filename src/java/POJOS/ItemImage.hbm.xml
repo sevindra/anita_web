@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.ItemImage" table="item_image" catalog="anitaweb" optimistic-lock="version">
+        <id name="iditemImage" type="java.lang.Integer">
+            <column name="iditem_image" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="item" class="POJOS.Item" fetch="select">
+            <column name="item_iditem" not-null="true" />
+        </many-to-one>
+        <property name="url" type="string">
+            <column name="url" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

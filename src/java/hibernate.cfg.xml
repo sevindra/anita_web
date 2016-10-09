@@ -18,6 +18,7 @@
     <mapping resource="POJOS/Cart.hbm.xml"/>
     <mapping resource="POJOS/Item.hbm.xml"/>
     <mapping resource="POJOS/Color.hbm.xml"/>
+    <mapping resource="POJOS/ItemImage.hbm.xml"/>
     <mapping resource="POJOS/Addres.hbm.xml"/>
     <mapping resource="POJOS/WatchList.hbm.xml"/>
     <mapping resource="POJOS/Grn.hbm.xml"/>

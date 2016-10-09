@@ -4,6 +4,13 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="POJOS.ItemImage"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="java.util.List"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Item"%>
 <%@page import="Src.current_url"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -122,25 +129,34 @@
                 <div class="col-md-9">
                     <!--                    <div class="panel panel-default">
                                             <div class="panel-body">-->
-                    <%for (int i = 0; i < 3; i++) {
-                            for (int j = 0; j < 3; j++) {%>
+                    <%
+                        Session ses = objsave.getses();
+                        Criteria c = ses.createCriteria(Item.class);
+                        List<Item> list = c.list();
+                        for (Item item : list) {%>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="thumbnail" style="position: relative">
-                                    <a href="Item_details.jsp"><img src="adminPanel/men/2015-New-Arrival-Mens-Set-font-b-Men-s-b-font-Commercial-Wedding-font-b-Formal.jpg"/></a>
+                                    <%
+                                        Criteria c1 = ses.createCriteria(ItemImage.class);
+                                        c1.add(Restrictions.eq("item", item));
+                                        //c1.setFirstResult(1);
+                                        c1.setMaxResults(1);
+                                        List<ItemImage> itemimage = c1.list();
+                                        for (ItemImage i : itemimage) {
+                                    %>
+                                    <a href="Item_details.jsp"><img src="<%out.write(i.getUrl());%>"/></a>
                                     <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
+                                    <%}%>
+                                </div>
+                                <div class="col-md-12" style="height: 100px; margin-top: -30px">
+                                    <h3><%=item.getItemname()%></h3>
+                                </div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <h3>T-Shirt</h3>
-                                </div>
-                                <div class="col-md-6 price pull-right">
-                                    <h3><label>Rs.1250.00</label></h3>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p style="text-align: justify">Medium, 100% Cotton, Hand Wash, Made in Sri Lanka</p>
+                                        <p style="text-align: justify; height: 50px" ><%=item.getDescription()%></p>
                                         <div class="col-md-8 col-md-offset-2">
                                             <a class="btn btn-success btn-block" href="Item_details.jsp"><strong>View</strong></a>
                                         </div>
@@ -151,8 +167,7 @@
                         </div>
                     </div>
 
-                    <%}
-                        }%>
+                    <% }%>
                     <!--                        </div>
                                         </div>-->
                 </div>

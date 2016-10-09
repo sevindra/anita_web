@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,22 +12,28 @@ public class Stock  implements java.io.Serializable {
 
 
      private Integer idstock;
+     private Color color;
      private Item item;
+     private Size size;
      private String itemCode;
      private Double price;
      private Integer qty;
      private Integer status;
-     private Set grns = new HashSet(0);
+     private Set<Grn> grns = new HashSet<Grn>(0);
 
     public Stock() {
     }
 
 	
-    public Stock(Item item) {
+    public Stock(Color color, Item item, Size size) {
+        this.color = color;
         this.item = item;
+        this.size = size;
     }
-    public Stock(Item item, String itemCode, Double price, Integer qty, Integer status, Set grns) {
+    public Stock(Color color, Item item, Size size, String itemCode, Double price, Integer qty, Integer status, Set<Grn> grns) {
+       this.color = color;
        this.item = item;
+       this.size = size;
        this.itemCode = itemCode;
        this.price = price;
        this.qty = qty;
@@ -42,12 +48,26 @@ public class Stock  implements java.io.Serializable {
     public void setIdstock(Integer idstock) {
         this.idstock = idstock;
     }
+    public Color getColor() {
+        return this.color;
+    }
+    
+    public void setColor(Color color) {
+        this.color = color;
+    }
     public Item getItem() {
         return this.item;
     }
     
     public void setItem(Item item) {
         this.item = item;
+    }
+    public Size getSize() {
+        return this.size;
+    }
+    
+    public void setSize(Size size) {
+        this.size = size;
     }
     public String getItemCode() {
         return this.itemCode;
@@ -77,11 +97,11 @@ public class Stock  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getGrns() {
+    public Set<Grn> getGrns() {
         return this.grns;
     }
     
-    public void setGrns(Set grns) {
+    public void setGrns(Set<Grn> grns) {
         this.grns = grns;
     }
 

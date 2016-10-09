@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Subcat" table="subcat" catalog="anitaweb" optimistic-lock="version">
         <id name="idsubcat" type="java.lang.Integer">
@@ -19,7 +19,7 @@
         </property>
         <set name="items" table="item" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idsubcat" not-null="true" />
+                <column name="subcat_idsubcat" not-null="true" />
             </key>
             <one-to-many class="POJOS.Item" />
         </set>

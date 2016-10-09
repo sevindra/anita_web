@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -21,12 +21,12 @@ public class User  implements java.io.Serializable {
      private String mobile2;
      private String img;
      private Integer status;
-     private Set carts = new HashSet(0);
-     private Set addreses = new HashSet(0);
-     private Set logins = new HashSet(0);
-     private Set watchLists = new HashSet(0);
-     private Set messagesForCustomer = new HashSet(0);
-     private Set messagesForAnita = new HashSet(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
+     private Set<Addres> addreses = new HashSet<Addres>(0);
+     private Set<Login> logins = new HashSet<Login>(0);
+     private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
+     private Set<Message> messagesForAnita = new HashSet<Message>(0);
 
     public User() {
     }
@@ -35,7 +35,7 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set carts, Set addreses, Set logins, Set watchLists, Set messagesForCustomer, Set messagesForAnita) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Message> messagesForCustomer, Set<Message> messagesForAnita) {
        this.utype = utype;
        this.nic = nic;
        this.fname = fname;
@@ -123,46 +123,46 @@ public class User  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Set getCarts() {
+    public Set<Cart> getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set carts) {
+    public void setCarts(Set<Cart> carts) {
         this.carts = carts;
     }
-    public Set getAddreses() {
+    public Set<Addres> getAddreses() {
         return this.addreses;
     }
     
-    public void setAddreses(Set addreses) {
+    public void setAddreses(Set<Addres> addreses) {
         this.addreses = addreses;
     }
-    public Set getLogins() {
+    public Set<Login> getLogins() {
         return this.logins;
     }
     
-    public void setLogins(Set logins) {
+    public void setLogins(Set<Login> logins) {
         this.logins = logins;
     }
-    public Set getWatchLists() {
+    public Set<WatchList> getWatchLists() {
         return this.watchLists;
     }
     
-    public void setWatchLists(Set watchLists) {
+    public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
-    public Set getMessagesForCustomer() {
+    public Set<Message> getMessagesForCustomer() {
         return this.messagesForCustomer;
     }
     
-    public void setMessagesForCustomer(Set messagesForCustomer) {
+    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
         this.messagesForCustomer = messagesForCustomer;
     }
-    public Set getMessagesForAnita() {
+    public Set<Message> getMessagesForAnita() {
         return this.messagesForAnita;
     }
     
-    public void setMessagesForAnita(Set messagesForAnita) {
+    public void setMessagesForAnita(Set<Message> messagesForAnita) {
         this.messagesForAnita = messagesForAnita;
     }
 

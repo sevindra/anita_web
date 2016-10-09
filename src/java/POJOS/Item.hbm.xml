@@ -1,21 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Item" table="item" catalog="anitaweb" optimistic-lock="version">
         <id name="iditem" type="java.lang.Integer">
             <column name="iditem" />
             <generator class="identity" />
         </id>
-        <many-to-one name="color" class="POJOS.Color" fetch="select">
-            <column name="color_idcolor" not-null="true" />
-        </many-to-one>
-        <many-to-one name="size" class="POJOS.Size" fetch="select">
-            <column name="size_idsize" not-null="true" />
-        </many-to-one>
         <many-to-one name="subcat" class="POJOS.Subcat" fetch="select">
-            <column name="idsubcat" not-null="true" />
+            <column name="subcat_idsubcat" not-null="true" />
         </many-to-one>
         <property name="itemname" type="string">
             <column name="itemname" length="70" />
@@ -58,6 +52,12 @@
                 <column name="item_iditem" not-null="true" />
             </key>
             <one-to-many class="POJOS.Grn" />
+        </set>
+        <set name="itemImages" table="item_image" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="item_iditem" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.ItemImage" />
         </set>
     </class>
 </hibernate-mapping>

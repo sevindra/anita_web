@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,16 +13,16 @@ public class Size  implements java.io.Serializable {
 
      private Integer idsize;
      private String size;
-     private Set carts = new HashSet(0);
-     private Set items = new HashSet(0);
+     private Set<Stock> stocks = new HashSet<Stock>(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
 
     public Size() {
     }
 
-    public Size(String size, Set carts, Set items) {
+    public Size(String size, Set<Stock> stocks, Set<Cart> carts) {
        this.size = size;
+       this.stocks = stocks;
        this.carts = carts;
-       this.items = items;
     }
    
     public Integer getIdsize() {
@@ -39,19 +39,19 @@ public class Size  implements java.io.Serializable {
     public void setSize(String size) {
         this.size = size;
     }
-    public Set getCarts() {
+    public Set<Stock> getStocks() {
+        return this.stocks;
+    }
+    
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
+    }
+    public Set<Cart> getCarts() {
         return this.carts;
     }
     
-    public void setCarts(Set carts) {
+    public void setCarts(Set<Cart> carts) {
         this.carts = carts;
-    }
-    public Set getItems() {
-        return this.items;
-    }
-    
-    public void setItems(Set items) {
-        this.items = items;
     }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 25, 2016 9:30:21 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Size" table="size" catalog="anitaweb" optimistic-lock="version">
         <id name="idsize" type="java.lang.Integer">
@@ -11,17 +11,17 @@
         <property name="size" type="string">
             <column name="size" length="45" />
         </property>
+        <set name="stocks" table="stock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="size_idsize" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Stock" />
+        </set>
         <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="size_idsize" not-null="true" />
             </key>
             <one-to-many class="POJOS.Cart" />
-        </set>
-        <set name="items" table="item" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="size_idsize" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Item" />
         </set>
     </class>
 </hibernate-mapping>

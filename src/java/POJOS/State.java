@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Sep 25, 2016 9:30:20 PM by Hibernate Tools 4.3.1
+// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,13 +14,13 @@ public class State  implements java.io.Serializable {
      private Integer idstate;
      private String state;
      private Double deliveryPrice;
-     private Set suppliers = new HashSet(0);
-     private Set addreses = new HashSet(0);
+     private Set<Supplier> suppliers = new HashSet<Supplier>(0);
+     private Set<Addres> addreses = new HashSet<Addres>(0);
 
     public State() {
     }
 
-    public State(String state, Double deliveryPrice, Set suppliers, Set addreses) {
+    public State(String state, Double deliveryPrice, Set<Supplier> suppliers, Set<Addres> addreses) {
        this.state = state;
        this.deliveryPrice = deliveryPrice;
        this.suppliers = suppliers;
@@ -48,18 +48,18 @@ public class State  implements java.io.Serializable {
     public void setDeliveryPrice(Double deliveryPrice) {
         this.deliveryPrice = deliveryPrice;
     }
-    public Set getSuppliers() {
+    public Set<Supplier> getSuppliers() {
         return this.suppliers;
     }
     
-    public void setSuppliers(Set suppliers) {
+    public void setSuppliers(Set<Supplier> suppliers) {
         this.suppliers = suppliers;
     }
-    public Set getAddreses() {
+    public Set<Addres> getAddreses() {
         return this.addreses;
     }
     
-    public void setAddreses(Set addreses) {
+    public void setAddreses(Set<Addres> addreses) {
         this.addreses = addreses;
     }
 
