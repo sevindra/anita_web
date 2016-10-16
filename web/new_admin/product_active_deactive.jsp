@@ -20,6 +20,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h3 style="margin-top: -20px"><strong>Product Activate / Deactivate</strong></h3>
         <div class="col-md-12">
             <table class="table table-hover table-striped table-bordered" id="sup_table">
                 <tr>

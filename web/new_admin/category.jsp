@@ -30,6 +30,8 @@
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         sync_table();
                         alert(xhttp.responseText);
+                        $('#catname').val("");
+                        $('#catname').focus();
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
                 };

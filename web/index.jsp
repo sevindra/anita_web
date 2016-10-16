@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="POJOS.ItemImage"%>
 <%@page import="org.hibernate.Criteria"%>
@@ -130,10 +131,26 @@
                     <!--                    <div class="panel panel-default">
                                             <div class="panel-body">-->
                     <%
+                        String currentpage = request.getParameter("pag");
+
                         Session ses = objsave.getses();
-                        Criteria c = ses.createCriteria(Item.class);
-                        List<Item> list = c.list();
-                        for (Item item : list) {%>
+                        Criteria cr = ses.createCriteria(Item.class);
+                        cr.add(Restrictions.eq("status", 1));
+                        //cr.addOrder(Order.desc("idproduct"));
+
+                        if (currentpage != null) {
+                            if (currentpage.equals("1")) {
+                                cr.setMaxResults(3);
+                            } else {
+                                cr.setFirstResult((Integer.parseInt(request.getParameter("pag")) * 3) - 3);
+                                cr.setMaxResults(3);
+                            }
+                        } else {
+                            cr.setMaxResults(3);
+                        }
+
+                        List<Item> l = cr.list();
+                        for (Item item : l) {%>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -146,7 +163,7 @@
                                         List<ItemImage> itemimage = c1.list();
                                         for (ItemImage i : itemimage) {
                                     %>
-                                    <a href="Item_details.jsp"><img src="<%out.write(i.getUrl());%>"/></a>
+                                    <a href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
                                     <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
                                     <%}%>
                                 </div>
@@ -158,7 +175,7 @@
                                     <div class="col-md-12">
                                         <p style="text-align: justify; height: 50px" ><%=item.getDescription()%></p>
                                         <div class="col-md-8 col-md-offset-2">
-                                            <a class="btn btn-success btn-block" href="Item_details.jsp"><strong>View</strong></a>
+                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><strong>View</strong></a>
                                         </div>
 
                                     </div>
@@ -171,8 +188,29 @@
                     <!--                        </div>
                                         </div>-->
                 </div>
+                <div class="text-center">
+                    <%
+                        int items = 0;
+                        int pages = 0;
+                        Criteria cr1 = ses.createCriteria(Item.class);
+                        cr1.setProjection(Projections.rowCount());
+//                Product pr=(Product)cr.uniqueResult();
+                        items = Integer.parseInt(cr1.uniqueResult().toString());
+
+                        pages = items / 3;
+                        if (items % 3 > 0) {
+                            pages += 1;
+                        }
+                        // out.print(pages + "");
+
+                        for (int i = 1; i <= pages; i++) {
+                            %><a href="index.jsp?pag=<%=i%>"><button class="btn btn-default" style="margin-left: 5px; margin-right: 5px; margin-bottom: 10px; color: red"><%out.print(i);%></button></a><%
+                        }
+                    %>
+                </div>
+
             </div>
-        </div>    
+        </div>
 
 
 

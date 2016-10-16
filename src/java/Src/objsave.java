@@ -50,4 +50,16 @@ public class objsave {
             e.printStackTrace();
         }
     }
+    public static void delete(Object obj) throws Exception {
+        //ses = getses();
+        getses();
+        try {
+            Transaction tr = ses.beginTransaction();
+            ses.delete(obj);
+            tr.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

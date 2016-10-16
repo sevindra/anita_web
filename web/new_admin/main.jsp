@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Anita Admin Panel</title>
+        <title>ANITA ADMIN</title>
         <%@include file="inc.jsp" %>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <noscript>
@@ -82,6 +82,9 @@
             }
             function product_active_deactive() {
                 $('#admin_body').load('product_active_deactive.jsp');
+            }
+            function add_stock() {
+                $('#admin_body').load('add_stock.jsp');
             }
 
 
@@ -163,7 +166,7 @@
                     </div>
                     <div id="cat2" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <a href="#"><li class="list-group-item">One</li></a>
+                            <a href="#"><li class="list-group-item" onclick="add_stock()">GRN</li></a>
                             <li class="list-group-item">Two</li>
                             <li class="list-group-item">Three</li>
                         </ul>

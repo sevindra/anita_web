@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 16, 2016 2:02:04 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Stock" table="stock" catalog="anitaweb" optimistic-lock="version">
         <id name="idstock" type="java.lang.Integer">
@@ -11,29 +11,26 @@
         <many-to-one name="color" class="POJOS.Color" fetch="select">
             <column name="color_idcolor" not-null="true" />
         </many-to-one>
+        <many-to-one name="grn" class="POJOS.Grn" fetch="select">
+            <column name="grn_grnid" not-null="true" />
+        </many-to-one>
         <many-to-one name="item" class="POJOS.Item" fetch="select">
             <column name="iditem" not-null="true" />
         </many-to-one>
         <many-to-one name="size" class="POJOS.Size" fetch="select">
             <column name="size_idsize" not-null="true" />
         </many-to-one>
-        <property name="itemCode" type="string">
-            <column name="item_code" length="50" />
-        </property>
         <property name="price" type="java.lang.Double">
             <column name="price" precision="22" scale="0" />
         </property>
         <property name="qty" type="java.lang.Integer">
             <column name="qty" />
         </property>
+        <property name="avalQty" type="java.lang.Integer">
+            <column name="aval_qty" />
+        </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
-        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="stock_idstock" not-null="true" />
-            </key>
-            <one-to-many class="POJOS.Grn" />
-        </set>
     </class>
 </hibernate-mapping>

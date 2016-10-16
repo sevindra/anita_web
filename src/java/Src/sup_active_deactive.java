@@ -40,7 +40,7 @@ public class sup_active_deactive extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String status = request.getParameter("status");
             String supid = request.getParameter("supid");
-            System.out.println("supid-"+supid);
+            //System.out.println("supid-"+supid);
             //out.print("head "+supid + "-" + status);
            Supplier supplier = (Supplier) objsave.getses().load(Supplier.class, Integer.parseInt(supid));
             if(supplier.getStatus()==1){

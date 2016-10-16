@@ -27,6 +27,7 @@
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         alert(xhttp.responseText);
                         $('#subcatname').val("");
+                        $('#subcatname').focus();
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
                 };

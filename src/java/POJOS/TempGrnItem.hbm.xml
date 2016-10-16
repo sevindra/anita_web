@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 16, 2016 2:02:04 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.TempGrnItem" table="temp_grn_item" catalog="anitaweb" optimistic-lock="version">
+        <id name="idtempGrnItem" type="java.lang.Integer">
+            <column name="idtemp_grn_item" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="color" class="POJOS.Color" fetch="select">
+            <column name="color_idcolor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="item" class="POJOS.Item" fetch="select">
+            <column name="item_iditem" not-null="true" />
+        </many-to-one>
+        <many-to-one name="size" class="POJOS.Size" fetch="select">
+            <column name="size_idsize" not-null="true" />
+        </many-to-one>
+        <property name="cost" type="java.lang.Double">
+            <column name="cost" precision="22" scale="0" />
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="price" precision="22" scale="0" />
+        </property>
+        <property name="qty" type="java.lang.Integer">
+            <column name="qty" />
+        </property>
+        <property name="discount" type="java.lang.Integer">
+            <column name="discount" />
+        </property>
+        <property name="total" type="java.lang.Double">
+            <column name="total" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

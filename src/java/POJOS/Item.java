@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
+// Generated Oct 16, 2016 2:02:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -19,10 +19,14 @@ public class Item  implements java.io.Serializable {
      private String url;
      private String delivary;
      private Integer status;
+     private Set<Color> colors = new HashSet<Color>(0);
      private Set<Cart> carts = new HashSet<Cart>(0);
+     private Set<CartItem> cartItems = new HashSet<CartItem>(0);
+     private Set<TempGrnItem> tempGrnItems = new HashSet<TempGrnItem>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<Size> sizes = new HashSet<Size>(0);
+     private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
      private Set<Stock> stocks = new HashSet<Stock>(0);
-     private Set<Grn> grns = new HashSet<Grn>(0);
      private Set<ItemImage> itemImages = new HashSet<ItemImage>(0);
 
     public Item() {
@@ -32,7 +36,7 @@ public class Item  implements java.io.Serializable {
     public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Cart> carts, Set<WatchList> watchLists, Set<Stock> stocks, Set<Grn> grns, Set<ItemImage> itemImages) {
+    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<Cart> carts, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages) {
        this.subcat = subcat;
        this.itemname = itemname;
        this.watching = watching;
@@ -40,10 +44,14 @@ public class Item  implements java.io.Serializable {
        this.url = url;
        this.delivary = delivary;
        this.status = status;
+       this.colors = colors;
        this.carts = carts;
+       this.cartItems = cartItems;
+       this.tempGrnItems = tempGrnItems;
        this.watchLists = watchLists;
+       this.sizes = sizes;
+       this.grnItems = grnItems;
        this.stocks = stocks;
-       this.grns = grns;
        this.itemImages = itemImages;
     }
    
@@ -103,12 +111,33 @@ public class Item  implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    public Set<Color> getColors() {
+        return this.colors;
+    }
+    
+    public void setColors(Set<Color> colors) {
+        this.colors = colors;
+    }
     public Set<Cart> getCarts() {
         return this.carts;
     }
     
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
+    }
+    public Set<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+    
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+    public Set<TempGrnItem> getTempGrnItems() {
+        return this.tempGrnItems;
+    }
+    
+    public void setTempGrnItems(Set<TempGrnItem> tempGrnItems) {
+        this.tempGrnItems = tempGrnItems;
     }
     public Set<WatchList> getWatchLists() {
         return this.watchLists;
@@ -117,19 +146,26 @@ public class Item  implements java.io.Serializable {
     public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
+    public Set<Size> getSizes() {
+        return this.sizes;
+    }
+    
+    public void setSizes(Set<Size> sizes) {
+        this.sizes = sizes;
+    }
+    public Set<GrnItem> getGrnItems() {
+        return this.grnItems;
+    }
+    
+    public void setGrnItems(Set<GrnItem> grnItems) {
+        this.grnItems = grnItems;
+    }
     public Set<Stock> getStocks() {
         return this.stocks;
     }
     
     public void setStocks(Set<Stock> stocks) {
         this.stocks = stocks;
-    }
-    public Set<Grn> getGrns() {
-        return this.grns;
-    }
-    
-    public void setGrns(Set<Grn> grns) {
-        this.grns = grns;
     }
     public Set<ItemImage> getItemImages() {
         return this.itemImages;

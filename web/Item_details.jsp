@@ -4,12 +4,45 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.State"%>
+<%@page import="java.util.List"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="POJOS.ItemImage"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Item"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<script src="zoom_js/jquery-1.8.3.min.js" type="text/javascript"></script>-->
         <%@include file="inc.jsp" %>
+        <script src="zoom_js/jquery.elevateZoom-3.0.8.min.js" type="text/javascript"></script>
+        <script src="zoom_js/jquery.elevatezoom.js" type="text/javascript"></script>
+        <script>
+            <%
+                String getitemid = request.getParameter("itemid");
+                int i = Integer.parseInt(getitemid);
+
+                Item item = (Item) objsave.ses.load(Item.class, i);
+                Session ses = objsave.getses();
+
+                Criteria c1 = ses.createCriteria(ItemImage.class);
+                c1.add(Restrictions.eq("item", item));
+                List<ItemImage> listi = c1.list();
+                int topcount = listi.size();
+            %>
+            $(function () {
+            <%
+                for (int a = 0; a <= topcount; a++) {
+            %>$("#zoom_<%=a%>").elevateZoom();<%
+                }
+            %>
+
+                });
+        </script>
         <script>
             var color;
             var size;
@@ -23,18 +56,25 @@
                 size = $('.size_val').val();
                 if (color == "-Select-") {
                     $('.color').show();
-                }else{
+                } else {
                     $('.color').hide();
-                    
+
                 }
                 if (size == "-Select-") {
                     $('.size').show();
-                }else{
-                    
+                } else {
+
                     $('.size').hide();
                 }
             }
             $(function () {
+
+
+
+
+
+
+
                 $('#login-form-link').click(function (e) {
                     $("#login-form").delay(100).fadeIn(100);
                     $("#register-form").fadeOut(100);
@@ -109,34 +149,84 @@
             }
 
 
+
+            var d = new Date();
+            var monthNames;
+            $(document).on('click', '.cat', function () {
+                //alert($(this).parent().html());
+                var catname = $(this).html();
+                var ar = catname.split(">");
+                var ar2 = ar[1];
+                var ar3 = ar2.split("<");
+                //alert(ar3[0]);
+//                    $("#catname").val(ar3[0]);
+//                    catid=ar3[0];
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        var day = xhttp.responseText;
+
+                        var tomorrow = new Date();
+                        tomorrow.setDate(parseInt(day) + 2 + tomorrow.getDate());
+                        //tomorrow.setDate(day + tomorrow.getDate());
+                        //alert(tomorrow.getDate() + " dddd-" + day);
+
+                        monthNames = ["Jan:", "Feb:", "Mar:", "Apr:", "May:", "Jun:",
+                            "Jul:", "Aug:", "Sep:", "Oct:", "Nov:", "Dec:"
+                        ];
+
+                        //alert(monthNames[d.getMonth()] + " " + tomorrow.getDate());
+                        document.getElementById('day').innerHTML = monthNames[d.getMonth()] + " " + (d.getDate() + 2) + " and ";
+                        document.getElementById('to').innerHTML = monthNames[d.getMonth()] + " " + tomorrow.getDate();
+                    }
+                };
+                //alert(catid);
+                xhttp.open("POST", "astemate_date?state=" + ar3[0], true);
+                xhttp.send();
+            });
+            function setdel() {
+                var d = new Date();
+                var monthNames;
+                monthNames = ["Jan:", "Feb:", "Mar:", "Apr:", "May:", "Jun:",
+                    "Jul:", "Aug:", "Sep:", "Oct:", "Nov:", "Dec:"
+                ];
+                document.getElementById('day').innerHTML = monthNames[d.getMonth()] + " " + (d.getDate() + 2) + " and Oct: 18";
+            }
+
+
+            //alert("The current month is " + monthNames[d.getMonth()]);
         </script>
         <title>Item Name</title>
     </head>
-    <body>
+    <body onload="setdel()">
         <%@include file="site/header.jsp" %>
 
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="col-md-12" id="slider">
+                    <div class="col-md-12" id="slider" style="margin-top: 20px">
                         <!-- Top part of the slider -->
                         <div class="row">
                             <div class="col-md-12" id="carousel-bounding-box">
                                 <div class="carousel slide" id="myCarousel">
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
-                                        <div class="active item" data-slide-number="0">
-                                            <img src="img/470x480&text=zero.png"></div>
-
-                                        <div class="item" data-slide-number="1">
-                                            <img src="img/470x480&text=1.png"></div>
-
-                                        <div class="item" data-slide-number="2">
-                                            <img src="img/470x480&text=2.png"></div>
-
-                                        <div class="item" data-slide-number="3">
-                                            <img src="img/470x480&text=3.png"></div>
-
+                                        <%
+                                            topcount = 0;
+                                            for (ItemImage ii : listi) {
+                                        %>
+                                        <div class="<%if (topcount == 0) {
+                                                out.write("active");
+                                            }%> item" data-slide-number="<%=topcount%>">
+                                            <img id="zoom_<%=topcount%>" src="<%=ii.getUrl()%>" data-zoom-image="<%=ii.getUrl()%>">
+                                        </div>
+                                        <%
+                                                topcount++;
+                                            }%>
 
                                     </div>
 
@@ -144,10 +234,35 @@
                             </div>
                         </div>
                     </div>
+                    <div class="">
+                        <div class="col-md-12" style="margin-top: 20px">
+                            <div class='row' style="text-align: center">
+                                <%  Criteria c = ses.createCriteria(ItemImage.class);
+                                    c.add(Restrictions.eq("item", item));
+                                    List<ItemImage> list = c.list();
+                                    int count = 0;
+                                    for (ItemImage itemimagee : list) {
+
+                                %>
+                                <div class="" style="width: 15%;display: inline-block">
+                                    <a class="thumbnail" id="<%="carousel-selector-" + count%>"><img src="<%out.write(itemimagee.getUrl());%>"></a>
+                                </div> 
+                                <script>
+                                    $(function () {
+                                        $("#zoom_01").elevateZoom();
+                                    });
+                                </script>
+                                <%count++;
+                                    }%>
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-7">
                     <div class="row">
-                        <h3>My Item Name</h3>
+                        <h3><%=item.getItemname()%></h3>
                         <div style="border: solid 1px #cccccc"></div>  
                     </div>
                     <div class="col-md-7">
@@ -186,7 +301,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="col-md-10">
-                                    <div class="form-group">
+                                    <div class="input-group form-group">
                                         <select class="form-control size_val" onchange="sizecolor()">
                                             <option>-Select-</option>
                                             <option>S</option>
@@ -194,7 +309,28 @@
                                             <option>L</option>
                                             <option>XL</option>
                                         </select>
+                                        <span class="input-group-addon">
+                                            <a href="#" data-toggle="modal" data-target="#myModal"><span class="fa fa-plus"></span></a>
+                                        </span>
                                     </div>
+                                </div>
+                            </div>
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="img/clothsizes.jpg" class="img-responsive"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -257,37 +393,63 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
                                         <h5><strong>Description</strong></h5>
-                                        Medium, 100% Cotton, Hand Wash, Made in Sri Lanka
+                                        <%=item.getDescription()%>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 text-right">
-                                <h5>Shipping : </h5> 
-                            </div>
-                            <div class="col-md-9">
-                                <h5>Island Wide Shipping</h5>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-3 text-right">
                                 <h5>Delivery : </h5> 
                             </div>
                             <div class="col-md-9">
-                                <h5>Estimated between <strong> Jun. 15 and Jun. 30</strong></h5>
-                                <h6 style="color: #666666">Ships within 2 days after receiving cleared payment</h6>
+                                <h5>Colombo - Rs.150<a href="#" data-toggle="collapse" data-target="#demo"><span class="fa fa-plus-square" style="margin-left: 10px"></span></a></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-right">
+
+                            </div>
+                            <div class="col-md-9">
+                                <div class="collapse" id="demo">
+                                    <table class="table table-striped table-condensed table-responsive table-hover">
+                                        <thead>
+                                        <th>Province</th>
+                                        <th>LKR.</th>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                List<State> liststate = objsave.getses().createCriteria(State.class).list();
+                                                for (State state : liststate) {
+                                            %>
+                                            <tr class="cat">
+                                                <td><%=state.getState()%></td>
+                                                <td><%=state.getDeliveryPrice()%></td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table> 
+                                </div>
                             </div>
                         </div>
                         <div class="row ">
                             <div class="col-md-3 text-right">
-                                <h5>Payments : </h5> 
+                                <h5></h5> 
                             </div>
                             <div class="col-md-9">
-                                <!--<span class="fa fa-spinner fa-spin "></span>-->
-                                <h5><strong>Visa,Master Card,American Express</strong></h5>
+                                <h5>Estimated between <strong id="day"></strong><strong id="to"></strong></h5>
+                                <h6 style="color: #666666">Delivery within 2 days after receiving cleared payment</h6>
                             </div>
                         </div>
+                        <!--                        <div class="row ">
+                                                    <div class="col-md-3 text-right">
+                                                        <h5>Payments : </h5> 
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <span class="fa fa-spinner fa-spin "></span>
+                                                        <h5><strong>Visa,Master Card,American Express</strong></h5>
+                                                    </div>
+                                                </div>-->
                     </div>
                     <br/>
                     <div class="col-md-5">
@@ -302,25 +464,7 @@
         </div>
 
         <div class="container-fluid">
-            <div class="col-md-5" style="margin-top: 20px">
-                <div class='row' style="text-align: center">
 
-                    <div class="" style="width: 20%;display: inline-block">
-                        <a class="thumbnail" id="carousel-selector-0"><img src="img/470x480&text=zero.png"></a>
-                    </div>          
-                    <div class="" style="width: 20%;display: inline-block">
-                        <a class="thumbnail" id="carousel-selector-1"><img src="img/470x480&text=1.png"></a>
-                    </div>
-                    <div class="" style="width: 20%;display: inline-block">
-                        <a class="thumbnail" id="carousel-selector-2"><img src="img/470x480&text=2.png"></a>
-                    </div>
-                    <div class="" style="width: 20%;display: inline-block">
-                        <a class="thumbnail" id="carousel-selector-3"><img src="img/470x480&text=3.png"></a>
-                    </div>
-
-
-                </div>
-            </div>
         </div>
         <%@include file="site/footer.jsp" %>
     </body>

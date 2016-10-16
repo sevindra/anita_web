@@ -1,45 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 16, 2016 2:02:04 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Grn" table="grn" catalog="anitaweb" optimistic-lock="version">
-        <id name="grnid" type="int">
+        <id name="grnid" type="java.lang.Integer">
             <column name="grnid" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="item" class="POJOS.Item" fetch="select">
-            <column name="item_iditem" not-null="true" />
-        </many-to-one>
-        <many-to-one name="stock" class="POJOS.Stock" fetch="select">
-            <column name="stock_idstock" not-null="true" />
-        </many-to-one>
         <many-to-one name="supplier" class="POJOS.Supplier" fetch="select">
             <column name="idsupplier" not-null="true" />
         </many-to-one>
+        <property name="grnidreal" type="string">
+            <column name="grnidreal" length="45" not-null="true" />
+        </property>
         <property name="deteTime" type="timestamp">
             <column name="dete_time" length="0" />
-        </property>
-        <property name="cost" type="java.lang.Double">
-            <column name="cost" precision="22" scale="0" />
-        </property>
-        <property name="qty" type="java.lang.Integer">
-            <column name="qty" />
         </property>
         <property name="total" type="java.lang.Double">
             <column name="total" precision="22" scale="0" />
         </property>
-        <property name="discount" type="java.lang.Integer">
-            <column name="discount" />
-        </property>
-        <property name="pay" type="java.lang.Double">
-            <column name="pay" precision="22" scale="0" />
-        </property>
-        <property name="bal" type="java.lang.Double">
-            <column name="bal" precision="22" scale="0" />
-        </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <set name="grnItems" table="grn_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grn_grnid" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.GrnItem" />
+        </set>
+        <set name="stocks" table="stock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grn_grnid" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Stock" />
+        </set>
     </class>
 </hibernate-mapping>

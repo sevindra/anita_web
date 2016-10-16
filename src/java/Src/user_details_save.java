@@ -5,7 +5,10 @@
  */
 package Src;
 
+import POJOS.Item;
+import POJOS.ItemImage;
 import POJOS.Login;
+import POJOS.Subcat;
 import POJOS.User;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +27,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -32,6 +36,7 @@ import org.hibernate.criterion.Restrictions;
  */
 @WebServlet(name = "user_details_save", urlPatterns = {"/user_details_save"})
 public class user_details_save extends HttpServlet {
+
     private String url1;
     private String url2;
 
@@ -50,6 +55,10 @@ public class user_details_save extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
+            FileItemFactory factry = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factry);
+            
+            
             String fname = "";
             String mname = "";
             String lname = "";
@@ -59,64 +68,78 @@ public class user_details_save extends HttpServlet {
             String pcode = "";
             String mobile = "";
             String nic = "";
-            Session ses = controler.connector.getSessionFactory().openSession();
-            boolean ismultiple = ServletFileUpload.isMultipartContent(request);
-            out.write("okkkkk");
-            if (ismultiple) {
+            String thumb = "";
 
-                FileItemFactory fif = new DiskFileItemFactory();
-               ServletFileUpload upload = new ServletFileUpload(fif);
-                try {
-                    List<FileItem> fit = upload.parseRequest(request);
-                    for (FileItem f : fit) {
-                        //out.write("okkkkk2");
-                        if (!(f.getName() == null)) {
-                            // out.write("okkkkk3");
+            List itlist = upload.parseRequest(request);
+            for (Object object : itlist) {
+                FileItem fileitem = (FileItem) object;
+                Item item = new Item();
+                if (fileitem.isFormField()) {
+                    if (fileitem.getFieldName().equals("catid")) {
+                        fname = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("mname")) {
+                        mname = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("lname")) {
+                        lname = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("address")) {
+                        address = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("city")) {
+                        city = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("state")) {
+                        state = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("pcode")) {
+                        pcode = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("mobile")) {
+                        mobile = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("nic")) {
+                        nic = fileitem.getString();
+                    }
+                    
+                    
 
-                            if (f.isFormField()) {
-////                               
-                                if(f.getName().equals("fname")){
-                                    fname = f.getString();
-                                }
-            System.out.println(fname + "ffff " + mname + " " + lname + " " + address + " " + city + " " + state + " " + pcode + " " + mobile + " " + nic);
-                                
-//                                String n = new File(f.getName()).getName();
-//                                url1="C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
-//                                url2="adminPanel/customer_images/" + System.currentTimeMillis() + "_" + n;
-//                                f.write(new File(url1+url2));
-                                //response.sendRedirect("my_profile.jsp");
-                            }else{
-                                
+                } else {
+                    if (fileitem.getFieldName().equals("fupload")) {
+                        if (!fileitem.getName().equals("")) {
+                            thumb = Math.random() + fileitem.getName();
+                            String url1="C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
+                            String url2="adminPanel/product_imges/";
+                            File f = new File(url1+url2+ thumb);
+                            System.out.println(f.getPath());
+                            Session itemses = objsave.getses();
+                            Criteria c = itemses.createCriteria(Item.class);
+                            c.setProjection(Projections.max("iditem"));
+                            int itemid = (int) c.uniqueResult();
+                            Item newitem = (Item) objsave.getses().load(Item.class, itemid);
+                            ItemImage itemimage = new ItemImage();
+                            itemimage.setItem(newitem);
+                            itemimage.setUrl(url2+thumb);
+                            objsave.save(itemimage);
+                            //out.write(item.getIditem());
+                            if (f.exists()) {
+                                fileitem.write(f);
+
+                            } else {
+                                File ff = new File("C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/adminPanel/product_imges");
+                                ff.mkdir();
+                                fileitem.write(f);
                             }
-                            //0out.print(f.getName().equals(fname));
-                        } else {
-                            //out.write("else");
-//                            //response.sendRedirect("my_profile.jsp");
-//
                         }
                     }
-//                    Login login = (Login) request.getSession().getAttribute("login");
-//                    int userid = login.getUser().getIduser();
-//                    User user = (User) ses.load(User.class, userid);
-//                    user.setFname(fname);
-//                    user.setMname(mname);
-//                    user.setLname(lname);
-//                    user.setMobile(mobile);
-//                    user.setImg(url2);
-//                    ses.update(user);
-//                    ses.beginTransaction().commit();
-//                    out.write(user.getFname());
-                    
-                    
-                    
-                   
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-                System.out.print("iff");
+
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

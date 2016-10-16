@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Oct 8, 2016 7:36:06 AM by Hibernate Tools 4.3.1
+// Generated Oct 16, 2016 2:02:03 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,16 +12,26 @@ public class Size  implements java.io.Serializable {
 
 
      private Integer idsize;
+     private Item item;
      private String size;
      private Set<Stock> stocks = new HashSet<Stock>(0);
+     private Set<TempGrnItem> tempGrnItems = new HashSet<TempGrnItem>(0);
+     private Set<CartItem> cartItems = new HashSet<CartItem>(0);
      private Set<Cart> carts = new HashSet<Cart>(0);
 
     public Size() {
     }
 
-    public Size(String size, Set<Stock> stocks, Set<Cart> carts) {
+	
+    public Size(Item item) {
+        this.item = item;
+    }
+    public Size(Item item, String size, Set<Stock> stocks, Set<TempGrnItem> tempGrnItems, Set<CartItem> cartItems, Set<Cart> carts) {
+       this.item = item;
        this.size = size;
        this.stocks = stocks;
+       this.tempGrnItems = tempGrnItems;
+       this.cartItems = cartItems;
        this.carts = carts;
     }
    
@@ -31,6 +41,13 @@ public class Size  implements java.io.Serializable {
     
     public void setIdsize(Integer idsize) {
         this.idsize = idsize;
+    }
+    public Item getItem() {
+        return this.item;
+    }
+    
+    public void setItem(Item item) {
+        this.item = item;
     }
     public String getSize() {
         return this.size;
@@ -45,6 +62,20 @@ public class Size  implements java.io.Serializable {
     
     public void setStocks(Set<Stock> stocks) {
         this.stocks = stocks;
+    }
+    public Set<TempGrnItem> getTempGrnItems() {
+        return this.tempGrnItems;
+    }
+    
+    public void setTempGrnItems(Set<TempGrnItem> tempGrnItems) {
+        this.tempGrnItems = tempGrnItems;
+    }
+    public Set<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+    
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
     public Set<Cart> getCarts() {
         return this.carts;
