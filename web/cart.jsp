@@ -4,6 +4,19 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="POJOS.ItemImage"%>
+<%@page import="POJOS.Stock"%>
+<%@page import="POJOS.Item"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="POJOS.CartItem"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="POJOS.User"%>
+<%@page import="POJOS.Cart"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="Src.objsave"%>
+<%@page import="org.hibernate.Session"%>
 <%@page import="Src.current_url"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -76,6 +89,11 @@
 
 
         </script>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
     </head>
     <body>
         <div>
@@ -85,22 +103,39 @@
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <%for (int i = 0; i < 1; i++) {
-                            for (int j = 0; j < 2; j++) {
+                    <%
+                        if (request.getSession().getAttribute("sessionCart") != null) {
+
+                            HashMap<String, Object> sessionCart = (HashMap<String, Object>) request.getSession().getAttribute("sessionCart");
+                            double total1 = 0;
+                            for (String key : sessionCart.keySet()) {
+                                Item p = (Item) objsave.getses().load(Item.class, Integer.parseInt(key));
+                        //total1 += (p.getPrice * (Integer.parseInt(sessionCart.get(key))));
                     %>
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="thumbnail col-md-2" style="padding: 5px">
-                                    <img src="adminPanel/men/3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N.jpg"/>
+                                    <%
+                                        Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
+                                        c1.add(Restrictions.eq("item", p));
+                                        //c1.setFirstResult(1);
+                                        c1.setMaxResults(1);
+                                        List<ItemImage> itemimage = c1.list();
+                                        for (ItemImage i : itemimage) {
+                                    %>
+                                    <a href="<%out.write("Item_details.jsp?itemid="+p.getIditem());%>"><img src="<%=i.getUrl()%>"/></a>
+                                    <%}%>
                                 </div>
+                               
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <h4><a>3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N</a></h4>
+                                            <h4><a href="<%out.write("Item_details.jsp?itemid="+p.getIditem());%>"><%=p.getItemname()%></a></h4>
                                         </div>
                                         <div class="row">
-                                            <h4>Size : M</h4>
+                                            <h4><strong>Color : </strong></h4>
+                                            <h4><strong>Size : </strong></h4>
                                         </div>
 
 
@@ -113,7 +148,7 @@
                                             <h5>Quantity:</h5> 
                                         </div>
                                         <div class="col-md-7">
-                                            <input type="text" class="text-center form-control" value="1"/>
+                                            <input type="text" class="text-center form-control" value="<%=sessionCart.get(key) %>"/>
                                         </div>
 
                                     </div>
@@ -129,8 +164,7 @@
                             </div>
                         </div>
                     </div>
-                    <%
-                            }
+                    <%}
                         }%>
                 </div>
             </div>
@@ -141,7 +175,7 @@
                     <h3><strong>Cart Summary</strong></h3>
                     <div style="border: solid #999999 1px"></div>
                     <h3><strong>Total: LKR.283.49</strong></h3>
-                    <button class="btn btn-success btn-block"><strong>Continue Shopping</strong></button>
+                    <button class="btn btn-success btn-block" onclick="goBack()"><strong>Continue Shopping</strong></button>
                     <button class="btn btn-primary btn-block"><strong>Proceed to checkout</strong></button>
                 </div>
             </div>
@@ -162,7 +196,7 @@
                         </div>
                         <div class="col-md-10 col-md-offset-2" style="margin-bottom: 20px">
                             <div class="col-md-6">
-                                <button class="btn btn-success btn-block"><strong>Continue Shopping</strong></button>
+                                <button class="btn btn-success btn-block" onclick="goBack()"><strong>Continue Shopping</strong></button>
                             </div>
                             <div class="col-md-6">
                                 <button class="btn btn-primary btn-block"><strong>Proceed to checkout</strong></button>

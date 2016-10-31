@@ -5,7 +5,7 @@
  */
 package Src;
 
-import POJOS.ItemImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,15 +14,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
  * @author Sevi
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class deltethis extends HttpServlet {
+@WebServlet(name = "fileupload", urlPatterns = {"/fileupload"})
+public class fileupload extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +40,30 @@ public class deltethis extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-                    Criteria c1=objsave.getses().createCriteria(ItemImage.class);
-                    c1.add(Restrictions.eq("item",10));
-                    List<ItemImage> itemimage=c1.list();
-                    for(ItemImage i:itemimage){
-                        out.write(i.getUrl());
+            boolean ismultiple = ServletFileUpload.isMultipartContent(request);
+           
+            if (ismultiple) {
+                
+                FileItemFactory fif = new DiskFileItemFactory();
+                ServletFileUpload upload=new ServletFileUpload(fif);
+                
+                try {
+                    
+                    List<FileItem> fit=upload.parseRequest(request);
+                    for (FileItem f : fit) {
+                        
+                        if (!f.isFormField()) {
+                            String n=new File(f.getName()).getName();
+                            System.out.println(f.getSize());
+                            f.write(new File("C:/Users/Sevi/Desktop/testfup/"+System.currentTimeMillis()+"_"+n));
+                            response.sendRedirect("testmess.html");
+                        }
                     }
-        }catch(Exception e){
-        e.printStackTrace();
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

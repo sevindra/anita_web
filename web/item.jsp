@@ -64,15 +64,20 @@
         <div>
             <%@include file="site/header.jsp" %>
         </div>
-        
+
         <div>
             <%@include file="site/Category.jsp" %>
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <%for (int i = 0; i < 3; i++) {
-                            for (int j = 0; j < 3; j++) {%>
+                    <%
+                        Cat cat = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", request.getParameter("catname"))).uniqueResult();
+                        List<Subcat> sublist = objsave.getses().createCriteria(Subcat.class).add(Restrictions.eq("cat", cat)).list();
+
+                        for (Subcat subli:sublist) {
+                    
+                    %>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -99,8 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <%}
-                        }%>
+                    <%}%>
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.TempSize"%>
+<%@page import="POJOS.TempColor"%>
 <%@page import="POJOS.Item"%>
 <%@page import="java.util.List"%>
 <%@page import="Src.objsave"%>
@@ -65,7 +67,7 @@
                             elem.setAttribute("class", "myimgs");
                             elem.setAttribute("src", e.target.result);
                             elem.setAttribute("height", "75");
-                            elem.setAttribute("width", "75");
+                            elem.setAttribute("width", "100");
                             elem.setAttribute("onclick", 'deleteimage(' + c + ')');
                             document.getElementById("myimg").appendChild(elem);
                             c++;
@@ -95,22 +97,62 @@
                 xhttp.open("POST", "../category?subsearchcat=" + catid, true);
                 xhttp.send();
             }
-            function color() {
+            function addcolor() {
                 var color = document.getElementById('color').value;
-                var size = document.getElementById('size').value;
-                var coloradd = document.getElementById('coloradd').value;
-                var sizeadd = document.getElementById('sizeadd').value;
                 var xhttp = new XMLHttpRequest();
-                //alert("ok");
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        sync_color_tb();
                         alert(xhttp.responseText);
 
                         //document.getElementById('subcat').innerHTML = xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "../size_color?color=" + color + "&", true);
+                xhttp.open("POST", "../size_color?adcolor=" + color + "&addcolor=add", true);
+                xhttp.send();
+            }
+            function addsize() {
+                var size = document.getElementById('size').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        sync_size_tb();
+                        alert(xhttp.responseText);
+
+                        //document.getElementById('subcat').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../size_color?adsize=" + size + "&addsize=add", true);
+                xhttp.send();
+            }
+            function sync_color_tb() {
+                //alert("called");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                                //alert(xhttp.responseText);
+
+                        document.getElementById('colortb').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../size_color?synccolor=ok", true);
+                xhttp.send();
+            }
+            function sync_size_tb() {
+                alert("called");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                                //alert(xhttp.responseText);
+
+                        document.getElementById('sizetb').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../size_color?syncsize=ok", true);
                 xhttp.send();
             }
 
@@ -177,7 +219,7 @@
                                     <input disabled="disabled" id="fileName" placeholder="Choose File"/>
                                     <div id="upFile" class="btn btn-warning">
                                         <span>Select</span>
-                                        <input onchange="readurl(this)" class="upload" type="file" name="fupload" id="selectFile" required=""/>
+                                        <input onchange="readurl(this)" class="upload" type="file" name="fupload" id="selectFile" required="" multiple=""/>
                                     </div>
                                     <br>
                                     <div id="message"></div>
@@ -187,6 +229,76 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4 mypadin7">
+                                <label>Add Colors : </label>  
+                            </div>
+                            <div class="col-md-6">
+                                <input placeholder="Color Name" class="form-control" id="color">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success btn-block" id="coloradd" onclick="addcolor()" type="button">Add</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4 mypadin7">
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <th>Colors</th>
+                                    </thead>
+                                    <tbody id="colortb">
+                                        <%
+                                        List<TempColor> collist=objsave.getses().createCriteria(TempColor.class).list();
+                                        for(TempColor tc:collist){
+                                        %>
+                                        <tr>
+                                            <td><%=tc.getColor()%></td>
+                                        </tr>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4 mypadin7">
+                                <label>Add Sizes : </label>  
+                            </div>
+                            <div class="col-md-6">
+                                <input placeholder="Size Name" class="form-control" name="sizename" id="size">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success btn-block" id="sizeadd" type="button" onclick="addsize()">Add</button>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4 mypadin7">
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <th>Sizes</th>
+                                    </thead>
+                                    <tbody id="sizetb">
+                                        <%
+                                        List<TempSize> sizlist=objsave.getses().createCriteria(TempSize.class).list();
+                                        for(TempSize tc:sizlist){
+                                        %>
+                                        <tr>
+                                            <td><%=tc.getSize()%></td>
+                                        </tr>
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                         </div>
                         <br/>
                         <div class="row">
@@ -204,31 +316,9 @@
                                 </div>
                             </div>
                         </div>
-                        <br/>
+                        
                     </form>
-                    <div class="row">
-                        <div class="col-md-4 mypadin7">
-                            <label>Add Colors : </label>  
-                        </div>
-                        <div class="col-md-6">
-                            <input placeholder="Color Name" class="form-control" required="" id="color">
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-success btn-block" id="coloradd" onclick="color()">Add</button>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-4 mypadin7">
-                            <label>Add Sizes : </label>  
-                        </div>
-                        <div class="col-md-6">
-                            <input placeholder="Size Name" class="form-control" name="itemname" required="" id="size">
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-success btn-block" id="sizeadd">Add</button>
-                        </div>
-                    </div>
+
 
                 </div>
 

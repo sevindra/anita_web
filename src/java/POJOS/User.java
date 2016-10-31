@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Oct 16, 2016 2:02:03 PM by Hibernate Tools 4.3.1
+// Generated Oct 31, 2016 7:52:56 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -25,8 +25,8 @@ public class User  implements java.io.Serializable {
      private Set<Addres> addreses = new HashSet<Addres>(0);
      private Set<Login> logins = new HashSet<Login>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
-     private Set<Message> messagesForCustomer = new HashSet<Message>(0);
-     private Set<Message> messagesForAnita = new HashSet<Message>(0);
+     private Set<Message> messagesForMfrom = new HashSet<Message>(0);
+     private Set<Message> messagesForMto = new HashSet<Message>(0);
 
     public User() {
     }
@@ -35,7 +35,7 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Message> messagesForCustomer, Set<Message> messagesForAnita) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Message> messagesForMfrom, Set<Message> messagesForMto) {
        this.utype = utype;
        this.nic = nic;
        this.fname = fname;
@@ -49,8 +49,8 @@ public class User  implements java.io.Serializable {
        this.addreses = addreses;
        this.logins = logins;
        this.watchLists = watchLists;
-       this.messagesForCustomer = messagesForCustomer;
-       this.messagesForAnita = messagesForAnita;
+       this.messagesForMfrom = messagesForMfrom;
+       this.messagesForMto = messagesForMto;
     }
    
     public Integer getIduser() {
@@ -151,19 +151,19 @@ public class User  implements java.io.Serializable {
     public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
-    public Set<Message> getMessagesForCustomer() {
-        return this.messagesForCustomer;
+    public Set<Message> getMessagesForMfrom() {
+        return this.messagesForMfrom;
     }
     
-    public void setMessagesForCustomer(Set<Message> messagesForCustomer) {
-        this.messagesForCustomer = messagesForCustomer;
+    public void setMessagesForMfrom(Set<Message> messagesForMfrom) {
+        this.messagesForMfrom = messagesForMfrom;
     }
-    public Set<Message> getMessagesForAnita() {
-        return this.messagesForAnita;
+    public Set<Message> getMessagesForMto() {
+        return this.messagesForMto;
     }
     
-    public void setMessagesForAnita(Set<Message> messagesForAnita) {
-        this.messagesForAnita = messagesForAnita;
+    public void setMessagesForMto(Set<Message> messagesForMto) {
+        this.messagesForMto = messagesForMto;
     }
 
 

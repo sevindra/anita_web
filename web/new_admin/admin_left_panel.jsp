@@ -6,15 +6,6 @@
                             <a onclick="Dashboard();" href="#"><span class="glyphicon glyphicon-dashboard"></span> DashBoard</a>
                         </h4>
                     </div>
-<!--                    <div id="collapse1" class="panel-collapse collapse in">
-                        <ul class="list-group">
-                            <li class="list-group-item">Messages</li>
-                            <li class="list-group-item">Email</li>
-                            <li class="list-group-item">Orders</li>
-                            <li class="list-group-item">Low Stock</li>
-                            <li class="list-group-item">Watched Items</li>
-                        </ul>
-                    </div>-->
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -67,8 +58,19 @@
                     <div id="collapse5" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item">One</li>
-                            <li class="list-group-item">Two</li>
-                            <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="fa fa-calculator glyphicon_margin"></span> Advertisement</a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Add Advertisement</li>
+                            <li class="list-group-item">Active / Deactive</li>
                         </ul>
                     </div>
                 </div>

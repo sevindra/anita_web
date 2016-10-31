@@ -6,7 +6,9 @@
 package Src;
 
 import POJOS.Cart;
+import POJOS.CartItem;
 import POJOS.Item;
+import POJOS.Stock;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,20 +51,22 @@ public class add_to_cart extends HttpServlet {
                 cc.add(Restrictions.eq("user", ((User) s.load(User.class, Integer.parseInt(request.getSession().getAttribute("ID").toString())))));
 
                 Cart c;
-                Item p;
-                CartHasProducts chp;
+                Item item;
+                Stock p;
+                CartItem chp;
                 if (cc.uniqueResult() != null) {
-                    Criteria ch = s.createCriteria(CartHasProducts.class);
+                    Criteria ch = s.createCriteria(CartItem.class);
                     c = (Cart) cc.uniqueResult();
 
-                    p = (Products) s.load(Products.class, Integer.parseInt(request.getParameter("pid")));
+                    item = (Item) s.load(Item.class, Integer.parseInt(request.getParameter("pid")));
+                    p = (Stock) s.load(Stock.class, item);
                     ch.add(Restrictions.and(Restrictions.eq("products", p), Restrictions.eq("cart", c)));
 
                     if (ch.uniqueResult() != null) {
                         System.out.println("sdsdsdsdsdsdsd");
-                        chp = (CartHasProducts) ch.uniqueResult();
+                        chp = (CartItem) ch.uniqueResult();
 
-                        chp.setQty(chp.getQty() + Double.parseDouble(request.getParameter("qty")));
+                        chp.setQty(chp.getQty() + Integer.parseInt(request.getParameter("qty")));
                         chp.setTotal(chp.getTotal() + (p.getPrice() * Double.parseDouble(request.getParameter("qty"))));
                         s.update(chp);
                         c.setTotal(c.getTotal() + (p.getPrice() * Double.parseDouble(request.getParameter("qty"))));
@@ -70,11 +74,11 @@ public class add_to_cart extends HttpServlet {
                         s.beginTransaction().commit();
 
                     } else {
-                        chp = new CartHasProducts();
+                        chp = new CartItem();
                         c = (Cart) cc.uniqueResult();
                         chp.setCart(c);
-                        chp.setProducts(p);
-                        chp.setQty(Double.parseDouble(request.getParameter("qty")));
+                        chp.setItem(item);
+                        chp.setQty(Integer.parseInt(request.getParameter("qty")));
                         chp.setTotal(p.getPrice() * Double.parseDouble(request.getParameter("qty")));
                         c.setTotal(c.getTotal() + (p.getPrice() * Double.parseDouble(request.getParameter("qty"))));
                         s.update(c);
@@ -83,17 +87,18 @@ public class add_to_cart extends HttpServlet {
                     }
 
                 } else {
-                    p = (Products) s.load(Products.class, Integer.parseInt(request.getParameter("pid")));
+                    item = (Item) s.load(Item.class, Integer.parseInt(request.getParameter("pid")));
+                    p = (Stock) s.load(Stock.class, item);
                     c = new Cart();
                     User u = ((User) s.load(User.class, Integer.parseInt(request.getSession().getAttribute("ID").toString())));
                     c.setUser(u);
                     c.setDateTime(new Date());
                     c.setTotal(p.getPrice() * Double.parseDouble(request.getParameter("qty")));
                     s.save(c);
-                    chp = new CartHasProducts();
+                    chp = new CartItem();
                     chp.setCart(c);
-                    chp.setProducts(p);
-                    chp.setQty(Double.parseDouble(request.getParameter("qty")));
+                    chp.setItem(item);
+                    chp.setQty(Integer.parseInt(request.getParameter("qty")));
                     chp.setTotal(p.getPrice() * Double.parseDouble(request.getParameter("qty")));
                     s.save(chp);
                     s.beginTransaction().commit();
@@ -103,14 +108,17 @@ public class add_to_cart extends HttpServlet {
             } else {
                 HashMap<String, String> sessionCart;
                 if (request.getSession().getAttribute("sessionCart") != null) {
+                    System.out.println("ssd-session load");
                     sessionCart = (HashMap<String, String>) request.getSession().getAttribute("sessionCart");
 
                     sessionCart.put(request.getParameter("pid"), request.getParameter("qty"));
                     request.getSession().setAttribute("sessionCart", sessionCart);
                 } else {
-
+                    System.out.println("ssd-ession bild");
+                    System.out.println(request.getParameter("color")+"ssd-ession bild"+request.getParameter("size"));
                     sessionCart = new HashMap<>();
 
+                    
                     sessionCart.put(request.getParameter("pid"), request.getParameter("qty"));
                     request.getSession().setAttribute("sessionCart", sessionCart);
                 }

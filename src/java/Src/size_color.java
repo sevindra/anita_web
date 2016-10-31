@@ -8,6 +8,8 @@ package Src;
 import POJOS.Color;
 import POJOS.Item;
 import POJOS.Size;
+import POJOS.TempColor;
+import POJOS.TempSize;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -42,15 +44,24 @@ public class size_color extends HttpServlet {
             String pid = request.getParameter("pid");
             String size = request.getParameter("size");
             String col = request.getParameter("color");
-            //out.write("okk"+pid);
-            Item item = (Item) objsave.getses().load(Item.class, Integer.parseInt(pid));
+            String addcolor = request.getParameter("addcolor");
+            String addsize = request.getParameter("addsize");
+            String adcolor = request.getParameter("adcolor");
+            String adsize = request.getParameter("adsize");
+            String synccolor = request.getParameter("synccolor");
+            String syncsize = request.getParameter("syncsize");
+            //out.write("okk-" + addcolor);
+            Item item = null;
+            if (pid != null) {
+                item = (Item) objsave.getses().load(Item.class, Integer.parseInt(pid));
+            }
 
             if (col != null) {
                 if (col.equals("color")) {
                     List<Color> list = (List) objsave.getses().createCriteria(Color.class).add(Restrictions.eq("item", item)).list();
 
                     for (Color color : list) {
-                        out.write("<option value="+color.getIdcolor()+">");
+                        out.write("<option value=" + color.getIdcolor() + ">");
                         out.write(color.getColor());
                         out.write("</option>");
 
@@ -61,12 +72,50 @@ public class size_color extends HttpServlet {
             if (size != null) {
                 if (size.equals("size")) {
                     List<Size> lists = (List) objsave.getses().createCriteria(Size.class).add(Restrictions.eq("item", item)).list();
-                
+
                     for (Size list : lists) {
-                        out.write("<option value="+list.getIdsize()+">");
+                        out.write("<option value=" + list.getIdsize() + ">");
                         out.write(list.getSize());
                         out.write("</option>");
                     }
+                }
+            }
+            if (addcolor != null) {
+                if (addcolor.equals("add")) {
+                    TempColor tcolor= new TempColor();
+                    tcolor.setColor(adcolor);
+                    objsave.save(tcolor);
+                    out.write("color Saved");
+                }
+            }
+            if (addsize != null) {
+                if (addsize.equals("add")) {
+                    TempSize tsize= new TempSize();
+                    tsize.setSize(adsize);
+                    objsave.save(tsize);
+                    out.write("Size Saved");
+                }
+            }
+            if (synccolor != null) {
+                if (synccolor.equals("ok")) {
+                    
+                    List<TempColor> collist=objsave.getses().createCriteria(TempColor.class).list();
+                                        for(TempColor tc:collist){
+                                        out.write("<tr>");
+                                        out.write("<td>"+tc.getColor()+"</td>");
+                                        out.write("</tr>");
+                                        }
+                }
+            }
+            if (syncsize != null) {
+                if (syncsize.equals("ok")) {
+                    
+                    List<TempSize> collist=objsave.getses().createCriteria(TempSize.class).list();
+                                        for(TempSize tc:collist){
+                                        out.write("<tr>");
+                                        out.write("<td>"+tc.getSize()+"</td>");
+                                        out.write("</tr>");
+                                        }
                 }
             }
 

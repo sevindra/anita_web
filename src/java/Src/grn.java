@@ -5,7 +5,6 @@
  */
 package Src;
 
-import POJOS.Cat;
 import POJOS.Color;
 import POJOS.Grn;
 import POJOS.GrnItem;
@@ -16,24 +15,13 @@ import POJOS.Supplier;
 import POJOS.TempGrnItem;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.json.JsonArray;
-import javax.json.JsonNumber;
-import javax.json.JsonObject;
-import javax.json.JsonString;
-import javax.json.JsonValue;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.json.JSONObject;
 
 /**
  *

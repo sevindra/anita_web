@@ -37,12 +37,14 @@
                         alert(pid + ", " + cost + ", " + price + ", " + qty + ", " + dis + ", " + tot + ", " + color + ", " + size + ", " + addbtn);
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         sync_table();
+                        subtot();
                         //alert(xhttp.responseText);
                         //document.getElementById('foundcolor').innerHTML = xhttp.responseText;
                     }
                 };
                 xhttp.open("POST", "../grn?pid=" + pid + "&cost=" + cost + "&price=" + price + "&qty=" + qty + "&dis=" + dis + "&tot=" + tot + "&color=" + color + "&size=" + size + "&addbtn=" + addbtn, true);
                 xhttp.send();
+                subtot();
             }
 
 
@@ -125,23 +127,30 @@
                 });
             });
 
-            function subtot(){
+            function subtot() {
                 //alert("ok");
-                <%
-                double tot=(Double)objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.sum("total")).uniqueResult();
-                %>
-                        $('#totalam').val(<%=tot%>);
+            <%
+                    long t =(Long) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.rowCount()).uniqueResult();
+                    if (!(t==0)) {
+                        double tot = (Double) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.sum("total")).uniqueResult();
+                    
+            %>
+                $('#totalam').val(<%=tot%>);
+                <%}else{
+                    %>
+                $('#totalam').val("0");                            
+                    <%    
+                    }%>
             }
             function sync_table() {
-                console.log('sysnc table');
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     //alert(xhttp.readyState);
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         //alert(xhttp.responseText);
-                        subtot();
                         document.getElementById('tbl').innerHTML = xhttp.responseText;
+                        subtot();
                     }
                 };
                 xhttp.open("POST", "../grn?synctb=ok", true);
@@ -150,10 +159,14 @@
 
 
             function save() {
-                var grnid=document.getElementById('grnid').value;
-                var supid=document.getElementById('supid').value;
-                var totalam=document.getElementById('totalam').value;
+                var grnid = document.getElementById('grnid').value;
+                var supid = document.getElementById('supid').value;
+                var totalam = document.getElementById('totalam').value;
                 var xhttp = new XMLHttpRequest();
+                
+                if(grnid===""){
+                    alert("Empty grnid");
+                }else{
                 xhttp.onreadystatechange = function () {
                     //alert(xhttp.readyState);
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
@@ -163,8 +176,9 @@
                         //document.getElementById('tbl').innerHTML = xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "../grn?grnsave=save&grnid="+grnid+"&supid="+supid+"&totalam="+totalam, true);
+                xhttp.open("POST", "../grn?grnsave=save&grnid=" + grnid + "&supid=" + supid + "&totalam=" + totalam, true);
                 xhttp.send();
+                }
             }
             subtot();
         </script>

@@ -5,6 +5,11 @@
 --%>
 
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="POJOS.Subcat"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Cat"%>
+<%@page import="java.util.List"%>
 <%
     HttpSession hsheader = request.getSession();
     POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
@@ -45,56 +50,68 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <b class="caret"></b></a>
 
                     <ul class="dropdown-menu multi-level" >
+                        <%                            int count = 5;
+                            List<Cat> catli = objsave.getses().createCriteria(Cat.class).list();
+                            for (Cat cat : catli) {
+                        %>
                         <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
-                            <ul class="dropdown-menu">
-                                <li> <a href="item.jsp"> Shirt </a> </li>
-                                <li> <a href="item.jsp"> T-Shirt </a> </li>
-                                <li> <a href="item.jsp"> Short </a> </li>
-                                <li> <a href="item.jsp"> Trousers </a> </li>
-                                <li> <a href="item.jsp"> Denims </a> </li>
-                                <li> <a href="item.jsp"> Shoes </a> </li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=cat.getCatname()%></a>
+                            <ul class="dropdown-menu" style="margin-top: <%=count%>px">
+                                <%
+                                    List<Subcat> sublist = objsave.getses().createCriteria(Subcat.class).add(Restrictions.eq("cat", cat)).list();
+                                    for (Subcat subli : sublist) {
+                                %>
+                                <li> <a href="item.jsp?catname=<%=cat.getCatname()%>&subcatname=<%=subli.getSubname()%>"><%=subli.getSubname()%></a> </li>
+                                    <%}%>
+                                <!--                                <li> <a href="item.jsp"> T-Shirt </a> </li>
+                                                                <li> <a href="item.jsp"> Short </a> </li>
+                                                                <li> <a href="item.jsp"> Trousers </a> </li>
+                                                                <li> <a href="item.jsp"> Denims </a> </li>
+                                                                <li> <a href="item.jsp"> Shoes </a> </li>-->
 
                             </ul>
                         </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
-                            <ul class="dropdown-menu" style="margin-top: 30px">
-                                <li> <a href="item.jsp"> Blouses </a> </li>
-                                <li> <a href="item.jsp"> T-Shirts </a> </li>
-                                <li> <a href="item.jsp"> Frocks </a> </li>
-                                <li> <a href="item.jsp"> Trousers </a> </li>
-                                <li> <a href="item.jsp"> Denims </a> </li>
-                                <li> <a href="item.jsp"> Shoes </a> </li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids</a>
-                            <ul class="dropdown-menu" style="margin-top: 55px">
-                                <li> <a href="item.jsp"> T-shirts </a> </li>
-                                <li> <a href="item.jsp"> Trousers </a> </li>
-                                <li> <a href="item.jsp"> Shorts  </a> </li>
-                                <li> <a href="item.jsp"> Frocks </a> </li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Toys</a>
-                            <ul class="dropdown-menu" style="margin-top: 82px">
-                                <li> <a href="item.jsp"> Boy </a> </li>
-                                <li> <a href="item.jsp"> Girl </a> </li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other</a>
-                            <ul class="dropdown-menu" style="margin-top: 108px">
-                                <li> <a href="item.jsp"> other1 </a> </li>
-                                <li> <a href="item.jsp"> other2 </a> </li>
-
-                            </ul>
-                        </li>
+                        <%
+                                count += 26;
+                            }%>
+                        <!--                        <li class="dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
+                                                    <ul class="dropdown-menu" style="margin-top: 30px">
+                                                        <li> <a href="item.jsp"> Blouses </a> </li>
+                                                        <li> <a href="item.jsp"> T-Shirts </a> </li>
+                                                        <li> <a href="item.jsp"> Frocks </a> </li>
+                                                        <li> <a href="item.jsp"> Trousers </a> </li>
+                                                        <li> <a href="item.jsp"> Denims </a> </li>
+                                                        <li> <a href="item.jsp"> Shoes </a> </li>
+                        
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids</a>
+                                                    <ul class="dropdown-menu" style="margin-top: 55px">
+                                                        <li> <a href="item.jsp"> T-shirts </a> </li>
+                                                        <li> <a href="item.jsp"> Trousers </a> </li>
+                                                        <li> <a href="item.jsp"> Shorts  </a> </li>
+                                                        <li> <a href="item.jsp"> Frocks </a> </li>
+                        
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Toys</a>
+                                                    <ul class="dropdown-menu" style="margin-top: 82px">
+                                                        <li> <a href="item.jsp"> Boy </a> </li>
+                                                        <li> <a href="item.jsp"> Girl </a> </li>
+                        
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other</a>
+                                                    <ul class="dropdown-menu" style="margin-top: 108px">
+                                                        <li> <a href="item.jsp"> other1 </a> </li>
+                                                        <li> <a href="item.jsp"> other2 </a> </li>
+                        
+                                                    </ul>
+                                                </li>-->
                     </ul>
 
                 </li>

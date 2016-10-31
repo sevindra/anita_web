@@ -19,6 +19,9 @@
             google.charts.load('current', {'packages': ['bar']});
             google.charts.setOnLoadCallback(drawChart);
 
+
+
+
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['2016', 'Sales', 'Expenses', 'Profit'],
@@ -86,11 +89,19 @@
             function add_stock() {
                 $('#admin_body').load('add_stock.jsp');
             }
-
+            function messages() {
+                $('#admin_body').load('admin_message.jsp');
+            }
+            function admin_user_message() {
+                $('#admin_body').load('admin_user_message.jsp');
+            }
+            function add_advertisement() {
+                $('#admin_body').load('add_advertisement.jsp');
+            }
 
             <%
-                HttpSession hsheader = request.getSession();
-                POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
+    HttpSession hsheader = request.getSession();
+    POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
 
             %>
 
@@ -182,8 +193,8 @@
                         <ul class="list-group">
                             <li class="list-group-item"><a onclick="category()" href="#">Category</a></li>
                             <li class="list-group-item"><a onclick="subcategory()" href="#">Sub Category</a></li></li>
-                        <li class="list-group-item"><a onclick="product()" href="#">Product</a></li></li>
-            <li class="list-group-item"><a onclick="product_active_deactive()" href="#">Active/Deactive</a></li></li>
+                            <li class="list-group-item"><a onclick="product()" href="#">Product</a></li></li>
+                            <li class="list-group-item"><a onclick="product_active_deactive()" href="#">Active/Deactive</a></li></li>
                         </ul>
                     </div>
                 </div>
@@ -208,9 +219,22 @@
                     </div>
                     <div id="cat5" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a onclick="add_supplier();" href="#">one</a></li>
+                            <li class="list-group-item"><a href="#">one</a></li>
                             <li class="list-group-item">Two</li>
                             <li class="list-group-item">Three</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#cat6"><span class="fa fa-newspaper-o glyphicon_margin"></span> Advertisement</a>
+                        </h4>
+                    </div>
+                    <div id="cat6" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_advertisement()" href="#">Add Advertisement</a></li>
+                            <li class="list-group-item"><a href="#">Active/Deactive</a></li>
                         </ul>
                     </div>
                 </div>

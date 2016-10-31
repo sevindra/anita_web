@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 16, 2016 2:02:04 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 31, 2016 7:52:58 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Message" table="message" catalog="anitaweb" optimistic-lock="version">
         <id name="idmessage" type="java.lang.Integer">
             <column name="idmessage" />
             <generator class="identity" />
         </id>
-        <many-to-one name="userByCustomer" class="POJOS.User" fetch="select">
-            <column name="customer" not-null="true" />
+        <many-to-one name="userByMfrom" class="POJOS.User" fetch="select">
+            <column name="mfrom" not-null="true" />
         </many-to-one>
-        <many-to-one name="userByAnita" class="POJOS.User" fetch="select">
-            <column name="anita" not-null="true" />
+        <many-to-one name="userByMto" class="POJOS.User" fetch="select">
+            <column name="mto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="utype" class="POJOS.Utype" fetch="select">
+            <column name="utype_idutype" not-null="true" />
         </many-to-one>
         <property name="message" type="string">
             <column name="message" length="65535" />
@@ -22,6 +25,9 @@
         </property>
         <property name="notification" type="java.lang.Integer">
             <column name="notification" />
+        </property>
+        <property name="datetime" type="timestamp">
+            <column name="datetime" length="0" />
         </property>
     </class>
 </hibernate-mapping>

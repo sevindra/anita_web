@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 31, 2016 7:52:58 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.TempSize" table="temp_size" catalog="anitaweb" optimistic-lock="version">
+        <id name="idtempSize" type="java.lang.Integer">
+            <column name="idtemp_size" />
+            <generator class="identity" />
+        </id>
+        <property name="size" type="string">
+            <column name="size" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

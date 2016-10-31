@@ -5,9 +5,13 @@
  */
 package Src;
 
+import POJOS.Color;
 import POJOS.Item;
 import POJOS.ItemImage;
+import POJOS.Size;
 import POJOS.Subcat;
+import POJOS.TempColor;
+import POJOS.TempSize;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -55,10 +60,9 @@ public class product extends HttpServlet {
             String descrition = "";
             String thumb = "";
             int flag = 0;
-
-            List itlist = upload.parseRequest(request);
-            for (Object object : itlist) {
-                FileItem fileitem = (FileItem) object;
+            boolean flag2 = true;
+            List<FileItem> itlist = upload.parseRequest(request);
+            for (FileItem fileitem : itlist) {
                 Item item = new Item();
                 if (fileitem.isFormField()) {
                     if (fileitem.getFieldName().equals("catid")) {
@@ -74,25 +78,50 @@ public class product extends HttpServlet {
                         descrition = fileitem.getString();
                     }
                     flag++;
-                    if ((itlist.size() - 1) == flag) {
 
-                        Subcat subcat = (Subcat) objsave.getses().load(Subcat.class, Integer.parseInt(subcatid));
-                        item.setSubcat(subcat);
-                        item.setItemname(itemname);
-                        item.setDescription(descrition);
-                        item.setStatus(1);
-                        objsave.save(item);
-                    //out.write(catid+", "+subcatid+","+itemname+","+descrition);
-                        //flag=false;
+                    if ((itlist.size() - 1) == flag | (itlist.size() - 2) == flag | (itlist.size() - 3) == flag | (itlist.size() - 4) == flag | (itlist.size() - 5) == flag) {
+                        if (flag2) {
+                            System.out.println(subcatid);
+                            Subcat subcat = (Subcat) objsave.getses().load(Subcat.class, Integer.parseInt(subcatid));
+                            item.setSubcat(subcat);
+                            item.setItemname(itemname);
+                            item.setDescription(descrition);
+                            item.setStatus(1);
+                            objsave.save(item);
+
+                            List<TempColor> tc = objsave.getses().createCriteria(TempColor.class).list();
+                            for (TempColor tc1 : tc) {
+                                Color col = new Color();
+                                System.out.println(tc1.getColor());
+                                col.setColor(tc1.getColor());
+                                col.setItem(item);
+                                objsave.save(col);
+
+                                objsave.delete(tc1);
+                            }
+
+                            List<TempSize> ts = objsave.getses().createCriteria(TempSize.class).list();
+                            for (TempSize t : ts) {
+                                Size siz = new Size();
+                                siz.setSize(t.getSize());
+                                siz.setItem(item);
+                                objsave.save(siz);
+
+                                objsave.delete(t);
+                            }
+                   // out.write(catid+", "+subcatid+","+itemname+","+descrition);
+                            //System.out.println(catid+", "+subcatid+","+itemname+","+descrition);
+                            flag2 = false;
+                        }
                     }
 
                 } else {
                     if (fileitem.getFieldName().equals("fupload")) {
                         if (!fileitem.getName().equals("")) {
                             thumb = Math.random() + fileitem.getName();
-                            String url1="C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
-                            String url2="adminPanel/product_imges/";
-                            File f = new File(url1+url2+ thumb);
+                            String url1 = "C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
+                            String url2 = "adminPanel/product_imges/";
+                            File f = new File(url1 + url2 + thumb);
                             System.out.println(f.getPath());
                             Session itemses = objsave.getses();
                             Criteria c = itemses.createCriteria(Item.class);
@@ -101,7 +130,7 @@ public class product extends HttpServlet {
                             Item newitem = (Item) objsave.getses().load(Item.class, itemid);
                             ItemImage itemimage = new ItemImage();
                             itemimage.setItem(newitem);
-                            itemimage.setUrl(url2+thumb);
+                            itemimage.setUrl(url2 + thumb);
                             objsave.save(itemimage);
                             //out.write(item.getIditem());
                             if (f.exists()) {
@@ -117,6 +146,9 @@ public class product extends HttpServlet {
                 }
 
             }
+            HttpSession hs=request.getSession();
+            hs.setAttribute("product", "add");
+            response.sendRedirect("new_admin/main.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }
