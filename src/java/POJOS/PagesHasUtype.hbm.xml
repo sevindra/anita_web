@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.PagesHasUtype" table="pages_has_utype" catalog="anitaweb" optimistic-lock="version">
+        <id name="idpagesHasUtype" type="java.lang.Integer">
+            <column name="idpages_has_utype" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pages" class="POJOS.Pages" fetch="select">
+            <column name="pages_idpages" not-null="true" />
+        </many-to-one>
+        <many-to-one name="utype" class="POJOS.Utype" fetch="select">
+            <column name="utype_idutype" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

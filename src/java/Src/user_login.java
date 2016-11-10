@@ -70,7 +70,12 @@ public class user_login extends HttpServlet {
                         HttpSession hs = request.getSession();
                         hs.setAttribute("user_obj", login.getUser());
                         hs.setAttribute("login", login);
+                        User u =(User) hs.getAttribute("user_obj");
+                        if(u.getUtype().getUtype().equals("Customer")){
                         response.sendRedirect("index.jsp");
+                        }else{
+                        response.sendRedirect("new_admin/main.jsp");
+                        }
                     } else {
                         response.sendRedirect("login.jsp?error_login=1");
 

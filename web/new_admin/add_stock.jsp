@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.User"%>
+<%@page import="Src.privilege_class"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="POJOS.TempGrnItem"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -130,17 +132,17 @@
             function subtot() {
                 //alert("ok");
             <%
-                    long t =(Long) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.rowCount()).uniqueResult();
-                    if (!(t==0)) {
-                        double tot = (Double) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.sum("total")).uniqueResult();
-                    
+                long t = (Long) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.rowCount()).uniqueResult();
+                if (!(t == 0)) {
+                    double tot = (Double) objsave.getses().createCriteria(TempGrnItem.class).setProjection(Projections.sum("total")).uniqueResult();
+
             %>
                 $('#totalam').val(<%=tot%>);
-                <%}else{
-                    %>
-                $('#totalam').val("0");                            
-                    <%    
-                    }%>
+            <%} else {
+            %>
+                $('#totalam').val("0");
+            <%
+                        }%>
             }
             function sync_table() {
                 var xhttp = new XMLHttpRequest();
@@ -163,21 +165,21 @@
                 var supid = document.getElementById('supid').value;
                 var totalam = document.getElementById('totalam').value;
                 var xhttp = new XMLHttpRequest();
-                
-                if(grnid===""){
+
+                if (grnid === "") {
                     alert("Empty grnid");
-                }else{
-                xhttp.onreadystatechange = function () {
-                    //alert(xhttp.readyState);
-                    if (xhttp.readyState === 4 && xhttp.status === 200) {
-                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                        sync_table();
-                        alert(xhttp.responseText);
-                        //document.getElementById('tbl').innerHTML = xhttp.responseText;
-                    }
-                };
-                xhttp.open("POST", "../grn?grnsave=save&grnid=" + grnid + "&supid=" + supid + "&totalam=" + totalam, true);
-                xhttp.send();
+                } else {
+                    xhttp.onreadystatechange = function () {
+                        //alert(xhttp.readyState);
+                        if (xhttp.readyState === 4 && xhttp.status === 200) {
+                            //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                            sync_table();
+                            alert(xhttp.responseText);
+                            //document.getElementById('tbl').innerHTML = xhttp.responseText;
+                        }
+                    };
+                    xhttp.open("POST", "../grn?grnsave=save&grnid=" + grnid + "&supid=" + supid + "&totalam=" + totalam, true);
+                    xhttp.send();
                 }
             }
             subtot();
@@ -185,6 +187,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Goods Receive Note</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-12">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -321,5 +327,13 @@
                 </div>
             </div>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

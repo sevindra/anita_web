@@ -16,6 +16,27 @@
         <META HTTP-EQUIV="Refresh" CONTENT="0;URL=../error_javascript.jsp">
         </noscript>
         <script>
+            <%
+                HttpSession hsheader = request.getSession();
+                POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
+
+                if (userheader == null) {
+                    response.sendRedirect("../404.jsp");
+                } else {
+                    if (userheader.getUtype().getUtype().equals("Super Admin") | userheader.getUtype().getUtype().equals("Admin") | userheader.getUtype().getUtype().equals("User")) {
+
+                    } else {
+                        response.sendRedirect("../404.jsp");
+                    }
+                }
+
+                if (request.getParameter("product") != null) {
+                    if (request.getParameter("product").equals("add")) {
+            %>
+            product();
+            <%}
+                }%>
+
             google.charts.load('current', {'packages': ['bar']});
             google.charts.setOnLoadCallback(drawChart);
 
@@ -92,18 +113,33 @@
             function messages() {
                 $('#admin_body').load('admin_message.jsp');
             }
-            function admin_user_message() {
-                $('#admin_body').load('admin_user_message.jsp');
+            function admin_user_message(v) {
+                alert(v);
+                $('#admin_body').load('admin_user_message.jsp?userid=' + v);
+
             }
             function add_advertisement() {
                 $('#admin_body').load('add_advertisement.jsp');
             }
+            function add_privilege() {
+                $('#admin_body').load('add_privelage.jsp');
+            }
+            function msg_read() {
+                var msgid = document.getElementById('msgid').value;
 
-            <%
-    HttpSession hsheader = request.getSession();
-    POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
 
-            %>
+                        alert(xhttp.responseText);
+                        //document.getElementById('sup_table').innerHTML=xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../user_message?read=ok&msgid=" + msgid, true);
+                xhttp.send();
+            }
+            
 
         </script>
     </head>
@@ -150,7 +186,7 @@
                                 <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                                 <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Settings</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
+                                <li><a href="../logout?user=admin"><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
 
                             </ul>
                         </li>
@@ -235,6 +271,18 @@
                         <ul class="list-group">
                             <li class="list-group-item"><a onclick="add_advertisement()" href="#">Add Advertisement</a></li>
                             <li class="list-group-item"><a href="#">Active/Deactive</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="fa fa-calculator glyphicon_margin"></span> User Management</a>
+                        </h4>
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_privilege()" href="#">Add privilege</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 31, 2016 7:52:58 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Utype" table="utype" catalog="anitaweb" optimistic-lock="version">
         <id name="idutype" type="java.lang.Integer">
@@ -22,6 +22,12 @@
                 <column name="idutype" not-null="true" />
             </key>
             <one-to-many class="POJOS.User" />
+        </set>
+        <set name="pagesHasUtypes" table="pages_has_utype" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="utype_idutype" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.PagesHasUtype" />
         </set>
     </class>
 </hibernate-mapping>

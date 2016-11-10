@@ -5,6 +5,11 @@
 --%>
 
 
+<%@page import="org.hibernate.criterion.Order"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="org.hibernate.criterion.Projections"%>
+<%@page import="POJOS.Message"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="POJOS.Subcat"%>
 <%@page import="Src.objsave"%>
@@ -153,15 +158,27 @@
                     </ul>  
                     <%}%>
                 </li>
+                <%
+                                    Criteria c = objsave.getses().createCriteria(Message.class);
+                                    c.add(Restrictions.eq("notification", 1));
+                                    c.addOrder(Order.desc("datetime"));
+                                    List<Message> mli=c.list();
+                                    c.setProjection(Projections.sum("notification"));
+                                    int me = Integer.parseInt(c.uniqueResult().toString());
+                                %>
                 <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px">32</span><%}%>
+                            class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px"><%=me%></span><%}%>
                     </a>
                     <%if (userheader != null) {%>
                     <ul class="dropdown-menu">
-                        <li><a href="message.jsp"><span class="label label-warning">4:00 AM</span> Favourites Snippet</a></li>
-                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
-                        <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email
-                                design</a></li>
+                        <%
+                        for(Message m:mli){
+                        %>
+                        <li><a href="message.jsp"><span class="label label-warning">4:00 AM</span> <%=m.getMessage()%></a></li>
+                        <%}%>
+<!--                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
+                        <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email-->
+                                <!--design</a></li>-->
                         <li class="divider"></li>
                         <li><a href="message.jsp" class="text-center">View All</a></li>
                     </ul>        

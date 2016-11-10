@@ -21,7 +21,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -79,9 +78,10 @@ public class product extends HttpServlet {
                     }
                     flag++;
 
-                    if ((itlist.size() - 1) == flag | (itlist.size() - 2) == flag | (itlist.size() - 3) == flag | (itlist.size() - 4) == flag | (itlist.size() - 5) == flag) {
+                    if ((itlist.size() - 1) == flag | (itlist.size() - 2) == flag | (itlist.size() - 3) == flag | (itlist.size() - 4) == flag | (itlist.size() - 5) == flag| (itlist.size() - 6) == flag) {
                         if (flag2) {
-                            System.out.println(subcatid);
+                            
+                            System.out.println("item---");
                             Subcat subcat = (Subcat) objsave.getses().load(Subcat.class, Integer.parseInt(subcatid));
                             item.setSubcat(subcat);
                             item.setItemname(itemname);
@@ -118,6 +118,7 @@ public class product extends HttpServlet {
                 } else {
                     if (fileitem.getFieldName().equals("fupload")) {
                         if (!fileitem.getName().equals("")) {
+                            System.out.println("fup---");
                             thumb = Math.random() + fileitem.getName();
                             String url1 = "C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
                             String url2 = "adminPanel/product_imges/";
@@ -126,7 +127,14 @@ public class product extends HttpServlet {
                             Session itemses = objsave.getses();
                             Criteria c = itemses.createCriteria(Item.class);
                             c.setProjection(Projections.max("iditem"));
-                            int itemid = (int) c.uniqueResult();
+                            String i = c.uniqueResult().toString();
+                            System.out.println(i);
+                            int itemid;
+                            if (i==null) {
+                               itemid=1; 
+                            }else{
+                            itemid=Integer.parseInt(i);
+                            }
                             Item newitem = (Item) objsave.getses().load(Item.class, itemid);
                             ItemImage itemimage = new ItemImage();
                             itemimage.setItem(newitem);
@@ -146,9 +154,9 @@ public class product extends HttpServlet {
                 }
 
             }
-            HttpSession hs=request.getSession();
-            hs.setAttribute("product", "add");
-            response.sendRedirect("new_admin/main.jsp");
+//            HttpSession hs=request.getSession();
+//            hs.setAttribute("product", "add");
+            response.sendRedirect("new_admin/main.jsp?product=add");
         } catch (Exception e) {
             e.printStackTrace();
         }

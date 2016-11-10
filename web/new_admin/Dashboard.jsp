@@ -4,6 +4,16 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.privilege_class"%>
+<%@page import="POJOS.WatchList"%>
+<%@page import="POJOS.Utype"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="POJOS.User"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="org.hibernate.criterion.Projections"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +26,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Dashboard</strong></h3>
-
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-primary">
@@ -26,7 +39,13 @@
                                 <i class="fa fa-comments fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div><strong style="font-size: 35px">26</strong></div>
+                                <%
+                                    Session ses = objsave.getses();
+                                    Criteria c = ses.createCriteria(Message.class);
+                                    c.setProjection(Projections.sum("newmes"));
+                                    int coun = Integer.parseInt(c.uniqueResult().toString());
+                                %>
+                                <div><strong style="font-size: 35px"><%=coun%></strong></div>
                                 <div><strong>Messages</strong></div>
                             </div>
                         </div>
@@ -92,7 +111,14 @@
                                 <i class="fa fa-users fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div><strong style="font-size: 35px">120</strong></div>
+                                <%
+                                    Criteria uc = ses.createCriteria(User.class);
+                                    Utype ut = (Utype) ses.load(Utype.class, 4);
+                                    uc.add(Restrictions.eq("utype", ut));
+                                    uc.setProjection(Projections.count("utype"));
+                                    int users = Integer.parseInt(uc.uniqueResult().toString());
+                                %>
+                                <div><strong style="font-size: 35px"><%=users%></strong></div>
                                 <div><strong>Total Users</strong></div>
                             </div>
                         </div>
@@ -161,7 +187,12 @@
                                 <i class="fa fa-eye fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div><strong style="font-size: 35px">120</strong></div>
+                                <%
+                                    Criteria watc = ses.createCriteria(WatchList.class);
+                                    watc.setProjection(Projections.count("item"));
+                                    int watchcount = Integer.parseInt(c.uniqueResult().toString());
+                                %>
+                                <div><strong style="font-size: 35px"><%=watchcount%></strong></div>
                                 <div><strong>Watched Items</strong></div>
                             </div>
                         </div>
@@ -203,5 +234,13 @@
 
         <div id="chart_div" class="col-md-12"></div>
         <br/>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

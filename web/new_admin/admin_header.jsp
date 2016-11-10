@@ -38,7 +38,7 @@
                             <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                             <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
+                            <li><a href="#" onclick=""><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
 
                         </ul>
                     </li>

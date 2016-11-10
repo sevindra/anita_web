@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.User"%>
+<%@page import="Src.privilege_class"%>
 <%@page import="POJOS.TempSize"%>
 <%@page import="POJOS.TempColor"%>
 <%@page import="POJOS.Item"%>
@@ -104,7 +106,7 @@
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         sync_color_tb();
-                        alert(xhttp.responseText);
+                        //alert(xhttp.responseText);
 
                         //document.getElementById('subcat').innerHTML = xhttp.responseText;
                     }
@@ -119,7 +121,7 @@
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         sync_size_tb();
-                        alert(xhttp.responseText);
+                        //alert(xhttp.responseText);
 
                         //document.getElementById('subcat').innerHTML = xhttp.responseText;
                     }
@@ -133,7 +135,7 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                                //alert(xhttp.responseText);
+                        //alert(xhttp.responseText);
 
                         document.getElementById('colortb').innerHTML = xhttp.responseText;
                     }
@@ -142,12 +144,12 @@
                 xhttp.send();
             }
             function sync_size_tb() {
-                alert("called");
+                //alert("called");
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                                //alert(xhttp.responseText);
+                        //alert(xhttp.responseText);
 
                         document.getElementById('sizetb').innerHTML = xhttp.responseText;
                     }
@@ -161,6 +163,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Product</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -253,8 +259,8 @@
                                     </thead>
                                     <tbody id="colortb">
                                         <%
-                                        List<TempColor> collist=objsave.getses().createCriteria(TempColor.class).list();
-                                        for(TempColor tc:collist){
+                                            List<TempColor> collist = objsave.getses().createCriteria(TempColor.class).list();
+                                            for (TempColor tc : collist) {
                                         %>
                                         <tr>
                                             <td><%=tc.getColor()%></td>
@@ -263,7 +269,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                         <br/>
                         <div class="row">
@@ -288,8 +294,8 @@
                                     </thead>
                                     <tbody id="sizetb">
                                         <%
-                                        List<TempSize> sizlist=objsave.getses().createCriteria(TempSize.class).list();
-                                        for(TempSize tc:sizlist){
+                                            List<TempSize> sizlist = objsave.getses().createCriteria(TempSize.class).list();
+                                            for (TempSize tc : sizlist) {
                                         %>
                                         <tr>
                                             <td><%=tc.getSize()%></td>
@@ -298,7 +304,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                         <br/>
                         <div class="row">
@@ -316,7 +322,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </form>
 
 
@@ -350,5 +356,13 @@
             </div>
             <br/>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

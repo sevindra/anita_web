@@ -16,6 +16,7 @@
     <mapping resource="POJOS/User.hbm.xml"/>
     <mapping resource="POJOS/Item.hbm.xml"/>
     <mapping resource="POJOS/TempColor.hbm.xml"/>
+    <mapping resource="POJOS/Pages.hbm.xml"/>
     <mapping resource="POJOS/Grn.hbm.xml"/>
     <mapping resource="POJOS/Subcat.hbm.xml"/>
     <mapping resource="POJOS/Cat.hbm.xml"/>
@@ -25,6 +26,7 @@
     <mapping resource="POJOS/Cart.hbm.xml"/>
     <mapping resource="POJOS/Color.hbm.xml"/>
     <mapping resource="POJOS/ItemImage.hbm.xml"/>
+    <mapping resource="POJOS/PagesHasUtype.hbm.xml"/>
     <mapping resource="POJOS/TempSize.hbm.xml"/>
     <mapping resource="POJOS/Addres.hbm.xml"/>
     <mapping resource="POJOS/WatchList.hbm.xml"/>

@@ -74,5 +74,18 @@
                         </ul>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="fa fa-calculator glyphicon_margin"></span> User Management</a>
+                        </h4>
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Add Privilege</li>
+                            <li class="list-group-item">Active / Deactive</li>
+                        </ul>
+                    </div>
+                </div>
             </div> 
         </div>

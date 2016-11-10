@@ -85,7 +85,7 @@ public class size_color extends HttpServlet {
                     TempColor tcolor= new TempColor();
                     tcolor.setColor(adcolor);
                     objsave.save(tcolor);
-                    out.write("color Saved");
+                    //out.write("color Saved");
                 }
             }
             if (addsize != null) {
@@ -93,7 +93,7 @@ public class size_color extends HttpServlet {
                     TempSize tsize= new TempSize();
                     tsize.setSize(adsize);
                     objsave.save(tsize);
-                    out.write("Size Saved");
+                    //out.write("Size Saved");
                 }
             }
             if (synccolor != null) {

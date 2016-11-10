@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.privilege_class"%>
+<%@page import="POJOS.User"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="POJOS.ItemImage"%>
 <%@page import="POJOS.Item"%>
@@ -21,6 +23,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Product Activate / Deactivate</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-12">
             <table class="table table-hover table-striped table-bordered" id="sup_table">
                 <tr>
@@ -47,7 +53,7 @@
                         c1.setMaxResults(1);
                         List<ItemImage> itemimage = c1.list();
                         for (ItemImage i : itemimage) {
-                    %><td><img src="<%out.write("../"+i.getUrl());%>" width="200" height="150"/></td><%
+                    %><td><img src="<%out.write("../" + i.getUrl());%>" width="200" height="150"/></td><%
                         }
                         %>
 
@@ -70,5 +76,13 @@
                 <%}%>
             </table>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

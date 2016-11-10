@@ -86,12 +86,13 @@
                 </div>
             </div>
         </div>
+       
         <div class="container-fluid">
             <div class="col-md-12">
                 <div class="col-lg-5 thumbnail">
                     <div style="text-decoration:none; overflow:hidden; height:500px; width:1350px; max-width:100%;" >
                         <div id="embed-map-canvas" style="height:100%; width:100%;max-width:100%;">
-                            <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Anita+Designer+Wear,+Desinghe+Mawatha,+Sri+Jayawardenepura+Kotte,+Western+Province,+Sri+Lanka&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
+                            <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Anita+Designer+Wear,+Desinghe+Mawatha,+Sri+Jayawardenepura+Kotte,+Sri+Lanka&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe>
                         </div>
                         <a class="google-maps-html" href="https://www.dog-checks.com" id="make-map-information">www.dog-checks.com</a>
                         <style>#embed-map-canvas .map-generator{max-width: 100%; max-height: 100%; background: none;</style>

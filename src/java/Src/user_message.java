@@ -42,6 +42,8 @@ public class user_message extends HttpServlet {
             String message = request.getParameter("user_message");
             String message_btn = request.getParameter("message_btn");
             String load_mes = request.getParameter("load_mes");
+            String msgid = request.getParameter("msgid");
+            String read = request.getParameter("read");
             //out.write(message+"-"+message_btn);
             if (message_btn != null) {
                 HttpSession hs = request.getSession();
@@ -52,13 +54,16 @@ public class user_message extends HttpServlet {
                 mes.setUserByMfrom(user1);
                 mes.setUserByMto(user);
                 mes.setMessage(message);
-                mes.setNewmes(0);
+                mes.setNewmes(1);
                 mes.setNotification(0);
                 objsave.save(mes);
                 out.write("message sent");
             }
             if (load_mes != null) {
 
+            }
+            if (read != null) {
+                out.write(msgid);
             }
         } catch (Exception e) {
             e.printStackTrace();

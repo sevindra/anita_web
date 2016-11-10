@@ -4,6 +4,10 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="POJOS.ItemImage"%>
+<%@page import="POJOS.WatchList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,7 +35,6 @@
                     $(this).addClass('active');
                     e.preventDefault();
                 });
-
             });
             $(document).ready(function () {
 
@@ -45,14 +48,7 @@
                             $(this).toggleClass('open');
                         }
                 );
-
-
             });
-
-
-
-
-
             <%
                 HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
@@ -67,7 +63,23 @@
 
             }
 
+            function un_watch_from_list(id) {
 
+                var itemid = id;
+                alert(id);
+                var xhttp = new XMLHttpRequest();
+                //alert(itemid);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        //alert(xhttp.responseText);
+                        document.getElementById('watchlist').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid + "&unwatch=list&userid=" +<%=user.getIduser()%>, true);
+                xhttp.send();
+            }
 
         </script>
     </head>
@@ -81,20 +93,31 @@
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <%for (int i = 0; i < 1; i++) {
-                            for (int j = 0; j < 5; j++) {
+                <div class="panel-body" id="watchlist">
+                    <%
+                        List<WatchList> wat = objsave.getses().createCriteria(WatchList.class).add(Restrictions.eq("user", user)).list();
+                        for (WatchList w : wat) {
                     %>
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="thumbnail col-md-3" style="padding: 5px">
-                                    <img src="adminPanel/men/3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N.jpg"/>
+                                    <%
+                                        Session ses = objsave.getses();
+                                        Criteria c1 = ses.createCriteria(ItemImage.class);
+                                        c1.add(Restrictions.eq("item", w.getItem()));
+                                        //c1.setFirstResult(1);
+                                        c1.setMaxResults(1);
+                                        List<ItemImage> itemimage = c1.list();
+                                        for (ItemImage i : itemimage) {
+                                    %>
+                                    <img src="<%=i.getUrl()%>"/>
+                                    <%}%>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <h4><a>3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N</a></h4>
+                                            <h4><a><%=w.getItem().getItemname()%></a></h4>
                                         </div>
                                         <div class="row">
                                             <h4>Size : M</h4>
@@ -103,7 +126,7 @@
                                             <h4>Qty : 1</h4>
                                         </div>
                                         <div class="row">
-                                            <button class="btn btn-danger col-md-4">Remove</button>
+                                            <button class="btn btn-danger col-md-4" onclick="un_watch_from_list('<%=w.getItem().getIditem()%>')">Remove</button>
                                         </div>
 
                                     </div>
@@ -123,7 +146,6 @@
                         </div>
                     </div>
                     <%
-                            }
                         }%>
                 </div>
             </div>

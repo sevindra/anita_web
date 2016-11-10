@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.privilege_class"%>
+<%@page import="POJOS.User"%>
 <%@page import="POJOS.Cat"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.Criteria"%>
@@ -16,12 +18,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script>
-            
+
             var catid;
             var gotcatid;
             function save() {
-                var savebtn= document.getElementById('savebtn').innerHTML;
-                var catname= document.getElementById('catname').value;
+                var savebtn = document.getElementById('savebtn').innerHTML;
+                var catname = document.getElementById('catname').value;
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
@@ -35,39 +37,39 @@
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "../category?savebtn="+savebtn+"&catname="+catname, true);
+                xhttp.open("POST", "../category?savebtn=" + savebtn + "&catname=" + catname, true);
                 xhttp.send();
             }
-            $(document).ready(function() {
-                $(document).on('click', '.cat', function() {
+            $(document).ready(function () {
+                $(document).on('click', '.cat', function () {
                     //alert($(this).parent().html());
-                    var catname=$(this).parent().html();
-                    var ar=catname.split(">");
-                   var ar2=ar[1];
-                   var ar3=ar2.split("<");
+                    var catname = $(this).parent().html();
+                    var ar = catname.split(">");
+                    var ar2 = ar[1];
+                    var ar3 = ar2.split("<");
                     //alert(ar3[0]);
                     $("#catname").val(ar3[0]);
-                    catid=ar3[0];
-                    
-                   var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    //alert(xhttp.readyState);
-                    if (xhttp.readyState === 4 && xhttp.status === 200) {
-                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                        //alert(xhttp.responseText);
-                        gotcatid=xhttp.responseText;
-                        //document.getElementById('sup_table').innerHTML=xhttp.responseText;
-                    }
-                };
+                    catid = ar3[0];
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        //alert(xhttp.readyState);
+                        if (xhttp.readyState === 4 && xhttp.status === 200) {
+                            //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                            //alert(xhttp.responseText);
+                            gotcatid = xhttp.responseText;
+                            //document.getElementById('sup_table').innerHTML=xhttp.responseText;
+                        }
+                    };
                     //alert(catid);
-                xhttp.open("POST", "../category?catupdate="+catid, true);
-                xhttp.send(); 
+                    xhttp.open("POST", "../category?catupdate=" + catid, true);
+                    xhttp.send();
                 });
             });
-            
+
             function update() {
-                var catname= document.getElementById('catname').value;
-                var updatebtn= document.getElementById('updatebtn').innerHTML;
+                var catname = document.getElementById('catname').value;
+                var updatebtn = document.getElementById('updatebtn').innerHTML;
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
@@ -79,31 +81,35 @@
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "../category?updatebtn="+updatebtn+"&updatecatid="+gotcatid+"&catname="+catname, true);
+                xhttp.open("POST", "../category?updatebtn=" + updatebtn + "&updatecatid=" + gotcatid + "&catname=" + catname, true);
                 xhttp.send();
             }
-            
+
             function sync_table() {
-                
+
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     //alert(xhttp.readyState);
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         //alert(xhttp.responseText);
-                        document.getElementById('cattable').innerHTML=xhttp.responseText;
+                        document.getElementById('cattable').innerHTML = xhttp.responseText;
                     }
                 };
                 xhttp.open("POST", "../category?synctb=ok", true);
                 xhttp.send();
             }
-            
-             
+
+
         </script>
 
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Category</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -144,8 +150,8 @@
                     </thead>
                     <tbody id="cattable">
                         <%
-                        List<Cat> list=objsave.getses().createCriteria(Cat.class).list();
-                        for(Cat cat:list){
+                            List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
+                            for (Cat cat : list) {
                         %>
                         <tr>
                             <td class="cat"><%=cat.getCatname()%></td>
@@ -157,5 +163,13 @@
                 </table>
             </div>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

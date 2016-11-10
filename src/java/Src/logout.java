@@ -35,10 +35,22 @@ public class logout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession hs= request.getSession();
+            String user = request.getParameter("user");
+            HttpSession hs = request.getSession();
             hs.invalidate();
-            response.sendRedirect("index.jsp");
-            
+
+            if (user == null) {
+                    response.sendRedirect("index.jsp");
+
+            } else {
+                if (user.equals("admin")) {
+                    response.sendRedirect("login.jsp");
+                    out.write("adm" + user);
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
+            }
+
         }
     }
 

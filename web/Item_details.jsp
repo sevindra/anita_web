@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.Advertisement"%>
+<%@page import="POJOS.WatchList"%>
 <%@page import="POJOS.Size"%>
 <%@page import="POJOS.Color"%>
 <%@page import="POJOS.State"%>
@@ -154,6 +156,17 @@
                 ////    <%}%>
 
             }
+            function check_to_watch() {
+
+            <%                        if (user == null) {%>////
+                alert("Please Login First !");
+            <%} else {
+            %>
+                add_to_watch();
+            <%
+                }%>
+
+            }
 
 
 
@@ -204,7 +217,38 @@
                 document.getElementById('day').innerHTML = monthNames[d.getMonth()] + " " + (d.getDate() + 2) + " and Oct: 18";
             }
 
+            function add_to_watch() {
+                var itemid = <%=i%>
 
+                var xhttp = new XMLHttpRequest();
+                //alert(itemid);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        //alert(xhttp.responseText);
+                        document.getElementById('watched').innerHTML=xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid+"&watch=ok", true);
+                xhttp.send();
+            }
+            function un_watch() {
+                var itemid = <%=i%>
+
+                var xhttp = new XMLHttpRequest();
+                //alert(itemid);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        //alert(xhttp.responseText);
+                        document.getElementById('watched').innerHTML=xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid+"&unwatch=ok&userid="+<%=user.getIduser()%>, true);
+                xhttp.send();
+            }
             //alert("The current month is " + monthNames[d.getMonth()]);
         </script>
 
@@ -246,9 +290,9 @@
                         <div class="">
                             <div class="col-md-12" style="margin-top: 20px">
                                 <div class='row' style="text-align: center">
-                                    <%  Criteria c = ses.createCriteria(ItemImage.class);
-                                        c.add(Restrictions.eq("item", item));
-                                        List<ItemImage> list = c.list();
+                                    <%  Criteria c0 = ses.createCriteria(ItemImage.class);
+                                        c0.add(Restrictions.eq("item", item));
+                                        List<ItemImage> list = c0.list();
                                         int coun = 0;
                                         for (ItemImage itemimagee : list) {
 
@@ -319,7 +363,7 @@
                                                     List<Size> zlist = objsave.getses().createCriteria(Size.class).add(Restrictions.eq("item", item)).list();
                                                     for (Size zl : zlist) {
                                                 %>
-                                                <option value=""><%=zl.getSize()%></option>
+                                                <option value="<%=zl.getIdsize()%>"><%=zl.getSize()%></option>
                                                 <%}%>
                                             </select>
 
@@ -444,6 +488,7 @@
                                         </div> 
                                         <div class="col-md-4">
                                             <h5>1 Watching</h5>
+
                                         </div>
                                         <div class="col-md-4">
                                             <button class="btn btn-success form-control" onclick="sizecolor()">Add To Cart</button>
@@ -456,8 +501,17 @@
                                         <div class="col-md-4">
 
                                         </div>
-                                        <div class="col-md-5">
-                                            <a href="#"><h6><span class="glyphicon glyphicon-eye-open"></span>Add to watch list</h6></a>
+                                        <div class="col-md-5" id="watched">
+                                            <%
+
+                                                WatchList watchitem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", user))).uniqueResult();
+                                                if (watchitem == null) {
+
+                                            %>
+                                            <a href="#" onclick="check_to_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Add to watch list </h6></a>
+                                                        <%} else {%>
+                                            <a href="#" onclick="un_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Watched<span class="glyphicon glyphicon-ok" style="color: #00cc33; margin-left: 10px"></span></h6></a>
+                                                        <%}%>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -529,18 +583,24 @@
                                     <!-- Start WOWSlider.com BODY section -->
                                     <div id="wowslider-container1">
                                         <div class="ws_images"><ul>
-                                                <li><img src="item_view_slider/data1/images/advertisement_image1_010062.jpg" alt="" title="" id="wows1_0"/></li>
-                                                <li><img src="item_view_slider/data1/images/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt="" title="" id="wows1_1"/></li>
+                                                <%
+                                                List<Advertisement> liad=objsave.getses().createCriteria(Advertisement.class).add(Restrictions.eq("page", "itemview")).list();
+                                                for(Advertisement itemad:liad){
+                                                %>
+                                                <li><img src="<%=itemad.getUrl()%>" alt="" title="" id="wows1_0"/></li>
+                                                <%}%>
+<!--                                                <li><img src="item_view_slider/data1/images/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt="" title="" id="wows1_1"/></li>
                                                 <li><a href=""><img src="item_view_slider/data1/images/summerclearanceclothingsale.jpg" alt="wow slider" title="" id="wows1_2"/></a></li>
-                                                <li><img src="item_view_slider/data1/images/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt="" title="" id="wows1_3"/></li>
+                                                <li><img src="item_view_slider/data1/images/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt="" title="" id="wows1_3"/></li>-->
                                             </ul></div>
-                                        <div class="ws_bullets"><div>
+                                        <div class="ws_bullets">
+<!--                                            <div>
                                                 <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/advertisement_image1_010062.jpg" alt=""/>1</span></a>
                                                 <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt=""/>2</span></a>
                                                 <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/summerclearanceclothingsale.jpg" alt=""/>3</span></a>
                                                 <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt=""/>4</span></a>
                                                 <div class="ws_shadow"></div>
-                                            </div>	
+                                            </div>	-->
                                             <script type="text/javascript" src="engine1/wowslider.js"></script>
                                             <script type="text/javascript" src="engine1/script.js"></script>
                                             <!-- End WOWSlider.com BODY section -->

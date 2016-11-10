@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.User"%>
+<%@page import="Src.privilege_class"%>
 <%@page import="org.hibernate.SQLQuery"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.criterion.Order"%>
@@ -22,7 +24,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Messages</strong></h3>
-
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="container-fluid">
             <div class="container">
 
@@ -48,47 +53,49 @@
                                     <div class="list-group">
                                         <%
 
-                                            String sql = "SELECT * FROM message GROUP BY mto";
+                                            String sql = "SELECT * FROM message ORDER BY idmessage DESC";
                                             SQLQuery query = objsave.getses().createSQLQuery(sql);
                                             query.addEntity(Message.class);
                                             List<Message> list = query.list();
                                             //List<Message> list = objsave.getses().createCriteria(Message.class).add(Restrictions.or(Restrictions.eq("userByMto", user),Restrictions.eq("userByMfrom", user))).list();
                                             for (Message me : list) {
                                         %>
-                                        <a href="#" class="list-group-item <%if(me.getNewmes()==1){out.write("read");} %>" onclick="admin_user_message()">
+                                        <a href="#" class="list-group-item <%if (me.getNewmes() == 1) {
+                                                out.write("read");
+                                            }%>" onclick="admin_user_message('<%=me.getUserByMto().getIduser()%>')">
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox">
                                                 </label>
                                             </div>
                                             <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
-                                                                                                      display: inline-block;"><%=me.getUserByMfrom().getFname()%></span> <span class=""></span>
+                                                                                                      display: inline-block;"><%=me.getUserByMto().getFname()%></span> <span class=""></span>
                                             <span class="text-muted" style="font-size: 11px;"></span> <span
                                                 class="badge">12:10 AM</span> <span class="pull-right"></span>
                                         </a>
                                         <%}%>
-<!--                                        <a href="#" class="list-group-item read">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                            <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
-                                                                                                      display: inline-block;">Bhaumik Patel</span> <span class="">This is big title</span>
-                                            <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span
-                                                class="badge">12:10 AM</span> <span class="pull-right"></span>
-                                        </a>
-                                        <a href="#" class="list-group-item read">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                </label>
-                                            </div>
-                                            <span class="glyphicon glyphicon-star"></span><span class="name" style="min-width: 120px;
-                                                                                                display: inline-block;">Bhaumik Patel</span> <span class="">This is big title</span>
-                                            <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span
-                                                class="badge">12:10 AM</span> <span class="pull-right"></span>
-                                        </a>-->
+                                        <!--                                        <a href="#" class="list-group-item read">
+                                                                                    <div class="checkbox">
+                                                                                        <label>
+                                                                                            <input type="checkbox">
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
+                                                                                                                                              display: inline-block;">Bhaumik Patel</span> <span class="">This is big title</span>
+                                                                                    <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span
+                                                                                        class="badge">12:10 AM</span> <span class="pull-right"></span>
+                                                                                </a>
+                                                                                <a href="#" class="list-group-item read">
+                                                                                    <div class="checkbox">
+                                                                                        <label>
+                                                                                            <input type="checkbox">
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <span class="glyphicon glyphicon-star"></span><span class="name" style="min-width: 120px;
+                                                                                                                                        display: inline-block;">Bhaumik Patel</span> <span class="">This is big title</span>
+                                                                                    <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span
+                                                                                        class="badge">12:10 AM</span> <span class="pull-right"></span>
+                                                                                </a>-->
                                     </div>
                                 </div>
                                 <div class="tab-pane fade in" id="profile">
@@ -109,5 +116,13 @@
                 </div>
             </div>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

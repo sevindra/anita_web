@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="Src.privilege_class"%>
+<%@page import="POJOS.User"%>
 <%@page import="POJOS.Subcat"%>
 <%@page import="POJOS.Cat"%>
 <%@page import="Src.objsave"%>
@@ -16,9 +18,9 @@
         <title>JSP Page</title>
         <script>
             function save() {
-                var savebtn= document.getElementById('subsave').innerHTML;
-                var subcatname= document.getElementById('subcatname').value;
-                var catid= document.getElementById('catid').value;
+                var savebtn = document.getElementById('subsave').innerHTML;
+                var subcatname = document.getElementById('subcatname').value;
+                var catid = document.getElementById('catid').value;
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
@@ -31,7 +33,7 @@
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "../category?subsave="+savebtn+"&subcatname="+subcatname+"&catid="+catid, true);
+                xhttp.open("POST", "../category?subsave=" + savebtn + "&subcatname=" + subcatname + "&catid=" + catid, true);
                 xhttp.send();
             }
 
@@ -39,6 +41,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Sub Category</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -49,8 +55,8 @@
                         <div class="col-md-8">
                             <select class="form-control" id="catid">
                                 <%
-                                List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
-                                for(Cat cat:list){
+                                    List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
+                                    for (Cat cat : list) {
                                 %>
                                 <option value="<%=cat.getIdcat()%>"><%=cat.getCatname()%></option>
                                 <%}%>
@@ -95,8 +101,8 @@
                     </thead>
                     <tbody>
                         <%
-                        List<Subcat> tlist=objsave.getses().createCriteria(Subcat.class).list();
-                        for(Subcat subcat:tlist){
+                            List<Subcat> tlist = objsave.getses().createCriteria(Subcat.class).list();
+                            for (Subcat subcat : tlist) {
                         %>
                         <tr>
                             <td><%=subcat.getSubname()%></td>
@@ -108,5 +114,13 @@
                 </table>
             </div>
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>
