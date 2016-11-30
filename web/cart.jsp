@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.Size"%>
+<%@page import="POJOS.Color"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="POJOS.ItemImage"%>
@@ -24,17 +26,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="inc.jsp" %>
-        <title>JSP Page</title>
+        <title>Cart</title>
         <script>
-            <%
 
-                HttpSession url = request.getSession();
-                //current_url currenturl = (current_url) url.getAttribute("currenturl");
-                String urlrr = url.getAttribute("currenturl").toString();
-                System.out.println("curret url:-" + urlrr);
-
-
-            %>
 
             $(function () {
                 $('#login-form-link').click(function (e) {
@@ -101,6 +95,7 @@
         </div>
         <br/>
         <div class="col-md-9">
+            <h1><strong>Your Shopping Cart</strong></h1>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <%
@@ -110,7 +105,7 @@
                             double total1 = 0;
                             for (String key : sessionCart.keySet()) {
                                 Item p = (Item) objsave.getses().load(Item.class, Integer.parseInt(key));
-                        //total1 += (p.getPrice * (Integer.parseInt(sessionCart.get(key))));
+                                //total1 += (p.getPrice * (Integer.parseInt(sessionCart.get(key))));
                     %>
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -122,20 +117,26 @@
                                         //c1.setFirstResult(1);
                                         c1.setMaxResults(1);
                                         List<ItemImage> itemimage = c1.list();
+                                        String val = sessionCart.get(key).toString();
+                                        String val2[] = val.split("-");
                                         for (ItemImage i : itemimage) {
                                     %>
-                                    <a href="<%out.write("Item_details.jsp?itemid="+p.getIditem());%>"><img src="<%=i.getUrl()%>"/></a>
-                                    <%}%>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + p.getIditem());%>"><img src="<%=i.getUrl()%>"/></a>
+                                        <%}%>
                                 </div>
-                               
+
                                 <div class="col-md-6">
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <h4><a href="<%out.write("Item_details.jsp?itemid="+p.getIditem());%>"><%=p.getItemname()%></a></h4>
+                                            <h4><a href="<%out.write("Item_details.jsp?itemid=" + p.getIditem());%>"><%=p.getItemname()%></a></h4>
                                         </div>
                                         <div class="row">
-                                            <h4><strong>Color : </strong></h4>
-                                            <h4><strong>Size : </strong></h4>
+                                            <%
+                                                Color co = (Color) objsave.getses().load(Color.class, Integer.parseInt(val2[3]));
+                                                Size si = (Size) objsave.getses().load(Size.class, Integer.parseInt(val2[1]));
+                                            %>
+                                            <h4><strong>Color : <%=co.getColor()%></strong></h4>
+                                            <h4><strong>Size : <%=si.getSize()%></strong></h4>
                                         </div>
 
 
@@ -148,13 +149,13 @@
                                             <h5>Quantity:</h5> 
                                         </div>
                                         <div class="col-md-7">
-                                            <input type="text" class="text-center form-control" value="<%=sessionCart.get(key) %>"/>
+                                            <input type="text" class="text-center form-control" value="<%=val2[0]%>"/>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <h4 class="pull-right"><strong>LKR.1250.00</strong></h4>
+                                    <h4 class="pull-right"><strong><%=val2[2]%></strong></h4>
                                     <br/>
                                     <h6 class="pull-right">Shipping Available</h6>
                                     <div class="row">
@@ -165,7 +166,13 @@
                         </div>
                     </div>
                     <%}
-                        }%>
+                    } else {%>
+                    <div class="col-md-10 col-md-offset-1">
+
+                        <h2><strong>Your shopping cart is empty</strong></h2>
+
+                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>

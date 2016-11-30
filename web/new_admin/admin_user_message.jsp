@@ -21,9 +21,10 @@
                 String userid = request.getParameter("userid");
             %>
 
-            function adimin_msge_to_cus() {
+            function adimin_msge_to_cus(uid) {
                 var message_btn = document.getElementById('message_btn').innerHTML;
                 var message = document.getElementById('admin_msg').value;
+                var uid = uid;
 
 
                 var xhttp = new XMLHttpRequest();
@@ -32,19 +33,19 @@
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
 
                         alert(xhttp.responseText);
-                        //document.getElementById('sup_table').innerHTML=xhttp.responseText;
+                        document.getElementById('admin_msg').innerHTML="";
                     }
                 };
-                xhttp.open("POST", "../user_message?user_message=" + message + "&message_btn=" + message_btn, true);
+                xhttp.open("POST", "../user_message?user_message=" + message + "&message_btn=" + message_btn + "&uid=" + uid, true);
                 xhttp.send();
             }
         </script>
     </head>
     <body>
-        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
-                privilege_class p = new privilege_class();
-                User su = (User) request.getSession().getAttribute("user_obj");
-                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
+            //   privilege_class p = new privilege_class();
+            //    User su = (User) request.getSession().getAttribute("user_obj");
+            //    if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <%
             HttpSession hsheader = request.getSession();
             POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
@@ -67,10 +68,10 @@
                     <script>
                         alert(<%=mes.getMessage()%>);
                     </script>
-                    <img src="<%if (mes.getUtype().getIdutype() == 4) {
-                            out.write("../" + u.getImg());
-                        } else {
+                    <img src="<%if (mes.getUtype().getIdutype() != 4) {
                             out.write("../img/anita.ico");
+                        } else {
+                            out.write("../" + u.getImg());
                         }%>" style="width: 50px"/>
                 </div>
                 <div class="col-md-6">
@@ -85,17 +86,17 @@
                 </div>
                 <br/>
                 <div class="row text-right">
-                    <button class="btn btn-primary" style="width: 100px" id="message_btn" onclick="adimin_msge_to_cus()">Send</button>
+                    <button class="btn btn-primary" style="width: 100px" id="message_btn" onclick="adimin_msge_to_cus('<%=u.getIduser()%>')">Send</button>
                 </div>
             </div>
         </div>
-        <%} else {
+        <%//} else {
         %>
-        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>
+        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+                </div>-->
         <%
-                }
-            }%>
+         //       }
+            //    }%>
     </body>
 </html>

@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -24,9 +24,12 @@ public class User  implements java.io.Serializable {
      private Set<Cart> carts = new HashSet<Cart>(0);
      private Set<Addres> addreses = new HashSet<Addres>(0);
      private Set<Login> logins = new HashSet<Login>(0);
+     private Set<OnlineUsers> onlineUserses = new HashSet<OnlineUsers>(0);
+     private Set<ItemPerPage> itemPerPages = new HashSet<ItemPerPage>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
      private Set<Message> messagesForMfrom = new HashSet<Message>(0);
      private Set<Message> messagesForMto = new HashSet<Message>(0);
+     private Set<Question> questions = new HashSet<Question>(0);
 
     public User() {
     }
@@ -35,7 +38,7 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<WatchList> watchLists, Set<Message> messagesForMfrom, Set<Message> messagesForMto) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<OnlineUsers> onlineUserses, Set<ItemPerPage> itemPerPages, Set<WatchList> watchLists, Set<Message> messagesForMfrom, Set<Message> messagesForMto, Set<Question> questions) {
        this.utype = utype;
        this.nic = nic;
        this.fname = fname;
@@ -48,9 +51,12 @@ public class User  implements java.io.Serializable {
        this.carts = carts;
        this.addreses = addreses;
        this.logins = logins;
+       this.onlineUserses = onlineUserses;
+       this.itemPerPages = itemPerPages;
        this.watchLists = watchLists;
        this.messagesForMfrom = messagesForMfrom;
        this.messagesForMto = messagesForMto;
+       this.questions = questions;
     }
    
     public Integer getIduser() {
@@ -144,6 +150,20 @@ public class User  implements java.io.Serializable {
     public void setLogins(Set<Login> logins) {
         this.logins = logins;
     }
+    public Set<OnlineUsers> getOnlineUserses() {
+        return this.onlineUserses;
+    }
+    
+    public void setOnlineUserses(Set<OnlineUsers> onlineUserses) {
+        this.onlineUserses = onlineUserses;
+    }
+    public Set<ItemPerPage> getItemPerPages() {
+        return this.itemPerPages;
+    }
+    
+    public void setItemPerPages(Set<ItemPerPage> itemPerPages) {
+        this.itemPerPages = itemPerPages;
+    }
     public Set<WatchList> getWatchLists() {
         return this.watchLists;
     }
@@ -164,6 +184,13 @@ public class User  implements java.io.Serializable {
     
     public void setMessagesForMto(Set<Message> messagesForMto) {
         this.messagesForMto = messagesForMto;
+    }
+    public Set<Question> getQuestions() {
+        return this.questions;
+    }
+    
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 
 

@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.Criteria"%>
 <%@page import="org.hibernate.Session"%>
@@ -161,7 +163,7 @@
                 <%
                                     Criteria c = objsave.getses().createCriteria(Message.class);
                                     c.add(Restrictions.eq("notification", 1));
-                                    c.addOrder(Order.desc("datetime"));
+                                   // c.addOrder(Order.desc("date"));
                                     List<Message> mli=c.list();
                                     c.setProjection(Projections.sum("notification"));
                                     int me = Integer.parseInt(c.uniqueResult().toString());
@@ -173,8 +175,15 @@
                     <ul class="dropdown-menu">
                         <%
                         for(Message m:mli){
+                            String mes=m.getMessage();
+                            mes=mes.substring(0, 15);
+                            Date d1 = new Date();
+                            Date d2 = m.getDate();
+                            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                            String d3=sd.format(d1);
+                            String d4=sd.format(d2);
                         %>
-                        <li><a href="message.jsp"><span class="label label-warning">4:00 AM</span> <%=m.getMessage()%></a></li>
+                        <li><a href="message.jsp"><span class="label label-warning"><%if(d3.equals(d4)){out.write(m.getTime().toString());}else{out.write(m.getDate().toString());}%></span> <%=mes+"..."%></a></li>
                         <%}%>
 <!--                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
                         <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email-->

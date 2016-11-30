@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 
@@ -14,7 +14,6 @@ public class Addres  implements java.io.Serializable {
      private User user;
      private String address;
      private String city;
-     private String state_1;
      private String zip;
      private Integer primaryAddress;
      private Integer status;
@@ -27,12 +26,11 @@ public class Addres  implements java.io.Serializable {
         this.state = state;
         this.user = user;
     }
-    public Addres(State state, User user, String address, String city, String state_1, String zip, Integer primaryAddress, Integer status) {
+    public Addres(State state, User user, String address, String city, String zip, Integer primaryAddress, Integer status) {
        this.state = state;
        this.user = user;
        this.address = address;
        this.city = city;
-       this.state_1 = state_1;
        this.zip = zip;
        this.primaryAddress = primaryAddress;
        this.status = status;
@@ -72,13 +70,6 @@ public class Addres  implements java.io.Serializable {
     
     public void setCity(String city) {
         this.city = city;
-    }
-    public String getState_1() {
-        return this.state_1;
-    }
-    
-    public void setState_1(String state_1) {
-        this.state_1 = state_1;
     }
     public String getZip() {
         return this.zip;

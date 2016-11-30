@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,7 +17,8 @@ public class Message  implements java.io.Serializable {
      private String message;
      private Integer newmes;
      private Integer notification;
-     private Date datetime;
+     private Date date;
+     private Date time;
 
     public Message() {
     }
@@ -28,14 +29,15 @@ public class Message  implements java.io.Serializable {
         this.userByMto = userByMto;
         this.utype = utype;
     }
-    public Message(User userByMfrom, User userByMto, Utype utype, String message, Integer newmes, Integer notification, Date datetime) {
+    public Message(User userByMfrom, User userByMto, Utype utype, String message, Integer newmes, Integer notification, Date date, Date time) {
        this.userByMfrom = userByMfrom;
        this.userByMto = userByMto;
        this.utype = utype;
        this.message = message;
        this.newmes = newmes;
        this.notification = notification;
-       this.datetime = datetime;
+       this.date = date;
+       this.time = time;
     }
    
     public Integer getIdmessage() {
@@ -87,12 +89,19 @@ public class Message  implements java.io.Serializable {
     public void setNotification(Integer notification) {
         this.notification = notification;
     }
-    public Date getDatetime() {
-        return this.datetime;
+    public Date getDate() {
+        return this.date;
     }
     
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Date getTime() {
+        return this.time;
+    }
+    
+    public void setTime(Date time) {
+        this.time = time;
     }
 
 

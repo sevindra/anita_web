@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2016 12:42:02 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.ItemPerPage" table="item_per_page" catalog="anitaweb" optimistic-lock="version">
+        <id name="iditemPerPage" type="java.lang.Integer">
+            <column name="iditem_per_page" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="POJOS.User" fetch="select">
+            <column name="user_iduser" not-null="true" />
+        </many-to-one>
+        <property name="item" type="java.lang.Integer">
+            <column name="item" />
+        </property>
+    </class>
+</hibernate-mapping>

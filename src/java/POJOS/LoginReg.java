@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,8 +12,10 @@ public class LoginReg  implements java.io.Serializable {
 
      private Integer idloginReg;
      private Login login;
-     private Date indateTime;
-     private Date outdateTime;
+     private Date indate;
+     private Date intime;
+     private Date outdate;
+     private Date outtime;
 
     public LoginReg() {
     }
@@ -22,10 +24,12 @@ public class LoginReg  implements java.io.Serializable {
     public LoginReg(Login login) {
         this.login = login;
     }
-    public LoginReg(Login login, Date indateTime, Date outdateTime) {
+    public LoginReg(Login login, Date indate, Date intime, Date outdate, Date outtime) {
        this.login = login;
-       this.indateTime = indateTime;
-       this.outdateTime = outdateTime;
+       this.indate = indate;
+       this.intime = intime;
+       this.outdate = outdate;
+       this.outtime = outtime;
     }
    
     public Integer getIdloginReg() {
@@ -42,19 +46,33 @@ public class LoginReg  implements java.io.Serializable {
     public void setLogin(Login login) {
         this.login = login;
     }
-    public Date getIndateTime() {
-        return this.indateTime;
+    public Date getIndate() {
+        return this.indate;
     }
     
-    public void setIndateTime(Date indateTime) {
-        this.indateTime = indateTime;
+    public void setIndate(Date indate) {
+        this.indate = indate;
     }
-    public Date getOutdateTime() {
-        return this.outdateTime;
+    public Date getIntime() {
+        return this.intime;
     }
     
-    public void setOutdateTime(Date outdateTime) {
-        this.outdateTime = outdateTime;
+    public void setIntime(Date intime) {
+        this.intime = intime;
+    }
+    public Date getOutdate() {
+        return this.outdate;
+    }
+    
+    public void setOutdate(Date outdate) {
+        this.outdate = outdate;
+    }
+    public Date getOuttime() {
+        return this.outtime;
+    }
+    
+    public void setOuttime(Date outtime) {
+        this.outtime = outtime;
     }
 
 

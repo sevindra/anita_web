@@ -14,8 +14,7 @@ import org.hibernate.Transaction;
  */
 public class objsave {
 
-  public static Session ses;
-
+    public static Session ses=null;
     public static Session getses() throws Exception {
 
         if (ses == null) {
@@ -32,7 +31,7 @@ public class objsave {
             Transaction tr = ses.beginTransaction();
             ses.save(obj);
             tr.commit();
-
+            //ses.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,11 +44,13 @@ public class objsave {
             Transaction tr = ses.beginTransaction();
             ses.update(obj);
             tr.commit();
-
+            //ses.close();
         } catch (Exception e) {
+            //ses.close();
             e.printStackTrace();
         }
     }
+
     public static void delete(Object obj) throws Exception {
         //ses = getses();
         getses();
@@ -57,7 +58,7 @@ public class objsave {
             Transaction tr = ses.beginTransaction();
             ses.delete(obj);
             tr.commit();
-
+            //ses.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

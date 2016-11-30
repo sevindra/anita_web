@@ -32,6 +32,9 @@
             20
         </session-timeout>
     </session-config>
+    <listener>
+        <listener-class>Src.online_u</listener-class>
+    </listener>
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>

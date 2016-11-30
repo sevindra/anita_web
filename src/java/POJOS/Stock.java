@@ -1,7 +1,8 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +21,8 @@ public class Stock  implements java.io.Serializable {
      private Integer qty;
      private Integer avalQty;
      private Integer status;
+     private Date date;
+     private Date time;
      private Set<CartItem> cartItems = new HashSet<CartItem>(0);
 
     public Stock() {
@@ -32,7 +35,7 @@ public class Stock  implements java.io.Serializable {
         this.item = item;
         this.size = size;
     }
-    public Stock(Color color, Grn grn, Item item, Size size, Double price, Integer qty, Integer avalQty, Integer status, Set<CartItem> cartItems) {
+    public Stock(Color color, Grn grn, Item item, Size size, Double price, Integer qty, Integer avalQty, Integer status, Date date, Date time, Set<CartItem> cartItems) {
        this.color = color;
        this.grn = grn;
        this.item = item;
@@ -41,6 +44,8 @@ public class Stock  implements java.io.Serializable {
        this.qty = qty;
        this.avalQty = avalQty;
        this.status = status;
+       this.date = date;
+       this.time = time;
        this.cartItems = cartItems;
     }
    
@@ -106,6 +111,20 @@ public class Stock  implements java.io.Serializable {
     
     public void setStatus(Integer status) {
         this.status = status;
+    }
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Date getTime() {
+        return this.time;
+    }
+    
+    public void setTime(Date time) {
+        this.time = time;
     }
     public Set<CartItem> getCartItems() {
         return this.cartItems;

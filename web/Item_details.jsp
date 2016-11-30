@@ -75,6 +75,11 @@
 
                     $('.size').hide();
                 }
+                if (size == "-Select-") {
+                    if (color == "-Select-") {
+                        add_to_checkout();
+                    }
+                }
             }
             $(function () {
 
@@ -167,6 +172,17 @@
                 }%>
 
             }
+            function check_to_watch2() {
+
+            <%                        if (user == null) {%>////
+                alert("Please Login First !");
+            <%} else {
+            %>
+                
+            <%
+                }%>
+
+            }
 
 
 
@@ -227,10 +243,26 @@
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
 
                         //alert(xhttp.responseText);
-                        document.getElementById('watched').innerHTML=xhttp.responseText;
+                        document.getElementById('watched').innerHTML = xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid+"&watch=ok", true);
+                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid + "&watch=ok", true);
+                xhttp.send();
+            }
+            function add_to_checkout() {
+                var itemid = <%=i%>
+
+                var xhttp = new XMLHttpRequest();
+                //alert(itemid);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        alert(xhttp.responseText);
+                        //document.getElementById('watched').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "checkout?itemid=" + itemid + "&watch=ok", true);
                 xhttp.send();
             }
             function un_watch() {
@@ -243,10 +275,35 @@
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
 
                         //alert(xhttp.responseText);
-                        document.getElementById('watched').innerHTML=xhttp.responseText;
+                        document.getElementById('watched').innerHTML = xhttp.responseText;
                     }
                 };
-                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid+"&unwatch=ok&userid="+<%=user.getIduser()%>, true);
+                <%
+                int uid;
+                if(user==null){
+                uid=0;
+                }else{
+                uid=user.getIduser();
+                }
+                %>
+                xhttp.open("POST", "add_to_watch_list?itemid=" + itemid + "&unwatch=ok&userid=" +<%=uid%>, true);
+                xhttp.send();
+            }
+            function qust() {
+                var itemid = document.getElementById('itemid').value;
+                var mes = document.getElementById('mes').value;
+                var xhttp = new XMLHttpRequest();
+//                alert(itemid);
+//                alert(mes);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        alert(xhttp.responseText);
+                        //document.getElementById('watched').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "item_qst?itemid=" + itemid + "&mes=" + mes, true);
                 xhttp.send();
             }
             //alert("The current month is " + monthNames[d.getMonth()]);
@@ -333,7 +390,7 @@
                                                     List<Color> clist = objsave.getses().createCriteria(Color.class).add(Restrictions.eq("item", item)).list();
                                                     for (Color cl : clist) {
                                                 %>
-                                                <option value="black"><%=cl.getColor()%></option>
+                                                <option value="<%=cl.getIdcolor()%>"><%=cl.getColor()%></option>
                                                 <%}%>
                                             </select>
                                         </div>
@@ -446,6 +503,46 @@
 
                                     </div>
                                 </div>
+                                <div id="myModal2" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <%
+                                                            Criteria c12 = ses.createCriteria(ItemImage.class);
+                                                            c12.add(Restrictions.eq("item", item));
+                                                            //c1.setFirstResult(1);
+                                                            c12.setMaxResults(1);
+                                                            List<ItemImage> itemimage = c12.list();
+                                                            for (ItemImage i2 : itemimage) {
+                                                        %><img src="<%out.write(i2.getUrl());%>" width="200" height="150"/><%
+                                                            }
+                                                        %>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <h4><%=item.getItemname()%></h4>
+                                                        <div style="border: solid 1px #cccccc"></div>
+                                                        <br/>
+                                                        <input type="hidden" id="itemid" value="<%=item.getIditem()%>"/>
+                                                        <textarea class="form-control" placeholder="Message" id="mes"></textarea>
+                                                        <br/>
+                                                        <button class="btn btn-primary pull-right" onclick="qust()">Send</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 text-right">
@@ -477,6 +574,7 @@
                                         </div> 
                                         <div class="col-md-4">
                                             <h4><strong>LKR.1250.00</strong></h4>
+                                            <input type="hidden" name="price" value="LKR.1250.00"/>
                                         </div>
                                         <div class="col-md-4">
                                             <button class="btn btn-primary form-control" onclick="sizecolor()">Buy It Now</button>
@@ -491,7 +589,7 @@
 
                                         </div>
                                         <div class="col-md-4">
-                                            <button class="btn btn-success form-control" onclick="sizecolor()">Add To Cart</button>
+                                            <button class="btn btn-success form-control" onclick="sizecolor()" type="submit">Add To Cart</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -509,8 +607,11 @@
 
                                             %>
                                             <a href="#" onclick="check_to_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Add to watch list </h6></a>
-                                                        <%} else {%>
+                                            <a href="#" data-toggle="modal" data-target="<%if(user!=null){%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
+
+                                            <%} else {%>
                                             <a href="#" onclick="un_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Watched<span class="glyphicon glyphicon-ok" style="color: #00cc33; margin-left: 10px"></span></h6></a>
+                                            <a href="#" data-toggle="modal" data-target="<%if(user!=null){%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
                                                         <%}%>
                                         </div>
                                     </div>
@@ -584,23 +685,23 @@
                                     <div id="wowslider-container1">
                                         <div class="ws_images"><ul>
                                                 <%
-                                                List<Advertisement> liad=objsave.getses().createCriteria(Advertisement.class).add(Restrictions.eq("page", "itemview")).list();
-                                                for(Advertisement itemad:liad){
+                                                    List<Advertisement> liad = objsave.getses().createCriteria(Advertisement.class).add(Restrictions.eq("page", "itemview")).list();
+                                                    for (Advertisement itemad : liad) {
                                                 %>
                                                 <li><img src="<%=itemad.getUrl()%>" alt="" title="" id="wows1_0"/></li>
-                                                <%}%>
-<!--                                                <li><img src="item_view_slider/data1/images/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt="" title="" id="wows1_1"/></li>
-                                                <li><a href=""><img src="item_view_slider/data1/images/summerclearanceclothingsale.jpg" alt="wow slider" title="" id="wows1_2"/></a></li>
-                                                <li><img src="item_view_slider/data1/images/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt="" title="" id="wows1_3"/></li>-->
+                                                    <%}%>
+                                                <!--                                                <li><img src="item_view_slider/data1/images/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt="" title="" id="wows1_1"/></li>
+                                                                                                <li><a href=""><img src="item_view_slider/data1/images/summerclearanceclothingsale.jpg" alt="wow slider" title="" id="wows1_2"/></a></li>
+                                                                                                <li><img src="item_view_slider/data1/images/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt="" title="" id="wows1_3"/></li>-->
                                             </ul></div>
                                         <div class="ws_bullets">
-<!--                                            <div>
-                                                <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/advertisement_image1_010062.jpg" alt=""/>1</span></a>
-                                                <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt=""/>2</span></a>
-                                                <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/summerclearanceclothingsale.jpg" alt=""/>3</span></a>
-                                                <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt=""/>4</span></a>
-                                                <div class="ws_shadow"></div>
-                                            </div>	-->
+                                            <!--                                            <div>
+                                                                                            <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/advertisement_image1_010062.jpg" alt=""/>1</span></a>
+                                                                                            <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/d262648a8026f7b2c8a70a32b1c54a56.jpg" alt=""/>2</span></a>
+                                                                                            <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/summerclearanceclothingsale.jpg" alt=""/>3</span></a>
+                                                                                            <a href="#" title=""><span><img src="item_view_slider/data1/tooltips/tumblr_ndbebxkbni1qivqslo1_1280.jpg" alt=""/>4</span></a>
+                                                                                            <div class="ws_shadow"></div>
+                                                                                        </div>	-->
                                             <script type="text/javascript" src="engine1/wowslider.js"></script>
                                             <script type="text/javascript" src="engine1/script.js"></script>
                                             <!-- End WOWSlider.com BODY section -->
@@ -610,12 +711,13 @@
                             </div>
                         </div>
                         <input type="hidden" name="pid" value="<%=item.getIditem()%>"/>
-                        </form>
                     </div>
+                </div>
+            </form>
+        </div>
+        <div class="container-fluid">
 
-                    <div class="container-fluid">
-
-                    </div>
-                    <%@include file="site/footer.jsp" %>
-                    </body>
-                    </html>
+        </div>
+        <%@include file="site/footer.jsp" %>
+    </body>
+</html>

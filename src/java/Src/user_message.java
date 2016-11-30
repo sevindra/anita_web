@@ -9,6 +9,7 @@ import POJOS.Message;
 import POJOS.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,18 +45,27 @@ public class user_message extends HttpServlet {
             String load_mes = request.getParameter("load_mes");
             String msgid = request.getParameter("msgid");
             String read = request.getParameter("read");
+            String uid = request.getParameter("uid");
             //out.write(message+"-"+message_btn);
             if (message_btn != null) {
                 HttpSession hs = request.getSession();
-                User user = (User) hs.getAttribute("user_obj");
+                User user = null;
+                if (uid == null) {
+                    User u = (User) hs.getAttribute("user_obj");
+                    user = (User) objsave.getses().load(User.class, u.getIduser());
+                } else {
+                    user = (User) objsave.getses().load(User.class, Integer.parseInt(uid));
+                }
                 User user1 = (User) objsave.getses().load(User.class, 1);
                 Message mes = new Message();
-                mes.setUtype(user.getUtype());
-                mes.setUserByMfrom(user1);
-                mes.setUserByMto(user);
+                mes.setUtype(user1.getUtype());
+                mes.setUserByMfrom(user);
+                mes.setUserByMto(user1);
                 mes.setMessage(message);
-                mes.setNewmes(1);
-                mes.setNotification(0);
+                mes.setNewmes(0);
+                mes.setNotification(1);
+                mes.setDate(new Date());
+                mes.setTime(new Date());
                 objsave.save(mes);
                 out.write("message sent");
             }

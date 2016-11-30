@@ -23,10 +23,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Product Activate / Deactivate</strong></h3>
-        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
-                privilege_class p = new privilege_class();
-                User su = (User) request.getSession().getAttribute("user_obj");
-                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
+           //     privilege_class p = new privilege_class();
+          //      User su = (User) request.getSession().getAttribute("user_obj");
+         //       if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-12">
             <table class="table table-hover table-striped table-bordered" id="sup_table">
                 <tr>
@@ -76,13 +76,13 @@
                 <%}%>
             </table>
         </div>
-        <%} else {
+        <%//} else {
         %>
-        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
             <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>
+        </div>-->
         <%
-                }
-            }%>
+         //       }
+        //    }%>
     </body>
 </html>

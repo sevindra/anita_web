@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.User"%>
+<%@page import="POJOS.Addres"%>
 <%@page import="java.util.List"%>
 <%@page import="POJOS.State"%>
 <%@page import="org.hibernate.Criteria"%>
@@ -66,7 +68,7 @@
             <%
                 HttpSession hs = request.getSession();
                 POJOS.User user = (POJOS.User) hs.getAttribute("user_obj");
-                POJOS.Login login=(POJOS.Login)hs.getAttribute("login");
+                POJOS.Login login = (POJOS.Login) hs.getAttribute("login");
 
             %>
 
@@ -178,6 +180,16 @@
                 $("#" + x).remove();
             }
 
+            $(function () {
+                $('#upload-form').ajaxForm({
+                    success: function (msg) {
+                        alert("File has been uploaded successfully");
+                    },
+                    error: function (msg) {
+                        $("#upload-error").text("Couldn't upload file");
+                    }
+                });
+            });
         </script>
     </head>
     <body style="background: #e2f2f2">
@@ -188,8 +200,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8 my-div-center">
-                            
-                            <img class="img-responsive img-circle" src="<%if(user!=null){out.write(user.getImg());}%>"/>
+
+                            <img class="img-responsive img-circle" src="<%if (user != null) {
+                                    out.write(user.getImg());
+                                }%>"/>
                         </div>
                     </div>
                     <div class="row">
@@ -204,13 +218,20 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        
+
                         <div class="row">
-                            <span class="glyphicon glyphicon-map-marker"></span> 44, Vimukthi Mawatha, Pelawatta, Battaramulla.
+                            <%
+                                Session ses = objsave.getses();
+                                Criteria c2 = ses.createCriteria(Addres.class);
+                                c2.add(Restrictions.eq("user", user));
+                                c2.add(Restrictions.eq("primaryAddress", 1));
+                                Addres addr = (Addres) c2.uniqueResult();
+                            %>
+                            <span class="glyphicon glyphicon-map-marker"></span> <%=addr.getAddress() + " " + addr.getCity() + " " + addr.getZip()%>
                         </div>
                         <br/>
                         <div class="row">
-                            <span class="glyphicon glyphicon-pencil"></span> NIC - 920912460v
+                            <span class="glyphicon glyphicon-pencil"></span> <%=user.getNic()%>
                         </div>
                         <br/>
                         <div class="row">
@@ -227,6 +248,7 @@
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
+
                     <h3><strong>User Details</strong></h3>
                     <hr/>
 
@@ -241,29 +263,24 @@
 
                             <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <form  enctype="multipart/form-data" method="post" id="uploadForm" action="user_details_save">
+                                    <form id="upload-form" class="upload-box" action="user_details_save" method="post" enctype="multipart/form-data">
+                                        <span id="upload-error" class="error">${uploadError}</span>
                                         <div class="col-md-12">
-                                            <!--                                        <div class="row">
-                                                                                        <div class="col-md-2 col-md-offset-1">
-                                                                                            <h5><strong>Account Type</strong></h5>
-                                                                                        </div>
-                                                                                        <div class="col-md-4">
-                                                                                            <input type="text" placeholder="Account Type" class="form-control"/>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <br/>-->
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-1">
                                                     <h5><strong>Name</strong></h5>
                                                 </div>
+                                                <%
+                                                User us = (User) request.getSession().getAttribute("user_obj");
+                                                %>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="First Name" class="form-control" name="fname" value="Sevindra"/>
+                                                    <input type="text" placeholder="First Name" class="form-control" name="fname" value="<%=us.getFname() %>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="Middle Name" class="form-control" name="mname"/>
+                                                    <input type="text" placeholder="Middle Name" class="form-control" name="mname" value="<%=us.getMname() %>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="Last Name" class="form-control" name="lname"/>
+                                                    <input type="text" placeholder="Last Name" class="form-control" name="lname" value="<%=us.getLname() %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -272,10 +289,13 @@
                                                     <h5><strong>Address</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" placeholder="Address" class="form-control" name="address"/>
+                                                    <%
+                                                    Addres ad= (Addres)objsave.getses().createCriteria(Addres.class).add(Restrictions.eq("user", us)).uniqueResult();
+                                                    %>
+                                                    <input type="text" placeholder="Address" class="form-control" name="address" value="<%=ad.getAddress() %>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="City" class="form-control" name="city"/>
+                                                    <input type="text" placeholder="City" class="form-control" name="city" value="<%=ad.getCity() %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -286,10 +306,10 @@
                                                 <div class="col-md-6">
                                                     <select class="form-control" name="state">
                                                         <%
-                                                        Session ses= controler.connector.getSessionFactory().openSession();
-                                                        Criteria c = ses.createCriteria(State.class);
-                                                        List <State> li1=c.list();
-                                                        for(State state:li1){
+
+                                                            Criteria c1 = ses.createCriteria(State.class);
+                                                            List<State> li1 = c1.list();
+                                                            for (State state : li1) {
                                                         %>
                                                         <option value="<%=state.getIdstate()%>"><%=state.getState()%></option>
                                                         <%}%>
@@ -302,7 +322,7 @@
                                                     <h5><strong>Postal Code (Zip)</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control" name="pcode"/>
+                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control" name="pcode" value="<%=ad.getZip() %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -311,7 +331,7 @@
                                                     <h5><strong>Primary Mobile</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" placeholder="Mobile" class="form-control" name="mobile"/>
+                                                    <input type="text" placeholder="Mobile" class="form-control" name="mobile" value="<%=us.getMobile() %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -320,7 +340,7 @@
                                                     <h5><strong>NIC</strong></h5>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" placeholder="NIC" class="form-control" name="nic"/>
+                                                    <input type="text" placeholder="NIC" class="form-control" name="nic" value="<%=us.getNic() %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -342,38 +362,16 @@
                                                             <div class="btn btn-default image-preview-input">
                                                                 <span class="glyphicon glyphicon-folder-open"></span>
                                                                 <span class="image-preview-input-title">Browse</span>
-                                                                <input onchange="readurl(this)" class="upload" type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" id="selectFile"/> <!-- rename it -->
+                                                                <input onchange="readurl(this)" class="upload" type="file" accept="image/png, image/jpeg, image/gif" name="fupload" id="selectFile"/> <!-- rename it -->
 
                                                             </div>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--                                        <div class="row">
-                                                                                        <div class="col-md-2 col-md-offset-1">
-                                                                                            <h5><strong>Profile Picture</strong></h5>
-                                                                                        </div>
-                                                                                        <div class="col-md-5">
-                                                                                            <div class="input-group image-preview">
-                                                                                                <input type="text" class="form-control image-preview-filename" disabled="disabled">  don't give a name === doesn't send on POST/GET 
-                                                                                                <span class="input-group-btn">
-                                                                                                     image-preview-clear button 
-                                                                                                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                                                                                        <span class="glyphicon glyphicon-remove"></span> Clear
-                                                                                                    </button>
-                                                                                                     image-preview-input 
-                                                                                                    <div class="btn btn-default image-preview-input">
-                                                                                                        <span class="glyphicon glyphicon-folder-open"></span>
-                                                                                                        <span class="image-preview-input-title">Browse</span>
-                                                                                                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>  rename it 
-                                                                                                    </div>
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>-->
                                             <br/>
                                             <div class="row">
-                                                <button class="btn btn-primary pull-right"><strong>Save Details</strong></button>
+                                                <button class="btn btn-primary pull-right" type="submit"><strong>Save Details</strong></button>
                                             </div>
                                         </div>
                                     </form>

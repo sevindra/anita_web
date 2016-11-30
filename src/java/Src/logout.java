@@ -44,8 +44,8 @@ public class logout extends HttpServlet {
 
             } else {
                 if (user.equals("admin")) {
+                    out.write("user ty " + user);
                     response.sendRedirect("login.jsp");
-                    out.write("adm" + user);
                 } else {
                     response.sendRedirect("index.jsp");
                 }

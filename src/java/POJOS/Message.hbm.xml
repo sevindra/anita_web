@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 29, 2016 12:42:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Message" table="message" catalog="anitaweb" optimistic-lock="version">
         <id name="idmessage" type="java.lang.Integer">
@@ -26,8 +26,11 @@
         <property name="notification" type="java.lang.Integer">
             <column name="notification" />
         </property>
-        <property name="datetime" type="timestamp">
-            <column name="datetime" length="0" />
+        <property name="date" type="date">
+            <column name="date" length="0" />
+        </property>
+        <property name="time" type="time">
+            <column name="time" length="0" />
         </property>
     </class>
 </hibernate-mapping>

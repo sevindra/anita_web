@@ -92,7 +92,8 @@ public class add_to_cart extends HttpServlet {
                     c = new Cart();
                     User u = ((User) s.load(User.class, Integer.parseInt(request.getSession().getAttribute("ID").toString())));
                     c.setUser(u);
-                    c.setDateTime(new Date());
+                    c.setDate(new Date());
+                    c.setTime(new Date());
                     c.setTotal(p.getPrice() * Double.parseDouble(request.getParameter("qty")));
                     s.save(c);
                     chp = new CartItem();
@@ -119,7 +120,7 @@ public class add_to_cart extends HttpServlet {
                     sessionCart = new HashMap<>();
 
                     
-                    sessionCart.put(request.getParameter("pid"), request.getParameter("qty"));
+                    sessionCart.put(request.getParameter("pid"), request.getParameter("qty")+"-"+request.getParameter("size")+"-"+request.getParameter("price")+"-"+request.getParameter("color"));
                     request.getSession().setAttribute("sessionCart", sessionCart);
                 }
 

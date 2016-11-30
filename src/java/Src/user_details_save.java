@@ -6,9 +6,6 @@
 package Src;
 
 import POJOS.Item;
-import POJOS.ItemImage;
-import POJOS.Login;
-import POJOS.Subcat;
 import POJOS.User;
 import java.io.File;
 import java.io.IOException;
@@ -19,16 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -57,8 +48,7 @@ public class user_details_save extends HttpServlet {
 
             FileItemFactory factry = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factry);
-            
-            
+
             String fname = "";
             String mname = "";
             String lname = "";
@@ -67,15 +57,17 @@ public class user_details_save extends HttpServlet {
             String state = "";
             String pcode = "";
             String mobile = "";
+            String mobile2 = "";
             String nic = "";
             String thumb = "";
-
+            String url2 = "";
+            int flag = 0;
+            boolean flag2 = true;
             List itlist = upload.parseRequest(request);
             for (Object object : itlist) {
                 FileItem fileitem = (FileItem) object;
-                Item item = new Item();
                 if (fileitem.isFormField()) {
-                    if (fileitem.getFieldName().equals("catid")) {
+                    if (fileitem.getFieldName().equals("fname")) {
                         fname = fileitem.getString();
                     }
                     if (fileitem.getFieldName().equals("mname")) {
@@ -99,35 +91,27 @@ public class user_details_save extends HttpServlet {
                     if (fileitem.getFieldName().equals("mobile")) {
                         mobile = fileitem.getString();
                     }
+                    if (fileitem.getFieldName().equals("mobile2")) {
+                        mobile2 = fileitem.getString();
+                    }
                     if (fileitem.getFieldName().equals("nic")) {
                         nic = fileitem.getString();
                     }
-                    
-                    
 
                 } else {
                     if (fileitem.getFieldName().equals("fupload")) {
                         if (!fileitem.getName().equals("")) {
                             thumb = Math.random() + fileitem.getName();
-                            String url1="C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
-                            String url2="adminPanel/product_imges/";
-                            File f = new File(url1+url2+ thumb);
+                            String url1 = "C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/";
+                            url2 = "adminPanel/customer_images/";
+                            File f = new File(url1 + url2 + thumb);
                             System.out.println(f.getPath());
-                            Session itemses = objsave.getses();
-                            Criteria c = itemses.createCriteria(Item.class);
-                            c.setProjection(Projections.max("iditem"));
-                            int itemid = (int) c.uniqueResult();
-                            Item newitem = (Item) objsave.getses().load(Item.class, itemid);
-                            ItemImage itemimage = new ItemImage();
-                            itemimage.setItem(newitem);
-                            itemimage.setUrl(url2+thumb);
-                            objsave.save(itemimage);
-                            //out.write(item.getIditem());
+
                             if (f.exists()) {
                                 fileitem.write(f);
 
                             } else {
-                                File ff = new File("C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/adminPanel/product_imges");
+                                File ff = new File("C:/Users/Sevi/Documents/NetBeansProjects/anita_web/web/adminPanel/customer_images");
                                 ff.mkdir();
                                 fileitem.write(f);
                             }
@@ -136,6 +120,18 @@ public class user_details_save extends HttpServlet {
                 }
 
             }
+            User us = (User) request.getSession().getAttribute("user_obj");
+            //System.out.println(us.getFname());
+            us.setNic(nic);
+            us.setFname(fname);
+            us.setMname(mname);
+            us.setLname(lname);
+            us.setMobile(mobile);
+            us.setMobile2(mobile2);
+            us.setImg(url2 + thumb);
+            us.setStatus(1);
+            //objsave.ses=null;
+            objsave.update(us);
         } catch (Exception e) {
             e.printStackTrace();
         }

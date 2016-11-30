@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -28,6 +28,7 @@ public class Item  implements java.io.Serializable {
      private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
      private Set<Stock> stocks = new HashSet<Stock>(0);
      private Set<ItemImage> itemImages = new HashSet<ItemImage>(0);
+     private Set<Question> questions = new HashSet<Question>(0);
 
     public Item() {
     }
@@ -36,7 +37,7 @@ public class Item  implements java.io.Serializable {
     public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<Cart> carts, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages) {
+    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<Cart> carts, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages, Set<Question> questions) {
        this.subcat = subcat;
        this.itemname = itemname;
        this.watching = watching;
@@ -53,6 +54,7 @@ public class Item  implements java.io.Serializable {
        this.grnItems = grnItems;
        this.stocks = stocks;
        this.itemImages = itemImages;
+       this.questions = questions;
     }
    
     public Integer getIditem() {
@@ -173,6 +175,13 @@ public class Item  implements java.io.Serializable {
     
     public void setItemImages(Set<ItemImage> itemImages) {
         this.itemImages = itemImages;
+    }
+    public Set<Question> getQuestions() {
+        return this.questions;
+    }
+    
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 
 

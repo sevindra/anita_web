@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1
+// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,7 +15,8 @@ public class Grn  implements java.io.Serializable {
      private Integer grnid;
      private Supplier supplier;
      private String grnidreal;
-     private Date deteTime;
+     private Date date;
+     private Date time;
      private Double total;
      private Integer status;
      private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
@@ -29,10 +30,11 @@ public class Grn  implements java.io.Serializable {
         this.supplier = supplier;
         this.grnidreal = grnidreal;
     }
-    public Grn(Supplier supplier, String grnidreal, Date deteTime, Double total, Integer status, Set<GrnItem> grnItems, Set<Stock> stocks) {
+    public Grn(Supplier supplier, String grnidreal, Date date, Date time, Double total, Integer status, Set<GrnItem> grnItems, Set<Stock> stocks) {
        this.supplier = supplier;
        this.grnidreal = grnidreal;
-       this.deteTime = deteTime;
+       this.date = date;
+       this.time = time;
        this.total = total;
        this.status = status;
        this.grnItems = grnItems;
@@ -60,12 +62,19 @@ public class Grn  implements java.io.Serializable {
     public void setGrnidreal(String grnidreal) {
         this.grnidreal = grnidreal;
     }
-    public Date getDeteTime() {
-        return this.deteTime;
+    public Date getDate() {
+        return this.date;
     }
     
-    public void setDeteTime(Date deteTime) {
-        this.deteTime = deteTime;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Date getTime() {
+        return this.time;
+    }
+    
+    public void setTime(Date time) {
+        this.time = time;
     }
     public Double getTotal() {
         return this.total;

@@ -60,17 +60,22 @@ public class add_to_watch_list extends HttpServlet {
 //            out.write("watched");
                     out.write("<a href=\"#\" onclick=\"un_watch()\"><h6><span class=\"glyphicon glyphicon-eye-open\"></span>Watched<span class=\"glyphicon glyphicon-ok\" style=\"color: #00cc33; margin-left: 10px\"></span></h6></a>");
                     
+                    
                 }
             }
             if (unwatch != null) {
                 if (unwatch.equals("ok")) {
                     //out.write("okk");
+                    if(userid.equals("0")){
+                    out.write("");
+                    }else{
                     User uid = (User) objsave.getses().load(User.class, Integer.parseInt(userid));
                     WatchList witem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", uid))).uniqueResult();
                     //out.write(witem.getIdwatchList());
                     objsave.delete(witem);
                     out.write("<a href=\"#\" onclick=\"check_to_watch()\"><h6><span class=\"glyphicon glyphicon-eye-open\"></span>Add to watch list </h6></a>");
-                }
+                    }
+                    }
             }
             if (unwatch != null) {
                 if (unwatch.equals("list")) {

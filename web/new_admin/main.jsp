@@ -4,6 +4,14 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="org.hibernate.criterion.Projections"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Stock"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,13 +45,35 @@
             <%}
                 }%>
 
-            google.charts.load('current', {'packages': ['bar']});
+            google.charts.load('current', {
+                'packages': ['bar']});
             google.charts.setOnLoadCallback(drawChart);
 
 
 
 
             function drawChart() {
+            <%
+                Date date = new Date(); // your date
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                month=month+1;
+                //int day = cal.get(Calendar.DAY_OF_MONTH);
+                
+                String d1 = year+"-"+month+"-01";
+                String d2 = year+"-"+month+"-30";
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                Date sDate = sd.parse(d1);
+                Date eDate = sd.parse(d2);
+                Criteria c = objsave.getses().createCriteria(Stock.class);
+                c.add(Restrictions.ge("date", sDate));
+                c.add(Restrictions.lt("date", eDate));
+                c.setProjection(Projections.sum("price"));
+                double coun = Double.parseDouble(c.uniqueResult().toString());
+
+            %>
                 var data = google.visualization.arrayToDataTable([
                     ['2016', 'Sales', 'Expenses', 'Profit'],
 //                    ['Jan', 1000, 400, 200],
@@ -52,12 +82,12 @@
 //                    ['April', 1030, 540, 350],
 //                    ['May', 1030, 540, 350],
 //                    ['Jun', 1030, 540, 350],
-                    ['Jul', 1030, 540, 350],
-                    ['Aug', 1030, 540, 350],
-                    ['Sep', 1030, 540, 350],
-                    ['Oct', 1030, 540, 350],
-                    ['Nov', 1030, 540, 350],
-                    ['Dec', 1030, 540, 350]
+                    ['Jul', 0, 0, 0],
+                    ['Aug', 0, 0, 0],
+                    ['Sep', 0, 0, 0],
+                    ['Oct', 0, 0, 0],
+                    ['Nov', 0, <%=coun%>, 0],
+                    ['Dec', 0, 0, 0]
                 ]);
 
                 var options = {
@@ -85,7 +115,9 @@
                     }
                 }
             }
-
+            function question() {
+                $('#admin_body').load('item_question.jsp');
+            }
             function add_supplier() {
                 $('#admin_body').load('Add_supplier.jsp');
             }
@@ -124,6 +156,25 @@
             function add_privilege() {
                 $('#admin_body').load('add_privelage.jsp');
             }
+            function add_user() {
+                $('#admin_body').load('Add_user.jsp');
+            }
+            function user_act_deact() {
+                $('#admin_body').load('user_act_deact.jsp');
+            }
+            function online_users() {
+                $('#admin_body').load('online_users.jsp');
+            }
+            function watched_item() {
+                $('#admin_body').load('watched_item.jsp');
+            }
+            function all_users() {
+                $('#admin_body').load('all_users.jsp');
+            }
+            function daily_visited() {
+                $('#admin_body').load('daily_visited.jsp');
+            }
+
             function msg_read() {
                 var msgid = document.getElementById('msgid').value;
 
@@ -139,7 +190,7 @@
                 xhttp.open("POST", "../user_message?read=ok&msgid=" + msgid, true);
                 xhttp.send();
             }
-            
+
 
         </script>
     </head>
@@ -282,7 +333,9 @@
                     </div>
                     <div id="collapse7" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a onclick="add_privilege()" href="#">Add privilege</a></li>
+                            <li class="list-group-item"><a onclick="add_user()" href="#">Add User</a></li>
+                            <li class="list-group-item"><a onclick="user_act_deact()" href="#">Act / Deactive</a></li>
+                            <li class="list-group-item"><a onclick="add_privilege()" href="#">User privilege</a></li>
                         </ul>
                     </div>
                 </div>

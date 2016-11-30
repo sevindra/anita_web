@@ -24,7 +24,8 @@ public class privilege_class {
             String pge [] =url.split("/");
          
             for (PagesHasUtype rhp : u.getUtype().getPagesHasUtypes()) {
-                 System.out.println("awaaaaa  "+pge[pge.length-1]);
+//                 System.out.println("awaaaaa  "+pge[pge.length-1]);
+                 System.out.println(rhp.getPages().getPageName()+" =  "+pge[pge.length-1]);
                 if (rhp.getPages().getPageName().equals(pge[pge.length-1])) {
                     
                     return true;

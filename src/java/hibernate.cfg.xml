@@ -12,11 +12,13 @@
     <mapping resource="POJOS/TempGrnItem.hbm.xml"/>
     <mapping resource="POJOS/Message.hbm.xml"/>
     <mapping resource="POJOS/Advertisement.hbm.xml"/>
+    <mapping resource="POJOS/ItemPerPage.hbm.xml"/>
     <mapping resource="POJOS/LoginReg.hbm.xml"/>
     <mapping resource="POJOS/User.hbm.xml"/>
     <mapping resource="POJOS/Item.hbm.xml"/>
     <mapping resource="POJOS/TempColor.hbm.xml"/>
     <mapping resource="POJOS/Pages.hbm.xml"/>
+    <mapping resource="POJOS/Question.hbm.xml"/>
     <mapping resource="POJOS/Grn.hbm.xml"/>
     <mapping resource="POJOS/Subcat.hbm.xml"/>
     <mapping resource="POJOS/Cat.hbm.xml"/>
@@ -31,6 +33,7 @@
     <mapping resource="POJOS/Addres.hbm.xml"/>
     <mapping resource="POJOS/WatchList.hbm.xml"/>
     <mapping resource="POJOS/GrnItem.hbm.xml"/>
+    <mapping resource="POJOS/OnlineUsers.hbm.xml"/>
     <mapping resource="POJOS/Login.hbm.xml"/>
     <mapping resource="POJOS/Utype.hbm.xml"/>
   </session-factory>

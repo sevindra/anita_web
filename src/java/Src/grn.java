@@ -144,7 +144,8 @@ public class grn extends HttpServlet {
                     Grn grn = new Grn();
                     grn.setGrnidreal(grnid);
                     grn.setSupplier(supplier);
-                    grn.setDeteTime(new Date());
+                    grn.setDate(new Date());
+                    grn.setTime(new Date());
                     grn.setTotal(Double.parseDouble(totalam));
                     grn.setStatus(1);
                     objsave.save(grn);
@@ -170,6 +171,8 @@ public class grn extends HttpServlet {
                         stock.setQty(list1.getQty());
                         stock.setAvalQty(list1.getQty());
                         stock.setStatus(1);
+                        stock.setDate(new Date());
+                        stock.setTime(new Date());
                         objsave.save(stock);
 
                         objsave.delete(list1);

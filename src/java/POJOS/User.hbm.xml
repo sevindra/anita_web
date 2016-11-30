@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 6, 2016 9:42:09 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 29, 2016 12:42:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.User" table="user" catalog="anitaweb" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
@@ -53,6 +53,18 @@
             </key>
             <one-to-many class="POJOS.Login" />
         </set>
+        <set name="onlineUserses" table="online_users" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.OnlineUsers" />
+        </set>
+        <set name="itemPerPages" table="item_per_page" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.ItemPerPage" />
+        </set>
         <set name="watchLists" table="watch_list" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="user_iduser" not-null="true" />
@@ -70,6 +82,12 @@
                 <column name="mto" not-null="true" />
             </key>
             <one-to-many class="POJOS.Message" />
+        </set>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_iduser" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Question" />
         </set>
     </class>
 </hibernate-mapping>

@@ -6,12 +6,16 @@
 package Src;
 
 import POJOS.Login;
+import POJOS.LoginReg;
 import POJOS.User;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javassist.compiler.TokenId;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -71,6 +75,15 @@ public class user_login extends HttpServlet {
                         hs.setAttribute("user_obj", login.getUser());
                         hs.setAttribute("login", login);
                         User u =(User) hs.getAttribute("user_obj");
+                        
+                        LoginReg lr=new LoginReg();
+                        lr.setLogin(login);
+                        lr.setIndate(new Date());
+                        lr.setIntime(new Date());
+                        objsave.save(lr);
+                        
+                        
+                        
                         if(u.getUtype().getUtype().equals("Customer")){
                         response.sendRedirect("index.jsp");
                         }else{
@@ -85,6 +98,7 @@ public class user_login extends HttpServlet {
 
                 }
             }
+        }catch(Exception e){
         }
     }
 
