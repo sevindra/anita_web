@@ -4,6 +4,14 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.Question"%>
+<%@page import="POJOS.WatchList"%>
+<%@page import="POJOS.LoginReg"%>
+<%@page import="POJOS.User"%>
+<%@page import="POJOS.OnlineUsers"%>
+<%@page import="POJOS.Utype"%>
+<%@page import="POJOS.Message"%>
+<%@page import="org.hibernate.Session"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -86,8 +94,8 @@
                     ['Aug', 0, 0, 0],
                     ['Sep', 0, 0, 0],
                     ['Oct', 0, 0, 0],
-                    ['Nov', 0, <%=coun%>, 0],
-                    ['Dec', 0, 0, 0]
+                    ['Nov', 0, 0, 0],
+                    ['Dec', 0, <%=coun%>, 0]
                 ]);
 
                 var options = {
@@ -174,6 +182,9 @@
             function daily_visited() {
                 $('#admin_body').load('daily_visited.jsp');
             }
+            function add_slider_img() {
+                $('#admin_body').load('add_slider_img.jsp');
+            }
 
             function msg_read() {
                 var msgid = document.getElementById('msgid').value;
@@ -215,14 +226,50 @@
                         <li class="">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-bell glyphicon_margin"></span> Notification<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Message</a></li>
-                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Email</a></li>
-                                <li><a href="#"><span class="fa fa-shopping-cart glyphicon_margin"></span> Orders</a></li>
-                                <li><a href="#"><span class="fa fa-database glyphicon_margin"></span> Low Stock</a></li>
-                                <li><a href="#"><span class="fa fa-eye glyphicon_margin"></span> Watched Items</a></li>
-                                <li><a href="#"><span class="fa fa-users glyphicon_margin"></span> Total Users</a></li>
-                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Daily Visited</a></li>
-                                <li><a href="#"><span class="fa fa-question glyphicon_margin"></span> Questions</a></li>
+                                <%
+                                    Session ses = objsave.getses();
+                                    Criteria c1 = ses.createCriteria(Message.class);
+                                    Utype uty = (Utype) objsave.getses().load(Utype.class, 4);
+                                    c1.add(Restrictions.eq("utype", uty));
+                                    c1.setProjection(Projections.sum("newmes"));
+                                    int cou = Integer.parseInt(c1.uniqueResult().toString());
+                                    
+                                    Criteria c2 = ses.createCriteria(OnlineUsers.class);
+                                    c2.setProjection(Projections.count("user"));
+                                    int online = Integer.parseInt(c2.uniqueResult().toString());
+                                    
+                                    Criteria uc = ses.createCriteria(User.class);
+                                    Utype ut = (Utype) ses.load(Utype.class, 4);
+                                    uc.add(Restrictions.eq("utype", ut));
+                                    uc.setProjection(Projections.count("utype"));
+                                    int users = Integer.parseInt(uc.uniqueResult().toString());
+                                    
+                                    Date d = new Date();
+                                    SimpleDateFormat sd1 = new SimpleDateFormat("yyyy-MM-dd");
+                                    String date1 = sd1.format(d);
+                                    Date toda = sd1.parse(date1);
+                                    Criteria lrc = objsave.getses().createCriteria(LoginReg.class);
+                                    lrc.add(Restrictions.eq("indate", toda));
+                                    lrc.setProjection(Projections.count("login"));
+                                    int daily = Integer.parseInt(lrc.uniqueResult().toString());
+                                    
+                                     Criteria watc = ses.createCriteria(WatchList.class);
+                                    watc.setProjection(Projections.count("item"));
+                                    int watchcount = Integer.parseInt(watc.uniqueResult().toString());
+                                    
+                                    Criteria quc = ses.createCriteria(Question.class);
+                                    quc.setProjection(Projections.count("item"));
+                                    int qucount = Integer.parseInt(quc.uniqueResult().toString());
+                                %>
+                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Message <span class="badge"><%=cou%></span></a></li>
+                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Online Users <span class="badge"><%=online%></span></a></li>
+                                <li><a href="#"><span class="fa fa-shopping-cart glyphicon_margin"></span> Orders <span class="badge"><%=users%></span></a></li>
+                                <li><a href="#"><span class="fa fa-database glyphicon_margin"></span> Low Stock <span class="badge"><%=cou%></span></a></li>
+                                <li><a href="#"><span class="fa fa-eye glyphicon_margin"></span> Watched Items <span class="badge"><%=cou%></span></a></li>
+                                <li><a href="#"><span class="fa fa-users glyphicon_margin"></span> Total Users <span class="badge"><%=users%></span></a></li>
+                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Daily Visited <span class="badge"><%=daily%></span></a></li>
+                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Watched Items <span class="badge"><%=watchcount%></span></a></li>
+                                <li><a href="#"><span class="fa fa-question glyphicon_margin"></span> Questions <span class="badge"><%=qucount%></span></a></li>
 
                             </ul>
                         </li>
@@ -336,6 +383,19 @@
                             <li class="list-group-item"><a onclick="add_user()" href="#">Add User</a></li>
                             <li class="list-group-item"><a onclick="user_act_deact()" href="#">Act / Deactive</a></li>
                             <li class="list-group-item"><a onclick="add_privilege()" href="#">User privilege</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse8"><span class="fa fa-camera glyphicon_margin"></span> Main Slider</a>
+                        </h4>
+                    </div>
+                    <div id="collapse8" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_slider_img()" href="#">Add Image</a></li>
+                            <li class="list-group-item"><a onclick="" href="#">Act / Deactive</a></li>
                         </ul>
                     </div>
                 </div>

@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.Stock"%>
 <%@page import="POJOS.Advertisement"%>
 <%@page import="POJOS.WatchList"%>
 <%@page import="POJOS.Size"%>
@@ -63,21 +64,22 @@
             function sizecolor() {
                 color = $('.color_val').val();
                 size = $('.size_val').val();
-                if (color == "-Select-") {
+                if (color == "") {
+                //alert("color");
                     $('.color').show();
                 } else {
                     $('.color').hide();
 
                 }
-                if (size == "-Select-") {
+                if (size == "") {
                     $('.size').show();
                 } else {
 
                     $('.size').hide();
                 }
-                if (size == "-Select-") {
-                    if (color == "-Select-") {
-                        add_to_checkout();
+                if (size != "") {
+                    if (color != "") {
+                        //add_to_cart();
                     }
                 }
             }
@@ -178,7 +180,7 @@
                 alert("Please Login First !");
             <%} else {
             %>
-                
+
             <%
                 }%>
 
@@ -265,6 +267,42 @@
                 xhttp.open("POST", "checkout?itemid=" + itemid + "&watch=ok", true);
                 xhttp.send();
             }
+            
+            function cart_qty() {
+                
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                       alert("added to your cart");
+                       
+                        document.getElementById('cartqty').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "cart_qty?cart=ok", true);
+                xhttp.send();
+            }
+            function add_to_cart() {
+                var sizeid = document.getElementById('size').value;
+                var colorid = document.getElementById('color').value;
+                var qty = document.getElementById('qty').value;
+                search_stock_id();
+                var xhttp = new XMLHttpRequest();
+                alert(sizeid+"-"+colorid+"-"+qty);
+                //console.info(sizeid+"-"+colorid+"-"+qty);
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                       alert("added to your cart");
+                       //cart_qty();
+                        //document.getElementById('watched').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "add_to_cart?stockid=" + stockid + "&sizeid="+sizeid+ "&colorid="+colorid+ "&qty="+qty, true);
+                xhttp.send();
+            }
             function un_watch() {
                 var itemid = <%=i%>
 
@@ -278,14 +316,14 @@
                         document.getElementById('watched').innerHTML = xhttp.responseText;
                     }
                 };
-                <%
+            <%
                 int uid;
-                if(user==null){
-                uid=0;
-                }else{
-                uid=user.getIduser();
+                if (user == null) {
+                    uid = 0;
+                } else {
+                    uid = user.getIduser();
                 }
-                %>
+            %>
                 xhttp.open("POST", "add_to_watch_list?itemid=" + itemid + "&unwatch=ok&userid=" +<%=uid%>, true);
                 xhttp.send();
             }
@@ -306,6 +344,24 @@
                 xhttp.open("POST", "item_qst?itemid=" + itemid + "&mes=" + mes, true);
                 xhttp.send();
             }
+            var stockid;
+            function search_stock_id() {
+                var sizeid = document.getElementById('size').value;
+                var colorid = document.getElementById('color').value;
+                var pid = document.getElementById('pid').value;
+                var xhttp = new XMLHttpRequest();
+                //alert("mes");
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        //alert("stockid get"+xhttp.responseText);
+                        stockid = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "search_stockid?size=" + sizeid + "&color=" + colorid+ "&pid=" + pid + "&searchstock=ok", true);
+                xhttp.send();
+            }
             //alert("The current month is " + monthNames[d.getMonth()]);
         </script>
 
@@ -315,7 +371,8 @@
         <%@include file="site/header.jsp" %>
 
         <div class="col-md-12">
-            <form method="post" action="add_to_cart">
+            <!--<button onclick="search_stock_id()">aaa</button>-->
+            <!--<form method="post" action="add_to_cart">-->
                 <div class="row">
                     <div class="col-md-5">
                         <div class="col-md-12" id="slider" style="margin-top: 20px">
@@ -384,12 +441,15 @@
                                 <div class="col-md-9">
                                     <div class="col-md-10">
                                         <div class="form-group">
-                                            <select class="form-control color_val" onchange="sizecolor()" required="" name="color">
+                                            <select class="form-control color_val" onchange="sizecolor()" required="" name="color" id="color">
                                                 <option value="">-Select-</option>
                                                 <%
                                                     List<Color> clist = objsave.getses().createCriteria(Color.class).add(Restrictions.eq("item", item)).list();
+                                                    //Criteria crs = objsave.getses().createCriteria(Stock.class);
+                                                    //crs.add(Restrictions.eq("item", item));
                                                     for (Color cl : clist) {
-                                                %>
+                                                    //crs.add(Restrictions.eq("color",cl.getIdcolor()));
+%>
                                                 <option value="<%=cl.getIdcolor()%>"><%=cl.getColor()%></option>
                                                 <%}%>
                                             </select>
@@ -414,12 +474,13 @@
                                 <div class="col-md-9">
                                     <div class="col-md-10">
                                         <div class="">
-                                            <select class="form-control size_val" onchange="sizecolor()" required="" name="size">
+                                            <select class="form-control size_val" onchange="sizecolor()" required="" name="size" id="size">
                                                 <option value="">-Select-</option>
                                                 <%
                                                     List<Size> zlist = objsave.getses().createCriteria(Size.class).add(Restrictions.eq("item", item)).list();
                                                     for (Size zl : zlist) {
-                                                %>
+                                                    //crs.add(Restrictions.eq("size", zl.getIdsize()));
+%>
                                                 <option value="<%=zl.getIdsize()%>"><%=zl.getSize()%></option>
                                                 <%}%>
                                             </select>
@@ -560,7 +621,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="col-md-4">
-                                        <input type="text" placeholder="Qty" class="form-control" name="qty" required=""/>
+                                        <input type="text" placeholder="Qty" class="form-control" name="qty" required="" value="1" id="qty"/>
 
                                     </div>
                                 </div>
@@ -573,7 +634,11 @@
                                             <h5>Price : </h5>
                                         </div> 
                                         <div class="col-md-4">
-                                            <h4><strong>LKR.1250.00</strong></h4>
+                                            <%
+
+                                                //Stock s =(Stock)crs.uniqueResult();
+                                            %>
+                                            <h4><strong>lkr</strong></h4>
                                             <input type="hidden" name="price" value="LKR.1250.00"/>
                                         </div>
                                         <div class="col-md-4">
@@ -589,7 +654,7 @@
 
                                         </div>
                                         <div class="col-md-4">
-                                            <button class="btn btn-success form-control" onclick="sizecolor()" type="submit">Add To Cart</button>
+                                            <button class="btn btn-success form-control" onclick="sizecolor()">Add To Cart</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -600,18 +665,16 @@
 
                                         </div>
                                         <div class="col-md-5" id="watched">
-                                            <%
-
-                                                WatchList watchitem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", user))).uniqueResult();
+                                            <%                                                WatchList watchitem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", user))).uniqueResult();
                                                 if (watchitem == null) {
 
                                             %>
                                             <a href="#" onclick="check_to_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Add to watch list </h6></a>
-                                            <a href="#" data-toggle="modal" data-target="<%if(user!=null){%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
+                                            <a href="#" data-toggle="modal" data-target="<%if (user != null) {%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
 
                                             <%} else {%>
                                             <a href="#" onclick="un_watch()"><h6><span class="glyphicon glyphicon-eye-open"></span>Watched<span class="glyphicon glyphicon-ok" style="color: #00cc33; margin-left: 10px"></span></h6></a>
-                                            <a href="#" data-toggle="modal" data-target="<%if(user!=null){%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
+                                            <a href="#" data-toggle="modal" data-target="<%if (user != null) {%>#myModal2<%}%>" onclick="check_to_watch2()"><h6><span class="glyphicon glyphicon-question-sign"></span>Question about this item</h6></a>
                                                         <%}%>
                                         </div>
                                     </div>
@@ -666,15 +729,7 @@
                                     <h6 style="color: #666666">Delivery within 2 days after receiving cleared payment</h6>
                                 </div>
                             </div>
-                            <!--                        <div class="row ">
-                                                        <div class="col-md-3 text-right">
-                                                            <h5>Payments : </h5> 
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <span class="fa fa-spinner fa-spin "></span>
-                                                            <h5><strong>Visa,Master Card,American Express</strong></h5>
-                                                        </div>
-                                                    </div>-->
+
                         </div>
                         <br/>
                         <div class="col-md-5">
@@ -710,10 +765,17 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="pid" value="<%=item.getIditem()%>"/>
+                        <%
+                            Criteria stcri = objsave.getses().createCriteria(Stock.class);
+                            stcri.add(Restrictions.eq("item", item));
+                            stcri.add(Restrictions.eq("item", item));
+                        %>
+
+                        <input type="hidden" name="pid" value="<%=item.getIditem()%>" id="pid"/>
+                        <input type="hidden" name="stockid" value="" id="stockid"/>
                     </div>
                 </div>
-            </form>
+            <!--</form>-->
         </div>
         <div class="container-fluid">
 

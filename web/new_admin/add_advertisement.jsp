@@ -119,18 +119,29 @@
 
                 }
             }
+            $(function () {
+                $('#upload-form').ajaxForm({
+                    success: function (msg) {
+                        document.getElementById('myimg').innerHTML = "";
+                        alert("File has been uploaded successfully");
+                    },
+                    error: function (msg) {
+                        $("#upload-error").text("Couldn't upload file");
+                    }
+                });
+            });
             findimage();
         </script>
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Advertisement</strong></h3>
         <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-           //     privilege_class p = new privilege_class();
-          //      User su = (User) request.getSession().getAttribute("user_obj");
-          //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+            //     privilege_class p = new privilege_class();
+            //      User su = (User) request.getSession().getAttribute("user_obj");
+            //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-6">
             <div class="panel panel-danger">
-                <form action="../advertisement_up" method="post" enctype="multipart/form-data">
+                <form action="../advertisement_up"  id="upload-form" class="upload-box" method="post" enctype="multipart/form-data">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-4 mypadin7">
@@ -198,11 +209,11 @@
         </div>
         <%//} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+                </div>-->
         <%
             //    }
-          //  }%>
+            //  }%>
     </body>
 </html>

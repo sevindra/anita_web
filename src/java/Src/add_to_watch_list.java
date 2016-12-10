@@ -49,7 +49,7 @@ public class add_to_watch_list extends HttpServlet {
             String unwatch = request.getParameter("unwatch");
             //out.write(userid);
             Item item = (Item) objsave.getses().load(Item.class, Integer.parseInt(itemid));
-                    HttpSession hs = request.getSession();
+            HttpSession hs = request.getSession();
             User u = (User) hs.getAttribute("user_obj");
             if (watch != null) {
                 if (watch.equals("ok")) {
@@ -59,23 +59,31 @@ public class add_to_watch_list extends HttpServlet {
                     objsave.save(wl);
 //            out.write("watched");
                     out.write("<a href=\"#\" onclick=\"un_watch()\"><h6><span class=\"glyphicon glyphicon-eye-open\"></span>Watched<span class=\"glyphicon glyphicon-ok\" style=\"color: #00cc33; margin-left: 10px\"></span></h6></a>");
-                    
-                    
+                    out.write("<a href=\"#\" data-toggle=\"modal\" data-target=\"");
+                    if (u != null) {
+                        out.write("#myModal2");
+                    }
+                    out.write("\" onclick=\"check_to_watch2()\"><h6><span class=\"glyphicon glyphicon-question-sign\"></span>Question about this item</h6></a>");
                 }
             }
             if (unwatch != null) {
                 if (unwatch.equals("ok")) {
                     //out.write("okk");
-                    if(userid.equals("0")){
-                    out.write("");
-                    }else{
-                    User uid = (User) objsave.getses().load(User.class, Integer.parseInt(userid));
-                    WatchList witem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", uid))).uniqueResult();
-                    //out.write(witem.getIdwatchList());
-                    objsave.delete(witem);
-                    out.write("<a href=\"#\" onclick=\"check_to_watch()\"><h6><span class=\"glyphicon glyphicon-eye-open\"></span>Add to watch list </h6></a>");
+                    if (userid.equals("0")) {
+                        out.write("");
+                    } else {
+                        User uid = (User) objsave.getses().load(User.class, Integer.parseInt(userid));
+                        WatchList witem = (WatchList) objsave.getses().createCriteria(WatchList.class).add(Restrictions.and(Restrictions.eq("item", item), Restrictions.eq("user", uid))).uniqueResult();
+                        //out.write(witem.getIdwatchList());
+                        objsave.delete(witem);
+                        out.write("<a href=\"#\" onclick=\"check_to_watch()\"><h6><span class=\"glyphicon glyphicon-eye-open\"></span>Add to watch list </h6></a>");
+                        out.write("<a href=\"#\" data-toggle=\"modal\" data-target=\"");
+                        if (u != null) {
+                            out.write("#myModal2");
+                        }
+                        out.write("\" onclick=\"check_to_watch2()\"><h6><span class=\"glyphicon glyphicon-question-sign\"></span>Question about this item</h6></a>");
                     }
-                    }
+                }
             }
             if (unwatch != null) {
                 if (unwatch.equals("list")) {
@@ -97,8 +105,8 @@ public class add_to_watch_list extends HttpServlet {
                         c1.setMaxResults(1);
                         List<ItemImage> itemimage = c1.list();
                         for (ItemImage i : itemimage) {
-                            out.write("<img src=\"" + i.getUrl()+"\"/>");
-                           // System.out.println("<img src=\"" + i.getUrl()+"\"/>");
+                            out.write("<img src=\"" + i.getUrl() + "\"/>");
+                            // System.out.println("<img src=\"" + i.getUrl()+"\"/>");
                         }
                         out.write("</div>\n"
                                 + "<div class=\"col-md-9\">\n"
@@ -113,7 +121,7 @@ public class add_to_watch_list extends HttpServlet {
                                 + "<h4>Qty : 1</h4>\n"
                                 + "</div>\n"
                                 + "<div class=\"row\">\n"
-                                + "<button class=\"btn btn-danger col-md-4\" onclick=\"un_watch_from_list('"+w.getItem().getIditem()+"')\">Remove</button>"
+                                + "<button class=\"btn btn-danger col-md-4\" onclick=\"un_watch_from_list('" + w.getItem().getIditem() + "')\">Remove</button>"
                                 + "</div>\n"
                                 + "\n"
                                 + "</div>\n"

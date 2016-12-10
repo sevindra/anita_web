@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="POJOS.Cart"%>
+<%@page import="POJOS.CartItem"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="org.hibernate.criterion.Order"%>
@@ -144,7 +146,6 @@
                     <ul class="dropdown-menu" role="menu">
 
                         <li><a href="my_profile.jsp">My Profile</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Checkout</a></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Cart</a></li>
 
                         <li class="divider"></li>
@@ -161,39 +162,55 @@
                     <%}%>
                 </li>
                 <%
-                                    Criteria c = objsave.getses().createCriteria(Message.class);
-                                    c.add(Restrictions.eq("notification", 1));
-                                   // c.addOrder(Order.desc("date"));
-                                    List<Message> mli=c.list();
-                                    c.setProjection(Projections.sum("notification"));
-                                    int me = Integer.parseInt(c.uniqueResult().toString());
-                                %>
+                    Criteria c = objsave.getses().createCriteria(Message.class);
+                    c.add(Restrictions.eq("notification", 1));
+                    // c.addOrder(Order.desc("date"));
+                    List<Message> mli = c.list();
+                    c.setProjection(Projections.sum("notification"));
+                    int me = Integer.parseInt(c.uniqueResult().toString());
+                %>
                 <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                             class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px"><%=me%></span><%}%>
                     </a>
                     <%if (userheader != null) {%>
                     <ul class="dropdown-menu">
                         <%
-                        for(Message m:mli){
-                            String mes=m.getMessage();
-                            mes=mes.substring(0, 15);
-                            Date d1 = new Date();
-                            Date d2 = m.getDate();
-                            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-                            String d3=sd.format(d1);
-                            String d4=sd.format(d2);
+                            for (Message m : mli) {
+                                String mes = m.getMessage();
+                                mes = mes.substring(0, 15);
+                                Date d1 = new Date();
+                                Date d2 = m.getDate();
+                                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+                                String d3 = sd.format(d1);
+                                String d4 = sd.format(d2);
                         %>
-                        <li><a href="message.jsp"><span class="label label-warning"><%if(d3.equals(d4)){out.write(m.getTime().toString());}else{out.write(m.getDate().toString());}%></span> <%=mes+"..."%></a></li>
-                        <%}%>
-<!--                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
-                        <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email-->
-                                <!--design</a></li>-->
+                        <li><a href="message.jsp"><span class="label label-warning"><%if (d3.equals(d4)) {
+                                out.write(m.getTime().toString());
+                            } else {
+                                out.write(m.getDate().toString());
+                            }%></span> <%=mes + "..."%></a></li>
+                                    <%}%>
+                        <!--                        <li><a href="message.jsp"><span class="label label-warning">4:30 AM</span> Email marketing</a></li>
+                                                <li><a href="message.jsp"><span class="label label-warning">5:00 AM</span> Subscriber focused email-->
+                        <!--design</a></li>-->
                         <li class="divider"></li>
                         <li><a href="message.jsp" class="text-center">View All</a></li>
                     </ul>        
                     <%}%>
                 </li>
-                <li><a onclick="seturl()" href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<span class="label label-warning" style="margin-right:  10px;margin-left: 5px">2</span></a>
+                <%
+                    int cartcount=0;
+                    Criteria cru = objsave.getses().createCriteria(Cart.class);
+                    cru.add(Restrictions.eq("user", userheader));
+                    List<Cart> carl = cru.list();
+                    for (Cart cr : carl) {
+                        Criteria crc = objsave.getses().createCriteria(CartItem.class);
+                        crc.add(Restrictions.eq("cart", cr));
+                        crc.setProjection(Projections.rowCount());
+                        cartcount = Integer.parseInt(crc.uniqueResult().toString());
+                    }
+                %>
+                <li><a onclick="seturl()" href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<%if(cartcount!=0){%><span class="label label-warning" style="margin-right:  10px;margin-left: 5px" id="cartqty"><%=cartcount %></span><%}%></a>
 
                 </li>
             </ul>

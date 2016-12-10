@@ -7,6 +7,7 @@ package Src;
 
 import POJOS.OnlineUsers;
 import POJOS.User;
+import java.util.ArrayList;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import org.hibernate.criterion.Restrictions;
@@ -36,11 +37,12 @@ public class online_u implements HttpSessionAttributeListener {
 
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
-        User u = (User) event.getValue();
-        System.out.println(event.getName() + " Remove " + u.getFname());
-        if (event.getName().equals("user_obj")) {
+       //ArrayList<model.session_cart> cart =null;
+        //User u = (User) event.getValue();
+        System.out.println(event.getName() + " Remove " );
+        //if (event.getName().equals("user_obj")) {
 
-            try {
+           // try {
 //                Map m = new HashMap();
 //                Login l = (Login) m.get("login_obj");
 //                Date d = (Date) m.get("date_time");
@@ -55,16 +57,16 @@ public class online_u implements HttpSessionAttributeListener {
 //                System.out.println(lrd.getIdloginReg());
 //                objsave.update(lrd);
 //                
-                OnlineUsers ou = (OnlineUsers) objsave.getses().createCriteria(OnlineUsers.class).add(Restrictions.eq("user", u)).uniqueResult();
-                objsave.delete(ou);
+              //  OnlineUsers ou = (OnlineUsers) objsave.getses().createCriteria(OnlineUsers.class).add(Restrictions.eq("user", u)).uniqueResult();
+             //   objsave.delete(ou);
 
 
                 //System.out.println("loginreg id "+lrd.getIdloginReg());
-                System.out.println(event.getName() + " Remove " + u.getFname());
-            } catch (Exception e) {
+           //     System.out.println(event.getName() + " Remove " + u.getFname());
+          //  } catch (Exception e) {
                 //e.printStackTrace();
-            }
-        }
+          //  }
+        //}
     }
 
     @Override

@@ -105,6 +105,7 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        var color = document.getElementById('color').value = "";
                         sync_color_tb();
                         //alert(xhttp.responseText);
 
@@ -120,6 +121,7 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        var size = document.getElementById('size').value = "";
                         sync_size_tb();
                         //alert(xhttp.responseText);
 
@@ -157,6 +159,71 @@
                 xhttp.open("POST", "../size_color?syncsize=ok", true);
                 xhttp.send();
             }
+            function sync_table() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        alert(xhttp.responseText);
+                        document.getElementById('ptable').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?synproduct=ok", true);
+                xhttp.send();
+            }
+
+            function sttechg(b) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.status);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        document.getElementById('ptable').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?itemid=" + b + "&statusupdateitem=ok", true);
+                xhttp.send();
+            }
+            $(function () {
+                $('#upload-form').ajaxForm({
+                    success: function (msg) {
+                        document.getElementById('itemname').value = "";
+                        document.getElementById('myimg').value = "";
+                        document.getElementById('des').value = "";
+                        document.getElementById('color').value = "";
+                        document.getElementById('size').value = "";
+                        document.getElementById('colortb').innerHTML = "";
+                        document.getElementById('sizetb').innerHTML = "";
+                        sync_table();
+                        alert("File has been uploaded successfully");
+                    },
+                    error: function (msg) {
+                        $("#upload-error").text("Couldn't upload file");
+                    }
+                });
+            });
+            function search() {
+                //var savebtn = document.getElementById('savebtn').innerHTML;
+                var search = document.getElementById('search').value;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //sync_table();
+//                        alert(xhttp.responseText);
+//                        $('#catname').val("");
+//                        $('#catname').focus();
+                        document.getElementById('ptable').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?searchtf=" + search + "&searchitem=ok", true);
+                xhttp.send();
+            }
 
             subsearch();
         </script>
@@ -170,7 +237,7 @@
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
-                    <form action="../product" method="post" enctype="multipart/form-data">
+                    <form id="upload-form" class="upload-box" action="../product" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-4 mypadin7">
                                 <label>Category Name : </label>
@@ -203,7 +270,7 @@
                                 <label>Item Name : </label>  
                             </div>
                             <div class="col-md-8">
-                                <input placeholder="Item Name" class="form-control" name="itemname" required="">
+                                <input placeholder="Item Name" class="form-control" name="itemname" required="" id="itemname">
                             </div>
                         </div>
                         <br/>
@@ -212,7 +279,7 @@
                                 <label>Description : </label>  
                             </div>
                             <div class="col-md-8">
-                                <textarea rows="5" class="form-control" placeholder="Item Description" name="description"></textarea>
+                                <textarea rows="5" class="form-control" placeholder="Item Description" name="description" id="des"></textarea>
                             </div>
                         </div>
                         <br/>
@@ -242,7 +309,7 @@
                                 <label>Add Colors : </label>  
                             </div>
                             <div class="col-md-6">
-                                <input placeholder="Color Name" class="form-control" id="color">
+                                <input placeholder="Color Name" class="form-control" id="color" autocomplete="off">
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-success btn-block" id="coloradd" onclick="addcolor()" type="button">Add</button>
@@ -277,7 +344,7 @@
                                 <label>Add Sizes : </label>  
                             </div>
                             <div class="col-md-6">
-                                <input placeholder="Size Name" class="form-control" name="sizename" id="size">
+                                <input placeholder="Size Name" class="form-control" name="sizename" id="size" autocomplete="off">
                             </div>
                             <div class="col-md-2">
                                 <button class="btn btn-success btn-block" id="sizeadd" type="button" onclick="addsize()">Add</button>
@@ -314,7 +381,7 @@
                             <div class="col-md-8 ">
                                 <div class="col-md-3 pull-right">
 
-                                    <button class="btn btn-primary pull-right btn-block" onclick="save()">Save</button>
+                                    <button class="btn btn-primary pull-right btn-block" type="submit">Save</button>
                                 </div>
                                 <div class="col-md-3 pull-right">
 
@@ -332,20 +399,47 @@
         </div>
         <div class="col-md-5">
             <div class="row">
+                <div class="col-md-3">
+                    <h5>Search :</h5>
+                </div>
+                <div class="col-md-9">
+                    <input placeholder="Search" class="form-control" onkeyup="search()" id="search">
+                </div>
+            </div>
+            <br/>
+            <div class="row">
                 <div style="display: block; max-height: 250px; overflow: hidden; overflow-y: scroll;">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>Category</th>
+                                <th>Sub Category</th>
                                 <th>Item</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="ptable">
                             <%
                                 List<Item> itemlist = objsave.getses().createCriteria(Item.class).list();
                                 for (Item cat : itemlist) {
                             %>
                             <tr>
-                                <td class="cat"><%=cat.getItemname()%></td>
+                                <td class="item"><%=cat.getSubcat().getCat().getCatname()%></td>
+                                <td class="item"><%=cat.getSubcat().getSubname()%></td>
+                                <td class="item"><%=cat.getItemname()%></td>
+                                <%
+                                    if (cat.getStatus().toString().equals("1")) {
+                                %>
+                                <td id="btn_active">
+                                    <button class="btn btn-success btn-block" onclick="sttechg('<%=cat.getIditem()%>')">Active</button>
+                                </td>
+                                <%
+                                } else {
+                                %>
+                                <td id="btn_deactive">
+                                    <button class="btn btn-danger btn-block" onclick="sttechg('<%=cat.getIditem()%>')">Deactive</button>
+                                </td>
+                                <%}%>
                             </tr>
                             <%}%>
 
@@ -358,11 +452,11 @@
         </div>
         <%//} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+                </div>-->
         <%
-           //     }
-           // }%>
+            //     }
+            // }%>
     </body>
 </html>

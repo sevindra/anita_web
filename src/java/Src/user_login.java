@@ -74,20 +74,23 @@ public class user_login extends HttpServlet {
                         HttpSession hs = request.getSession();
                         hs.setAttribute("user_obj", login.getUser());
                         hs.setAttribute("login", login);
-                        User u =(User) hs.getAttribute("user_obj");
-                        
-                        LoginReg lr=new LoginReg();
+                        User u = (User) hs.getAttribute("user_obj");
+
+                        LoginReg lr = new LoginReg();
                         lr.setLogin(login);
                         lr.setIndate(new Date());
                         lr.setIntime(new Date());
                         objsave.save(lr);
-                        
-                        
-                        
-                        if(u.getUtype().getUtype().equals("Customer")){
-                        response.sendRedirect("index.jsp");
-                        }else{
-                        response.sendRedirect("new_admin/main.jsp");
+
+                        if (u.getUtype().getUtype().equals("Customer")) {
+                            if (request.getSession().getAttribute("sessionCart") != null) {
+                                response.sendRedirect("add_to_cart");
+                            } else {
+                                response.sendRedirect("index.jsp");
+                            }
+
+                        } else {
+                            response.sendRedirect("new_admin/main.jsp");
                         }
                     } else {
                         response.sendRedirect("login.jsp?error_login=1");
@@ -98,7 +101,7 @@ public class user_login extends HttpServlet {
 
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
         }
     }
 

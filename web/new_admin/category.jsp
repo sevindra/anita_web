@@ -40,6 +40,25 @@
                 xhttp.open("POST", "../category?savebtn=" + savebtn + "&catname=" + catname, true);
                 xhttp.send();
             }
+            function search() {
+                //var savebtn = document.getElementById('savebtn').innerHTML;
+                var search = document.getElementById('search').value;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //sync_table();
+//                        alert(xhttp.responseText);
+//                        $('#catname').val("");
+//                        $('#catname').focus();
+                        document.getElementById('cattable').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?searchtf=" + search + "&search=ok", true);
+                xhttp.send();
+            }
             $(document).ready(function () {
                 $(document).on('click', '.cat', function () {
                     //alert($(this).parent().html());
@@ -77,6 +96,7 @@
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         sync_table();
+                        $('#catname').val("");
                         alert(xhttp.responseText);
                         //document.getElementById('sup_table').innerHTML=xhttp.responseText;
                     }
@@ -100,6 +120,19 @@
                 xhttp.send();
             }
 
+            function sttechg(b) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.status);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        document.getElementById('cattable').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?catid=" + b+"&statusupdate=ok", true);
+                xhttp.send();
+            }
 
         </script>
 
@@ -107,9 +140,9 @@
     <body>
         <h3 style="margin-top: -20px"><strong>Category</strong></h3>
         <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-          //      privilege_class p = new privilege_class();
-          //      User su = (User) request.getSession().getAttribute("user_obj");
-          //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+            //      privilege_class p = new privilege_class();
+            //      User su = (User) request.getSession().getAttribute("user_obj");
+            //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -141,35 +174,62 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div style="display: block; max-height: 300px; overflow: hidden; overflow-y: scroll;">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cattable">
-                        <%
-                            List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
-                            for (Cat cat : list) {
-                        %>
-                        <tr>
-                            <td class="cat"><%=cat.getCatname()%></td>
-                        </tr>
-                        <%}%>
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Search :</h5>
+                </div>
+                <div class="col-md-9">
+                    <input placeholder="Search" class="form-control" onkeyup="search()" id="search">
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+
+                <div style="display: block; max-height: 300px; overflow: hidden; overflow-y: scroll;">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cattable">
+                            <%
+                                List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
+                                for (Cat cat : list) {
+                            %>
+                            <tr>
+                                <td class="cat"><%=cat.getCatname()%></td>
+                                <%
+                                    if (cat.getStatus().toString().equals("1")) {
+                                %>
+                                <td id="btn_active">
+                                    <button class="btn btn-success btn-block" onclick="sttechg('<%=cat.getIdcat()%>')">Active</button>
+                                </td>
+                                <%
+                                } else {
+                                %>
+                                <td id="btn_deactive">
+                                    <button class="btn btn-danger btn-block" onclick="sttechg('<%=cat.getIdcat()%>')">Deactive</button>
+                                </td>
+                                <%}%>
+                            </tr>
+
+                            <%}%>
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <%//} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+                </div>-->
         <%
-        //        }
-        //    }%>
+            //        }
+            //    }%>
     </body>
 </html>

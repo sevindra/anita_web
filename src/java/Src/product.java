@@ -156,7 +156,7 @@ public class product extends HttpServlet {
             }
 //            HttpSession hs=request.getSession();
 //            hs.setAttribute("product", "add");
-            response.sendRedirect("new_admin/main.jsp?product=add");
+           // response.sendRedirect("new_admin/main.jsp?product=add");
         } catch (Exception e) {
             e.printStackTrace();
         }

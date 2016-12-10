@@ -128,7 +128,9 @@
                         <%
 
                             User u = (User) request.getSession().getAttribute("user_obj");
-                            String sql = "SELECT * FROM message WHERE mto='" + u.getIduser() + "' OR mfrom='" + u.getIduser() + "'";
+                            String uid=u.getIduser().toString();
+                            //out.write(uid);
+                            String sql = "SELECT * FROM message WHERE mto='" + uid + "' OR mfrom='" + uid + "'";
                             SQLQuery query = objsave.getses().createSQLQuery(sql);
                             query.addEntity(Message.class);
                             List<Message> list = query.list();

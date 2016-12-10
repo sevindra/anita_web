@@ -42,52 +42,51 @@ public class sup_active_deactive extends HttpServlet {
             String supid = request.getParameter("supid");
             //System.out.println("supid-"+supid);
             //out.print("head "+supid + "-" + status);
-           Supplier supplier = (Supplier) objsave.getses().load(Supplier.class, Integer.parseInt(supid));
-            if(supplier.getStatus()==1){
-            supplier.setStatus(0);
-            objsave.update(supplier);
-            }
-            else{
-            supplier.setStatus(1);
-            objsave.update(supplier);
+            Supplier supplier = (Supplier) objsave.getses().load(Supplier.class, Integer.parseInt(supid));
+            if (supplier.getStatus() == 1) {
+                supplier.setStatus(0);
+                objsave.update(supplier);
+            } else {
+                supplier.setStatus(1);
+                objsave.update(supplier);
             }
 
-            out.write("<tr>\n" +
-"                    <th>First Name</th>\n" +
-"                    <th>Last Name</th>\n" +
-"                    <th>Company Name</th>\n" +
-"                    <th>Contact No1</th>\n" +
-"                    <th>Contact No2</th>\n" +
-"                    <th>Email</th>\n" +
-"                    <th>Address</th>\n" +
-"                    <th>State</th>\n" +
-"                    <th>Act/Deact</th>\n" +
-"                </tr>");
+            out.write("<tr>\n"
+                    + "                    <th>First Name</th>\n"
+                    + "                    <th>Last Name</th>\n"
+                    + "                    <th>Company Name</th>\n"
+                    + "                    <th>Contact No1</th>\n"
+                    + "                    <th>Contact No2</th>\n"
+                    + "                    <th>Email</th>\n"
+                    + "                    <th>Address</th>\n"
+                    + "                    <th>State</th>\n"
+                    + "                    <th>Act/Deact</th>\n"
+                    + "                </tr>");
             Session ses = objsave.getses();
-                    Criteria c = ses.createCriteria(Supplier.class);
-                    List<Supplier> list = c.list();
-                    for (Supplier sup : list) {
-            out.write("<tr>");
-            out.write("<td>"+sup.getFname()+"</td>\n" +
-"                    <td>"+sup.getLname()+"</td>\n" +
-"                    <td>"+sup.getCname()+"</td>\n" +
-"                    <td>"+sup.getContact1()+"</td>\n" +
-"                    <td>"+sup.getContact2()+"</td>\n" +
-"                    <td>"+sup.getEmail()+"</td>\n" +
-"                    <td>"+sup.getAddress1()+" "+sup.getAddress2()+" "+sup.getAddress3()+"</td>\n" +
-"                    <td>"+sup.getState().getState()+"</td>");
-            //out.write("</tr>");
-            if(sup.getStatus().toString().equals("1")){
-            out.write("<td id=\"btn_active\">\n" +
-"                        <button class=\"btn btn-success btn-block\" onclick=\"sttechg('"+sup.getIdsupplier()+"')\">Active</button>\n" +
-"                    </td>");
-            }else{
-            out.write("<td id=\"btn_deactive\">\n" +
-"                        <button class=\"btn btn-danger btn-block\" onclick=\"sttechg('"+sup.getIdsupplier()+"')\">Deactive</button>\n" +
-"                    </td>");
+            Criteria c = ses.createCriteria(Supplier.class);
+            List<Supplier> list = c.list();
+            for (Supplier sup : list) {
+                out.write("<tr>");
+                out.write("<td>" + sup.getFname() + "</td>\n"
+                        + "                    <td>" + sup.getLname() + "</td>\n"
+                        + "                    <td>" + sup.getCname() + "</td>\n"
+                        + "                    <td>" + sup.getContact1() + "</td>\n"
+                        + "                    <td>" + sup.getContact2() + "</td>\n"
+                        + "                    <td>" + sup.getEmail() + "</td>\n"
+                        + "                    <td>" + sup.getAddress1() + " " + sup.getAddress2() + " " + sup.getAddress3() + "</td>\n"
+                        + "                    <td>" + sup.getState().getState() + "</td>");
+                //out.write("</tr>");
+                if (sup.getStatus().toString().equals("1")) {
+                    out.write("<td id=\"btn_active\">\n"
+                            + "                        <button class=\"btn btn-success btn-block\" onclick=\"sttechg('" + sup.getIdsupplier() + "')\">Active</button>\n"
+                            + "                    </td>");
+                } else {
+                    out.write("<td id=\"btn_deactive\">\n"
+                            + "                        <button class=\"btn btn-danger btn-block\" onclick=\"sttechg('" + sup.getIdsupplier() + "')\">Deactive</button>\n"
+                            + "                    </td>");
+                }
+                out.write("</tr>");
             }
-            out.write("</tr>");
-                    }
 
         } catch (Exception e) {
             e.printStackTrace();

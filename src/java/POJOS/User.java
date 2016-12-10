@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
+// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,7 +27,9 @@ public class User  implements java.io.Serializable {
      private Set<OnlineUsers> onlineUserses = new HashSet<OnlineUsers>(0);
      private Set<ItemPerPage> itemPerPages = new HashSet<ItemPerPage>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
+     private Set<CardDetails> cardDetailses = new HashSet<CardDetails>(0);
      private Set<Message> messagesForMfrom = new HashSet<Message>(0);
+     private Set<Invoice> invoices = new HashSet<Invoice>(0);
      private Set<Message> messagesForMto = new HashSet<Message>(0);
      private Set<Question> questions = new HashSet<Question>(0);
 
@@ -38,7 +40,7 @@ public class User  implements java.io.Serializable {
     public User(Utype utype) {
         this.utype = utype;
     }
-    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<OnlineUsers> onlineUserses, Set<ItemPerPage> itemPerPages, Set<WatchList> watchLists, Set<Message> messagesForMfrom, Set<Message> messagesForMto, Set<Question> questions) {
+    public User(Utype utype, String nic, String fname, String mname, String lname, String mobile, String mobile2, String img, Integer status, Set<Cart> carts, Set<Addres> addreses, Set<Login> logins, Set<OnlineUsers> onlineUserses, Set<ItemPerPage> itemPerPages, Set<WatchList> watchLists, Set<CardDetails> cardDetailses, Set<Message> messagesForMfrom, Set<Invoice> invoices, Set<Message> messagesForMto, Set<Question> questions) {
        this.utype = utype;
        this.nic = nic;
        this.fname = fname;
@@ -54,7 +56,9 @@ public class User  implements java.io.Serializable {
        this.onlineUserses = onlineUserses;
        this.itemPerPages = itemPerPages;
        this.watchLists = watchLists;
+       this.cardDetailses = cardDetailses;
        this.messagesForMfrom = messagesForMfrom;
+       this.invoices = invoices;
        this.messagesForMto = messagesForMto;
        this.questions = questions;
     }
@@ -171,12 +175,26 @@ public class User  implements java.io.Serializable {
     public void setWatchLists(Set<WatchList> watchLists) {
         this.watchLists = watchLists;
     }
+    public Set<CardDetails> getCardDetailses() {
+        return this.cardDetailses;
+    }
+    
+    public void setCardDetailses(Set<CardDetails> cardDetailses) {
+        this.cardDetailses = cardDetailses;
+    }
     public Set<Message> getMessagesForMfrom() {
         return this.messagesForMfrom;
     }
     
     public void setMessagesForMfrom(Set<Message> messagesForMfrom) {
         this.messagesForMfrom = messagesForMfrom;
+    }
+    public Set<Invoice> getInvoices() {
+        return this.invoices;
+    }
+    
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
     }
     public Set<Message> getMessagesForMto() {
         return this.messagesForMto;

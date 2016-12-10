@@ -21,9 +21,12 @@
     <mapping resource="POJOS/Question.hbm.xml"/>
     <mapping resource="POJOS/Grn.hbm.xml"/>
     <mapping resource="POJOS/Subcat.hbm.xml"/>
+    <mapping resource="POJOS/Invoice.hbm.xml"/>
     <mapping resource="POJOS/Cat.hbm.xml"/>
     <mapping resource="POJOS/CartItem.hbm.xml"/>
+    <mapping resource="POJOS/InvoiceItem.hbm.xml"/>
     <mapping resource="POJOS/Stock.hbm.xml"/>
+    <mapping resource="POJOS/CardDetails.hbm.xml"/>
     <mapping resource="POJOS/Supplier.hbm.xml"/>
     <mapping resource="POJOS/Cart.hbm.xml"/>
     <mapping resource="POJOS/Color.hbm.xml"/>

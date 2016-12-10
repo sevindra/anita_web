@@ -4,6 +4,12 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Subqueries"%>
+<%@page import="com.mysql.jdbc.Constants"%>
+<%@page import="org.hibernate.SQLQuery"%>
+<%@page import="org.hibernate.criterion.ProjectionList"%>
+<%@page import="java.io.Console"%>
+<%@page import="POJOS.Stock"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="POJOS.ItemImage"%>
@@ -26,6 +32,7 @@
         <!-- End WOWSlider.com HEAD section -->
         <title>Anita Designer wear</title>
         <script>
+            document.addEventListener('contextmenu', event => event.preventDefault());
             <%
                 String uri = request.getScheme() + "://"
                         + request.getServerName()
@@ -134,10 +141,11 @@
                         String currentpage = request.getParameter("pag");
 
                         Session ses = objsave.getses();
-                        Criteria cr = ses.createCriteria(Item.class);
-                        cr.add(Restrictions.eq("status", 1));
+                        Criteria cr = ses.createCriteria(Stock.class);
+                        cr.setProjection(Projections.groupProperty("item"));
+//                        cr.setProjection(Projections.rowCount());
                         //cr.addOrder(Order.desc("idproduct"));
-
+                        //out.write(cr.setProjection(Projections.rowCount()).toString());
                         if (currentpage != null) {
                             if (currentpage.equals("1")) {
                                 cr.setMaxResults(3);
@@ -163,7 +171,7 @@
                                         List<ItemImage> itemimage = c1.list();
                                         for (ItemImage i : itemimage) {
                                     %>
-                                    <a href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
                                     <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
                                     <%}%>
                                 </div>
@@ -175,7 +183,7 @@
                                     <div class="col-md-12">
                                         <p style="text-align: justify; height: 50px" ><%=item.getDescription()%></p>
                                         <div class="col-md-8 col-md-offset-2">
-                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><strong>View</strong></a>
+                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid=" + item.getIditem());%>"><strong>View</strong></a>
                                         </div>
 
                                     </div>
@@ -192,11 +200,27 @@
                     <%
                         int items = 0;
                         int pages = 0;
-                        Criteria cr1 = ses.createCriteria(Item.class);
-                        cr1.setProjection(Projections.rowCount());
-//                Product pr=(Product)cr.uniqueResult();
-                        items = Integer.parseInt(cr1.uniqueResult().toString());
+//                        Criteria cr1 = ses.createCriteria(Stock.class);
+                        //cr1.setProjection(Projections.groupProperty("item"));
 
+//                        ProjectionList projectionList = Projections.projectionList();
+//                        projectionList.add(Projections.groupProperty("item"));
+//                        cr1.setProjection(projectionList);
+//                        cr1.setProjection(Projections.rowCount());
+//                Product pr=(Product)cr.uniqueResult();
+//                        items = Integer.parseInt(cr1.uniqueResult().toString());
+                        String sql = "SELECT * FROM stock group by iditem";
+                        SQLQuery query = objsave.getses().createSQLQuery(sql);
+                        query.addEntity(Stock.class);
+                        //items = Integer.parseInt(query.uniqueResult().toString());
+                        List<Stock> sa=query.list();
+                        for(Stock a:sa){
+                        items=a.getItem().getIditem();
+                        }
+//                        Criteria nativeCriteria = objsave.createCriteria(Stock.class, Constants.SUB_PROFESSIONAL);
+//        nativeCriteria.add(Subqueries.propertyEq(Constants.SUB_PROFESSIONAL + "." + Constants.HCP_ID, criteria));
+//        nativeCriteria.setProjection(Projections.projectionList().add(Projections.rowCount()));
+//        rowCount = (Long) nativeCriteria.uniqueResult();
                         pages = items / 3;
                         if (items % 3 > 0) {
                             pages += 1;
@@ -204,9 +228,9 @@
                         // out.print(pages + "");
 
                         for (int i = 1; i <= pages; i++) {
-                            %><a href="index.jsp?pag=<%=i%>"><button class="btn btn-default" style="margin-left: 5px; margin-right: 5px; margin-bottom: 10px; color: red"><%out.print(i);%></button></a><%
+                    %><a href="index.jsp?pag=<%=i%>"><button class="btn btn-default" style="margin-left: 5px; margin-right: 5px; margin-bottom: 10px; color: red"><%out.print(i);%></button></a><%
                         }
-                    %>
+                        %>
                 </div>
 
             </div>

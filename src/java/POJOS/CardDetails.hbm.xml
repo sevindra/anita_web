@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2016 12:59:46 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.CardDetails" table="card_details" catalog="anitaweb" optimistic-lock="version">
+        <id name="idcardDetails" type="java.lang.Integer">
+            <column name="idcard_details" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="POJOS.User" fetch="select">
+            <column name="user_iduser" not-null="true" />
+        </many-to-one>
+        <property name="cardNo" type="string">
+            <column name="card_no" length="45" />
+        </property>
+        <property name="exp" type="string">
+            <column name="exp" length="45" />
+        </property>
+        <property name="sec" type="string">
+            <column name="sec" length="45" />
+        </property>
+        <property name="fname" type="string">
+            <column name="fname" length="45" />
+        </property>
+        <property name="lname" type="string">
+            <column name="lname" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

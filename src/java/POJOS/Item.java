@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
+// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,7 +20,6 @@ public class Item  implements java.io.Serializable {
      private String delivary;
      private Integer status;
      private Set<Color> colors = new HashSet<Color>(0);
-     private Set<Cart> carts = new HashSet<Cart>(0);
      private Set<CartItem> cartItems = new HashSet<CartItem>(0);
      private Set<TempGrnItem> tempGrnItems = new HashSet<TempGrnItem>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
@@ -37,7 +36,7 @@ public class Item  implements java.io.Serializable {
     public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<Cart> carts, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages, Set<Question> questions) {
+    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages, Set<Question> questions) {
        this.subcat = subcat;
        this.itemname = itemname;
        this.watching = watching;
@@ -46,7 +45,6 @@ public class Item  implements java.io.Serializable {
        this.delivary = delivary;
        this.status = status;
        this.colors = colors;
-       this.carts = carts;
        this.cartItems = cartItems;
        this.tempGrnItems = tempGrnItems;
        this.watchLists = watchLists;
@@ -119,13 +117,6 @@ public class Item  implements java.io.Serializable {
     
     public void setColors(Set<Color> colors) {
         this.colors = colors;
-    }
-    public Set<Cart> getCarts() {
-        return this.carts;
-    }
-    
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
     }
     public Set<CartItem> getCartItems() {
         return this.cartItems;

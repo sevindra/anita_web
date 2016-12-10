@@ -36,8 +36,6 @@ public class logout extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String user = request.getParameter("user");
-            HttpSession hs = request.getSession();
-            hs.invalidate();
 
             if (user == null) {
                     response.sendRedirect("index.jsp");
@@ -50,6 +48,8 @@ public class logout extends HttpServlet {
                     response.sendRedirect("index.jsp");
                 }
             }
+            HttpSession hs = request.getSession();
+            hs.invalidate();
 
         }
     }

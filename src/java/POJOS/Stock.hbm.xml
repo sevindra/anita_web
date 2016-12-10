@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 29, 2016 12:42:02 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 11, 2016 12:59:46 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Stock" table="stock" catalog="anitaweb" optimistic-lock="version">
         <id name="idstock" type="java.lang.Integer">
@@ -38,6 +38,12 @@
         <property name="time" type="time">
             <column name="time" length="0" />
         </property>
+        <set name="invoiceItems" table="invoice_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stock_idstock" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.InvoiceItem" />
+        </set>
         <set name="cartItems" table="cart_item" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="stock_idstock" not-null="true" />

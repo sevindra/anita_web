@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
+// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,7 +14,6 @@ public class Color  implements java.io.Serializable {
      private Integer idcolor;
      private Item item;
      private String color;
-     private Set<Cart> carts = new HashSet<Cart>(0);
      private Set<CartItem> cartItems = new HashSet<CartItem>(0);
      private Set<Stock> stocks = new HashSet<Stock>(0);
      private Set<TempGrnItem> tempGrnItems = new HashSet<TempGrnItem>(0);
@@ -26,10 +25,9 @@ public class Color  implements java.io.Serializable {
     public Color(Item item) {
         this.item = item;
     }
-    public Color(Item item, String color, Set<Cart> carts, Set<CartItem> cartItems, Set<Stock> stocks, Set<TempGrnItem> tempGrnItems) {
+    public Color(Item item, String color, Set<CartItem> cartItems, Set<Stock> stocks, Set<TempGrnItem> tempGrnItems) {
        this.item = item;
        this.color = color;
-       this.carts = carts;
        this.cartItems = cartItems;
        this.stocks = stocks;
        this.tempGrnItems = tempGrnItems;
@@ -55,13 +53,6 @@ public class Color  implements java.io.Serializable {
     
     public void setColor(String color) {
         this.color = color;
-    }
-    public Set<Cart> getCarts() {
-        return this.carts;
-    }
-    
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
     }
     public Set<CartItem> getCartItems() {
         return this.cartItems;

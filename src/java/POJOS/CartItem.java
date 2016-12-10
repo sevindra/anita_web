@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
+// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
 
 
 
@@ -17,6 +17,7 @@ public class CartItem  implements java.io.Serializable {
      private Stock stock;
      private Integer qty;
      private Double total;
+     private Double price;
 
     public CartItem() {
     }
@@ -29,7 +30,7 @@ public class CartItem  implements java.io.Serializable {
         this.size = size;
         this.stock = stock;
     }
-    public CartItem(Cart cart, Color color, Item item, Size size, Stock stock, Integer qty, Double total) {
+    public CartItem(Cart cart, Color color, Item item, Size size, Stock stock, Integer qty, Double total, Double price) {
        this.cart = cart;
        this.color = color;
        this.item = item;
@@ -37,6 +38,7 @@ public class CartItem  implements java.io.Serializable {
        this.stock = stock;
        this.qty = qty;
        this.total = total;
+       this.price = price;
     }
    
     public Integer getIdcartItem() {
@@ -94,6 +96,13 @@ public class CartItem  implements java.io.Serializable {
     
     public void setTotal(Double total) {
         this.total = total;
+    }
+    public Double getPrice() {
+        return this.price;
+    }
+    
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
 

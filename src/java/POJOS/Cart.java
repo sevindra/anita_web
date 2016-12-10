@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Nov 29, 2016 12:42:00 PM by Hibernate Tools 4.3.1
+// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,9 +13,6 @@ public class Cart  implements java.io.Serializable {
 
 
      private Integer idcart;
-     private Color color;
-     private Item item;
-     private Size size;
      private User user;
      private Double total;
      private Date date;
@@ -26,16 +23,10 @@ public class Cart  implements java.io.Serializable {
     }
 
 	
-    public Cart(Color color, Item item, Size size, User user) {
-        this.color = color;
-        this.item = item;
-        this.size = size;
+    public Cart(User user) {
         this.user = user;
     }
-    public Cart(Color color, Item item, Size size, User user, Double total, Date date, Date time, Set<CartItem> cartItems) {
-       this.color = color;
-       this.item = item;
-       this.size = size;
+    public Cart(User user, Double total, Date date, Date time, Set<CartItem> cartItems) {
        this.user = user;
        this.total = total;
        this.date = date;
@@ -49,27 +40,6 @@ public class Cart  implements java.io.Serializable {
     
     public void setIdcart(Integer idcart) {
         this.idcart = idcart;
-    }
-    public Color getColor() {
-        return this.color;
-    }
-    
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public Item getItem() {
-        return this.item;
-    }
-    
-    public void setItem(Item item) {
-        this.item = item;
-    }
-    public Size getSize() {
-        return this.size;
-    }
-    
-    public void setSize(Size size) {
-        this.size = size;
     }
     public User getUser() {
         return this.user;
