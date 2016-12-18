@@ -91,12 +91,17 @@
         <div>
             <%@include file="site/Category.jsp" %>
         </div>
+
         <div class="col-md-9">
+            <div>
+                <h2><strong>Watch List</strong></h2>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-body" id="watchlist">
                     <%
                         List<WatchList> wat = objsave.getses().createCriteria(WatchList.class).add(Restrictions.eq("user", user)).list();
-                        for (WatchList w : wat) {
+                        if (wat.size() != 0) {
+                            for (WatchList w : wat) {
                     %>
                     <div class="col-md-12">
                         <div class="panel panel-default">
@@ -142,6 +147,17 @@
 
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                        }
+                    } else {
+                    %>
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <center><h1>Your Watch List is Empty</h1></center>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@
                 <th>User NIC</th>
                 <th>Mobile</th>
                 <th>Mobile 2</th>
-                <th>Action</th>
+                <!--<th>Action</th>-->
                 </thead>
                 <%
                 List<Question> list=objsave.getses().createCriteria(Question.class).list();
@@ -55,7 +55,7 @@
                     <td><%=wl.getUser().getNic() %></td>
                     <td><%=wl.getUser().getMobile() %></td>
                     <td><%=wl.getUser().getMobile2() %></td>
-                    <td><button class="btn btn-warning btn-block">Send Message</button></td>
+                    <!--<td><button class="btn btn-warning btn-block">Send Message</button></td>-->
                 </tr>
                 <%}%>
             </table>

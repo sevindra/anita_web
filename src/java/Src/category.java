@@ -7,6 +7,7 @@ package Src;
 
 import POJOS.Cat;
 import POJOS.Item;
+import POJOS.PagesHasUtype;
 import POJOS.Subcat;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -67,20 +69,21 @@ public class category extends HttpServlet {
             String itemid = request.getParameter("itemid");
             String synproduct = request.getParameter("synproduct");
             String searchitem = request.getParameter("searchitem");
+            String synctbprivilage = request.getParameter("synctbprivilage");
 
             //out.write(updatebtn+" c");
             if (btnsave != null) {
                 if (btnsave.equals("Save")) {
                     Cat c = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", catname)).uniqueResult();
-                    if (c==null) {
-                        
-                    Cat cat = new Cat();
-                    cat.setCatname(catname);
-                    cat.setStatus(1);
-                    objsave.save(cat);
-                    out.write("Category Saved");
+                    if (c == null) {
+
+                        Cat cat = new Cat();
+                        cat.setCatname(catname);
+                        cat.setStatus(1);
+                        objsave.save(cat);
+                        out.write("Category Saved");
                     } else {
-                    out.write(catname+" Already Saved");
+                        out.write(catname + " Already Saved");
                     }
                 }
             }
@@ -90,24 +93,24 @@ public class category extends HttpServlet {
                     Criteria c = objsave.getses().createCriteria(Subcat.class);
                     c.add(Restrictions.eq("cat", cat));
                     c.add(Restrictions.eq("subname", subcatname));
-                    Subcat subc=(Subcat) c.uniqueResult();
-                    if (subc==null) {
-                        
-                    Subcat subcat = new Subcat();
-                    subcat.setCat(cat);
-                    subcat.setSubname(subcatname);
-                    subcat.setStatus(1);
-                    objsave.save(subcat);
-                    out.write("Sub Category Saved");
+                    Subcat subc = (Subcat) c.uniqueResult();
+                    if (subc == null) {
+
+                        Subcat subcat = new Subcat();
+                        subcat.setCat(cat);
+                        subcat.setSubname(subcatname);
+                        subcat.setStatus(1);
+                        objsave.save(subcat);
+                        out.write("Sub Category Saved");
                     } else {
-                    out.write(subcatname+" Already Saved");
+                        out.write(subcatname + " Already Saved");
                     }
-                    
+
                 }
             }
             if (subsearchcat != null) {
                 Cat cat = (Cat) objsave.getses().load(Cat.class, Integer.parseInt(subsearchcat));
-                List<Subcat> subcat = (List) objsave.getses().createCriteria(Subcat.class).add(Restrictions.eq("cat", cat)).list();
+                List<Subcat> subcat = (List) objsave.getses().createCriteria(Subcat.class).add(Restrictions.and(Restrictions.eq("cat", cat), Restrictions.eq("status", 1))).list();
                 for (Subcat subcat1 : subcat) {
                     out.write("<option value=" + subcat1.getIdsubcat() + ">" + subcat1.getSubname() + "</option>");
                 }
@@ -118,9 +121,32 @@ public class category extends HttpServlet {
                 Cat cat = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", catupdate)).uniqueResult();
                 out.write(cat.getIdcat().toString());
             }
+            if (synctbprivilage != null) {
+                //out.write(catupdate);
+                List<PagesHasUtype> ph = objsave.getses().createCriteria(PagesHasUtype.class).addOrder(Order.asc("utype")).list();
+                for (PagesHasUtype phu : ph) {
+
+                    out.write("\n");
+                    out.write("                                <tr>\n");
+                    out.write("                                    <td>");
+                    out.print(phu.getUtype().getUtype());
+                    out.write("</td>\n");
+                    out.write("                                    <td>");
+                    out.print(phu.getPages().getPageName());
+                    out.write("</td>\n");
+                    out.write("                            <input id=\"phuid\" type=\"hidden\" value=\"");
+                    out.print(phu.getIdpagesHasUtype());
+                    out.write("\"/>\n");
+                    out.write("                            <td><button class=\"btn btn-danger pull-right\" onclick=\"delete_privileges('");
+                    out.print(phu.getIdpagesHasUtype());
+                    out.write("')\">Delete</button></td>\n");
+                    out.write("                            </tr>\n");
+                    out.write("                            ");
+                }
+            }
             if (subcatupdate != null) {
 //                out.write("name "+updatesubcatcatid);
-                Cat cat= (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", updatesubcatcatid.toString())).uniqueResult();
+                Cat cat = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", updatesubcatcatid.toString())).uniqueResult();
                 Criteria c = objsave.getses().createCriteria(Subcat.class);
                 c.add(Restrictions.eq("subname", subcatupdate));
                 c.add(Restrictions.eq("cat", cat));
@@ -135,16 +161,7 @@ public class category extends HttpServlet {
                     out.write("Category Updated");
                 }
             }
-            if (updatebtnsubcat != null) {
-                if (updatebtnsubcat.equals("Update")) {
-                    Subcat subcat = (Subcat) objsave.getses().load(Subcat.class, Integer.parseInt(updatesubcatid));
-                    Cat cat = (Cat) objsave.getses().load(Cat.class, Integer.parseInt(catid));
-                    subcat.setCat(cat);
-                    subcat.setSubname(subcatname);
-                    objsave.update(subcat);
-                    out.write("Subcategory Updated");
-                }
-            }
+
             if (search != null) {
                 if (search.equals("ok")) {
                     //out.write("tb");
@@ -204,7 +221,7 @@ public class category extends HttpServlet {
                 if (searchitem.equals("ok")) {
                     //out.write("tb");
                     try {
-                        Criteria c = objsave.getses().createCriteria(Item.class).add(Restrictions.like("itemname", searchtf, MatchMode.START));
+                        Criteria c = objsave.getses().createCriteria(Item.class).add(Restrictions.like("itemname", searchtf, MatchMode.ANYWHERE));
                         List<Item> list = c.list();
                         for (Item cat : list) {
                             out.write("<tr>");
@@ -347,7 +364,7 @@ public class category extends HttpServlet {
                 if (synproduct.equals("ok")) {
                     //out.write("itemid");
                     try {
-                        
+
                         Criteria c = objsave.getses().createCriteria(Item.class);
                         List<Item> list = c.list();
                         for (Item cat : list) {

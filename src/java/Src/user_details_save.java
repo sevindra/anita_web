@@ -5,7 +5,9 @@
  */
 package Src;
 
+import POJOS.Addres;
 import POJOS.Item;
+import POJOS.State;
 import POJOS.User;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -120,7 +123,8 @@ public class user_details_save extends HttpServlet {
                 }
 
             }
-            User us = (User) request.getSession().getAttribute("user_obj");
+            User u = (User) request.getSession().getAttribute("user_obj");
+            User us=(User) objsave.getses().load(User.class, Integer.parseInt(u.getIduser().toString()));
             //System.out.println(us.getFname());
             us.setNic(nic);
             us.setFname(fname);
@@ -132,6 +136,29 @@ public class user_details_save extends HttpServlet {
             us.setStatus(1);
             //objsave.ses=null;
             objsave.update(us);
+            
+            Addres a=(Addres) objsave.getses().createCriteria(Addres.class).add(Restrictions.eq("user", us)).uniqueResult();
+                State s=(State) objsave.getses().load(State.class, Integer.parseInt(state));
+            if (a==null) {
+                Addres ad=new Addres();
+                ad.setAddress(address);
+                ad.setCity(city);
+                ad.setPrimaryAddress(1);
+                ad.setUser(us);
+                ad.setState(s);
+                ad.setStatus(1);
+                ad.setZip(pcode);
+                objsave.save(ad);
+                
+            } else {
+                a.setAddress(address);
+                a.setCity(city);
+                a.setPrimaryAddress(1);
+                a.setState(s);
+                a.setUser(us);
+                a.setZip(pcode);
+                objsave.update(a);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -31,24 +31,33 @@
                 <th>Mobile</th>
                 <th>Role</th>
                 </thead>
-                <%
-                    Session s = objsave.getses();
-                    Criteria c = s.createCriteria(OnlineUsers.class);
-                    List<OnlineUsers> us = c.list();
-                    for (OnlineUsers u : us) {
-                %>
-                <tr>
-                    <td><img src="../<%=u.getUser().getImg()%>" width="200" height="150"/></td>
-                    <td><%=u.getUser().getFname()%></td>
-                    <td><%=u.getUser().getMname() %></td>
-                    <td><%=u.getUser().getLname() %></td>
-                    <td><%=u.getUser().getNic() %></td>
-                    <td><%=u.getUser().getMobile() %></td>
-                    <td><%=u.getUser().getUtype().getUtype() %></td>
-                    <!--<td><button class="btn btn-danger">Deactive</button></td>-->
-                </tr>
-                <%}%>
+                <tbody id="online_tbody">
+
+                    <%
+                        String currentpage = request.getParameter("pag");
+                        Session s = objsave.getses();
+                        Criteria c = s.createCriteria(OnlineUsers.class);
+
+                        
+                        List<OnlineUsers> us = c.list();
+                        for (OnlineUsers u : us) {
+                    %>
+                    <tr>
+                        <td><img src="../<%=u.getUser().getImg()%>" width="200" height="150"/></td>
+                        <td><%=u.getUser().getFname()%></td>
+                        <td><%=u.getUser().getMname()%></td>
+                        <td><%=u.getUser().getLname()%></td>
+                        <td><%=u.getUser().getNic()%></td>
+                        <td><%=u.getUser().getMobile()%></td>
+                        <td><%=u.getUser().getUtype().getUtype()%></td>
+                        <!--<td><button class="btn btn-danger">Deactive</button></td>-->
+                    </tr>
+                    <%}%>
+                </tbody>
             </table>
+
+            
         </div>
+        
     </body>
 </html>

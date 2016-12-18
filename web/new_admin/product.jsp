@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="POJOS.User"%>
 <%@page import="Src.privilege_class"%>
 <%@page import="POJOS.TempSize"%>
@@ -106,6 +107,7 @@
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         var color = document.getElementById('color').value = "";
+                        var color = document.getElementById('color').focus();
                         sync_color_tb();
                         //alert(xhttp.responseText);
 
@@ -122,6 +124,7 @@
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
                         var size = document.getElementById('size').value = "";
+                        var size = document.getElementById('size').focus();
                         sync_size_tb();
                         //alert(xhttp.responseText);
 
@@ -166,7 +169,7 @@
                     //alert(xhttp.readyState);
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                        alert(xhttp.responseText);
+                        //alert(xhttp.responseText);
                         document.getElementById('ptable').innerHTML = xhttp.responseText;
                     }
                 };
@@ -191,10 +194,11 @@
                 $('#upload-form').ajaxForm({
                     success: function (msg) {
                         document.getElementById('itemname').value = "";
-                        document.getElementById('myimg').value = "";
+                        document.getElementById('myimg').innerHTML = "";
                         document.getElementById('des').value = "";
                         document.getElementById('color').value = "";
                         document.getElementById('size').value = "";
+                        document.getElementById('fileName').value = "";
                         document.getElementById('colortb').innerHTML = "";
                         document.getElementById('sizetb').innerHTML = "";
                         sync_table();
@@ -225,15 +229,37 @@
                 xhttp.send();
             }
 
+            function update() {
+                var subcat = document.getElementById('subcat').value;
+                var catid = document.getElementById('catid').value;
+                var pname = document.getElementById('itemname').value;
+                var xhttp = new XMLHttpRequest();
+//                alert("ok");
+                //alert("mes");
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+//                        success:function(response) {
+                       // window.location.href = "checkout.jsp";
+                        //alert("ok");
+//                        }
+                        alert(xhttp.responseText);
+//                        document.getElementById('pr').innerHTML ="LKR. "+ xhttp.responseText;
+//                        document.getElementById('pr2').value = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?catid=" + catid + "&subcatid=" + subcat + "&pname=" + pname + "&pupdate=ok", true);
+                xhttp.send();
+            }
             subsearch();
         </script>
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Product</strong></h3>
-        <% //if (request.getSession().getAttribute("user_obj").toString() != null) {
-//                privilege_class p = new privilege_class();
-//                User su = (User) request.getSession().getAttribute("user_obj");
-//                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+               privilege_class p = new privilege_class();
+               User su = (User) request.getSession().getAttribute("user_obj");
+               if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -245,7 +271,7 @@
                             <div class="col-md-8">
                                 <select class="form-control" id="catid" onchange="subsearch()" onclick="subsearch()" name="catid">
                                     <%
-                                        List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
+                                        List<Cat> list = objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("status", 1)).list();
                                         for (Cat cat : list) {
                                     %>
                                     <option value="<%=cat.getIdcat()%>"><%=cat.getCatname()%></option>
@@ -383,14 +409,14 @@
 
                                     <button class="btn btn-primary pull-right btn-block" type="submit">Save</button>
                                 </div>
-                                <div class="col-md-3 pull-right">
+<!--                                <div class="col-md-3 pull-right">
 
-                                    <button class="btn btn-info pull-right btn-block" onclick="">Update</button>
-                                </div>
+                                    <button class="btn btn-info pull-right btn-block" type="button" name="update" value="ok">Update</button>
+                                </div>-->
                             </div>
                         </div>
-
                     </form>
+
 
 
                 </div>
@@ -408,7 +434,7 @@
             </div>
             <br/>
             <div class="row">
-                <div style="display: block; max-height: 250px; overflow: hidden; overflow-y: scroll;">
+                <div style="display: block; max-height: 570px; overflow: hidden; overflow-y: scroll;">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -450,13 +476,13 @@
             </div>
             <br/>
         </div>
-        <%//} else {
+       <%} else {
         %>
-        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-                </div>-->
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px'  />
+        </div>
         <%
-            //     }
-            // }%>
+               }
+           }%>
     </body>
 </html>

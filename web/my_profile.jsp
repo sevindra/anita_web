@@ -143,6 +143,44 @@
                 });
             });
 
+            function save_delivary() {
+                var fname = document.getElementById('fnam').value;
+                var lname = document.getElementById('lnam').value;
+                var address = document.getElementById('addres').value;
+                var city = document.getElementById('cit').value;
+                var state = document.getElementById('stat').value;
+                var pcode = document.getElementById('zi').value;
+                var mobile = document.getElementById('mobil').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        alert(xhttp.responseText);
+
+                        //document.getElementById('cartqty').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "user_delivery_address?fname="+fname+"&lname="+lname+"&address="+address+"&city="+city+"&state="+state+"&pcode="+pcode+"&mobile="+mobile+"&del=ok", true);
+                xhttp.send();
+            }
+            function change_pw() {
+                var cupass = document.getElementById('cupass').value;
+                var newpass = document.getElementById('newpass').value;
+                var copass = document.getElementById('copass').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+//                        alert(xhttp.responseText);
+
+                        document.getElementById('cange').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "change_pw?cupass="+cupass+"&newpass="+newpass+"&copass="+copass+"&change=ok", true);
+                xhttp.send();
+            }
 
         </script>
         <script type="text/javascript">
@@ -227,11 +265,15 @@
                                 c2.add(Restrictions.eq("primaryAddress", 1));
                                 Addres addr = (Addres) c2.uniqueResult();
                             %>
-                            <span class="glyphicon glyphicon-map-marker"></span> <%=addr.getAddress() + " " + addr.getCity() + " " + addr.getZip()%>
+                            <span class="glyphicon glyphicon-map-marker"></span> <%if (addr != null) {
+                                    out.write(addr.getAddress() + " " + addr.getCity() + " " + addr.getZip());
+                                }%>
                         </div>
                         <br/>
                         <div class="row">
-                            <span class="glyphicon glyphicon-pencil"></span> <%=user.getNic()%>
+                            <span class="glyphicon glyphicon-pencil"></span> <%if (user.getNic() != null) {
+                                    out.write(user.getNic());
+                                }%>
                         </div>
                         <br/>
                         <div class="row">
@@ -271,16 +313,16 @@
                                                     <h5><strong>Name</strong></h5>
                                                 </div>
                                                 <%
-                                                User us = (User) request.getSession().getAttribute("user_obj");
+                                                    User us = (User) request.getSession().getAttribute("user_obj");
                                                 %>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="First Name" class="form-control" name="fname" value="<%=us.getFname() %>"/>
+                                                    <input type="text" placeholder="First Name" class="form-control" name="fname" value="<%=us.getFname()%>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="Middle Name" class="form-control" name="mname" value="<%=us.getMname() %>"/>
+                                                    <input type="text" placeholder="Middle Name" class="form-control" name="mname" value="<%=us.getMname()%>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="Last Name" class="form-control" name="lname" value="<%=us.getLname() %>"/>
+                                                    <input type="text" placeholder="Last Name" class="form-control" name="lname" value="<%=us.getLname()%>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -290,12 +332,16 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <%
-                                                    Addres ad= (Addres)objsave.getses().createCriteria(Addres.class).add(Restrictions.eq("user", us)).uniqueResult();
+                                                        Addres ad = (Addres) objsave.getses().createCriteria(Addres.class).add(Restrictions.and(Restrictions.eq("user", us),Restrictions.eq("primaryAddress", 1))).uniqueResult();
                                                     %>
-                                                    <input type="text" placeholder="Address" class="form-control" name="address" value="<%=ad.getAddress() %>"/>
+                                                    <input type="text" placeholder="Address" class="form-control" name="address" value="<%if (ad != null) {
+                                                            out.write(ad.getAddress());
+                                                        } %>"/>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" placeholder="City" class="form-control" name="city" value="<%=ad.getCity() %>"/>
+                                                    <input type="text" placeholder="City" class="form-control" name="city" value="<%if (ad != null) {
+                                                            out.write(ad.getCity());
+                                                        } %>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -322,7 +368,9 @@
                                                     <h5><strong>Postal Code (Zip)</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control" name="pcode" value="<%=ad.getZip() %>"/>
+                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control" name="pcode" value="<%if (ad != null) {
+                                                            out.write(ad.getZip());
+                                                        }%>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -331,7 +379,7 @@
                                                     <h5><strong>Primary Mobile</strong></h5>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" placeholder="Mobile" class="form-control" name="mobile" value="<%=us.getMobile() %>"/>
+                                                    <input type="text" placeholder="Mobile" class="form-control" name="mobile" value="<%=us.getMobile()%>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -340,7 +388,7 @@
                                                     <h5><strong>NIC</strong></h5>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" placeholder="NIC" class="form-control" name="nic" value="<%=us.getNic() %>"/>
+                                                    <input type="text" placeholder="NIC" class="form-control" name="nic" value="<%=us.getNic()%>"/>
                                                 </div>
                                             </div>
                                             <br/>
@@ -387,14 +435,23 @@
                             </div>
                             <div id="collapse2" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <h3><strong>Primary Delivery Address</strong></h3>
+                                    <h3><strong>Delivery Address</strong></h3>
                                     <hr/>
+                                    <%
+                                    Criteria cd=objsave.getses().createCriteria(Addres.class);
+                                    cd.add(Restrictions.eq("user", user));
+                                    cd.add(Restrictions.eq("primaryAddress", 0));
+                                    Addres a=(Addres)cd.uniqueResult();
+                                    %>
                                     <div class="row">
                                         <div class="col-md-2 col-md-offset-1">
                                             <h5><strong>Contact Name</strong></h5>
                                         </div>
-                                        <div class="col-md-4">
-                                            <input type="text" placeholder="Contact Name" class="form-control"/>
+                                        <div class="col-md-3">
+                                            <input type="text" placeholder="First Name" class="form-control" id="fnam" value="<%if(a!=null){out.write(a.getUser().getFname());}%>"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" placeholder="Last Name" class="form-control" id="lnam" value="<%if(a!=null){out.write(a.getUser().getLname());}%>"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -403,10 +460,10 @@
                                             <h5><strong>Street Address</strong></h5>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Address" class="form-control"/>
+                                            <input type="text" placeholder="Address" class="form-control" id="addres" value="<%if(a!=null){out.write(a.getAddress());}%>"/>
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" placeholder="City" class="form-control"/>
+                                            <input type="text" placeholder="City" class="form-control" id="cit" value="<%if(a!=null){out.write(a.getCity());}%>"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -415,7 +472,16 @@
                                             <h5><strong>State</strong></h5>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="State" class="form-control"/>
+                                            <select name="state" class="form-control" id="stat">   
+                                                <%
+                                                    Session se = controler.connector.getSessionFactory().openSession();
+                                                    Criteria c11 = se.createCriteria(State.class);
+                                                    List<State> li11 = c11.list();
+                                                    for (State state : li11) {
+                                                %>
+                                                <option value="<%=state.getIdstate()%>"><%=state.getState()%></option>
+                                                <%}%>
+                                            </select>
                                         </div>
                                     </div>
                                     <br/>
@@ -424,7 +490,7 @@
                                             <h5><strong>Postal Code (Zip)</strong></h5>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Postal Code (Zip)" class="form-control"/>
+                                            <input type="text" placeholder="Postal Code (Zip)" class="form-control" id="zi" value="<%if(a!=null){out.write(a.getZip());}%>"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -433,74 +499,74 @@
                                             <h5><strong>Mobile</strong></h5>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Mobile" class="form-control"/>
+                                            <input type="text" placeholder="Mobile" class="form-control" id="mobil" value="<%if(a!=null){out.write(a.getUser().getMobile());}%>"/>
                                         </div>
                                     </div>
                                     <br/>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button id="add_new_address" class="btn btn-warning" data-toggle="collapse" data-target="#demo">Add New Address</button>
-                                            <button class="btn btn-primary pull-right del_add_savebtn"><strong>Save Details</strong></button>
+                                            <!--<button id="add_new_address" class="btn btn-warning" data-toggle="collapse" data-target="#demo">Add New Address</button>-->
+                                            <button class="btn btn-primary pull-right del_add_savebtn" onclick="save_delivary()"><strong>Save Details</strong></button>
                                         </div>
 
                                     </div>
-                                    <div id="demo" class="collapse">
-                                        <h3><strong>Add New Address</strong></h3>
-                                        <hr/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Contact Name</strong></h5>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" placeholder="Contact Name" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Street Address</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Address" class="form-control"/>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" placeholder="City" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>State</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="State" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Postal Code (Zip)</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Postal Code (Zip)" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-2 col-md-offset-1">
-                                                <h5><strong>Mobile</strong></h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" placeholder="Mobile" class="form-control"/>
-                                            </div>
-                                        </div>
-                                        <br/>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <button id="del_add_savebtn2" class="btn btn-primary pull-right"><strong>Save Details</strong></button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--                                    <div id="demo" class="collapse">
+                                                                            <h3><strong>Add New Address</strong></h3>
+                                                                            <hr/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2 col-md-offset-1">
+                                                                                    <h5><strong>Contact Name</strong></h5>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <input type="text" placeholder="Contact Name" class="form-control"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2 col-md-offset-1">
+                                                                                    <h5><strong>Street Address</strong></h5>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <input type="text" placeholder="Address" class="form-control"/>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <input type="text" placeholder="City" class="form-control"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2 col-md-offset-1">
+                                                                                    <h5><strong>State</strong></h5>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <input type="text" placeholder="State" class="form-control"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2 col-md-offset-1">
+                                                                                    <h5><strong>Postal Code (Zip)</strong></h5>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <input type="text" placeholder="Postal Code (Zip)" class="form-control"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2 col-md-offset-1">
+                                                                                    <h5><strong>Mobile</strong></h5>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <input type="text" placeholder="Mobile" class="form-control"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br/>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <button id="del_add_savebtn2" class="btn btn-primary pull-right"><strong>Save Details</strong></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
 
                                 </div>
                             </div>
@@ -519,7 +585,7 @@
                                             <h5><strong>Password</strong></h5>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="password" class="form-control" placeholder="Current Password"/>
+                                            <input type="password" class="form-control" placeholder="Current Password" id="cupass"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -527,7 +593,7 @@
                                         <div class="col-md-2 col-md-offset-1">
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="password" class="form-control" placeholder="New Password"/>
+                                            <input type="password" class="form-control" placeholder="New Password" id="newpass"/>
                                         </div>
                                     </div>
                                     <br/>
@@ -535,13 +601,20 @@
                                         <div class="col-md-2 col-md-offset-1">
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="password" class="form-control" placeholder="Confirm New Password"/>
+                                            <input type="password" class="form-control" placeholder="Confirm New Password" id="copass"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-2 col-md-offset-1">
+                                        </div>
+                                        <div class="col-md-4" id="cange">
                                         </div>
                                     </div>
                                     <br/>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button id="del_add_savebtn2" class="btn btn-primary pull-right"><strong>Save Details</strong></button>
+                                            <button id="del_add_savebtn2" class="btn btn-primary pull-right" onclick="change_pw()"><strong>Save Details</strong></button>
                                         </div>
                                     </div>
                                     <br/>

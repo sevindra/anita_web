@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
+// Generated Dec 13, 2016 9:42:23 AM by Hibernate Tools 4.3.1
 
 
 
@@ -10,6 +10,8 @@ public class InvoiceItem  implements java.io.Serializable {
 
 
      private Integer idinvoiceItem;
+     private Invoice invoice;
+     private Item item;
      private Stock stock;
      private Integer qty;
      private Double price;
@@ -19,10 +21,14 @@ public class InvoiceItem  implements java.io.Serializable {
     }
 
 	
-    public InvoiceItem(Stock stock) {
+    public InvoiceItem(Invoice invoice, Item item, Stock stock) {
+        this.invoice = invoice;
+        this.item = item;
         this.stock = stock;
     }
-    public InvoiceItem(Stock stock, Integer qty, Double price, Double total) {
+    public InvoiceItem(Invoice invoice, Item item, Stock stock, Integer qty, Double price, Double total) {
+       this.invoice = invoice;
+       this.item = item;
        this.stock = stock;
        this.qty = qty;
        this.price = price;
@@ -35,6 +41,20 @@ public class InvoiceItem  implements java.io.Serializable {
     
     public void setIdinvoiceItem(Integer idinvoiceItem) {
         this.idinvoiceItem = idinvoiceItem;
+    }
+    public Invoice getInvoice() {
+        return this.invoice;
+    }
+    
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+    public Item getItem() {
+        return this.item;
+    }
+    
+    public void setItem(Item item) {
+        this.item = item;
     }
     public Stock getStock() {
         return this.stock;

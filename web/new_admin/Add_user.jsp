@@ -144,27 +144,67 @@
                 $("#" + x).remove();
             }
 
+            $(function () {
+                $('#upload-form').ajaxForm({
+                    success: function (msg) {
+                        document.getElementById('fname').value = "";
+                        document.getElementById('mname').value = "";
+                        document.getElementById('lname').value = "";
+                        document.getElementById('address').value = "";
+                        document.getElementById('city').value = "";
+                        document.getElementById('mobile').value = "";
+                        document.getElementById('mobile2').value = "";
+                        document.getElementById('email').value = "";
+                        document.getElementById('pass').value = "";
+//                        document.getElementById('cpass').value = "";
+                        sync_table();
+                        alert("File has been uploaded successfully");
+                    },
+                    error: function (msg) {
+                        $("#upload-error").text("Couldn't upload file");
+                    }
+                });
+            });
+
+            function sync_table() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        document.getElementById('udb').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../search?synuser=ok", true);
+                xhttp.send();
+            }
         </script>
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Add User</strong></h3>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-heading"><strong>Add User</strong></div>
                 <div class="panel-body">
 
-                    <form id="upload-form" class="upload-box" action="../admin_add_user" method="post" enctype="multipart/form-data">
+                    <form action="../admin_add_user"  id="upload-form" class="upload-box" method="post" enctype="multipart/form-data">
                         <span id="upload-error" class="error">${uploadError}</span>
                         <div class="row">
                             <div class="col-md-4">
                                 <h5><strong>Name : </strong></h5>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="First Name" name="fname"/>
+                                <input class="form-control" placeholder="First Name" name="fname" required="" id="fname"/>
                                 <br/>
-                                <input class="form-control" placeholder="Midle Name" name="mname"/>
+                                <input class="form-control" placeholder="Midle Name" name="mname" id="mname"/>
                                 <br/>
-                                <input class="form-control" placeholder="Last Name" name="lname"/>
+                                <input class="form-control" placeholder="Last Name" name="lname" required="" id="lname"/>
                             </div>
                         </div>
                         <br/>
@@ -173,9 +213,9 @@
                                 <h5><strong>Address : </strong></h5>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="Address" name="address"/>
+                                <input class="form-control" placeholder="Address" name="address" required="" id="address"/>
                                 <br/>
-                                <input class="form-control" placeholder="City" name="city"/>                            
+                                <input class="form-control" placeholder="City" name="city" required="" id="city"/>                            
                             </div>
                         </div>
                         <br/>
@@ -184,7 +224,7 @@
                                 <h5><strong>State</strong></h5>
                             </div>
                             <div class="col-md-8">
-                                <select name="state" class="form-control">   
+                                <select name="state" class="form-control" required="">   
                                     <%
                                         Session ses = controler.connector.getSessionFactory().openSession();
                                         Criteria c1 = ses.createCriteria(State.class);
@@ -202,7 +242,7 @@
                                 <h5><strong>Mobile : </strong></h5>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="Mobile No1" name="mobile"/>                    
+                                <input class="form-control" placeholder="Mobile No1" name="mobile" required="" id="mobile"/>                    
                             </div>
                         </div>
                         <br/>
@@ -210,7 +250,16 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="Mobile No2" name="mobile2"/>                    
+                                <input class="form-control" placeholder="Mobile No2" name="mobile2" id="mobile2"/>                    
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5><strong>Email : </strong></h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input placeholder="Email" name="email" required="" class="form-control" id="email"/>              
                             </div>
                         </div>
                         <br/>
@@ -219,7 +268,7 @@
                                 <h5><strong>NIC : </strong></h5>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="NIC" name="nic"/>                    
+                                <input class="form-control" placeholder="NIC" name="nic" required="" id="nic"/>                    
                             </div>
                         </div>
                         <br/>
@@ -230,7 +279,7 @@
                             <div class="col-md-8">
                                 <select class="form-control" name="utype">
                                     <%
-                                        List<Utype> ut = objsave.getses().createCriteria(Utype.class).list();
+                                        List<Utype> ut = objsave.getses().createCriteria(Utype.class).add(Restrictions.or(Restrictions.eq("idutype", 2), Restrictions.eq("idutype", 3))).list();
                                         for (Utype utype : ut) {
                                     %>
                                     <option value="<%=utype.getIdutype()%>"><%=utype.getUtype()%></option>
@@ -265,6 +314,25 @@
                         <br/>
                         <div class="row">
                             <div class="col-md-4">
+                                <h5><strong>Password : </strong></h5>
+                            </div>
+                            <div class="col-md-8">
+                                <input placeholder="Password" name="pass" required="" class="form-control" id="pass"/>              
+                            </div>
+                        </div>
+                        <br/>
+                        <!--                        <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h5><strong> Confirm Password : </strong></h5>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input placeholder="Confirm Password" name="cpass" required="" class="form-control"/>              
+                                                    </div>
+                                                </div>
+                                                <br/>-->
+
+                        <div class="row">
+                            <div class="col-md-4">
                             </div>
                             <div class="col-md-8">
                                 <div class="col-md-4 pull-right">
@@ -286,22 +354,32 @@
                 <th>NIC</th>
                 <th>Users</th>
                 </thead>
-                <%
-                    Utype uty = (Utype) objsave.getses().load(Utype.class, 4);
-                    Session s = objsave.getses();
-                    Criteria c = s.createCriteria(User.class);
-                    c.add(Restrictions.eq("status", 1));
-                    c.add(Restrictions.not(Restrictions.eq("utype", uty)));
-                    List<User> us = c.list();
-                    for (User u : us) {
-                %>
-                <tr>
-                    <td><%=u.getNic()%></td>
-                    <td><%=u.getFname()%></td>
-                </tr>
-                <%}%>
+                <tbody id="udb">
+                    <%
+                        Utype uty = (Utype) objsave.getses().load(Utype.class, 4);
+                        Session s = objsave.getses();
+                        Criteria c = s.createCriteria(User.class);
+                        c.add(Restrictions.eq("status", 1));
+                        c.add(Restrictions.not(Restrictions.eq("utype", uty)));
+                        List<User> us = c.list();
+                        for (User u : us) {
+                    %>
+                    <tr>
+                        <td><%=u.getNic()%></td>
+                        <td><%=u.getFname()%></td>
+                    </tr>
+                    <%}%>
+                </tbody>
             </table>
 
         </div>
+        <%} else {
+        %>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+            <img src='../img/no_access.jpg' style='width:100%;height:450px'  />
+        </div>
+        <%
+                }
+            }%>
     </body>
 </html>

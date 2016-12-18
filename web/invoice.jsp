@@ -4,6 +4,12 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="java.util.List"%>
+<%@page import="POJOS.InvoiceItem"%>
+<%@page import="POJOS.Login"%>
+<%@page import="Src.objsave"%>
+<%@page import="POJOS.Invoice"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,32 +17,40 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Invoice</title>
         <%@include file="inc.jsp" %>
+        <script>
+            function inprint(){
+                window.print();
+            }
+        </script>
     </head>
     <body>
+        <%
+        Invoice i=(Invoice)objsave.getses().load(Invoice.class, Integer.parseInt(request.getParameter("inid").toString()));
+        %>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="invoice-title">
-                        <h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+                        <h2>Invoice<button class="btn btn-default" style="margin-left: 20px" onclick="inprint()">Print</button><a href="index.jsp"><button class="btn btn-primary" style="margin-left: 20px">Home</button></a></h2><h3 class="pull-right">Order # <%="000"+i.getInvoiceNo() %></h3>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-xs-6">
                             <address>
                                 <strong>Billed To:</strong><br>
-                                John Smith<br>
-                                1234 Main<br>
-                                Apt. 4B<br>
-                                Springfield, ST 54321
+                                <%=i.getUser().getFname()+" "+i.getUser().getLname() %><br>
+                                <%=i.getBillAddress() %><br>
+                                <%=i.getBillCity() %><br>
+                                <%=i.getBillZip() %>
                             </address>
                         </div>
                         <div class="col-xs-6 text-right">
                             <address>
-                                <strong>Shipped To:</strong><br>
-                                Jane Smith<br>
-                                1234 Main<br>
-                                Apt. 4B<br>
-                                Springfield, ST 54321
+                                <strong>Delivery To:</strong><br>
+                                <%=i.getUser().getFname()+" "+i.getUser().getLname() %><br>
+                                <%=i.getDelAddress() %><br>
+                                <%=i.getDelCitiy() %><br>
+                                <%=i.getDelZip() %>
                             </address>
                         </div>
                     </div>
@@ -44,14 +58,17 @@
                         <div class="col-xs-6">
                             <address>
                                 <strong>Payment Method:</strong><br>
-                                Visa ending **** 4242<br>
-                                jsmith@email.com
+                                Card <%=i.getCardDetails().getCardNo() %><br>
+                                <%
+                                Login l=(Login)objsave.getses().load(Login.class, Integer.parseInt(i.getUser().getIduser().toString()));
+                                %>
+                                <%=l.getEmail() %>
                             </address>
                         </div>
                         <div class="col-xs-6 text-right">
                             <address>
                                 <strong>Order Date:</strong><br>
-                                March 7, 2014<br><br>
+                                <%=i.getDate().toString() %><br><br>
                             </address>
                         </div>
                     </div>
@@ -76,42 +93,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                        <%
+                                        List<InvoiceItem> ii=objsave.getses().createCriteria(InvoiceItem.class).add(Restrictions.eq("invoice", i)).list();
+                                        for(InvoiceItem iit:ii){
+                                        %>
                                         <tr>
-                                            <td>BS-200</td>
-                                            <td class="text-center">$10.99</td>
-                                            <td class="text-center">1</td>
-                                            <td class="text-right">$10.99</td>
+                                            <td><%=iit.getItem().getItemname() %></td>
+                                            <td class="text-center"><%=iit.getPrice() %></td>
+                                            <td class="text-center"><%=iit.getQty() %></td>
+                                            <td class="text-right"><%=iit.getTotal() %></td>
                                         </tr>
-                                        <tr>
-                                            <td>BS-400</td>
-                                            <td class="text-center">$20.00</td>
-                                            <td class="text-center">3</td>
-                                            <td class="text-right">$60.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>BS-1000</td>
-                                            <td class="text-center">$600.00</td>
-                                            <td class="text-center">1</td>
-                                            <td class="text-right">$600.00</td>
-                                        </tr>
+                                        <%}%>
                                         <tr>
                                             <td class="thick-line"></td>
                                             <td class="thick-line"></td>
-                                            <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                            <td class="thick-line text-right">$670.99</td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <!--<td class="thick-line text-center"><strong>Subtotal</strong></td>-->
+                                            <!--<td class="thick-line text-right">$670.99</td>-->
                                         </tr>
                                         <tr>
                                             <td class="no-line"></td>
                                             <td class="no-line"></td>
-                                            <td class="no-line text-center"><strong>Shipping</strong></td>
-                                            <td class="no-line text-right">$15</td>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                            <!--<td class="no-line text-center"><strong>Delivery</strong></td>-->
+                                            <!--<td class="no-line text-right">$15</td>-->
                                         </tr>
                                         <tr>
                                             <td class="no-line"></td>
                                             <td class="no-line"></td>
                                             <td class="no-line text-center"><strong>Total</strong></td>
-                                            <td class="no-line text-right">$685.99</td>
+                                            <td class="no-line text-right"><strong><%=i.getTotal() %></strong></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -31,26 +31,41 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-
+                        sync_table();
                         alert(xhttp.responseText);
                         document.getElementById('admin_msg').innerHTML="";
                     }
                 };
-                xhttp.open("POST", "../user_message?user_message=" + message + "&message_btn=" + message_btn + "&uid=" + uid, true);
+                xhttp.open("POST", "../admin_msg?user_message=" + message + "&message_btn=" + message_btn + "&uid=" + uid, true);
+                xhttp.send();
+            }
+            
+            function sync_table() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        document.getElementById('meslist').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../syn_message?userid=<%=userid%>", true);
                 xhttp.send();
             }
         </script>
     </head>
-    <body>
-        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-            //   privilege_class p = new privilege_class();
-            //    User su = (User) request.getSession().getAttribute("user_obj");
-            //    if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+    <body  id="meslist">
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+               privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <%
             HttpSession hsheader = request.getSession();
             POJOS.User userheader = (POJOS.User) hsheader.getAttribute("user_obj");
             User u = (User) objsave.getses().load(User.class, Integer.parseInt(userid));
-
+            
         %>
         <h3 style="margin-top: -20px"><a href="#" onclick="messages()"><span class="glyphicon glyphicon-arrow-left"></span></a><strong>Messages - <%=u.getFname()%></strong></h3>
         <div class="col-md-8 col-md-offset-1">
@@ -65,9 +80,7 @@
             %>
             <div class="row">
                 <div class="col-md-2">
-                    <script>
-                        alert(<%=mes.getMessage()%>);
-                    </script>
+                    
                     <img src="<%if (mes.getUtype().getIdutype() != 4) {
                             out.write("../img/anita.ico");
                         } else {
@@ -90,13 +103,13 @@
                 </div>
             </div>
         </div>
-        <%//} else {
+        <%} else {
         %>
-        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
                     <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-                </div>-->
+                </div>
         <%
-         //       }
-            //    }%>
+                }
+                }%>
     </body>
 </html>

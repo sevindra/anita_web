@@ -25,7 +25,7 @@
         <script>
 
             function adimin_msge() {
-                alert("okk");
+                //alert("okk");
                 var message_btn = document.getElementById('message_btn').innerHTML;
                 var message = document.getElementById('user_message').value;
 

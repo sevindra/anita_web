@@ -7,6 +7,7 @@ package Src;
 
 import POJOS.Addres;
 import POJOS.Item;
+import POJOS.Login;
 import POJOS.State;
 import POJOS.User;
 import POJOS.Utype;
@@ -56,10 +57,12 @@ public class admin_add_user extends HttpServlet {
             String city = "";
             String mobile = "";
             String mobile2 = "";
+            String email = "";
             String nic = "";
             String utype = "";
             String thumb = "";
             String url2 = "";
+            String pass = "";
             int flag = 0;
             boolean flag2 = true;
             List<FileItem> itlist = upload.parseRequest(request);
@@ -94,6 +97,12 @@ public class admin_add_user extends HttpServlet {
                     }
                     if (fileitem.getFieldName().equals("utype")) {
                         utype = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("email")) {
+                        email = fileitem.getString();
+                    }
+                    if (fileitem.getFieldName().equals("pass")) {
+                        pass = fileitem.getString();
                     }
                     flag++;
 
@@ -153,6 +162,12 @@ public class admin_add_user extends HttpServlet {
             addres.setPrimaryAddress(1);
             addres.setStatus(1);
             objsave.save(addres);
+            
+            Login l= new Login();
+            l.setEmail(email);
+            l.setUpass(pass);
+            l.setUser(u);
+            objsave.save(l);
 //            HttpSession hs=request.getSession();
 //            hs.setAttribute("product", "add");
             //response.sendRedirect("new_admin/main.jsp?product=add");

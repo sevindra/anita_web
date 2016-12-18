@@ -8,26 +8,18 @@ package Src;
 import POJOS.Login;
 import POJOS.LoginReg;
 import POJOS.User;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import javassist.compiler.TokenId;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.ImageIcon;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -71,26 +63,30 @@ public class user_login extends HttpServlet {
                     String dbpass = login.getUpass();
 
                     if (email.equals(dbemail) && pass.equals(dbpass)) {
-                        HttpSession hs = request.getSession();
-                        hs.setAttribute("user_obj", login.getUser());
-                        hs.setAttribute("login", login);
-                        User u = (User) hs.getAttribute("user_obj");
+                        if (login.getUser().getStatus() == 1) {
+                            HttpSession hs = request.getSession();
+                            hs.setAttribute("user_obj", login.getUser());
+                            hs.setAttribute("login", login);
+                            User u = (User) hs.getAttribute("user_obj");
 
-                        LoginReg lr = new LoginReg();
-                        lr.setLogin(login);
-                        lr.setIndate(new Date());
-                        lr.setIntime(new Date());
-                        objsave.save(lr);
+                            LoginReg lr = new LoginReg();
+                            lr.setLogin(login);
+                            lr.setIndate(new Date());
+                            lr.setIntime(new Date());
+                            objsave.save(lr);
 
-                        if (u.getUtype().getUtype().equals("Customer")) {
-                            if (request.getSession().getAttribute("sessionCart") != null) {
-                                response.sendRedirect("add_to_cart");
+                            if (u.getUtype().getUtype().equals("Customer")) {
+                                if (request.getSession().getAttribute("sessionCart") != null) {
+                                    response.sendRedirect("add_to_cart");
+                                } else {
+                                    response.sendRedirect("index.jsp");
+                                }
+
                             } else {
-                                response.sendRedirect("index.jsp");
+                                response.sendRedirect("new_admin/main.jsp");
                             }
-
                         } else {
-                            response.sendRedirect("new_admin/main.jsp");
+                            response.sendRedirect("login.jsp?error_login=6");
                         }
                     } else {
                         response.sendRedirect("login.jsp?error_login=1");
@@ -101,6 +97,7 @@ public class user_login extends HttpServlet {
 
                 }
             }
+
         } catch (Exception e) {
         }
     }

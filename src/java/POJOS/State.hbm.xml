@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 11, 2016 12:59:46 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 13, 2016 9:42:25 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.State" table="state" catalog="anitaweb" optimistic-lock="version">
         <id name="idstate" type="java.lang.Integer">
@@ -17,6 +17,18 @@
         <property name="day" type="java.lang.Integer">
             <column name="day" />
         </property>
+        <set name="invoicesForDelState" table="invoice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="del_state" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Invoice" />
+        </set>
+        <set name="invoicesForStateIdstate" table="invoice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="state_idstate" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Invoice" />
+        </set>
         <set name="suppliers" table="supplier" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="state_idstate" not-null="true" />

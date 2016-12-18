@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
+// Generated Dec 13, 2016 9:42:23 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -22,6 +22,7 @@ public class Item  implements java.io.Serializable {
      private Set<Color> colors = new HashSet<Color>(0);
      private Set<CartItem> cartItems = new HashSet<CartItem>(0);
      private Set<TempGrnItem> tempGrnItems = new HashSet<TempGrnItem>(0);
+     private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>(0);
      private Set<WatchList> watchLists = new HashSet<WatchList>(0);
      private Set<Size> sizes = new HashSet<Size>(0);
      private Set<GrnItem> grnItems = new HashSet<GrnItem>(0);
@@ -36,7 +37,7 @@ public class Item  implements java.io.Serializable {
     public Item(Subcat subcat) {
         this.subcat = subcat;
     }
-    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages, Set<Question> questions) {
+    public Item(Subcat subcat, String itemname, Integer watching, String description, String url, String delivary, Integer status, Set<Color> colors, Set<CartItem> cartItems, Set<TempGrnItem> tempGrnItems, Set<InvoiceItem> invoiceItems, Set<WatchList> watchLists, Set<Size> sizes, Set<GrnItem> grnItems, Set<Stock> stocks, Set<ItemImage> itemImages, Set<Question> questions) {
        this.subcat = subcat;
        this.itemname = itemname;
        this.watching = watching;
@@ -47,6 +48,7 @@ public class Item  implements java.io.Serializable {
        this.colors = colors;
        this.cartItems = cartItems;
        this.tempGrnItems = tempGrnItems;
+       this.invoiceItems = invoiceItems;
        this.watchLists = watchLists;
        this.sizes = sizes;
        this.grnItems = grnItems;
@@ -131,6 +133,13 @@ public class Item  implements java.io.Serializable {
     
     public void setTempGrnItems(Set<TempGrnItem> tempGrnItems) {
         this.tempGrnItems = tempGrnItems;
+    }
+    public Set<InvoiceItem> getInvoiceItems() {
+        return this.invoiceItems;
+    }
+    
+    public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+        this.invoiceItems = invoiceItems;
     }
     public Set<WatchList> getWatchLists() {
         return this.watchLists;

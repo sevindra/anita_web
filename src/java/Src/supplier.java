@@ -74,6 +74,7 @@ public class supplier extends HttpServlet {
                 Session sesi = objsave.getses();
                 Criteria c = sesi.createCriteria(Supplier.class);
                 c.add(Restrictions.eq("fname", fname));
+                c.add(Restrictions.eq("mname", mname));
                 Supplier supplier = (Supplier) c.uniqueResult();
                 if (supplier == null) {
                     String regexStr = "^[0-9]{10}$";

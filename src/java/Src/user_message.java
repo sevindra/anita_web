@@ -58,12 +58,12 @@ public class user_message extends HttpServlet {
                 }
                 User user1 = (User) objsave.getses().load(User.class, 1);
                 Message mes = new Message();
-                mes.setUtype(user1.getUtype());
+                mes.setUtype(user.getUtype());
                 mes.setUserByMfrom(user);
                 mes.setUserByMto(user1);
                 mes.setMessage(message);
-                mes.setNewmes(0);
-                mes.setNotification(1);
+                mes.setNewmes(1);
+                mes.setNotification(0);
                 mes.setDate(new Date());
                 mes.setTime(new Date());
                 objsave.save(mes);

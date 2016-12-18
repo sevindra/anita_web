@@ -94,6 +94,26 @@
                     });
                 }
 
+                 function rem_cart_item(x) {
+                  var cart_item_id=x;
+                var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function () {
+                        if (xhttp.readyState === 4 && xhttp.status === 200) {
+//                        alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+
+                        //alert(xhttp.responseText+" "+x);
+                                document.getElementById('cart_items').innerHTML = xhttp.responseText;
+                        }
+                        };
+                        xhttp.open("POST", "remove_cart_item?cart=ok&id="+x, true);
+                        xhttp.send();
+                }
+                 function checkInp(i)
+                {
+                    $('#qty'+i).bind('keyup paste', function () {
+                        this.value = this.value.replace(/[^0-9]/g, '');
+                    });
+                }
         </script>
         <script>
             function goBack() {
@@ -105,6 +125,9 @@
         <div>
             <%@include file="site/header.jsp" %>
         </div>
+        <%@include file="site/search_bar.jsp" %>
+        <br/>
+        <br/>
         <br/>
         <%
             if (request.getSession().getAttribute("user_obj") != null) {
@@ -117,12 +140,15 @@
         <div class="col-md-9">
             <h1><strong>Your Shopping Cart</strong></h1>
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <%                        User ser = (User) request.getSession().getAttribute("user_obj");
+                <div class="panel-body" id="cart_items">
+                    <%    
+                int iqty=0;
+                User ser = (User) request.getSession().getAttribute("user_obj");
                         cs.add(Restrictions.eq("user", ((User) objsave.getses().load(User.class, ((User) request.getSession().getAttribute("user_obj")).getIduser()))));
                         if (cs.uniqueResult() != null) {
                             List<CartItem> cl = objsave.getses().createCriteria(CartItem.class).add(Restrictions.eq("cart", cc)).list();
                             for (CartItem ch : cl) {
+                                iqty++;
                                 //out.write("ok");
                     %>
                     <div class="col-md-12">
@@ -168,7 +194,7 @@
                                             <h5>Quantity:</h5> 
                                         </div>
                                         <div class="col-md-7">
-                                            <input type="text" class="text-center form-control" value="<%=ch.getQty()%>"/>
+                                            <input type="text" class="text-center form-control" value="<%=ch.getQty()%>" onkeypress="checkInp('<%=iqty%>')" id="qty<%=iqty%>"/>
                                         </div>
                                     </div>
                                 </div>
@@ -179,10 +205,10 @@
                                     </div>
                                     <br/>
                                     <br/>
-                                    <!--                                    <h6 class="pull-right">Shipping Available</h6>-->
-                                    <!--                                    <div class="row">
-                                                                            <button class="btn btn-danger btn-block">Remove</button>
-                                                                        </div>-->
+                                                                        <h6 class="pull-right">Shipping Available</h6>
+                                                                        <div class="row">
+                                                                            <button class="btn btn-danger btn-block" onclick="rem_cart_item('<%=ch.getIdcartItem() %>')">Remove</button>
+                                                                        </div>
                                 </div>
                             </div>
                         </div>

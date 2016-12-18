@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="org.hibernate.SQLQuery"%>
+<%@page import="POJOS.Stock"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="POJOS.ItemImage"%>
 <%@page import="POJOS.Item"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -67,6 +70,10 @@
         <div>
             <%@include file="site/header.jsp" %>
         </div>
+        <%@include file="site/search_bar.jsp" %>
+        <br/>
+        <br/>
+        <br/>
 
         <div>
             <%@include file="site/Category.jsp" %>
@@ -75,33 +82,45 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <%
-                        Cat cat = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", request.getParameter("catname"))).uniqueResult();
-                        Criteria sucri=objsave.getses().createCriteria(Subcat.class);
-                        sucri.add(Restrictions.eq("cat", cat));
-                        sucri.add(Restrictions.eq("subname", request.getParameter("subcatname").toString()));
-                        Subcat subcat = (Subcat)sucri.uniqueResult();
-                        
-                        
-                        List<Item> subli = objsave.getses().createCriteria(Item.class).add(Restrictions.eq("subcat", subcat)).list();
+                        if (request.getParameter("catname") != null | request.getParameter("subcatname") != null) {
+                            Cat cat = (Cat) objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("catname", request.getParameter("catname"))).uniqueResult();
+                            Criteria sucri = objsave.getses().createCriteria(Subcat.class);
+                            sucri.add(Restrictions.eq("cat", cat));
+                            sucri.add(Restrictions.eq("subname", request.getParameter("subcatname").toString()));
+                            Subcat subcat = (Subcat) sucri.uniqueResult();
 
-                        for (Item item:subli) {
-                    
+                            List<Item> subli = objsave.getses().createCriteria(Item.class).add(Restrictions.eq("subcat", subcat)).list();
+
+                            for (Item item : subli) {
+
                     %>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="thumbnail" style="position: relative">
-                                    <%
-                                        Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
+                                    <%                                        Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
                                         c1.add(Restrictions.eq("item", item));
                                         //c1.setFirstResult(1);
                                         c1.setMaxResults(1);
                                         List<ItemImage> itemimage = c1.list();
                                         for (ItemImage i : itemimage) {
                                     %>
-                                    <a href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
-                                    <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
-                                    <%}%>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
+                                        <%}%>
+                                        <%
+                                            Calendar cal = Calendar.getInstance();
+                                            //cal.setTime(dateInstance);
+                                            cal.add(Calendar.DATE, -30);
+                                            Date dateBefore30Days = cal.getTime();
+                                            Criteria newimg = objsave.getses().createCriteria(Stock.class);
+                                            newimg.add(Restrictions.eq("item", item));
+                                            newimg.add(Restrictions.gt("date", dateBefore30Days));
+                                            newimg.add(Restrictions.lt("date", new Date()));
+                                            List<Stock> iii = newimg.list();
+                                        %>
+                                    <img <%if (iii.size() != 0) {
+                                            out.write("src=\"img/new.png\"");
+                                        }%> style="position: absolute; right: 0px;top: 0;"/>
                                 </div>
                                 <div class="col-md-12" style="height: 100px; margin-top: -30px">
                                     <h3><%=item.getItemname()%></h3>
@@ -111,7 +130,7 @@
                                     <div class="col-md-12">
                                         <p style="text-align: justify; height: 50px" ><%=item.getDescription()%></p>
                                         <div class="col-md-8 col-md-offset-2">
-                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid="+item.getIditem());%>"><strong>View</strong></a>
+                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid=" + item.getIditem());%>"><strong>View</strong></a>
                                         </div>
 
                                     </div>
@@ -119,7 +138,113 @@
                             </div>
                         </div>
                     </div>
-                    <%}%>
+                    <%}
+                    } else {
+                        if (request.getParameter("products").equals("new")) {
+
+                            Calendar cal = Calendar.getInstance();
+                            //cal.setTime(dateInstance);
+                            cal.add(Calendar.DATE, -30);
+                            Date dateBefore30Days = cal.getTime();
+                            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+
+                            String sql = "SELECT * FROM Stock WHERE date between '" + sd.format(dateBefore30Days).toString() + "' and'" + sd.format(new Date()).toString() + "' group by iditem";
+                            SQLQuery query = objsave.getses().createSQLQuery(sql);
+                            query.addEntity(Stock.class);
+                            List<Stock> iii = query.list();
+                            for (Stock st : iii) {
+                    %>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="thumbnail" style="position: relative">
+                                    <%                                        Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
+                                        c1.add(Restrictions.eq("item", st.getItem()));
+                                        //c1.setFirstResult(1);
+                                        c1.setMaxResults(1);
+                                        List<ItemImage> itemimage = c1.list();
+                                        for (ItemImage i : itemimage) {
+                                    %>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + st.getItem().getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
+                                        <%}%>
+
+                                    <img <%if (iii.size() != 0) {
+                                            out.write("src=\"img/new.png\"");
+                                        }%> style="position: absolute; right: 0px;top: 0;"/>
+                                </div>
+                                <div class="col-md-12" style="height: 100px; margin-top: -30px">
+                                    <h3><%=st.getItem().getItemname()%></h3>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="text-align: justify; height: 50px" ><%=st.getItem().getDescription()%></p>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid=" + st.getItem().getIditem());%>"><strong>View</strong></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                        }
+                    } else {
+                        String sql = "SELECT * FROM Stock group by iditem";
+                        SQLQuery query = objsave.getses().createSQLQuery(sql);
+                        query.addEntity(Stock.class);
+                        List<Stock> iii = query.list();
+                        for (Stock st : iii) {
+                    %>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="thumbnail" style="position: relative">
+                                    <%                                        Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
+                                        c1.add(Restrictions.eq("item", st.getItem()));
+                                        //c1.setFirstResult(1);
+                                        c1.setMaxResults(1);
+                                        List<ItemImage> itemimage = c1.list();
+                                        for (ItemImage i : itemimage) {
+                                    %>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + st.getItem().getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
+                                        <%}%>
+                                        <%
+                                            Calendar cal = Calendar.getInstance();
+                                            //cal.setTime(dateInstance);
+                                            cal.add(Calendar.DATE, -30);
+                                            Date dateBefore30Days = cal.getTime();
+                                            Criteria newimg = objsave.getses().createCriteria(Stock.class);
+                                            newimg.add(Restrictions.eq("item", st.getItem()));
+                                            newimg.add(Restrictions.gt("date", dateBefore30Days));
+                                            newimg.add(Restrictions.lt("date", new Date()));
+                                            List<Stock> iii2 = newimg.list();
+                                        %>
+                                    <img <%if (iii2.size() != 0) {
+                                            out.write("src=\"img/new.png\"");
+                                        }%> style="position: absolute; right: 0px;top: 0;"/>
+                                </div>
+                                <div class="col-md-12" style="height: 100px; margin-top: -30px">
+                                    <h3><%=st.getItem().getItemname()%></h3>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="text-align: justify; height: 50px" ><%=st.getItem().getDescription()%></p>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <a class="btn btn-success btn-block" href="<%out.write("Item_details.jsp?itemid=" + st.getItem().getIditem());%>"><strong>View</strong></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                                }
+                            }
+                        }%>
                 </div>
             </div>
         </div>

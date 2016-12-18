@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -74,6 +75,11 @@
                         $('#autoclosable-btn-danger').prop("disabled", false);
                     });
                 }
+                    $('#acdeact').hide();
+                if (res == 6) {
+                    $('#acdeact').show();
+ 
+                }
 
 
 
@@ -100,7 +106,7 @@
 
             });
 
-
+            
         </script>
     </head>
     <body>
@@ -139,10 +145,15 @@
                                         <div class="alert alert-danger alert-autocloseable-danger text-center">
                                             <strong>Wrong Email or Password</strong>
                                         </div>
-                                        <div class="form-group text-center">
+                                        <div class="alert alert-danger" id="acdeact">
+                                            <center>
+                                                <strong>Your Account has Been Deactivated</strong>
+                                            </center>
+                                        </div>
+<!--                                        <div class="form-group text-center">
                                             <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                             <label for="remember"> Remember Me</label>
-                                        </div>
+                                        </div>-->
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">
@@ -209,6 +220,7 @@
                                                 </strong>
                                             </center>
                                         </div>
+                                        
                                         <div class="alert alert-danger text-center" id="incomplete">
                                             <strong>Incomplete Data</strong>
                                         </div>

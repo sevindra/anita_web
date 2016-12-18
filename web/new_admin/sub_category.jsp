@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="Src.privilege_class"%>
 <%@page import="POJOS.User"%>
 <%@page import="POJOS.Subcat"%>
@@ -142,10 +143,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Sub Category</strong></h3>
-        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-            //      privilege_class p = new privilege_class();
-            //      User su = (User) request.getSession().getAttribute("user_obj");
-            //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                  privilege_class p = new privilege_class();
+                  User su = (User) request.getSession().getAttribute("user_obj");
+                  if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-7">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -156,7 +157,7 @@
                         <div class="col-md-8">
                             <select class="form-control" id="catid">
                                 <%
-                                    List<Cat> list = objsave.getses().createCriteria(Cat.class).list();
+                                    List<Cat> list = objsave.getses().createCriteria(Cat.class).add(Restrictions.eq("status", 1)).list();
                                     for (Cat cat : list) {
                                 %>
                                 <option value="<%=cat.getIdcat()%>"><%=cat.getCatname()%></option>
@@ -242,13 +243,13 @@
                 </div>
             </div>
         </div>
-        <%//} else {
+        <%} else {
         %>
-        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
                     <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-                </div>-->
+                </div>
         <%
-            //      }
-            //     }%>
+                  }
+                 }%>
     </body>
 </html>

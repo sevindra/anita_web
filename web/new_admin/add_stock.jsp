@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Order"%>
 <%@page import="POJOS.User"%>
 <%@page import="Src.privilege_class"%>
 <%@page import="org.hibernate.criterion.Projections"%>
@@ -49,7 +50,7 @@
                 subtot();
             }
 
-
+            var ss = setInterval(subtot(), 1000);
 
 
 
@@ -142,7 +143,7 @@
             %>
                 $('#totalam').val("0");
             <%
-                        }%>
+                }%>
             }
             function sync_table() {
                 var xhttp = new XMLHttpRequest();
@@ -187,10 +188,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Goods Receive Note</strong></h3>
-        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-           //     privilege_class p = new privilege_class();
-           //     User su = (User) request.getSession().getAttribute("user_obj");
-          //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-12">
             <div class="panel panel-danger">
                 <div class="panel-body">
@@ -227,7 +228,7 @@
                         <div class="col-md-3">
                             <select class="form-control" id="pname" onchange="foundcolor()">
                                 <%
-                                    List<Item> listi = objsave.getses().createCriteria(Item.class).add(Restrictions.eq("status", 1)).list();
+                                    List<Item> listi = objsave.getses().createCriteria(Item.class).add(Restrictions.eq("status", 1)).addOrder(Order.asc("itemname")).list();
                                     for (Item item : listi) {
 
                                 %>
@@ -244,9 +245,9 @@
                         <div class="col-md-1">
                             <input class="form-control" placeholder="Qty" id="qty" onkeyup="caltot()"/>
                         </div>
-                        <div class="col-md-2">
-                            <input class="form-control" placeholder="Discount" id="dis"/>
-                        </div>
+                        <!--<div class="col-md-2">-->
+                        <input class="form-control" id="dis" type="hidden" value="0"/>
+                        <!--</div>-->
                         <div class="col-md-2">
                             <input class="form-control" placeholder="Total" id="tot" disabled=""/>
                         </div>
@@ -327,13 +328,13 @@
                 </div>
             </div>
         </div>
-        <%//} else {
+        <%} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
             <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+        </div>
         <%
-          //      }
-       //     }%>
+                }
+            }%>
     </body>
 </html>

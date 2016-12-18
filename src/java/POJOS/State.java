@@ -1,5 +1,5 @@
 package POJOS;
-// Generated Dec 11, 2016 12:59:44 AM by Hibernate Tools 4.3.1
+// Generated Dec 13, 2016 9:42:23 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,16 +15,20 @@ public class State  implements java.io.Serializable {
      private String state;
      private Double deliveryPrice;
      private Integer day;
+     private Set<Invoice> invoicesForDelState = new HashSet<Invoice>(0);
+     private Set<Invoice> invoicesForStateIdstate = new HashSet<Invoice>(0);
      private Set<Supplier> suppliers = new HashSet<Supplier>(0);
      private Set<Addres> addreses = new HashSet<Addres>(0);
 
     public State() {
     }
 
-    public State(String state, Double deliveryPrice, Integer day, Set<Supplier> suppliers, Set<Addres> addreses) {
+    public State(String state, Double deliveryPrice, Integer day, Set<Invoice> invoicesForDelState, Set<Invoice> invoicesForStateIdstate, Set<Supplier> suppliers, Set<Addres> addreses) {
        this.state = state;
        this.deliveryPrice = deliveryPrice;
        this.day = day;
+       this.invoicesForDelState = invoicesForDelState;
+       this.invoicesForStateIdstate = invoicesForStateIdstate;
        this.suppliers = suppliers;
        this.addreses = addreses;
     }
@@ -56,6 +60,20 @@ public class State  implements java.io.Serializable {
     
     public void setDay(Integer day) {
         this.day = day;
+    }
+    public Set<Invoice> getInvoicesForDelState() {
+        return this.invoicesForDelState;
+    }
+    
+    public void setInvoicesForDelState(Set<Invoice> invoicesForDelState) {
+        this.invoicesForDelState = invoicesForDelState;
+    }
+    public Set<Invoice> getInvoicesForStateIdstate() {
+        return this.invoicesForStateIdstate;
+    }
+    
+    public void setInvoicesForStateIdstate(Set<Invoice> invoicesForStateIdstate) {
+        this.invoicesForStateIdstate = invoicesForStateIdstate;
     }
     public Set<Supplier> getSuppliers() {
         return this.suppliers;

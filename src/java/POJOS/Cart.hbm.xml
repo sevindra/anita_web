@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 11, 2016 12:59:46 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 13, 2016 9:42:25 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.Cart" table="cart" catalog="anitaweb" optimistic-lock="version">
         <id name="idcart" type="java.lang.Integer">

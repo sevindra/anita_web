@@ -11,6 +11,7 @@
     <mapping resource="POJOS/State.hbm.xml"/>
     <mapping resource="POJOS/TempGrnItem.hbm.xml"/>
     <mapping resource="POJOS/Message.hbm.xml"/>
+    <mapping resource="POJOS/Slider.hbm.xml"/>
     <mapping resource="POJOS/Advertisement.hbm.xml"/>
     <mapping resource="POJOS/ItemPerPage.hbm.xml"/>
     <mapping resource="POJOS/LoginReg.hbm.xml"/>

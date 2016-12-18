@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 13, 2016 9:42:25 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Slider" table="slider" catalog="anitaweb" optimistic-lock="version">
+        <id name="idslider" type="java.lang.Integer">
+            <column name="idslider" />
+            <generator class="identity" />
+        </id>
+        <property name="url" type="string">
+            <column name="url" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -44,9 +44,10 @@ public class search_stockid extends HttpServlet {
             String color=request.getParameter("color");
             String size=request.getParameter("size");
             String pid=request.getParameter("pid");
+            System.out.println("First Detail-"+searchstock+"-"+color+"-"+size+"-"+pid);
             if (searchstock!=null) {
                 if (searchstock.equals("ok")) {
-                    //out.write(size+"okkk"+color);
+                    
                     Color col= (Color) objsave.getses().load(Color.class, Integer.parseInt(color));
                     Size si= (Size) objsave.getses().load(Size.class, Integer.parseInt(size));
                     Item i= (Item) objsave.getses().load(Item.class, Integer.parseInt(pid));
@@ -55,6 +56,7 @@ public class search_stockid extends HttpServlet {
                     c.add(Restrictions.eq("size", si));
                     c.add(Restrictions.eq("color", col));
                     Stock s=(Stock) c.uniqueResult();
+                    System.out.println("Stock ID:"+s.getIdstock().toString());
                     out.write(s.getIdstock().toString());
                 }
             }

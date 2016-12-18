@@ -48,9 +48,9 @@
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a id="watch" href="item.jsp">New Products</a></li>
-                        <li><a id="watch" href="item.jsp">Promotions</a></li>
-                        <li><a href="item.jsp">Products</a></li>
+                        <li><a id="watch" href="item.jsp?products=new">New Products</a></li>
+                        <!--<li><a id="watch" href="item.jsp">Promotions</a></li>-->
+                        <li><a href="item.jsp?products=all">All products</a></li>
 
                     </ul>
                 </li>
@@ -128,7 +128,7 @@
                 <li><a href="Contact.jsp">Contact</a></li>
 
             </ul>				
-
+            
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">               <!--data-toggle="dropdown"-->
                     <a href="<%if (userheader == null) {%>login.jsp<%} else {%>#<%}%>" class="dropdown-toggle" id="user" value="<%if (userheader != null) {
@@ -146,7 +146,7 @@
                     <ul class="dropdown-menu" role="menu">
 
                         <li><a href="my_profile.jsp">My Profile</a></li>
-                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>purchased.jsp<%}%>">Cart</a></li>
+                        <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>cart.jsp<%}%>">Cart</a></li>
 
                         <li class="divider"></li>
                         <li><a onclick="loginfirst()" href="<%if (userheader != null) {%>watched.jsp<%}%>">Watched Items</a></li>
@@ -162,12 +162,16 @@
                     <%}%>
                 </li>
                 <%
+                    int me = 0;
                     Criteria c = objsave.getses().createCriteria(Message.class);
                     c.add(Restrictions.eq("notification", 1));
                     // c.addOrder(Order.desc("date"));
                     List<Message> mli = c.list();
+
                     c.setProjection(Projections.sum("notification"));
-                    int me = Integer.parseInt(c.uniqueResult().toString());
+                    if (c.uniqueResult() != null) {
+                        me = Integer.parseInt(c.uniqueResult().toString());
+                    }
                 %>
                 <li class="dropdown"><a onclick="loginfirst()" href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                             class="glyphicon glyphicon-envelope" style="margin-right: 5px"></span>Inbox<%if (userheader != null) {%><span class="label label-info" style="margin-left: 5px"><%=me%></span><%}%>
@@ -177,14 +181,16 @@
                         <%
                             for (Message m : mli) {
                                 String mes = m.getMessage();
-                                mes = mes.substring(0, 15);
+                                if (mes.length() > 15) {
+                                    mes = mes.substring(0, 15);
+                                }
                                 Date d1 = new Date();
                                 Date d2 = m.getDate();
                                 SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
                                 String d3 = sd.format(d1);
                                 String d4 = sd.format(d2);
                         %>
-                        <li><a href="message.jsp"><span class="label label-warning"><%if (d3.equals(d4)) {
+                        <li><a href="message_read?msgid=<%=m.getIdmessage()%>"><span class="label label-warning"><%if (d3.equals(d4)) {
                                 out.write(m.getTime().toString());
                             } else {
                                 out.write(m.getDate().toString());
@@ -199,7 +205,7 @@
                     <%}%>
                 </li>
                 <%
-                    int cartcount=0;
+                    int cartcount = 0;
                     Criteria cru = objsave.getses().createCriteria(Cart.class);
                     cru.add(Restrictions.eq("user", userheader));
                     List<Cart> carl = cru.list();
@@ -210,7 +216,7 @@
                         cartcount = Integer.parseInt(crc.uniqueResult().toString());
                     }
                 %>
-                <li><a onclick="seturl()" href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<%if(cartcount!=0){%><span class="label label-warning" style="margin-right:  10px;margin-left: 5px" id="cartqty"><%=cartcount %></span><%}%></a>
+                <li><a onclick="seturl()" href="cart.jsp"><span  class="glyphicon glyphicon-shopping-cart" style="margin-right: 5px"></span>Cart<%if (cartcount != 0) {%><span class="label label-warning" style="margin-right:  10px;margin-left: 5px" id="cartqty"><%=cartcount%></span><%}%></a>
 
                 </li>
             </ul>

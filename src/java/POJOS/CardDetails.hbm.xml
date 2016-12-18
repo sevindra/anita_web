@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 11, 2016 12:59:46 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Dec 13, 2016 9:42:25 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="POJOS.CardDetails" table="card_details" catalog="anitaweb" optimistic-lock="version">
         <id name="idcardDetails" type="java.lang.Integer">
@@ -26,5 +26,11 @@
         <property name="lname" type="string">
             <column name="lname" length="45" />
         </property>
+        <set name="invoices" table="invoice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="card_details_idcard_details" not-null="true" />
+            </key>
+            <one-to-many class="POJOS.Invoice" />
+        </set>
     </class>
 </hibernate-mapping>

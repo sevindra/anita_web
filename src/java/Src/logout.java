@@ -42,7 +42,7 @@ public class logout extends HttpServlet {
 
             } else {
                 if (user.equals("admin")) {
-                    out.write("user ty " + user);
+                    //out.write("user ty " + user);
                     response.sendRedirect("login.jsp");
                 } else {
                     response.sendRedirect("index.jsp");

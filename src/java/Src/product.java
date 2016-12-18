@@ -109,8 +109,8 @@ public class product extends HttpServlet {
 
                                 objsave.delete(t);
                             }
-                   // out.write(catid+", "+subcatid+","+itemname+","+descrition);
-                            //System.out.println(catid+", "+subcatid+","+itemname+","+descrition);
+//                    out.write(catid+", "+subcatid+","+itemname+","+descrition);
+                            System.out.println(catid+", "+subcatid+","+itemname+","+descrition);
                             flag2 = false;
                         }
                     }

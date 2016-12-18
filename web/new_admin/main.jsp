@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="POJOS.Invoice"%>
 <%@page import="POJOS.Question"%>
 <%@page import="POJOS.WatchList"%>
 <%@page import="POJOS.LoginReg"%>
@@ -69,7 +71,8 @@
                 int month = cal.get(Calendar.MONTH);
                 month=month+1;
                 //int day = cal.get(Calendar.DAY_OF_MONTH);
-                
+                double coun=0;
+                double coun2=0;
                 String d1 = year+"-"+month+"-01";
                 String d2 = year+"-"+month+"-30";
                 SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
@@ -78,30 +81,41 @@
                 Criteria c = objsave.getses().createCriteria(Stock.class);
                 c.add(Restrictions.ge("date", sDate));
                 c.add(Restrictions.lt("date", eDate));
+                //List<Stock> totp=c.list();
                 c.setProjection(Projections.sum("price"));
-                double coun = Double.parseDouble(c.uniqueResult().toString());
-
+                if(c.uniqueResult()!=null){
+                coun = Double.parseDouble(c.uniqueResult().toString());
+                }
+                
+                Criteria cp = objsave.getses().createCriteria(Invoice.class);
+                cp.add(Restrictions.ge("date", sDate));
+                cp.add(Restrictions.lt("date", eDate));
+                cp.setProjection(Projections.sum("total"));
+                if(cp.uniqueResult()!=null){
+                coun2 = Double.parseDouble(cp.uniqueResult().toString());
+                }
             %>
+                    
                 var data = google.visualization.arrayToDataTable([
-                    ['2016', 'Sales', 'Expenses', 'Profit'],
+                    ['2016', 'Sales', 'Expenses'],
 //                    ['Jan', 1000, 400, 200],
 //                    ['Feb', 1170, 460, 250],
 //                    ['March', 660, 1120, 300],
 //                    ['April', 1030, 540, 350],
 //                    ['May', 1030, 540, 350],
 //                    ['Jun', 1030, 540, 350],
-                    ['Jul', 0, 0, 0],
-                    ['Aug', 0, 0, 0],
-                    ['Sep', 0, 0, 0],
-                    ['Oct', 0, 0, 0],
-                    ['Nov', 0, 0, 0],
-                    ['Dec', 0, <%=coun%>, 0]
+                    ['Jul', 0, 0],
+                    ['Aug', 0, 0],
+                    ['Sep', 0, 0],
+                    ['Oct', 0, 0],
+                    ['Nov', 0, 0],
+                    ['Dec', <%=coun2 %>, <%=coun%>]
                 ]);
 
                 var options = {
                     chart: {
                         title: 'Company Performance',
-                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                        subtitle: 'Sales and Expenses : 2016',
                     },
                     bars: 'vertical',
                     vAxis: {format: 'decimal'},
@@ -154,7 +168,7 @@
                 $('#admin_body').load('admin_message.jsp');
             }
             function admin_user_message(v) {
-                alert(v);
+                //alert(v);
                 $('#admin_body').load('admin_user_message.jsp?userid=' + v);
 
             }
@@ -184,6 +198,24 @@
             }
             function add_slider_img() {
                 $('#admin_body').load('add_slider_img.jsp');
+            }
+            function product_video() {
+                $('#admin_body').load('product_video.jsp');
+            }
+            function add_sup_video() {
+                $('#admin_body').load('add_sup_video.jsp');
+            }
+            function add_grn() {
+                $('#admin_body').load('add_grn.jsp');
+            }
+            function orders() {
+                $('#admin_body').load('orders.jsp');
+            }
+            function delivery() {
+                $('#admin_body').load('delivery.jsp');
+            }
+            function grn_list() {
+                $('#admin_body').load('grn_list.jsp');
             }
 
             function msg_read() {
@@ -227,12 +259,15 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-bell glyphicon_margin"></span> Notification<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <%
+                                int cou=0;
                                     Session ses = objsave.getses();
                                     Criteria c1 = ses.createCriteria(Message.class);
                                     Utype uty = (Utype) objsave.getses().load(Utype.class, 4);
                                     c1.add(Restrictions.eq("utype", uty));
                                     c1.setProjection(Projections.sum("newmes"));
-                                    int cou = Integer.parseInt(c1.uniqueResult().toString());
+                                    if(c1.uniqueResult()!=null){
+                                     cou = Integer.parseInt(c1.uniqueResult().toString());
+                                    }
                                     
                                     Criteria c2 = ses.createCriteria(OnlineUsers.class);
                                     c2.setProjection(Projections.count("user"));
@@ -260,16 +295,20 @@
                                     Criteria quc = ses.createCriteria(Question.class);
                                     quc.setProjection(Projections.count("item"));
                                     int qucount = Integer.parseInt(quc.uniqueResult().toString());
+                                    
+                                    Criteria oderc = ses.createCriteria(Invoice.class);
+                                    oderc.add(Restrictions.eq("status", 1));
+                                    oderc.setProjection(Projections.count("status"));
+                                    int order = Integer.parseInt(oderc.uniqueResult().toString());
                                 %>
-                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Message <span class="badge"><%=cou%></span></a></li>
-                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Online Users <span class="badge"><%=online%></span></a></li>
-                                <li><a href="#"><span class="fa fa-shopping-cart glyphicon_margin"></span> Orders <span class="badge"><%=users%></span></a></li>
-                                <li><a href="#"><span class="fa fa-database glyphicon_margin"></span> Low Stock <span class="badge"><%=cou%></span></a></li>
-                                <li><a href="#"><span class="fa fa-eye glyphicon_margin"></span> Watched Items <span class="badge"><%=cou%></span></a></li>
-                                <li><a href="#"><span class="fa fa-users glyphicon_margin"></span> Total Users <span class="badge"><%=users%></span></a></li>
-                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Daily Visited <span class="badge"><%=daily%></span></a></li>
-                                <li><a href="#"><span class="fa fa-user glyphicon_margin"></span> Watched Items <span class="badge"><%=watchcount%></span></a></li>
-                                <li><a href="#"><span class="fa fa-question glyphicon_margin"></span> Questions <span class="badge"><%=qucount%></span></a></li>
+                                <li><a id="watch" href="#" onclick="messages()"><span class="glyphicon glyphicon-user"></span> Message <span class="badge"><%=cou%></span></a></li>
+                                <li><a id="watch" href="#" onclick="online_users()"><span class="fa fa-gear glyphicon_margin"></span> Online Users <span class="badge"><%=online%></span></a></li>
+                                <li><a href="#" onclick="orders()"><span class="fa fa-shopping-cart glyphicon_margin"></span> Orders <span class="badge"><%=order %></span></a></li>
+                                <li><a href="#" onclick="delivery()"><span class="fa fa-database glyphicon_margin"></span> Delivery List <span class="badge"><%=cou%></span></a></li>
+                                <li><a href="#" onclick="watched_item()"><span class="fa fa-eye glyphicon_margin"></span> Watched Items <span class="badge"><%=watchcount%></span></a></li>
+                                <li><a href="#" onclick="all_users()"><span class="fa fa-users glyphicon_margin"></span> Total Customers <span class="badge"><%=users%></span></a></li>
+                                <li><a href="#" onclick="daily_visited()"><span class="fa fa-user glyphicon_margin"></span> Daily Visited <span class="badge"><%=daily%></span></a></li>
+                                <li><a href="#" onclick="question()"><span class="fa fa-question glyphicon_margin"></span> Questions <span class="badge"><%=qucount%></span></a></li>
 
                             </ul>
                         </li>
@@ -281,8 +320,7 @@
                                 }
                                 %><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a id="watch" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                                <li><a id="watch" href="#"><span class="fa fa-gear glyphicon_margin"></span> Settings</a></li>
+                                <li><a id="watch" href="../my_profile.jsp"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="../logout?user=admin"><span class="fa fa-power-off glyphicon_margin"></span> Logout</a></li>
 
@@ -312,8 +350,7 @@
                     <div id="cat2" class="panel-collapse collapse">
                         <ul class="list-group">
                             <a href="#"><li class="list-group-item" onclick="add_stock()">GRN</li></a>
-                            <li class="list-group-item">Two</li>
-                            <li class="list-group-item">Three</li>
+                            <a href="#"><li class="list-group-item" onclick="grn_list()">GRN List</li></a>
                         </ul>
                     </div>
                 </div>
@@ -354,8 +391,6 @@
                     <div id="cat5" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item"><a href="#">one</a></li>
-                            <li class="list-group-item">Two</li>
-                            <li class="list-group-item">Three</li>
                         </ul>
                     </div>
                 </div>
@@ -368,7 +403,7 @@
                     <div id="cat6" class="panel-collapse collapse">
                         <ul class="list-group">
                             <li class="list-group-item"><a onclick="add_advertisement()" href="#">Add Advertisement</a></li>
-                            <li class="list-group-item"><a href="#">Active/Deactive</a></li>
+                            <!--<li class="list-group-item"><a href="#">Active/Deactive</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -386,7 +421,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel-default">
+<!--                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse8"><span class="fa fa-camera glyphicon_margin"></span> Main Slider</a>
@@ -398,12 +433,27 @@
                             <li class="list-group-item"><a onclick="" href="#">Act / Deactive</a></li>
                         </ul>
                     </div>
+                </div>-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse9"><span class="fa fa-headphones glyphicon_margin"></span> Help</a>
+                        </h4>
+                    </div>
+                    <div id="collapse9" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a onclick="add_grn()" href="#">Add Grn</a></li>
+                            <li class="list-group-item"><a onclick="add_sup_video()" href="#">Add Supplier</a></li>
+                            <li class="list-group-item"><a onclick="product_video()" href="#">Product</a></li>
+                            
+                        </ul>
+                    </div>
                 </div>
             </div> 
         </div>
 
         <div class="col-md-10 mypadin35" id="admin_body">
-
+            
 
         </div>
     </body>

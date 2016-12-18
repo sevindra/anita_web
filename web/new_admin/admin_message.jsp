@@ -24,10 +24,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Messages</strong></h3>
-        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-           //     privilege_class p = new privilege_class();
-           //     User su = (User) request.getSession().getAttribute("user_obj");
-           //     if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                 privilege_class p = new privilege_class();
+                 User su = (User) request.getSession().getAttribute("user_obj");
+                 if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="container-fluid">
             <div class="container">
 
@@ -43,8 +43,8 @@
                                 <!--                                <li>
                                                                     <a href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>Message from ANITA</a>
                                                                 </li>-->
-                                <li>
-                                    <a href="#messages" data-toggle="tab"><span class="glyphicon glyphicon-inbox"></span>Sent</a></li>
+                                <!--                                <li>
+                                                                    <a href="#messages" data-toggle="tab"><span class="glyphicon glyphicon-inbox"></span>Sent</a></li>-->
 
                             </ul>
                             <!-- Tab panes -->
@@ -53,7 +53,7 @@
                                     <div class="list-group">
                                         <%
 
-                                            String sql = "SELECT * FROM message where utype_idutype=4 ORDER BY idmessage DESC";
+                                            String sql = "SELECT * FROM message where utype_idutype=1 or utype_idutype=2 or utype_idutype=3 ORDER BY idmessage DESC";
                                             SQLQuery query = objsave.getses().createSQLQuery(sql);
                                             query.addEntity(Message.class);
                                             List<Message> list = query.list();
@@ -71,7 +71,7 @@
                                             <span class="glyphicon glyphicon-star-empty"></span><span class="name" style="min-width: 120px;
                                                                                                       display: inline-block;"><%=me.getUserByMto().getFname()%></span> <span class=""></span>
                                             <span class="text-muted" style="font-size: 11px;"></span> <span
-                                                class="badge">12:10 AM</span> <span class="pull-right"></span>
+                                                class="badge"><%=me.getTime() + " " + me.getDate()%></span> <span class="pull-right"></span>
                                         </a>
                                         <%}%>
                                         <!--                                        <a href="#" class="list-group-item read">
@@ -116,13 +116,13 @@
                 </div>
             </div>
         </div>
-        <%//} else {
+        <%} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
-            <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+                <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                    <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
+                </div>
         <%
-       //         }
-       //     }%>
+               }
+                 }%>
     </body>
 </html>

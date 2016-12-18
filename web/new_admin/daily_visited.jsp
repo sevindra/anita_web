@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="java.util.List"%>
 <%@page import="POJOS.LoginReg"%>
 <%@page import="Src.objsave"%>
@@ -29,24 +31,33 @@
                 <th>Login Date</th>
                 <th>Login Time</th>
                 </thead>
-                <%
-                    Session s = objsave.getses();
-                    Criteria c = s.createCriteria(LoginReg.class);
-                    List<LoginReg> us = c.list();
-                    for (LoginReg u : us) {
-                %>
-                <tr>
-                    <td><img src="../<%=u.getLogin().getUser().getImg() %>" width="150" height="100"/></td>
-                    <td><%=u.getLogin().getUser().getNic() %></td>
-                    <td><%=u.getLogin().getUser().getFname()%></td>
-                    <td><%=u.getLogin().getUser().getLname() %></td>
-                    <td><%=u.getLogin().getEmail() %></td>
-                    <td><%=u.getIndate() %></td>
-                    <td><%=u.getIntime() %></td>
-                    <!--<td><button class="btn btn-danger">Deactive</button></td>-->
-                </tr>
-                <%}%>
+                <tbody id="online_tbody">
+
+                    <%
+                        String currentpage = request.getParameter("pag");
+                        Session s = objsave.getses();
+                        Criteria c = s.createCriteria(LoginReg.class);
+
+                        
+                        c.add(Restrictions.eq("indate", new Date()));
+                        List<LoginReg> us = c.list();
+                        for (LoginReg u : us) {
+                    %>
+                    <tr>
+                        <td><img src="../<%=u.getLogin().getUser().getImg()%>" width="150" height="100"/></td>
+                        <td><%=u.getLogin().getUser().getNic()%></td>
+                        <td><%=u.getLogin().getUser().getFname()%></td>
+                        <td><%=u.getLogin().getUser().getLname()%></td>
+                        <td><%=u.getLogin().getEmail()%></td>
+                        <td><%=u.getIndate()%></td>
+                        <td><%=u.getIntime()%></td>
+                        <!--<td><button class="btn btn-danger">Deactive</button></td>-->
+                    </tr>
+                    <%}%>
+                </tbody>
             </table>
+            
         </div>
+        
     </body>
 </html>

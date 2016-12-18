@@ -4,6 +4,9 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.InvoiceItem"%>
+<%@page import="POJOS.ItemImage"%>
+<%@page import="POJOS.Invoice"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -79,50 +82,85 @@
             <%@include file="site/Category.jsp" %>
         </div>
         <div class="col-md-9">
+            <div>
+                <h2><strong>Purchased Items</strong></h2>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <%for (int i = 0; i < 1; i++) {
-                            for (int j = 0; j < 5; j++) {
+                    <%
+                        Criteria inc = objsave.getses().createCriteria(Invoice.class).add(Restrictions.eq("user", userheader));
+                        List<Invoice> i = inc.list();
+                        if (i.size() != 0) {
+                            for (Invoice in : i) {
+//
+                                Criteria iic = objsave.getses().createCriteria(InvoiceItem.class).add(Restrictions.eq("invoice", in));
+                                List<InvoiceItem> init = iic.list();
+                                for (InvoiceItem initem : init) {
+//                           
                     %>
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <%
+                                    Criteria c1 = objsave.getses().createCriteria(ItemImage.class);
+                                    c1.add(Restrictions.eq("item", initem.getItem()));
+                                    //c1.setFirstResult(1);
+                                    c1.setMaxResults(1);
+                                    List<ItemImage> itemimage = c1.list();
+                                    for (ItemImage im : itemimage) {
+                                %>
+
                                 <div class="thumbnail col-md-3" style="padding: 5px">
-                                    <img src="adminPanel/men/3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N.jpg"/>
+                                    <a href="<%out.write("Item_details.jsp?itemid=" + im.getItem().getIditem());%>"><img src="<%=im.getUrl()%>"/></a>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <h4><a>3PCS-LOT-Men-s-wear-short-sleeved-short-man-short-sleeved-s-t-shirts-Brand-N</a></h4>
+                                            <h4><a href="<%out.write("Item_details.jsp?itemid=" + im.getItem().getIditem());%>"><%=initem.getItem().getItemname()%></a></h4>
+                                        </div>
+                                        <%}%>
+                                        <div class="row">
+                                            <h4>Size : <%=initem.getStock().getSize().getSize()%></h4>
                                         </div>
                                         <div class="row">
-                                            <h4>Size : M</h4>
+                                            <h4>Qty : <%=initem.getQty()%></h4>
                                         </div>
                                         <div class="row">
-                                            <h4>Qty : 1</h4>
+                                            <h4>Color : <%=initem.getStock().getColor().getColor()%></h4>
                                         </div>
-                                        <div class="row">
-                                            <button class="btn btn-danger col-md-4">Remove</button>
-                                        </div>
+                                        <!--                                        <div class="row">
+                                                                                    <button class="btn btn-danger col-md-4">Remove</button>
+                                                                                </div>-->
 
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <h4 class="pull-right"><strong>LKR.1250.00</strong></h4>
+                                    <div class="col-md-3 pull-right">
+                                        <h5 class="pull-right"><strong><%=initem.getStock().getDate() + " " + initem.getStock().getTime()%></strong></h5>
+                                        <h4 class="pull-right"><strong>LKR. <%=initem.getStock().getPrice()%></strong></h4>
                                         <br/>
-                                        <h6 class="pull-right">Shipping Available</h6>
+                                        <!--<h6 class="pull-right">Shipping Available</h6>-->
                                     </div>
-                                    <div class="col-md-3">
-                                        <button class="btn btn-primary btn-block">Buy It Now</button> 
-                                        <button class="btn btn-success btn-block">Add To Cart</button> 
-
-                                    </div>
+                                    <!--                                    <div class="col-md-3">
+                                                                            <button class="btn btn-primary btn-block">Buy It Now</button> 
+                                                                            <button class="btn btn-success btn-block">Add To Cart</button> 
+                                    
+                                                                        </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <%
+                    <% }
                             }
+                        } else {
+                            %>
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <center><h2>Your Purchased List is Empty</h2></center>
+                                    </div>
+                                </div>
+                            </div>
+                    <%
                         }%>
                 </div>
             </div>

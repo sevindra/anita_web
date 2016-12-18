@@ -27,7 +27,8 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                        alert(xhttp.responseText);
+            sync_table();            
+            alert(xhttp.responseText);
 
                         //document.getElementById('subcat').innerHTML = xhttp.responseText;
                     }
@@ -43,7 +44,8 @@
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
-                        alert(xhttp.responseText);
+            sync_table();            
+            alert(xhttp.responseText);
 
                         //document.getElementById('subcat').innerHTML = xhttp.responseText;
                     }
@@ -51,14 +53,28 @@
                 xhttp.open("POST", "../privileges?privilege=" + p + "&delete_privilage=ok", true);
                 xhttp.send();
             }
+            function sync_table() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    //alert(xhttp.readyState);
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        //alert(xhttp.status + "   hutaaaaaa    " + xhttp.readyState);
+                        //alert(xhttp.responseText);
+                        document.getElementById('adptb').innerHTML = xhttp.responseText;
+                    }
+                };
+                xhttp.open("POST", "../category?synctbprivilage=ok", true);
+                xhttp.send();
+            }
         </script>
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Add Privilege</strong></h3>
-        <%//if (request.getSession().getAttribute("user_obj").toString() != null) {
-          //      privilege_class p = new privilege_class();
-          //      User su = (User) request.getSession().getAttribute("user_obj");
-          //      if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <%if (request.getSession().getAttribute("user_obj").toString() != null) {
+                privilege_class p = new privilege_class();
+                User su = (User) request.getSession().getAttribute("user_obj");
+                if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="col-md-12">
             <div class="panel panel-danger">
                 <div class="panel-heading"><strong>Restriction By User Type</strong></div>
@@ -113,36 +129,38 @@
                         </div>
                         <br/>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display: block; max-height: 550px; overflow: hidden; overflow-y: scroll;">
                         <table class="table table-bordered table-responsive table-striped">
                             <thead>
                             <th>User Type</th>
                             <th>Pages</th>
                             <th>Delete</th>
                             </thead> 
-                            <%
-                                List<PagesHasUtype> ph = objsave.getses().createCriteria(PagesHasUtype.class).addOrder(Order.asc("utype")).list();
-                                for (PagesHasUtype phu : ph) {
-                            %>
-                            <tr>
-                                <td><%=phu.getUtype().getUtype()%></td>
-                                <td><%=phu.getPages().getPageName()%></td>
+                            <tbody id="adptb">
+                                <%
+                                    List<PagesHasUtype> ph = objsave.getses().createCriteria(PagesHasUtype.class).addOrder(Order.asc("utype")).list();
+                                    for (PagesHasUtype phu : ph) {
+                                %>
+                                <tr>
+                                    <td><%=phu.getUtype().getUtype()%></td>
+                                    <td><%=phu.getPages().getPageName()%></td>
                             <input id="phuid" type="hidden" value="<%=phu.getIdpagesHasUtype()%>"/>
                             <td><button class="btn btn-danger pull-right" onclick="delete_privileges('<%=phu.getIdpagesHasUtype()%>')">Delete</button></td>
                             </tr>
                             <%}%>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <%//} else {
+        <%} else {
         %>
-<!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
             <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-        </div>-->
+        </div>
         <%
-           //     }
-         //   }%>
+                }
+            }%>
     </body>
 </html>

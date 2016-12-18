@@ -5,29 +5,15 @@
  */
 package Src;
 
-import POJOS.Color;
-import POJOS.Item;
-import POJOS.ItemImage;
-import POJOS.Size;
-import POJOS.Subcat;
-import POJOS.TempColor;
-import POJOS.TempSize;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
 
 /**
  *
@@ -50,9 +36,29 @@ public class testup extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            System.out.println(request.getRemoteAddr());
-        } catch (Exception e) {
 
+//            Cookie myCookie = new Cookie("name", "val");
+//            myCookie.setMaxAge(1);
+//            response.addCookie(myCookie);
+//
+//            Cookie[] cookies = request.getCookies();
+//
+//            for (int i = 0; i < cookies.length; i++) {
+//                Cookie cookie1 = cookies[i];
+//                if (cookie1.getName().equals("name")) {
+//                    out.write("name = " + cookie1.getValue());
+//                } else {
+//                    out.write("time Out");
+//                }
+//            }
+            Calendar cal = Calendar.getInstance();
+            //cal.setTime(dateInstance);
+            cal.add(Calendar.DATE, -30);
+            Date dateBefore30Days = cal.getTime();
+            out.write("src=\"img/new.png\"");
+           // out.write(new Date().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -61,6 +61,8 @@ public class privileges extends HttpServlet {
                 if (delete_privilage.equals("ok")) {
                     PagesHasUtype ph=(PagesHasUtype) objsave.getses().load(PagesHasUtype.class, Integer.parseInt(privilege));
                     objsave.delete(ph);
+                    Pages p=(Pages) objsave.getses().load(Pages.class, Integer.parseInt(ph.getPages().getIdpages().toString()));
+                    objsave.delete(p);
                     out.write("deleted");
                 }
             }

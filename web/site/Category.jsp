@@ -4,230 +4,62 @@
     Author     : Sevi
 --%>
 
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="POJOS.Subcat"%>
+<%@page import="java.util.List"%>
+<%@page import="POJOS.Cat"%>
+<%@page import="Src.objsave"%>
+<%@page import="org.hibernate.Criteria"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
         <div class="col-md-3">
             <div class="my-div-center my-text-center">
                 <label class="category-size">Categories</label>
             </div>
+            <%
+                int qwe = 0;
+                int rt = 0;
+                List<Cat> ca = objsave.getses().createCriteria(Cat.class).list();
+                for (Cat cat : ca) {
+                    rt++;
+            %>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus">
-                                </span>Men</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="<%="#collapse"+rt%>"><span class="glyphicon glyphicon-plus">
+                                </span><%=cat.getCatname()%></a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
+                    <div id="<%="collapse"+rt%>" class="panel-collapse collapse <%if(qwe==0){%>in<%}%>">
                         <div class="panel-body side-panel">
                             <table class="table">
+                                <%
+                                List<Subcat> sc=objsave.getses().createCriteria(Subcat.class).add(Restrictions.eq("cat", cat)).list();
+                                for(Subcat ssub:sc){
+                                %>
                                 <tr>
                                     <td>
-                                        <a href="item.jsp">Shirt</a>
+                                        <a href="item.jsp?catname=<%=cat.getCatname()%>&subcatname=<%=ssub.getSubname()%>"><%=ssub.getSubname()%></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">T-Shirt</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Short</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Trousers</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Denim</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Shoes</a>
-                                    </td>
-                                </tr>
+                                <%
+                                }%>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-plus">
-                                </span>Women</a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body side-panel">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Blouses</a> <span class="label label-success">$ 320</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">T-Shirts</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Frocks</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Trousers</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Denims</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Shoes</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-plus">
-                                </span>Kids</a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
-                        <div class="panel-body side-panel">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">T-shirts</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Trousers</a> <span class="label label-info">5</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Shorts</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Frocks</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="item.jsp">Baby Shoes</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-plus">
-                                </span>Toys</a>
-                        </h4>
-                    </div>
-                    <div id="collapseFour" class="panel-collapse collapse">
-                        <div class="panel-body side-panel">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Boy</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Girl</a>
-                                    </td>
-                                </tr>
-                                
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-plus">
-                                </span>Bags</a>
-                        </h4>
-                    </div>
-                    <div id="collapseFive" class="panel-collapse collapse">
-                        <div class="panel-body side-panel">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Sales</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Customers</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Products</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Shopping Cart</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-plus">
-                                </span>Shoes</a>
-                        </h4>
-                    </div>
-                    <div id="collapseSix" class="panel-collapse collapse">
-                        <div class="panel-body side-panel">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Sales</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Customers</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Products</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="item.jsp">Shopping Cart</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
+            <%
+                    qwe++;
+                }%>
         </div>
+    </body>
+</html>
+

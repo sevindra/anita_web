@@ -4,6 +4,8 @@
     Author     : Sevi
 --%>
 
+<%@page import="java.util.Calendar"%>
+<%@page import="POJOS.Addres"%>
 <%@page import="org.hibernate.criterion.Subqueries"%>
 <%@page import="com.mysql.jdbc.Constants"%>
 <%@page import="org.hibernate.SQLQuery"%>
@@ -32,7 +34,7 @@
         <!-- End WOWSlider.com HEAD section -->
         <title>Anita Designer wear</title>
         <script>
-            document.addEventListener('contextmenu', event => event.preventDefault());
+            //document.addEventListener('contextmenu', event = > event.preventDefault());
             <%
                 String uri = request.getScheme() + "://"
                         + request.getServerName()
@@ -102,8 +104,15 @@
     </head>
     <body>
 
-        <%@include file="site/header.jsp" %>
+        <%--<%@include file="site/header.jsp" %>--%>
+        <div>
+            <%@include file="site/header.jsp" %>
+        </div>
         <!-- Start WOWSlider.com BODY section -->
+        <%@include file="site/search_bar.jsp" %>
+        <br/>
+        <br/>
+        <br/>
         <div id="wowslider-container1">
             <div class="ws_images"><ul>
                     <li><img src="data1/images/madmenbbbanner.jpg" alt="" title="" id="wows1_0"/></li>
@@ -135,6 +144,22 @@
                 <%@include file="site/Category.jsp" %>
 
                 <div class="col-md-9">
+                    <%
+                        Addres adrs = (Addres) objsave.getses().createCriteria(Addres.class).add(Restrictions.and(Restrictions.eq("user", user), Restrictions.eq("primaryAddress", 1))).uniqueResult();
+                        if (user != null) {
+                            if (adrs == null) {
+                    %>
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="alert alert-info">
+                            <center>
+                                Please Complete your Profile Details <a href="my_profile.jsp"><strong>Click Here</strong></a>
+                            </center>
+                        </div>
+                    </div>
+                    <%
+                            }
+                        }
+                    %>
                     <!--                    <div class="panel panel-default">
                                             <div class="panel-body">-->
                     <%
@@ -172,8 +197,22 @@
                                         for (ItemImage i : itemimage) {
                                     %>
                                     <a href="<%out.write("Item_details.jsp?itemid=" + item.getIditem());%>"><img src="<%out.write(i.getUrl());%>"/></a>
-                                    <img src="img/new.png" style="position: absolute; right: 0px;top: 0;"/>
+
                                     <%}%>
+                                    <%
+                                        Calendar cal = Calendar.getInstance();
+                                        //cal.setTime(dateInstance);
+                                        cal.add(Calendar.DATE, -30);
+                                        Date dateBefore30Days = cal.getTime();
+                                        Criteria newimg = objsave.getses().createCriteria(Stock.class);
+                                        newimg.add(Restrictions.eq("item", item));
+                                        newimg.add(Restrictions.gt("date", dateBefore30Days));
+                                        newimg.add(Restrictions.lt("date", new Date()));
+                                        List<Stock> iii = newimg.list();
+                                    %>
+                                    <img <%if (iii.size() != 0) {
+                                            out.write("src=\"img/new.png\"");
+                                        }%> style="position: absolute; right: 0px;top: 0;"/>
                                 </div>
                                 <div class="col-md-12" style="height: 100px; margin-top: -30px">
                                     <h3><%=item.getItemname()%></h3>
@@ -213,10 +252,12 @@
                         SQLQuery query = objsave.getses().createSQLQuery(sql);
                         query.addEntity(Stock.class);
                         //items = Integer.parseInt(query.uniqueResult().toString());
-                        List<Stock> sa=query.list();
-                        for(Stock a:sa){
-                        items=a.getItem().getIditem();
+                        List<Stock> sa = query.list();
+
+                        for (Stock a : sa) {
+                            items = a.getItem().getIditem();
                         }
+                        items = sa.size();
 //                        Criteria nativeCriteria = objsave.createCriteria(Stock.class, Constants.SUB_PROFESSIONAL);
 //        nativeCriteria.add(Subqueries.propertyEq(Constants.SUB_PROFESSIONAL + "." + Constants.HCP_ID, criteria));
 //        nativeCriteria.setProjection(Projections.projectionList().add(Projections.rowCount()));

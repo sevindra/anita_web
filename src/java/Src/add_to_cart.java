@@ -230,7 +230,8 @@ public class add_to_cart extends HttpServlet {
                         Stock st = (Stock) objsave.getses().load(Stock.class, Integer.parseInt(prid));
                         p = (Item) objsave.getses().load(Item.class, Integer.parseInt(st.getItem().getIditem().toString()));
                         c = new Cart();
-                        User u = ((User) objsave.getses().load(User.class, Integer.parseInt(request.getSession().getAttribute("sessionCart").toString())));
+                        User sesuser=(User) request.getSession().getAttribute("user_obj");
+                        User u = ((User) objsave.getses().load(User.class, Integer.parseInt(sesuser.getIduser().toString())));
                         c.setUser(u);
                         c.setDate(new Date());
                         c.setTotal(st.getPrice() * Double.parseDouble(qty));
@@ -343,9 +344,9 @@ public class add_to_cart extends HttpServlet {
                 sessionCart.put(request.getParameter("stockid"), request.getParameter("qty"));
                 request.getSession().setAttribute("sessionCart", sessionCart);
 
+             response.sendRedirect("cart.jsp");
             }
 
-            // response.sendRedirect("cart.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }

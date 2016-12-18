@@ -4,6 +4,7 @@
     Author     : Sevi
 --%>
 
+<%@page import="POJOS.Invoice"%>
 <%@page import="POJOS.Question"%>
 <%@page import="POJOS.LoginReg"%>
 <%@page import="java.util.List"%>
@@ -32,10 +33,10 @@
     </head>
     <body>
         <h3 style="margin-top: -20px"><strong>Dashboard</strong></h3>
-        <% //if (request.getSession().getAttribute("user_obj").toString() != null) {
-            //  privilege_class p = new privilege_class();
-            //   User su = (User) request.getSession().getAttribute("user_obj");
-            //   if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
+        <% if (request.getSession().getAttribute("user_obj").toString() != null) {
+              privilege_class p = new privilege_class();
+             User su = (User) request.getSession().getAttribute("user_obj");
+              if (p.getPrivilage(su.getIduser().toString(), request.getRequestURI())) {%>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-primary">
@@ -101,14 +102,20 @@
                             <div class="col-xs-3">
                                 <i class="fa fa-shopping-cart fa-5x"></i>
                             </div>
+                            <%
+                                    Criteria oderc = ses.createCriteria(Invoice.class);
+                                    oderc.add(Restrictions.eq("status", 1));
+                                    oderc.setProjection(Projections.count("status"));
+                                    int order = Integer.parseInt(oderc.uniqueResult().toString());
+                                %>
                             <div class="col-xs-9 text-right">
-                                <div><strong style="font-size: 35px">10</strong></div>
+                                <div><strong style="font-size: 35px"><%=order %></strong></div>
                                 <div><strong>Orders</strong></div>
                             </div>
                         </div>
                     </div>
                     <a href="#">
-                        <div class="panel-footer">
+                        <div class="panel-footer" onclick="orders()">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
                             <div class="clearfix"></div>
@@ -132,7 +139,7 @@
                                     int users = Integer.parseInt(uc.uniqueResult().toString());
                                 %>
                                 <div><strong style="font-size: 35px"><%=users%></strong></div>
-                                <div><strong>Total Users</strong></div>
+                                <div><strong>Total Customers</strong></div>
                             </div>
                         </div>
                     </div>
@@ -187,16 +194,22 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-database fa-5x"></i>
+                                <i class="fa fa-truck fa-5x"></i>
                             </div>
+                            <%
+                                    Criteria delc = ses.createCriteria(Invoice.class);
+                                    delc.add(Restrictions.eq("delivery", 1));
+                                    delc.setProjection(Projections.count("delivery"));
+                                    int del = Integer.parseInt(delc.uniqueResult().toString());
+                                %>
                             <div class="col-xs-9 text-right">
-                                <div><strong style="font-size: 35px">10</strong></div>
-                                <div><strong>Low Stock</strong></div>
+                                <div><strong style="font-size: 35px"><%=del %></strong></div>
+                                <div><strong>Delivery List</strong></div>
                             </div>
                         </div>
                     </div>
                     <a href="#">
-                        <div class="panel-footer">
+                        <div class="panel-footer" onclick="delivery()">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-right"></i></span>
                             <div class="clearfix"></div>
@@ -264,13 +277,13 @@
 
         <div id="chart_div" class="col-md-12"></div>
         <br/>
-        <%//} else {
+        <%} else {
         %>
-        <!--        <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
+                <div class="col-md-12" style='position:absolute;z-index:0;left:0;top:0;width:100%;height:100%'>
                     <img src='../img/no_access.jpg' style='width:100%;height:450px' alt='[]' />
-                </div>-->
+                </div>
         <%
-            //    }
-            //   }%>
+                }
+               }%>
     </body>
 </html>
